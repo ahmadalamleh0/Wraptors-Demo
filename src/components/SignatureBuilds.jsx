@@ -360,10 +360,12 @@ export default function SignatureBuilds() {
           ref={videoRef}
           className={styles.headerVideo}
           src={masterVideoSrc}
+          autoPlay
           muted
           playsInline
           loop
-          preload="none"
+          preload="metadata"
+          poster={bmw1}
         />
 
         {/* Dark overlay for text readability */}

@@ -5,16 +5,6 @@
   position: relative;
 }
 
-/* Top atmospheric bleed — first ghost text drifts in from solid black */
-.section::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 180px;
-  background: linear-gradient(to bottom, #000 0%, transparent 100%);
-  z-index: 2;
-  pointer-events: none;
-}
 
 /* ── Service Zone ── */
 .serviceZone {

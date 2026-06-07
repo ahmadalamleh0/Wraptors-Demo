@@ -8,6 +8,7 @@ import Services from './components/Services';
 import SignatureBuilds from './components/SignatureBuilds';
 import TrustedBrands from './components/TrustedBrands';
 import GlobalLocations from './components/GlobalLocations';
+import Icons from './components/Icons';
 import Reviews from './components/Reviews';
 import Footer from './components/Footer';
 
@@ -18,12 +19,13 @@ export default function App() {
       <main>
         <Hero />
         <HeroVideo />
-        <Statement />
         <ServicesIntro />
         <Services />
+        <Statement />
         <SignatureBuilds />
         <TrustedBrands />
         <GlobalLocations />
+        <Icons />
         <Reviews />
         <Footer />
       </main>
