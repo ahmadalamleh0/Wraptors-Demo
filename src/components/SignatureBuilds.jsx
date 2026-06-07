@@ -364,8 +364,7 @@ export default function SignatureBuilds() {
           muted
           playsInline
           loop
-          preload="metadata"
-          poster={bmw1}
+          preload="auto"
         />
 
         {/* Dark overlay for text readability */}

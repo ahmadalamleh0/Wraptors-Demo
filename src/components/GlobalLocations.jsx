@@ -222,9 +222,8 @@ const REGIONS = [
 ];
 
 const STATS = [
-  { to: 14,   suffix: '',  label: 'Locations' },
-  { to: 3,    suffix: '',  label: 'Countries' },
-  { to: 9000, suffix: '+', label: 'Vehicles'  },
+  { to: 14, suffix: '', label: 'Locations' },
+  { to: 3,  suffix: '', label: 'Countries' },
 ];
 
 /* ── TacticalGlobe configuration ─────────────────────────── */

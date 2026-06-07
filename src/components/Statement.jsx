@@ -34,7 +34,7 @@ export default function Statement() {
           gsap.to(impact,   { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.90 });
           io.disconnect();
         },
-        { threshold: 0.15 }
+        { threshold: 0.25 }
       );
       io.observe(section);
       return () => io.disconnect();

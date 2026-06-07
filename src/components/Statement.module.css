@@ -82,6 +82,28 @@
   .declareLine  { font-size: clamp(2.4rem, 9vw, 5rem); will-change: opacity, transform; }
   .impactLine   { font-size: clamp(4rem, 17vw, 8rem); will-change: opacity, transform; }
   /* Overlay stays visible on mobile — JS fades it out when section enters view */
+
+  /* Bottom gradient — bridges into the dark Masterpieces header below */
+  .section::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 130px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 55%, #000 100%);
+    z-index: 11;
+    pointer-events: none;
+  }
+
+  /* Top gradient — bridges entry from dark Services section */
+  .section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, #000 0%, transparent 100%);
+    z-index: 11;
+    pointer-events: none;
+  }
 }
 
 @media (max-width: 480px) {
