@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './HeroVideo.module.css';
 import heroVideoSrc from '../../final_hero.mp4';
+import heroPoster   from '../assets/hero.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,6 +26,17 @@ export default function HeroVideo() {
     gsap.set(subLineRef.current, { opacity: 0, y: 16 });
 
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+    // Older iOS Safari needs this attribute set imperatively
+    video.setAttribute('webkit-playsinline', '');
+
+    // Attempt play immediately — works when autoPlay attribute fires early
+    video.play().catch(() => {});
+
+    // Retry the moment the user first touches or scrolls — covers iOS autoplay gate
+    const retryPlay = () => { if (video.paused) video.play().catch(() => {}); };
+    document.addEventListener('touchstart', retryPlay, { once: true, passive: true });
+    document.addEventListener('scroll',     retryPlay, { once: true, passive: true });
 
     // Shared: play/pause video on visibility
     const playIo = new IntersectionObserver(
@@ -51,7 +63,12 @@ export default function HeroVideo() {
         { threshold: 0.15 }
       );
       revealIo.observe(section);
-      return () => { playIo.disconnect(); revealIo.disconnect(); };
+      return () => {
+        playIo.disconnect();
+        revealIo.disconnect();
+        document.removeEventListener('touchstart', retryPlay);
+        document.removeEventListener('scroll',     retryPlay);
+      };
     }
 
     // Desktop: full scroll-driven scrub
@@ -74,7 +91,12 @@ export default function HeroVideo() {
       },
     });
 
-    return () => { playIo.disconnect(); st.kill(); };
+    return () => {
+      playIo.disconnect();
+      st.kill();
+      document.removeEventListener('touchstart', retryPlay);
+      document.removeEventListener('scroll',     retryPlay);
+    };
   }, []);
 
   return (
@@ -91,7 +113,8 @@ export default function HeroVideo() {
         muted
         playsInline
         loop
-        preload="metadata"
+        preload="auto"
+        poster={heroPoster}
       />
 
       <div className={styles.fadeTop}    aria-hidden="true" />

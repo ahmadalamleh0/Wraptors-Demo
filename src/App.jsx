@@ -10,6 +10,7 @@ import TrustedBrands from './components/TrustedBrands';
 import GlobalLocations from './components/GlobalLocations';
 import Icons from './components/Icons';
 import Reviews from './components/Reviews';
+import Academy from './components/Academy';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
         <GlobalLocations />
         <Icons />
         <Reviews />
+        <Academy />
         <Footer />
       </main>
     </>

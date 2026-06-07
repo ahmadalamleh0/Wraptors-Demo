@@ -311,6 +311,16 @@ export default function SignatureBuilds() {
   const videoRef    = useRef(null);
 
   useEffect(() => {
+    const video = videoRef.current;
+
+    // Older iOS Safari needs this set imperatively
+    video?.setAttribute('webkit-playsinline', '');
+
+    // Retry on first user gesture — covers iOS autoplay gate
+    const retryPlay = () => { if (video?.paused) video.play().catch(() => {}); };
+    document.addEventListener('touchstart', retryPlay, { once: true, passive: true });
+    document.addEventListener('scroll',     retryPlay, { once: true, passive: true });
+
     // Text reveal observer
     const textObserver = new IntersectionObserver(
       entries => {
@@ -333,11 +343,8 @@ export default function SignatureBuilds() {
     // Video autoplay observer
     const videoObserver = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          videoRef.current?.play().catch(() => {});
-        } else {
-          videoRef.current?.pause();
-        }
+        if (entry.isIntersecting) video?.play().catch(() => {});
+        else video?.pause();
       },
       { threshold: 0.15 }
     );
@@ -346,6 +353,8 @@ export default function SignatureBuilds() {
     return () => {
       textObserver.disconnect();
       videoObserver.disconnect();
+      document.removeEventListener('touchstart', retryPlay);
+      document.removeEventListener('scroll',     retryPlay);
     };
   }, []);
 
@@ -365,6 +374,7 @@ export default function SignatureBuilds() {
           playsInline
           loop
           preload="auto"
+          poster={rolls1}
         />
 
         {/* Dark overlay for text readability */}
