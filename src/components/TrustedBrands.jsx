@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import styles from './TrustedBrands.module.css';
 import logo3m     from '../../Banner/3m-red.svg';
 import logoHexis  from '../../hexis_logo.svg';
@@ -18,10 +19,28 @@ const BRANDS = [
 const TRACK = [...BRANDS, ...BRANDS, ...BRANDS, ...BRANDS];
 
 export default function TrustedBrands() {
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add(styles.visible);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section className={styles.section}>
 
-      <div className={styles.header}>
+      <div className={styles.header} ref={headerRef}>
         <span className={styles.label}>Trusted Brands</span>
         <h2 className={styles.title}>BUILT WITH THE WORLD'S MOST ICONIC NAMES</h2>
         <p className={styles.sub}>

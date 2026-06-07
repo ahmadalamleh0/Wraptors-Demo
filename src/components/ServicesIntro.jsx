@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import styles from './ServicesIntro.module.css';
+import introVideo from '../../Services_new.mp4';
 
 export default function ServicesIntro() {
   const sectionRef = useRef(null);
@@ -26,6 +27,16 @@ export default function ServicesIntro() {
 
   return (
     <section ref={sectionRef} className={styles.section}>
+      <video
+        className={styles.bgVideo}
+        src={introVideo}
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      />
+      <div className={styles.bgOverlay} aria-hidden="true" />
       <div className={styles.fadeTop} aria-hidden="true" />
 
       <div className={styles.content}>

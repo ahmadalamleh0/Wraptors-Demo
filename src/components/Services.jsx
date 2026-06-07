@@ -65,18 +65,38 @@ const INTERVAL_MS = 4000;
 
 function ServiceBlock({ svc, blockRef }) {
   const [activeIdx, setActiveIdx] = useState(0);
+  const localRef = useRef(null);
+
+  const setRef = el => {
+    localRef.current = el;
+    if (typeof blockRef === 'function') blockRef(el);
+  };
 
   useEffect(() => {
     if (svc.imgs.length <= 1) return;
-    const id = setInterval(
-      () => setActiveIdx(i => (i + 1) % svc.imgs.length),
-      INTERVAL_MS
+    const el = localRef.current;
+    if (!el) return;
+    let id = null;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!id) id = setInterval(
+            () => setActiveIdx(i => (i + 1) % svc.imgs.length),
+            INTERVAL_MS
+          );
+        } else {
+          clearInterval(id);
+          id = null;
+        }
+      },
+      { threshold: 0.3 }
     );
-    return () => clearInterval(id);
+    io.observe(el);
+    return () => { clearInterval(id); io.disconnect(); };
   }, [svc.imgs.length]);
 
   return (
-    <div className={styles.block} ref={blockRef}>
+    <div className={styles.block} ref={setRef}>
 
       {/* ── Left: image gallery ── */}
       <div className={styles.imgFrame}>

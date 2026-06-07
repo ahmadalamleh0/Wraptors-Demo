@@ -1,10 +1,21 @@
 /* ══ SIGNATURE BUILDS ══ */
 .section {
   background: #000;
-  padding: 0 0 80px;
+  padding: 0 0 0;
   position: relative;
   overflow: hidden;
   isolation: isolate;
+}
+
+/* Bottom atmosphere — feathers into TrustedBrands */
+.section::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.60) 60%, #000 100%);
+  pointer-events: none;
+  z-index: 10;
 }
 
 /* ── Full-viewport header — video background + centered title ── */
@@ -330,21 +341,17 @@
 }
 .card:hover .tag { color: #fff; }
 
-/* Slideshow dots */
+/* Slideshow dots — in-flow below tags inside cardContent */
 .dotsContainer {
-  position: absolute;
-  top: 24px; right: 24px;
-  z-index: 5;
   display: flex;
   gap: 6px;
   pointer-events: none;
   opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  margin-top: 8px;
+  transition: opacity 0.35s ease;
 }
 .card:hover .dotsContainer {
   opacity: 1;
-  transform: translateY(0);
 }
 .dot {
   width: 5px; height: 5px;
@@ -369,17 +376,12 @@
   .title         { font-size: clamp(60px, 18vw, 120px); }
   .categoryTitle { font-size: clamp(28px, 8vw, 52px); }
 
-  /* Dots — always visible on mobile, repositioned to bottom-center */
+  /* Dots — always visible on mobile, in-flow below tags */
   .dotsContainer {
-    top: auto;
-    right: 0;
-    left: 0;
-    bottom: 68px;
-    justify-content: center;
     gap: 10px;
     opacity: 1 !important;
-    transform: none !important;
     transition: none;
+    margin-top: 12px;
   }
   .dot {
     width: 18px;
@@ -404,7 +406,7 @@
   .cardTrack::after { flex-basis: 8px; }
   .card           { flex: 0 0 82vw; }
 
-  .dotsContainer  { bottom: 60px; gap: 8px; }
+  .dotsContainer  { gap: 8px; margin-top: 10px; }
   .dot            { width: 14px; }
   .activeDot      { width: 22px; }
 }

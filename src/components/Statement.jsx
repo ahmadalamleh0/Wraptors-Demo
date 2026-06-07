@@ -18,20 +18,20 @@ export default function Statement() {
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     if (isMobile) {
-      // ── Mobile: no pin, no scrub — IntersectionObserver + simple GSAP tweens ──
-      // Hide overlay immediately; the white section just appears on scroll naturally
-      gsap.set(overlay, { display: 'none' });
+      // ── Mobile: overlay stays visible initially so Statement never bleeds through below HeroVideo
+      // It fades out once the section properly enters the viewport, then text cascades in
       gsap.set([...lines, impact], { opacity: 0, y: 18 });
       gsap.set(ruler, { opacity: 0, scaleX: 0, transformOrigin: 'left center' });
 
       const io = new IntersectionObserver(
         ([entry]) => {
           if (!entry.isIntersecting) return;
-          gsap.to(lines[0], { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', delay: 0.05 });
-          gsap.to(lines[1], { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', delay: 0.22 });
-          gsap.to(ruler,    { opacity: 1, scaleX: 1, duration: 0.5, ease: 'power2.out', delay: 0.42 });
-          gsap.to(lines[2], { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', delay: 0.58 });
-          gsap.to(impact,   { opacity: 1, y: 0, duration: 0.75, ease: 'power2.out', delay: 0.78 });
+          gsap.to(overlay,  { opacity: 0, duration: 0.55, ease: 'power2.out' });
+          gsap.to(lines[0], { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.18 });
+          gsap.to(lines[1], { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.34 });
+          gsap.to(ruler,    { opacity: 1, scaleX: 1, duration: 0.5, ease: 'power2.out', delay: 0.54 });
+          gsap.to(lines[2], { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.70 });
+          gsap.to(impact,   { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.90 });
           io.disconnect();
         },
         { threshold: 0.15 }

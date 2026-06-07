@@ -291,15 +291,14 @@ function BuildCard({ build }) {
               <span key={tag} className={styles.tag}>{tag}</span>
             ))}
           </div>
+          {build.media && build.media.length > 1 && (
+            <div className={styles.dotsContainer}>
+              {build.media.map((_, i) => (
+                <span key={i} className={`${styles.dot} ${i === imgIndex ? styles.activeDot : ''}`} />
+              ))}
+            </div>
+          )}
         </div>
-
-        {build.media && build.media.length > 1 && (
-          <div className={styles.dotsContainer}>
-            {build.media.map((_, i) => (
-              <span key={i} className={`${styles.dot} ${i === imgIndex ? styles.activeDot : ''}`} />
-            ))}
-          </div>
-        )}
       </div>
     </article>
   );

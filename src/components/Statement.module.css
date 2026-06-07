@@ -74,19 +74,19 @@
   margin: 0;
 }
 
-/* ── Mobile — no pin, text just scrolls into view ── */
+/* ── Mobile — overlay fades on scroll-in, text cascades after ── */
 @media (max-width: 768px) {
-  .section      { padding: 80px 28px; min-height: auto; }
-  .contextLine  { font-size: clamp(1.0rem, 5vw, 2.2rem); letter-spacing: 0.06em; will-change: opacity, transform; }
-  .ruler        { margin: 36px auto; will-change: opacity, transform; }
-  .declareLine  { font-size: clamp(2rem, 8.5vw, 5rem); will-change: opacity, transform; }
-  .impactLine   { font-size: clamp(3.2rem, 15vw, 8rem); will-change: opacity, transform; }
-  /* Hide the overlay on mobile — entry handled by IO, not by scrub */
-  .blackOverlay { display: none; }
+  .section      { padding: 100px 36px 120px; min-height: auto; }
+  .contextLine  { font-size: clamp(1.1rem, 5.5vw, 2.4rem); letter-spacing: 0.06em; will-change: opacity, transform; }
+  .ruler        { margin: 40px auto; will-change: opacity, transform; }
+  .declareLine  { font-size: clamp(2.4rem, 9vw, 5rem); will-change: opacity, transform; }
+  .impactLine   { font-size: clamp(4rem, 17vw, 8rem); will-change: opacity, transform; }
+  /* Overlay stays visible on mobile — JS fades it out when section enters view */
 }
 
 @media (max-width: 480px) {
-  .contextLine  { font-size: 5.5vw; }
-  .declareLine  { font-size: 9.5vw; }
-  .impactLine   { font-size: 16.5vw; }
+  .section      { padding: 88px 28px 100px; }
+  .contextLine  { font-size: 6vw; }
+  .declareLine  { font-size: 10vw; }
+  .impactLine   { font-size: 18.5vw; }
 }

@@ -1,17 +1,35 @@
 /* ══ SERVICES INTRO ══ */
 .section {
   position: relative;
-  min-height: 80vh;
+  min-height: 100vh;
   background: #000;
   display: flex;
   align-items: center;
   overflow: hidden;
 }
 
+.bgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.50);
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* ── Content block ── */
 .content {
   flex: 1;
-  padding: 88px 64px 96px;
+  padding: 88px 64px 220px;
   position: relative;
   z-index: 2;
 }
@@ -53,7 +71,7 @@
 
 /* ── "STANDARD" — dominant word, full presence ── */
 .lineLarge {
-  font-size: clamp(5rem, 13vw, 16rem);
+  font-size: clamp(3.8rem, 10vw, 12rem);
   font-weight: 700;
   letter-spacing: 0.01em;
   color: #fff;
@@ -114,17 +132,17 @@
 .fadeBottom {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 16%;
-  background: linear-gradient(to top, #000 0%, transparent 100%);
+  height: 42%;
+  background: linear-gradient(to top, #000 0%, #000 18%, rgba(0,0,0,0.80) 45%, rgba(0,0,0,0.30) 72%, transparent 100%);
   z-index: 3;
   pointer-events: none;
 }
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
-  .section   { min-height: auto; }
-  .content   { padding: 64px 28px 72px; }
+  .section   { min-height: 100svh; }
+  .content   { padding: 64px 28px 160px; }
   .lineSmall { font-size: clamp(1.1rem, 5.5vw, 2.4rem); letter-spacing: 0.14em; }
-  .lineLarge { font-size: clamp(4rem, 17vw, 8rem); }
+  .lineLarge { font-size: clamp(3rem, 13vw, 6rem); }
   .subline   { font-size: clamp(0.65rem, 3vw, 0.84rem); max-width: none; letter-spacing: 0.09em; }
 }
