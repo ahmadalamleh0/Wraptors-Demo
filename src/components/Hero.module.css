@@ -104,7 +104,7 @@
 /* ── Logo wrapper ── */
 .logoWrap {
   position: relative;
-  width: clamp(240px, 34vw, 460px);
+  width: clamp(200px, 27vw, 390px);
   transform-origin: center center;
 }
 
@@ -121,7 +121,7 @@
 .topText {
   margin: 14px 0 0;
   font-family: 'Jarvane', 'Cinzel', 'Trajan Pro', Georgia, serif;
-  font-size: clamp(1.1rem, 2.6vw, 2.1rem);
+  font-size: clamp(0.95rem, 2.1vw, 1.8rem);
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -237,16 +237,24 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .logoWrap   { width: clamp(180px, 58vw, 280px); }
+  .logoWrap   { width: clamp(150px, 46vw, 230px); }
   .sideText   { width: clamp(36px, 10vw, 56px); font-size: clamp(0.38rem, 2vw, 0.5rem); }
-  .topText    { font-size: clamp(1.3rem, 8vw, 2rem); letter-spacing: 0.14em; margin-top: 10px; }
+  .topText    { font-size: clamp(1rem, 6.2vw, 1.65rem); letter-spacing: 0.14em; margin-top: 10px; }
   .bottomText { font-size: clamp(0.5rem, 2.2vw, 0.72rem); letter-spacing: 0.42em; }
   .spotlight  { width: 260px; }
   .bgGlow     { width: 300px; height: 300px; }
   .scrollCue  { bottom: 24px; }
+  /* Trim particle count on mobile — only first 8 visible */
+  .particle:nth-child(n+9) { display: none; }
 }
 
 @media (max-width: 480px) {
-  .logoWrap { width: 72vw; }
-  .topText  { font-size: 9.5vw; }
+  .logoWrap { width: 60vw; }
+  .topText  { font-size: 7.5vw; }
+  /* Even fewer particles on small phones */
+  .particle:nth-child(n+5) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle { animation: none; opacity: 0; }
 }

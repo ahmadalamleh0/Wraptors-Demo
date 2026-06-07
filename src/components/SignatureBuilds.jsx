@@ -214,12 +214,12 @@ const BUILDS = [
   { brandName: "Maybach",       logo: maybachLogo,   mainImage: maybach1,   media: [maybach1, maybach2, maybach3, maybach4, maybach5, maybach6],           serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],                 category: "german-precision" },
   { brandName: "Audi",          logo: audiLogo,      mainImage: audi1,      media: [audi1, audi2, audi3, audi4, audi5, audi6, audi7],                     serviceTags: ["FULL VINYL COLOR CHANGE", "TINT"],                   category: "german-precision" },
 
-  // Italian Exotics
+  // Italian Exotics — alternating Ferrari / Lamborghini
   { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrari1,      media: [ferrari1, ferrari2, ferrari3, ferrari4, ferrari5, ferrari6],                                                                         serviceTags: ["FULL VINYL COLOR CHANGE", "TINT", "CERAMIC COATING"], category: "italian-exotics" },
-  { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrariRed1,   media: [ferrariRed1, ferrariRed2, ferrariRed3, ferrariRed4, ferrariRed5],                                                                   serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
-  { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrariWhite1, media: [ferrariWhite1, ferrariWhite2, ferrariWhite3, ferrariWhite4, ferrariWhite5, ferrariWhite6, ferrariWhite7],                           serviceTags: ["FULL VINYL COLOR CHANGE", "CERAMIC COATING"],       category: "italian-exotics" },
   { brandName: "Lamborghini", logo: lamborghiniLogo, mainImage: lamboPurple1,  media: [lamboPurple1, lamboPurple2, lamboPurple3, lamboPurple4, lamboPurple5],                                                              serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
+  { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrariRed1,   media: [ferrariRed1, ferrariRed2, ferrariRed3, ferrariRed4, ferrariRed5],                                                                   serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
   { brandName: "Lamborghini", logo: lamborghiniLogo, mainImage: lamboLBWK1,    media: [lamboLBWK1, lamboLBWK2, lamboLBWK3, lamboLBWK4, lamboLBWK5],                                                                       serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
+  { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrariWhite1, media: [ferrariWhite1, ferrariWhite2, ferrariWhite3, ferrariWhite4, ferrariWhite5, ferrariWhite6, ferrariWhite7],                           serviceTags: ["FULL VINYL COLOR CHANGE", "CERAMIC COATING"],       category: "italian-exotics" },
   { brandName: "Lamborghini", logo: lamborghiniLogo, mainImage: urus1,         media: [urus1, urus2, urus4],                                                                                                               serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
 
   // American Muscle
@@ -272,6 +272,7 @@ function BuildCard({ build }) {
             className={styles.image}
             alt={`${build.brandName} Signature Build`}
             key={imgIndex}
+            loading="lazy"
           />
         ) : (
           <div className={styles.imagePlaceholder} />
@@ -363,7 +364,7 @@ export default function SignatureBuilds() {
           muted
           playsInline
           loop
-          preload="metadata"
+          preload="none"
         />
 
         {/* Dark overlay for text readability */}

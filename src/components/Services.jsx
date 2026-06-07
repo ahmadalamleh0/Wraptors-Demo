@@ -86,6 +86,7 @@ function ServiceBlock({ svc, blockRef }) {
               src={svc.imgs[activeIdx]}
               alt={svc.name}
               className={styles.img}
+              loading="lazy"
             />
           </div>
 

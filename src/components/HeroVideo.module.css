@@ -7,8 +7,8 @@
   overflow: hidden;
 }
 
-/* Video is stored rotated 90°. Swap dimensions so after rotation the landscape
-   frame fills the full viewport — width becomes visual height, height becomes visual width. */
+/* Video is stored rotated 90° — swap dimensions so after rotation the
+   landscape frame fills the full viewport correctly */
 .video {
   position: absolute;
   top: 50%;
@@ -19,8 +19,7 @@
   object-fit: cover;
 }
 
-/* Black overlay — starts opaque, fades out as section scrolls into view.
-   Creates the cinematic dark→reveal transition from the hero logo. */
+/* Black overlay — starts opaque, dissolves as section scrolls into view */
 .entryOverlay {
   position: absolute;
   inset: 0;
@@ -29,7 +28,7 @@
   pointer-events: none;
 }
 
-/* Top edge fade — blends from hero's black background */
+/* Top edge fade */
 .fadeTop {
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -39,7 +38,7 @@
   pointer-events: none;
 }
 
-/* Bottom edge fade — clean dark edge */
+/* Bottom edge fade */
 .fadeBottom {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -49,3 +48,79 @@
   pointer-events: none;
 }
 
+/* ── Cinematic text overlay ── */
+.textOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px 5vh;
+  pointer-events: none;
+  /* Subtle vignette centred on the text block — keeps type legible over any frame */
+  background: radial-gradient(
+    ellipse 70% 55% at 50% 55%,
+    rgba(0, 0, 0, 0.28) 0%,
+    transparent 100%
+  );
+}
+
+/* ── Main headline — two lines, light & editorial ── */
+.mainLine {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.2vw, 5.6rem);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.94);
+  text-align: center;
+  line-height: 1.15;
+  margin: 0 0 0.06em;
+  text-shadow:
+    0 2px 28px rgba(0, 0, 0, 0.65),
+    0 1px 0     rgba(0, 0, 0, 0.75);
+  will-change: transform, opacity;
+}
+
+/* ── Red blade separator ── */
+.ruler {
+  width: 56px;
+  height: 1px;
+  background: rgba(190, 10, 10, 0.80);
+  margin: 30px auto 28px;
+  box-shadow: 0 0 10px rgba(190, 10, 10, 0.30);
+  will-change: transform;
+}
+
+/* ── Subline — small caps, ultra-refined ── */
+.subLine {
+  font-family: var(--font-ui);
+  font-size: clamp(0.55rem, 0.88vw, 0.82rem);
+  font-weight: 500;
+  letter-spacing: 0.40em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  text-align: center;
+  line-height: 1.8;
+  margin: 0;
+  will-change: transform, opacity;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .textOverlay { padding: 0 28px 4vh; }
+  .mainLine    { font-size: clamp(1.6rem, 7vw, 3rem); letter-spacing: 0.04em; }
+  .ruler       { margin: 22px auto 20px; }
+  .subLine     {
+    font-size: clamp(0.48rem, 2.5vw, 0.7rem);
+    letter-spacing: 0.28em;
+    /* Break into separate lines on small screens */
+    white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainLine { font-size: 7.5vw; }
+  .subLine  { letter-spacing: 0.20em; }
+}
