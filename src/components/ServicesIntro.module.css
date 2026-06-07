@@ -1,19 +1,17 @@
 /* ══ SERVICES INTRO ══ */
 .section {
   position: relative;
-  min-height: 75vh;
+  min-height: 80vh;
   background: #000;
   display: flex;
   align-items: center;
   overflow: hidden;
 }
 
-/* ── Content ── */
+/* ── Content block ── */
 .content {
   flex: 1;
-  display: flex;
-  align-items: center;
-  padding: 80px 64px;
+  padding: 88px 64px 96px;
   position: relative;
   z-index: 2;
 }
@@ -22,29 +20,20 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  margin: 0;
+  margin: 0 0 44px;
 }
 
-/* Each line starts hidden, slides in from the left */
+/* ── Shared slide-in base ── */
 .line {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(5rem, 11vw, 14rem);
-  font-weight: 400;
-  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #fff;
-  line-height: 0.92;
-
+  line-height: 0.9;
   opacity: 0;
-  transform: translateX(-48px);
+  transform: translateX(-52px);
   transition:
     opacity   1.1s cubic-bezier(0.22, 1, 0.36, 1),
     transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
-
-  text-shadow:
-    0 2px 40px rgba(0, 0, 0, 0.5),
-    0 1px 0    rgba(0, 0, 0, 0.8);
 }
 
 .line.visible {
@@ -52,7 +41,67 @@
   transform: none;
 }
 
-/* ── Transitions ── */
+/* ── "THE WRAPTORS" — qualifier line, light & muted ── */
+.lineSmall {
+  font-size: clamp(1.4rem, 3vw, 3.8rem);
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.40);
+  margin-bottom: 0.08em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* ── "STANDARD" — dominant word, full presence ── */
+.lineLarge {
+  font-size: clamp(5rem, 13vw, 16rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-shadow:
+    0 2px 40px rgba(0, 0, 0, 0.5),
+    0 1px 0    rgba(0, 0, 0, 0.8);
+}
+
+/* ── Red blade separator ── */
+.rule {
+  width: 56px;
+  height: 1px;
+  background: rgba(180, 0, 0, 0.70);
+  box-shadow: 0 0 8px rgba(180, 0, 0, 0.22);
+  margin-bottom: 28px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rule.visible {
+  transform: scaleX(1);
+}
+
+/* ── Subline — premium descriptor ── */
+.subline {
+  font-family: var(--font-ui);
+  font-size: clamp(0.72rem, 1.1vw, 0.92rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity   0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.subline.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Edge fades ── */
 .fadeTop {
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -73,7 +122,9 @@
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
-  .section  { min-height: auto; }
-  .content  { padding: 60px 28px; }
-  .line     { font-size: clamp(4rem, 16vw, 8rem); }
+  .section   { min-height: auto; }
+  .content   { padding: 64px 28px 72px; }
+  .lineSmall { font-size: clamp(1.1rem, 5.5vw, 2.4rem); letter-spacing: 0.14em; }
+  .lineLarge { font-size: clamp(4rem, 17vw, 8rem); }
+  .subline   { font-size: clamp(0.65rem, 3vw, 0.84rem); max-width: none; letter-spacing: 0.09em; }
 }

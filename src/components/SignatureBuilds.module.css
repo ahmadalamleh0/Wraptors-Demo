@@ -338,11 +338,13 @@
   display: flex;
   gap: 6px;
   pointer-events: none;
-  animation: fadeInDots 0.4s var(--ease-smooth) forwards;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
-@keyframes fadeInDots {
-  from { opacity: 0; transform: translateY(-4px); }
-  to   { opacity: 1; transform: translateY(0); }
+.card:hover .dotsContainer {
+  opacity: 1;
+  transform: translateY(0);
 }
 .dot {
   width: 5px; height: 5px;
@@ -362,10 +364,36 @@
   .categoryHeader { padding: 0 28px 20px; }
   .cardTrack      { scroll-padding-left: 28px; gap: 14px; padding-bottom: 16px; }
   .cardTrack::before,
-  .cardTrack::after { flex-basis: 8px; } /* 8px + 14px gap = 22px ≈ 28px (close enough) */
+  .cardTrack::after { flex-basis: 8px; }
   .card           { flex: 0 0 72vw; }
   .title         { font-size: clamp(60px, 18vw, 120px); }
   .categoryTitle { font-size: clamp(28px, 8vw, 52px); }
+
+  /* Dots — always visible on mobile, repositioned to bottom-center */
+  .dotsContainer {
+    top: auto;
+    right: 0;
+    left: 0;
+    bottom: 68px;
+    justify-content: center;
+    gap: 10px;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none;
+  }
+  .dot {
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.28);
+    transition: background-color 0.3s ease, width 0.3s ease;
+  }
+  .activeDot {
+    width: 28px;
+    background: rgba(255, 255, 255, 0.88);
+    transform: none;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.30);
+  }
 }
 
 @media (max-width: 480px) {
@@ -375,4 +403,8 @@
   .cardTrack::before,
   .cardTrack::after { flex-basis: 8px; }
   .card           { flex: 0 0 82vw; }
+
+  .dotsContainer  { bottom: 60px; gap: 8px; }
+  .dot            { width: 14px; }
+  .activeDot      { width: 22px; }
 }

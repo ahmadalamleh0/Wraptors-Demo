@@ -3,8 +3,8 @@ import styles from './Services.module.css';
 
 import imgWrapping1   from '../../Wrappin(1new).jpeg';
 import imgWrapping2   from '../../Wrappin(2new).jpeg';
-import imgWrapping3   from '../../Wrappin(3new).jpeg';
-import imgPPF1        from '../../PPF(1New).jpeg';
+import imgWrapping3   from '../../Wrapping Last_3.jpeg';
+import imgPPF1        from '../../PPF(last_1).jpeg';
 import imgPPF2        from '../../PPF(2New).jpeg';
 import imgPPF3        from '../../PPF(3New).jpeg';
 import imgStarlight   from '../../Starlight_headliner.jpeg';
@@ -33,6 +33,7 @@ const SERVICES = [
     tags: ['Invisible Shield', 'Self-Healing'],
     desc: "Invisible armour for the paint beneath. Self-healing, optically clear film that shields your finish from the road's worst.",
     imgs: [imgPPF1, imgPPF2, imgPPF3],
+    imgPositions: ['center 30%', null, null],
   },
   {
     id: 'starlight',
@@ -87,6 +88,7 @@ function ServiceBlock({ svc, blockRef }) {
               alt={svc.name}
               className={styles.img}
               loading="lazy"
+              style={svc.imgPositions?.[activeIdx] ? { objectPosition: svc.imgPositions[activeIdx] } : undefined}
             />
           </div>
 

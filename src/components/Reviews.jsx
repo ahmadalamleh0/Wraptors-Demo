@@ -1,10 +1,42 @@
+import { useRef, useState, useEffect } from 'react';
 import styles from './Reviews.module.css';
 
+function CountUp({ to, suffix = '', duration = 1400 }) {
+  const [display, setDisplay] = useState(0);
+  const ref = useRef(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || started.current) return;
+        started.current = true;
+        const t0 = performance.now();
+        const tick = now => {
+          const p = Math.min((now - t0) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          setDisplay(Math.round(eased * to));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        io.disconnect();
+      },
+      { threshold: 0.5 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [to, duration]);
+
+  return <span ref={ref}>{display.toLocaleString()}{suffix}</span>;
+}
+
 const STATS = [
-  { value: '9000+', label: 'Vehicles Transformed' },
-  { value: '13',    label: 'Global Locations' },
-  { value: '10+',   label: 'Years Experience' },
-  { value: '573+',  label: 'Verified Reviews' },
+  { to: 9000, suffix: '+', label: 'Vehicles Transformed' },
+  { to: 13,   suffix: '',  label: 'Global Locations' },
+  { to: 10,   suffix: '+', label: 'Years Experience' },
+  { to: 573,  suffix: '+', label: 'Verified Reviews' },
 ];
 
 const REVIEWS = [
@@ -74,9 +106,11 @@ export default function Reviews() {
 
         {/* Stats row */}
         <div className={styles.statsRow}>
-          {STATS.map(({ value, label }) => (
+          {STATS.map(({ to, suffix, label }) => (
             <div key={label} className={styles.stat}>
-              <span className={styles.statValue}>{value}</span>
+              <span className={styles.statValue}>
+                <CountUp to={to} suffix={suffix} duration={to >= 1000 ? 2000 : 1200} />
+              </span>
               <span className={styles.statLabel}>{label}</span>
             </div>
           ))}

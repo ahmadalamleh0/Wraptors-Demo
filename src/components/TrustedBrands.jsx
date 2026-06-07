@@ -1,16 +1,16 @@
 import styles from './TrustedBrands.module.css';
 import logo3m     from '../../Banner/3m-red.svg';
-import logoHexis  from '../../Banner/HEXIS-Canada-logo.svg';
-import logoAvery  from '../../Banner/avery-dennison.svg';
-import logoStek   from '../../Banner/stek-emblem-white.svg';
-import logoSuntek from '../../Banner/suntek-logo.svg';
+import logoHexis  from '../../hexis_logo.svg';
+import logoAvery  from '../../graphics-rev-logo-290x45.avif';
+import logoStek   from '../../jIsdVIhisFg6BDDsoZ6StvyW840.avif';
+import logoSuntek from '../../suntek-logo.svg';
 
 const BRANDS = [
-  { name: '3M',             src: logo3m     },
-  { name: 'HEXIS Canada',   src: logoHexis  },
+  { name: '3M',             src: logo3m,     style: { filter: 'none' } },
+  { name: 'HEXIS Canada',   src: logoHexis,  style: { filter: 'none' } },
   { name: 'Avery Dennison', src: logoAvery  },
   { name: 'STEK',           src: logoStek   },
-  { name: 'SunTek',         src: logoSuntek },
+  { name: 'SunTek',         src: logoSuntek, style: { filter: 'none' } },
 ];
 
 // Four copies so the strip always feels full regardless of screen width.
@@ -38,6 +38,7 @@ export default function TrustedBrands() {
                 src={brand.src}
                 alt={brand.name}
                 className={styles.logo}
+                style={brand.style}
                 draggable="false"
               />
             </div>

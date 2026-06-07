@@ -1,6 +1,11 @@
 import { useRef, useState, useEffect } from 'react';
 import styles from './GlobalLocations.module.css';
 import MilitaryMap from '../../components/TacticalGlobe';
+import flagCA from '../../CANADA(FLAG).svg';
+import flagUS from '../../USA(FLAG).svg';
+import flagZA from '../../SA(FLAG).svg';
+
+const IS_MOBILE = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
 
 /* ── Sphere math — mirrors TacticalGlobe internals for the lines overlay ── */
 const D2R = Math.PI / 180;
@@ -20,7 +25,7 @@ function projectPoint(lng, lat, lambda, phi, gamma, R, cx, cy) {
   return { sx: cx + R * ry, sy: cy - R * rz, v: rx >= 0 };
 }
 
-function greatCircle(lng1, lat1, lng2, lat2, N = 64) {
+function greatCircle(lng1, lat1, lng2, lat2, N = 48) {
   const toVec = (lng, lat) => {
     const la = lat * D2R, lr = lng * D2R, cl = Math.cos(la);
     return [cl * Math.cos(lr), cl * Math.sin(lr), Math.sin(la)];
@@ -40,16 +45,43 @@ function greatCircle(lng1, lat1, lng2, lat2, N = 64) {
   return pts;
 }
 
-// Hub-and-spoke: HQ (index 0) → major distant locations
 const LINE_PAIRS = [
-  [0, 2], // Mississauga → Ottawa
-  [0, 5], // Mississauga → Calgary
-  [0, 6], // Mississauga → Vancouver
-  [0, 7], // Mississauga → Fort Lauderdale
-  [0, 8], // Mississauga → Orlando
-  [0, 9], // Mississauga → Cape Town
+  [0, 2], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9],
 ];
 
+/* ── Count-up animation ── */
+function CountUp({ to, suffix = '', duration = 1400 }) {
+  const [display, setDisplay] = useState(0);
+  const ref = useRef(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || started.current) return;
+        started.current = true;
+        const t0 = performance.now();
+        const tick = now => {
+          const p = Math.min((now - t0) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          setDisplay(Math.round(eased * to));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        io.disconnect();
+      },
+      { threshold: 0.5 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [to, duration]);
+
+  return <span ref={ref}>{display.toLocaleString()}{suffix}</span>;
+}
+
+/* ── GlobeLines — pauses rAF when section is off-screen ── */
 function GlobeLines({ markers, interaction }) {
   const containerRef = useRef(null);
   const pathRef = useRef(null);
@@ -77,9 +109,11 @@ function GlobeLines({ markers, interaction }) {
     const R = Math.max(20, Math.min(W, H) / 2 - 8);
     const cx = W / 2, cy = H / 2;
     let raf;
+    let running = false;
     let lastTime = performance.now();
 
     const step = now => {
+      if (!running) return;
       const dt = Math.min(0.05, (now - lastTime) / 1000);
       lastTime = now;
       if (interaction.autoRotate) rotRef.current.lambda += interaction.autoRotateSpeed * dt;
@@ -105,8 +139,29 @@ function GlobeLines({ markers, interaction }) {
       if (pathRef.current) pathRef.current.setAttribute('d', d || '');
       raf = requestAnimationFrame(step);
     };
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
+
+    const section = containerRef.current?.closest('section');
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !running) {
+          running = true;
+          lastTime = performance.now();
+          raf = requestAnimationFrame(step);
+        } else if (!entry.isIntersecting) {
+          running = false;
+          cancelAnimationFrame(raf);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    if (section) io.observe(section);
+    else { running = true; raf = requestAnimationFrame(step); }
+
+    return () => {
+      running = false;
+      cancelAnimationFrame(raf);
+      io.disconnect();
+    };
   }, [dims]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -126,6 +181,8 @@ function GlobeLines({ markers, interaction }) {
 }
 
 /* ── Location data ────────────────────────────────────────── */
+const FLAG_MAP = { CA: flagCA, US: flagUS, ZA: flagZA };
+
 const REGIONS = [
   {
     code: 'CA',
@@ -165,23 +222,23 @@ const REGIONS = [
 ];
 
 const STATS = [
-  { num: '14',   label: 'Locations' },
-  { num: '3',    label: 'Countries' },
-  { num: '9K+',  label: 'Vehicles'  },
+  { to: 14,   suffix: '',  label: 'Locations' },
+  { to: 3,    suffix: '',  label: 'Countries' },
+  { to: 9000, suffix: '+', label: 'Vehicles'  },
 ];
 
 /* ── TacticalGlobe configuration ─────────────────────────── */
 const GLOBE_MARKERS = [
-  { label: 'Mississauga · ON',     description: 'Headquarters · Ontario',  latitude: 43.589,  longitude: -79.644,  color: '#cc2200' }, // 0 - HQ
-  { label: 'Vaughan · ON',         description: 'Ontario',                  latitude: 43.837,  longitude: -79.508,  color: '#cc2200' }, // 1
-  { label: 'Ottawa · ON',          description: 'Ontario',                  latitude: 45.421,  longitude: -75.697,  color: '#cc2200' }, // 2
-  { label: 'Hamilton · ON',        description: 'Ontario',                  latitude: 43.256,  longitude: -79.871,  color: '#cc2200' }, // 3
-  { label: 'Barrie · ON',          description: 'Ontario',                  latitude: 44.389,  longitude: -79.690,  color: '#cc2200' }, // 4
-  { label: 'Calgary · AB',         description: 'Alberta',                  latitude: 51.045,  longitude: -114.072, color: '#cc2200' }, // 5
-  { label: 'Vancouver · BC',       description: 'British Columbia',         latitude: 49.283,  longitude: -123.121, color: '#cc2200' }, // 6
-  { label: 'Fort Lauderdale · FL', description: 'Florida, USA',             latitude: 26.122,  longitude: -80.137,  color: '#cc2200' }, // 7
-  { label: 'Orlando · FL',         description: 'Florida, USA',             latitude: 28.538,  longitude: -81.379,  color: '#cc2200' }, // 8
-  { label: 'Cape Town · ZA',       description: 'South Africa',             latitude: -33.925, longitude: 18.424,   color: '#cc2200' }, // 9
+  { label: 'Mississauga · ON',     description: 'Headquarters · Ontario',  latitude: 43.589,  longitude: -79.644,  color: '#cc2200' },
+  { label: 'Vaughan · ON',         description: 'Ontario',                  latitude: 43.837,  longitude: -79.508,  color: '#cc2200' },
+  { label: 'Ottawa · ON',          description: 'Ontario',                  latitude: 45.421,  longitude: -75.697,  color: '#cc2200' },
+  { label: 'Hamilton · ON',        description: 'Ontario',                  latitude: 43.256,  longitude: -79.871,  color: '#cc2200' },
+  { label: 'Barrie · ON',          description: 'Ontario',                  latitude: 44.389,  longitude: -79.690,  color: '#cc2200' },
+  { label: 'Calgary · AB',         description: 'Alberta',                  latitude: 51.045,  longitude: -114.072, color: '#cc2200' },
+  { label: 'Vancouver · BC',       description: 'British Columbia',         latitude: 49.283,  longitude: -123.121, color: '#cc2200' },
+  { label: 'Fort Lauderdale · FL', description: 'Florida, USA',             latitude: 26.122,  longitude: -80.137,  color: '#cc2200' },
+  { label: 'Orlando · FL',         description: 'Florida, USA',             latitude: 28.538,  longitude: -81.379,  color: '#cc2200' },
+  { label: 'Cape Town · ZA',       description: 'South Africa',             latitude: -33.925, longitude: 18.424,   color: '#cc2200' },
 ];
 
 const GLOBE_MAP_STYLE = {
@@ -194,7 +251,7 @@ const GLOBE_MAP_STYLE = {
 };
 
 const GLOBE_TOOLTIP = {
-  show:        true,
+  show:        !IS_MOBILE,
   background:  'rgba(6, 8, 10, 0.94)',
   textColor:   '#e4e8e6',
   borderColor: 'rgba(255, 255, 255, 0.09)',
@@ -203,7 +260,7 @@ const GLOBE_TOOLTIP = {
 const GLOBE_GRID = {
   show:    true,
   color:   '#252c34',
-  opacity: 0.28,
+  opacity: IS_MOBILE ? 0.15 : 0.28,
 };
 
 const GLOBE_LAYOUT = {
@@ -214,17 +271,17 @@ const GLOBE_LAYOUT = {
 };
 
 const GLOBE_INTERACTION = {
-  autoRotate:       true,
-  autoRotateSpeed:  4.5,
-  rotateX:          0,
-  rotateY:          20,
-  rotateZ:          -50,
-  enableDrag:       true,
-  dragSensitivity:  0.4,
-  glowColor:        '#d40000',
-  glowIntensity:    0.55,
-  showStars:        true,
-  showLabels:       true,
+  autoRotate:      !IS_MOBILE,
+  autoRotateSpeed: IS_MOBILE ? 0 : 4.5,
+  rotateX:         0,
+  rotateY:         20,
+  rotateZ:         -50,
+  enableDrag:      !IS_MOBILE,
+  dragSensitivity: IS_MOBILE ? 0 : 0.4,
+  glowColor:       '#d40000',
+  glowIntensity:   IS_MOBILE ? 0.20 : 0.55,
+  showStars:       !IS_MOBILE,
+  showLabels:      !IS_MOBILE,
 };
 
 /* ── Component ───────────────────────────────────────────── */
@@ -270,10 +327,10 @@ export default function GlobalLocations() {
           className={`${styles.globeOuter} ${revealed ? styles.in : ''}`}
           style={{ transitionDelay: revealed ? '0.18s' : '0s' }}
         >
-          <div className={styles.aura1}    aria-hidden="true" />
-          <div className={styles.aura2}    aria-hidden="true" />
-          <div className={styles.aura3}    aria-hidden="true" />
-          <div className={styles.auraScan} aria-hidden="true" />
+          {!IS_MOBILE && <div className={styles.aura1}    aria-hidden="true" />}
+          {!IS_MOBILE && <div className={styles.aura2}    aria-hidden="true" />}
+          {!IS_MOBILE && <div className={styles.aura3}    aria-hidden="true" />}
+          {!IS_MOBILE && <div className={styles.auraScan} aria-hidden="true" />}
 
           <div className={styles.globeWrap}>
             <MilitaryMap
@@ -296,7 +353,9 @@ export default function GlobalLocations() {
         >
           {STATS.map(s => (
             <div key={s.label} className={styles.stat}>
-              <span className={styles.statNum}>{s.num}</span>
+              <span className={styles.statNum}>
+                <CountUp to={s.to} suffix={s.suffix} duration={s.to >= 1000 ? 2000 : 1200} />
+              </span>
               <span className={styles.statLabel}>{s.label}</span>
             </div>
           ))}
@@ -311,7 +370,7 @@ export default function GlobalLocations() {
               style={{ transitionDelay: revealed ? `${0.48 + i * 0.13}s` : '0s' }}
             >
               <div className={styles.regionHeader}>
-                <span className={styles.regionCode}>{region.code}</span>
+                <img src={FLAG_MAP[region.code]} alt={region.name} className={styles.regionFlag} />
                 <span className={styles.regionName}>{region.name}</span>
                 <span className={styles.regionCount}>{region.count}</span>
               </div>

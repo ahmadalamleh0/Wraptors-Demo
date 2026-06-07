@@ -141,7 +141,7 @@
     calc(100% - 28px) 10px,              calc(100% - 11px) 10px,
     calc(100% - 28px) calc(100% - 11px), calc(100% - 11px) calc(100% - 28px);
   background-repeat: no-repeat;
-  padding: 44px 52px;
+  padding: 36px 48px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -153,7 +153,7 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 }
 
 .tag {
@@ -174,18 +174,18 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #fff;
-  margin: 0 0 22px;
+  margin: 0 0 16px;
   line-height: 0.88;
 }
 
 /* ── Description ── */
 .desc {
   font-family: var(--font-ui);
-  font-size: clamp(0.8rem, 1vw, 0.9rem);
+  font-size: clamp(0.82rem, 1vw, 0.93rem);
   letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.36);
-  line-height: 1.75;
-  margin: 0 0 38px;
+  color: rgba(255, 255, 255, 0.58);
+  line-height: 1.9;
+  margin: 0 0 26px;
   max-width: 360px;
 }
 

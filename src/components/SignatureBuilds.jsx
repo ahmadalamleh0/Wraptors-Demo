@@ -14,10 +14,10 @@ import mustangLogo from '../../FORD_N.svg';
 import cadillacLogo from '../../cadillac-svgrepo-com.svg';
 import lexusLogo from '../../lexus-svgrepo-com.svg';
 import subaruLogo from '../../subaru-svgrepo-com.svg';
-import gtrLogo from '../../gt-r.svg';
-import bentleyLogo from '../../bentley-logo-svgrepo-com.svg';
+import gtrLogo from '../../GTR_NEW.svg';
+import bentleyLogo from '../../Simplified Negative_BMdotCom_1000x500_2x1.svg';
 import rollsLogo from '../../rolls-royce-svgrepo-com.svg';
-import astonLogo from '../../Brands/aston-martin-2.svg';
+import astonLogo from '../../Aston_Martin_Logo_0.svg';
 import rangeLogo from '../../Brands/range-rover-2.svg';
 import mclarenLogo from '../../Brands/mclaren.svg';
 import maybachLogo from '../../maybach-svgrepo-com.svg';
@@ -214,13 +214,13 @@ const BUILDS = [
   { brandName: "Maybach",       logo: maybachLogo,   mainImage: maybach1,   media: [maybach1, maybach2, maybach3, maybach4, maybach5, maybach6],           serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],                 category: "german-precision" },
   { brandName: "Audi",          logo: audiLogo,      mainImage: audi1,      media: [audi1, audi2, audi3, audi4, audi5, audi6, audi7],                     serviceTags: ["FULL VINYL COLOR CHANGE", "TINT"],                   category: "german-precision" },
 
-  // Italian Exotics — alternating Ferrari / Lamborghini
+  // Italian Exotics — LBWK first, then Lamborghini / Ferrari alternating
+  { brandName: "Lamborghini", logo: lamborghiniLogo, mainImage: lamboLBWK1,    media: [lamboLBWK1, lamboLBWK2, lamboLBWK3, lamboLBWK4, lamboLBWK5],                                                                       serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
   { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrari1,      media: [ferrari1, ferrari2, ferrari3, ferrari4, ferrari5, ferrari6],                                                                         serviceTags: ["FULL VINYL COLOR CHANGE", "TINT", "CERAMIC COATING"], category: "italian-exotics" },
   { brandName: "Lamborghini", logo: lamborghiniLogo, mainImage: lamboPurple1,  media: [lamboPurple1, lamboPurple2, lamboPurple3, lamboPurple4, lamboPurple5],                                                              serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
   { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrariRed1,   media: [ferrariRed1, ferrariRed2, ferrariRed3, ferrariRed4, ferrariRed5],                                                                   serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
-  { brandName: "Lamborghini", logo: lamborghiniLogo, mainImage: lamboLBWK1,    media: [lamboLBWK1, lamboLBWK2, lamboLBWK3, lamboLBWK4, lamboLBWK5],                                                                       serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
-  { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrariWhite1, media: [ferrariWhite1, ferrariWhite2, ferrariWhite3, ferrariWhite4, ferrariWhite5, ferrariWhite6, ferrariWhite7],                           serviceTags: ["FULL VINYL COLOR CHANGE", "CERAMIC COATING"],       category: "italian-exotics" },
   { brandName: "Lamborghini", logo: lamborghiniLogo, mainImage: urus1,         media: [urus1, urus2, urus4],                                                                                                               serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
+  { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrariWhite1, media: [ferrariWhite1, ferrariWhite2, ferrariWhite3, ferrariWhite4, ferrariWhite5, ferrariWhite6, ferrariWhite7],                           serviceTags: ["FULL VINYL COLOR CHANGE", "CERAMIC COATING"],       category: "italian-exotics" },
 
   // American Muscle
   { brandName: "Dodge",     logo: srtLogo,      mainImage: srt4,      media: [srt4, srt1, srt2, srt3, srt5],                                         serviceTags: ["FULL VINYL COLOR CHANGE", "TINT"],                   category: "american-muscle" },
@@ -231,7 +231,7 @@ const BUILDS = [
   // Japanese Icons
   { brandName: "Lexus",     logo: lexusLogo,   mainImage: lexus1,   media: [lexus1, lexus2, lexus3, lexus4, lexus5],     serviceTags: ["FULL VINYL COLOR CHANGE", "CERAMIC COATING"], category: "japanese-icons" },
   { brandName: "Subaru",    logo: subaruLogo,  mainImage: subaru1,  media: [subaru1, subaru2, subaru3, subaru4, subaru5], serviceTags: ["FULL VINYL COLOR CHANGE", "TINT"],             category: "japanese-icons" },
-  { brandName: "Nissan GTR",logo: gtrLogo,     mainImage: gtr1,     media: [gtr1, gtr2, gtr3, gtr4, gtr5],               serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],           category: "japanese-icons" },
+  { brandName: "Nissan GTR",logo: gtrLogo,     mainImage: gtr1,     media: [gtr1, gtr2, gtr3, gtr4, gtr5],               serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],           category: "japanese-icons", logoStyle: { filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.45))', opacity: 0.88 } },
 
   // British Luxury
   { brandName: "Bentley",     logo: bentleyLogo, mainImage: bentley1, media: [bentley1, bentley2, bentley3, bentley4, bentley5],                           serviceTags: ["FULL CLEAR PPF", "TINT", "CERAMIC COATING"],  category: "british-luxury" },
@@ -281,7 +281,7 @@ function BuildCard({ build }) {
         <div className={styles.overlay} />
 
         <div className={styles.logoContainer}>
-          <img src={build.logo} className={styles.logo} alt="" aria-hidden="true" />
+          <img src={build.logo} className={styles.logo} alt="" aria-hidden="true" style={build.logoStyle} />
         </div>
 
         <div className={styles.cardContent}>
@@ -293,7 +293,7 @@ function BuildCard({ build }) {
           </div>
         </div>
 
-        {hovered && build.media && build.media.length > 1 && (
+        {build.media && build.media.length > 1 && (
           <div className={styles.dotsContainer}>
             {build.media.map((_, i) => (
               <span key={i} className={`${styles.dot} ${i === imgIndex ? styles.activeDot : ''}`} />
