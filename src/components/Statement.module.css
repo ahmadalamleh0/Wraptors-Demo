@@ -1,0 +1,90 @@
+/* ══ STATEMENT ══ */
+.section {
+  position: relative;
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 120px 48px;
+}
+
+/* Full-screen black plane — GSAP dissolves it on entry, restores it on exit.
+   No CSS gradients needed: the only darkness is this overlay, fully GSAP-controlled. */
+.blackOverlay {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ── Content — sits behind the overlay until it clears ── */
+.inner {
+  position: relative;
+  z-index: 5;
+  max-width: 1300px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ── Context lines — subdued setup ── */
+.contextLine {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.6vw, 3.4rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.38);
+  line-height: 1.25;
+  margin: 0 0 0.25em;
+}
+
+/* ── Red blade separator ── */
+.ruler {
+  width: 52px;
+  height: 1px;
+  background: rgba(180, 0, 0, 0.65);
+  margin: 52px auto;
+  box-shadow: 0 0 6px rgba(180, 0, 0, 0.20);
+}
+
+/* ── "I DON'T FOLLOW TRENDS" ── */
+.declareLine {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 8.5rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.72);
+  line-height: 1.0;
+  margin: 0 0 0.1em;
+}
+
+/* ── "I MAKE THEM" — the hero line ── */
+.impactLine {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 13.5vw, 18rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #000;
+  line-height: 0.88;
+  margin: 0;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .section      { padding: 80px 28px; }
+  .contextLine  { font-size: clamp(1.0rem, 5vw, 2.2rem); letter-spacing: 0.06em; }
+  .ruler        { margin: 36px auto; }
+  .declareLine  { font-size: clamp(2rem, 8.5vw, 5rem); }
+  .impactLine   { font-size: clamp(3.2rem, 15vw, 8rem); }
+}
+
+@media (max-width: 480px) {
+  .contextLine  { font-size: 5.5vw; }
+  .declareLine  { font-size: 9.5vw; }
+  .impactLine   { font-size: 16.5vw; }
+}

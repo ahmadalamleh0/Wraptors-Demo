@@ -1,0 +1,142 @@
+/* ══ TRUSTED BRANDS ══ */
+.section {
+  background: #000;
+  padding: 88px 0 96px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hairline separator at the top */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,0.06) 25%,
+    rgba(255,255,255,0.10) 50%,
+    rgba(255,255,255,0.06) 75%,
+    transparent
+  );
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  padding: 0 24px 60px;
+}
+
+.label {
+  display: block;
+  font-family: var(--font-ui, 'Rajdhani', sans-serif);
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: var(--font-display, 'Bebas Neue', sans-serif);
+  font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 14px;
+  line-height: 1.05;
+}
+
+.sub {
+  font-family: var(--font-ui, 'Rajdhani', sans-serif);
+  font-size: clamp(0.68rem, 1.05vw, 0.84rem);
+  color: rgba(255, 255, 255, 0.30);
+  letter-spacing: 0.04em;
+  margin: 0 auto;
+  max-width: 460px;
+  line-height: 1.6;
+}
+
+/* ── Marquee outer — clips overflow and fades edges ── */
+.marqueeOuter {
+  overflow: hidden;
+  /* Fade masks left + right so the loop disappears cleanly off-screen */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 9%,
+    #000 91%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 9%,
+    #000 91%,
+    transparent 100%
+  );
+}
+
+/* Pause on hover */
+.marqueeOuter:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
+/* ── Marquee track ── */
+.marqueeTrack {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: marqueeScroll 32s linear infinite;
+}
+
+/* ── Individual logo slot ── */
+.logoItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 64px;
+  flex-shrink: 0;
+}
+
+/* ── Logo image ── */
+.logo {
+  height: 36px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  /* All-white so logos read cleanly on black at any brand color */
+  filter: brightness(0) invert(1);
+  opacity: 0.38;
+  transition:
+    opacity   0.4s ease,
+    transform 0.4s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.logoItem:hover .logo {
+  opacity: 0.88;
+  transform: scale(1.10);
+}
+
+/* ── Keyframe: move exactly -50% = two copies → seamless ── */
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .section    { padding: 64px 0 72px; }
+  .header     { padding: 0 20px 44px; }
+  .logo       { height: 28px; }
+  .logoItem   { padding: 0 44px; }
+}
+
+@media (max-width: 480px) {
+  .logo     { height: 24px; }
+  .logoItem { padding: 0 32px; }
+}

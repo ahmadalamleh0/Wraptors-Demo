@@ -1,0 +1,252 @@
+/* ══ HERO ══ */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  background: #030303;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Gold hairline at section bottom */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(212,170,50,0.10) 30%,
+    rgba(212,170,50,0.18) 50%,
+    rgba(212,170,50,0.10) 70%,
+    transparent
+  );
+  z-index: 10;
+}
+
+/* ── Background radial glow ── */
+.bgGlow {
+  position: absolute;
+  width: clamp(380px, 58vw, 700px);
+  height: clamp(380px, 58vw, 700px);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(212,170,50,0.08) 0%,
+    rgba(180,140,30,0.04) 30%,
+    rgba(140,100,15,0.01) 55%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Spotlight cone ── */
+.spotlight {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: clamp(300px, 42vw, 560px);
+  height: 72%;
+  background: linear-gradient(
+    180deg,
+    rgba(255,248,220,0.04) 0%,
+    rgba(255,248,220,0.015) 36%,
+    rgba(255,248,220,0.005) 64%,
+    transparent 100%
+  );
+  clip-path: polygon(28% 0%, 72% 0%, 94% 100%, 6% 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Fixed lockup ── */
+.lockup {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* ── Logo row: EST. | logo | 2016 ── */
+.logoRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Side labels ── */
+.sideText {
+  width: clamp(48px, 7vw, 88px);
+  text-align: center;
+  font-family: 'Jarvane', var(--font-ui), serif;
+  font-size: clamp(0.44rem, 0.72vw, 0.58rem);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1;
+  text-shadow:
+    0  1px 0  rgba(0,0,0,0.9),
+    0 -1px 0  rgba(255,255,255,0.08);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Logo wrapper ── */
+.logoWrap {
+  position: relative;
+  width: clamp(240px, 34vw, 460px);
+  transform-origin: center center;
+}
+
+/* ── SVG logo ── */
+.badgeImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  fill: #ffffff;
+}
+
+/* ── WRAPTORS MAFIA — engraved, below logo ── */
+.topText {
+  margin: 14px 0 0;
+  font-family: 'Jarvane', 'Cinzel', 'Trajan Pro', Georgia, serif;
+  font-size: clamp(1.1rem, 2.6vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  /* Slightly off-white so the bright highlights above the letters pop as ridges */
+  color: rgba(218, 218, 218, 0.92);
+  text-align: center;
+  line-height: 1;
+  /* Engraved / chiselled stone effect:
+     top edge (-y): bright white highlight = light catching the carved ridge
+     bottom edge (+y): hard black floor = depth of the groove */
+  text-shadow:
+    0 -2px 0    rgba(255, 255, 255, 0.82),   /* bright ridge top */
+    0 -1px 0    rgba(255, 255, 255, 0.45),   /* ridge soften */
+    0  1px 0    rgba(0, 0, 0, 1),            /* carved floor */
+    0  2px 3px  rgba(0, 0, 0, 0.95),         /* groove depth */
+    0  3px 8px  rgba(0, 0, 0, 0.80),         /* deeper shadow */
+    1px  0 0    rgba(0, 0, 0, 0.30),
+    -1px 0 0    rgba(0, 0, 0, 0.30);
+  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.18);
+  -webkit-font-smoothing: antialiased;
+  will-change: clip-path, transform, filter;
+}
+
+/* ── LOYALTY OVER ROYALTY — engraved subtitle ── */
+.bottomText {
+  margin: 8px 0 0;
+  font-family: 'Jarvane', var(--font-ui), serif;
+  font-size: clamp(0.52rem, 0.95vw, 0.76rem);
+  font-weight: 700;
+  letter-spacing: 0.56em;
+  text-transform: uppercase;
+  color: rgba(200, 200, 200, 0.78);
+  text-align: center;
+  line-height: 1;
+  text-shadow:
+    0 -1px 0    rgba(255, 255, 255, 0.65),
+    0  1px 0    rgba(0, 0, 0, 1),
+    0  2px 4px  rgba(0, 0, 0, 0.88);
+  -webkit-text-stroke: 0.3px rgba(255, 255, 255, 0.14);
+  -webkit-font-smoothing: antialiased;
+  will-change: clip-path, transform, filter;
+}
+
+/* ── Subtle atmosphere particles ── */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.95) 0%,
+    rgba(220,230,255,0.50) 45%,
+    transparent            100%
+  );
+  animation: particleFloat var(--pdur, 5s) ease-in-out var(--pdelay, 0s) infinite;
+}
+
+@keyframes particleFloat {
+  0%   { transform: translate(0, 0)                  scale(1.0); opacity: 0;    }
+  12%  { opacity: 0.72; }
+  55%  { transform: translate(var(--pdx,3px), -22px) scale(0.85); opacity: 0.42; }
+  100% { transform: translate(var(--pdx,3px), -42px) scale(0.65); opacity: 0;   }
+}
+
+/* ── Scroll indicator ── */
+.scrollCue {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  pointer-events: none;
+}
+
+.scrollText {
+  font-family: var(--font-ui, sans-serif);
+  font-size: 7px;
+  letter-spacing: 0.55em;
+  color: rgba(255,255,255,0.22);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.scrollBar {
+  display: block;
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.28), transparent);
+}
+
+.scrollDot {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.30);
+  animation: scrollBounce 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .logoWrap   { width: clamp(180px, 58vw, 280px); }
+  .sideText   { width: clamp(36px, 10vw, 56px); font-size: clamp(0.38rem, 2vw, 0.5rem); }
+  .topText    { font-size: clamp(1.3rem, 8vw, 2rem); letter-spacing: 0.14em; margin-top: 10px; }
+  .bottomText { font-size: clamp(0.5rem, 2.2vw, 0.72rem); letter-spacing: 0.42em; }
+  .spotlight  { width: 260px; }
+  .bgGlow     { width: 300px; height: 300px; }
+  .scrollCue  { bottom: 24px; }
+}
+
+@media (max-width: 480px) {
+  .logoWrap { width: 72vw; }
+  .topText  { font-size: 9.5vw; }
+}

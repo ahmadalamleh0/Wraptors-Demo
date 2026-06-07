@@ -1,0 +1,241 @@
+/* ══ NAVBAR — transparent/cinematic ══ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 28px 56px;
+  /* Starts fully transparent over the hero */
+  background: transparent;
+  transition:
+    background    0.55s var(--ease-smooth),
+    padding       0.55s var(--ease-smooth),
+    border-color  0.55s;
+}
+
+/* Frosted glass when page is scrolled */
+.navScrolled {
+  background: rgba(3, 3, 3, 0.88);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  padding: 16px 56px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.038);
+  box-shadow: 0 2px 60px rgba(0, 0, 0, 0.7);
+}
+
+/* ── Logo — absolutely centered in the navbar ── */
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* SVG logo mark — fades in as the hero logo arrives on scroll */
+.navLogoMark {
+  display: block;
+  width: 40px;
+  height: 40px;
+  fill: #ffffff;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+}
+
+.navLogoVisible {
+  opacity: 1;
+}
+
+@media (max-width: 960px) {
+  .navLogoMark { width: 32px; height: 32px; }
+}
+
+/* ── Nav links ── */
+.links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-left: auto;
+}
+
+.link {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+  transition: color 0.25s;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--red), var(--red-bright));
+  box-shadow: 0 0 5px rgba(212, 0, 0, 0.6);
+  transition: width 0.38s var(--ease-smooth);
+}
+
+.link:hover {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+/* ── Desktop CTA ── */
+.navCta {
+  margin-left: 12px;
+  font-size: 10px !important;
+  padding: 10px 22px !important;
+  letter-spacing: 0.26em !important;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)) !important;
+  flex-shrink: 0;
+}
+
+/* ── Hero mode: hide all right-side nav items during initial hero reveal ──
+   .navHeroMode is on the <nav> when the user hasn't scrolled yet.
+   Removing the class triggers the CSS transitions below.               */
+
+/* Desktop: hide links + CTA */
+@media (min-width: 961px) {
+  .links {
+    transition:
+      opacity   0.75s ease,
+      visibility 0.75s ease,
+      transform 0.75s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  .navHeroMode .links {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+  }
+}
+
+/* Desktop + mobile: hide CTA button */
+.navCta {
+  transition:
+    opacity   0.75s ease,
+    visibility 0.75s ease,
+    transform 0.75s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.navHeroMode .navCta {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
+
+/* Mobile: hide burger */
+.burger {
+  transition:
+    opacity   0.75s ease,
+    visibility 0.75s ease,
+    transform 0.35s cubic-bezier(0.33, 1, 0.68, 1),
+    opacity   0.25s;
+}
+.navHeroMode .burger {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* ── Mobile CTA (inside drawer) ── */
+.mobileCta {
+  display: none;
+}
+
+/* ── Mobile burger ── */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: auto;
+}
+
+.burger span {
+  display: block;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+  transform-origin: center;
+  transition: transform 0.35s var(--ease-smooth), opacity 0.25s, width 0.35s, background 0.25s;
+}
+
+.burger span:nth-child(1) { width: 22px; }
+.burger span:nth-child(2) { width: 14px; }
+.burger span:nth-child(3) { width: 22px; }
+
+.burger:hover span { background: #fff; }
+.burger:hover span:nth-child(2) { width: 22px; }
+
+.burgerOpen span:nth-child(1) { transform: translateY(6px) rotate(45deg); width: 22px; }
+.burgerOpen span:nth-child(2) { opacity: 0; }
+.burgerOpen span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); width: 22px; }
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .nav        { padding: 22px 28px; }
+  .navScrolled{ padding: 14px 28px; }
+
+  .links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 28px;
+    background: rgba(3, 3, 3, 0.98);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 48px 40px;
+    margin-left: 0;
+    transform: translateX(100%);
+    transition: transform 0.45s var(--ease-cinema);
+    z-index: 199;
+  }
+
+  /* Red top accent line on the drawer */
+  .links::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 64px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+  }
+
+  .linksOpen { transform: translateX(0); }
+
+  .link {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.2em;
+  }
+
+  .navCta    { display: none; }
+  .mobileCta { display: block; margin-top: 16px; width: 100%; }
+  .mobileCta a { width: 100%; justify-content: center; }
+  .burger    { display: flex; }
+}
