@@ -341,6 +341,25 @@
 }
 .card:hover .tag { color: #fff; }
 
+/* Exclusive build badge — top right corner */
+.cardBadge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 5;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  background: rgba(0, 0, 0, 0.50);
+  backdrop-filter: blur(6px);
+  padding: 4px 10px;
+  font-family: var(--font-ui);
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.70);
+  font-weight: 700;
+  pointer-events: none;
+}
+
 /* Slideshow dots — in-flow below tags inside cardContent */
 .dotsContainer {
   display: flex;

@@ -208,37 +208,37 @@ const CATEGORIES = [
 
 const BUILDS = [
   // German Precision
-  { brandName: "BMW",           logo: bmwLogo,       mainImage: bmw1,       media: [bmw1, bmw2, bmw3, bmw4, bmw5, bmw6, bmw7],                           serviceTags: ["FULL VINYL COLOR CHANGE", "PPF", "CERAMIC COATING"], category: "german-precision" },
-  { brandName: "Mercedes-Benz", logo: amgLogo,       mainImage: amg2,       media: [amg2, amg1, amg3, amg4, amg5, amg6],                                 serviceTags: ["FULL CLEAR PPF", "TINT"],                            category: "german-precision" },
-  { brandName: "Porsche",       logo: porscheLogo,   mainImage: porsch1,    media: [porsch1, porsch2, porsch3, porsch4, porsch5, porsch6],                 serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],                 category: "german-precision" },
-  { brandName: "Maybach",       logo: maybachLogo,   mainImage: maybach1,   media: [maybach1, maybach2, maybach3, maybach4, maybach5, maybach6],           serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],                 category: "german-precision" },
-  { brandName: "Audi",          logo: audiLogo,      mainImage: audi1,      media: [audi1, audi2, audi3, audi4, audi5, audi6, audi7],                     serviceTags: ["FULL VINYL COLOR CHANGE", "TINT"],                   category: "german-precision" },
+  { brandName: "BMW G80 M3",         logo: bmwLogo,       mainImage: bmw1,       media: [bmw1, bmw2, bmw3, bmw4, bmw5, bmw6, bmw7],                           serviceTags: ["SATIN BLACK", "ORANGE CALIPERS", "WINDOW TINTS"],              category: "german-precision" },
+  { brandName: "BRABUS 800 S-Class", logo: amgLogo,       mainImage: amg2,       media: [amg2, amg1, amg3, amg4, amg5, amg6],                                 serviceTags: ["RASPBERRY BLUE", "BRABUS CONVERSION", "STARLIGHT"],            category: "german-precision" },
+  { brandName: "Porsche 911 GTS",    logo: porscheLogo,   mainImage: porsch2,    media: [porsch2, porsch1, porsch3, porsch4, porsch5, porsch6],                 serviceTags: ["GLOSS MIDNIGHT GREEN", "SATIN GOLD WHEELS", "CERAMIC COATING"], category: "german-precision" },
+  { brandName: "Mercedes S580",      logo: maybachLogo,   mainImage: maybach1,   media: [maybach1, maybach2, maybach3, maybach4, maybach5, maybach6],           serviceTags: ["TWO-TONE", "SATIN WHITE ALUMINUM"],                            category: "german-precision" },
+  { brandName: "Audi RS6",           logo: audiLogo,      mainImage: audi1,      media: [audi1, audi2, audi3, audi4, audi5, audi6, audi7],                     serviceTags: ["PAINT PROTECTION FILM"],                                                         category: "german-precision" },
 
   // Italian Exotics — LBWK first, then Lamborghini / Ferrari alternating
-  { brandName: "Lamborghini", logo: lamborghiniLogo, mainImage: lamboLBWK1,    media: [lamboLBWK1, lamboLBWK2, lamboLBWK3, lamboLBWK4, lamboLBWK5],                                                                       serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
-  { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrari1,      media: [ferrari1, ferrari2, ferrari3, ferrari4, ferrari5, ferrari6],                                                                         serviceTags: ["FULL VINYL COLOR CHANGE", "TINT", "CERAMIC COATING"], category: "italian-exotics" },
-  { brandName: "Lamborghini", logo: lamborghiniLogo, mainImage: lamboPurple1,  media: [lamboPurple1, lamboPurple2, lamboPurple3, lamboPurple4, lamboPurple5],                                                              serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
-  { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrariRed1,   media: [ferrariRed1, ferrariRed2, ferrariRed3, ferrariRed4, ferrariRed5],                                                                   serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
-  { brandName: "Lamborghini", logo: lamborghiniLogo, mainImage: urus1,         media: [urus1, urus2, urus4],                                                                                                               serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],               category: "italian-exotics" },
-  { brandName: "Ferrari",     logo: ferrariGesLogo,  mainImage: ferrariWhite1, media: [ferrariWhite1, ferrariWhite2, ferrariWhite3, ferrariWhite4, ferrariWhite5, ferrariWhite6, ferrariWhite7],                           serviceTags: ["FULL VINYL COLOR CHANGE", "CERAMIC COATING"],       category: "italian-exotics" },
+  { brandName: "Lamborghini LBWK",  logo: lamborghiniLogo, mainImage: lamboLBWK1,    media: [lamboLBWK1, lamboLBWK2, lamboLBWK3, lamboLBWK4, lamboLBWK5],                                                              buildLabel: "WRAPTORS BUILD · LBWK", badge: "1 OF 1", serviceTags: ["CELESTIAL UNICORN FINISH"],                                                   category: "italian-exotics" },
+  { brandName: "Ferrari F8",         logo: ferrariGesLogo,  mainImage: ferrari1,      media: [ferrari1, ferrari2, ferrari3, ferrari4, ferrari5, ferrari6],                                                                serviceTags: ["FULL-BODY PAINT PROTECTION FILM", "DEEP BLUE INTERIOR ACCENTS"],                                              category: "italian-exotics" },
+  { brandName: "Lamborghini",        logo: lamborghiniLogo, mainImage: lamboPurple1,  media: [lamboPurple1, lamboPurple2, lamboPurple3, lamboPurple4, lamboPurple5],                                                     serviceTags: ["TWO-TONE FINISH", "SATIN BLACK UPPER", "MATTE ICED TITANIUM PINK LOWER"],                                     category: "italian-exotics" },
+  { brandName: "Ferrari 488 Spider", logo: ferrariGesLogo,  mainImage: ferrariRed1,   media: [ferrariRed1, ferrariRed2, ferrariRed3, ferrariRed4, ferrariRed5],                                                          serviceTags: ["GLOSS CARMEN RED", "DOOR TRIMS", "GLOSS BLACK ACCENTS"],                                                      category: "italian-exotics" },
+  { brandName: "Lamborghini Urus",   logo: lamborghiniLogo, mainImage: urus1,         media: [urus1, urus2, urus4],                                                                                                      serviceTags: ["BLOSSOM COLOR WRAP"],                                                                                         category: "italian-exotics" },
+  { brandName: "Ferrari",            logo: ferrariGesLogo,  mainImage: ferrariWhite1, media: [ferrariWhite1, ferrariWhite2, ferrariWhite3, ferrariWhite4, ferrariWhite5, ferrariWhite6, ferrariWhite7],                  serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],                                                                   category: "italian-exotics" },
 
   // American Muscle
-  { brandName: "Dodge",     logo: srtLogo,      mainImage: srt4,      media: [srt4, srt1, srt2, srt3, srt5],                                         serviceTags: ["FULL VINYL COLOR CHANGE", "TINT"],                   category: "american-muscle" },
-  { brandName: "Corvette",  logo: corvetteLogo, mainImage: corvette1, media: [corvette1, corvette2, corvette3, corvette4, corvette5],                  serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],                 category: "american-muscle" },
-  { brandName: "Cadillac",  logo: cadillacLogo, mainImage: cadillac1, media: [cadillac1, cadillac2, cadillac3, cadillac4, cadillac5, cadillac6],       serviceTags: ["FULL CLEAR PPF", "TINT", "CERAMIC COATING"],         category: "american-muscle" },
-  { brandName: "Mustang",   logo: mustangLogo,  mainImage: mustang3,  media: [mustang3, mustang4, mustang5, mustang6, mustang7],                       serviceTags: ["FULL VINYL COLOR CHANGE", "TINT"],                   category: "american-muscle" },
+  { brandName: "Dodge",     logo: srtLogo,      mainImage: srt4,      media: [srt4, srt1, srt2, srt3, srt5],                                         serviceTags: ["SATIN CHROME RED WRAP", "CERAMIC COATING"],                                          category: "american-muscle" },
+  { brandName: "Corvette",  logo: corvetteLogo, mainImage: corvette1, media: [corvette1, corvette2, corvette3, corvette4, corvette5],                  serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],                                                  category: "american-muscle" },
+  { brandName: "Cadillac",  logo: cadillacLogo, mainImage: cadillac1, media: [cadillac1, cadillac2, cadillac3, cadillac4, cadillac5, cadillac6],       serviceTags: ["SATIN ALUMINUM WHITE FINISH", "GLOSS BLACK ROOF", "COLOR-MATCHED ACCENTS"],           category: "american-muscle" },
+  { brandName: "Mustang",   logo: mustangLogo,  mainImage: mustang3,  media: [mustang3, mustang4, mustang5, mustang6, mustang7],                       serviceTags: ["SATIN BLACK WRAP", "GLOSS BLACK RACING STRIPES"],                                     category: "american-muscle" },
 
   // Japanese Icons
-  { brandName: "Lexus",     logo: lexusLogo,   mainImage: lexus1,   media: [lexus1, lexus2, lexus3, lexus4, lexus5],     serviceTags: ["FULL VINYL COLOR CHANGE", "CERAMIC COATING"], category: "japanese-icons" },
-  { brandName: "Subaru",    logo: subaruLogo,  mainImage: subaru1,  media: [subaru1, subaru2, subaru3, subaru4, subaru5], serviceTags: ["FULL VINYL COLOR CHANGE", "TINT"],             category: "japanese-icons" },
-  { brandName: "Nissan GTR",logo: gtrLogo,     mainImage: gtr1,     media: [gtr1, gtr2, gtr3, gtr4, gtr5],               serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],           category: "japanese-icons", logoStyle: { filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.45))', opacity: 0.88 } },
+  { brandName: "Lexus",     logo: lexusLogo,   mainImage: lexus1,   media: [lexus1, lexus2, lexus3, lexus4, lexus5],     serviceTags: ["CHROME RED INTERIOR", "AMBIENT LIGHTING", "CERAMIC COATING"], category: "japanese-icons" },
+  { brandName: "Subaru",    logo: subaruLogo,  mainImage: subaru1,  media: [subaru1, subaru2, subaru3, subaru4, subaru5], serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],               category: "japanese-icons" },
+  { brandName: "Nissan GTR",logo: gtrLogo,     mainImage: gtr1,     media: [gtr1, gtr2, gtr3, gtr4, gtr5],               serviceTags: ["MATTE GUNMETAL METALLIC FINISH"],                          category: "japanese-icons", logoStyle: { filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.45))', opacity: 0.88 } },
 
   // British Luxury
-  { brandName: "Bentley",     logo: bentleyLogo, mainImage: bentley1, media: [bentley1, bentley2, bentley3, bentley4, bentley5],                           serviceTags: ["FULL CLEAR PPF", "TINT", "CERAMIC COATING"],  category: "british-luxury" },
-  { brandName: "Rolls-Royce", logo: rollsLogo,   mainImage: rolls1,   media: [rolls1, rolls2, rolls3, rolls4, rolls6, rolls7],                             serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],          category: "british-luxury" },
-  { brandName: "Aston Martin",logo: astonLogo,   mainImage: aston5,   media: [aston5, aston1, aston2, aston3, aston4, aston6],                             serviceTags: ["FULL VINYL COLOR CHANGE", "TINT"],             category: "british-luxury" },
-  { brandName: "Range Rover", logo: rangeLogo,   mainImage: range1,   media: [range1, range2, range3, range5],                                              serviceTags: ["FULL VINYL COLOR CHANGE", "TINT", "CERAMIC COATING"], category: "british-luxury" },
-  { brandName: "McLaren",     logo: mclarenLogo, mainImage: mclaren1, media: [mclaren1, mclaren2, mclaren3, mclaren4, mclaren5, mclaren6, mclaren7, mclaren8, mclaren9], serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"], category: "british-luxury" },
+  { brandName: "Bentley",     logo: bentleyLogo, mainImage: bentley1, media: [bentley1, bentley2, bentley3, bentley4, bentley5],                           serviceTags: ["WIDEBODY CONVERSION", "FULL NARDO GRAY WRAP"],                                    category: "british-luxury" },
+  { brandName: "Rolls-Royce", logo: rollsLogo,   mainImage: rolls1,   media: [rolls1, rolls2, rolls3, rolls4, rolls6, rolls7],                             serviceTags: ["SATIN BLACK FINISH", "BLACKED-OUT TRIM"],                                         category: "british-luxury" },
+  { brandName: "Aston Martin",logo: astonLogo,   mainImage: aston5,   media: [aston5, aston1, aston2, aston3, aston4, aston6],                             serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],                                       category: "british-luxury" },
+  { brandName: "Range Rover", logo: rangeLogo,   mainImage: range1,   media: [range1, range2, range3, range5],                                              serviceTags: ["MATTE DEAD BLACK", "GLOSS BLACK RIMS", "FRONT WINDOW TINT", "CERAMIC COATING"],  category: "british-luxury" },
+  { brandName: "McLaren",     logo: mclarenLogo, mainImage: mclaren1, media: [mclaren1, mclaren2, mclaren3, mclaren4, mclaren5, mclaren6, mclaren7, mclaren8, mclaren9], serviceTags: ["FULL SATIN BLACK WRAP", "CARBON FIBER ACCENTS"], category: "british-luxury" },
 ];
 
 // ── Card Component ──────────────────────────────────────────────────────────
@@ -284,8 +284,12 @@ function BuildCard({ build }) {
           <img src={build.logo} className={styles.logo} alt="" aria-hidden="true" style={build.logoStyle} />
         </div>
 
+        {build.badge && (
+          <div className={styles.cardBadge}>{build.badge}</div>
+        )}
+
         <div className={styles.cardContent}>
-          <span className={styles.buildLabel}>WRAPTORS BUILD</span>
+          <span className={styles.buildLabel}>{build.buildLabel || 'WRAPTORS BUILD'}</span>
           <div className={styles.tags}>
             {build.serviceTags.map(tag => (
               <span key={tag} className={styles.tag}>{tag}</span>
