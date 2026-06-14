@@ -14,6 +14,14 @@
 }
 
 @font-face {
+  font-family: 'Ethnocentric';
+  src: url('./assets/fonts/Ethnocentric-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'BrittanySignature';
   src: url('./assets/fonts/BrittanySignatureScript.ttf') format('truetype');
   font-weight: normal;

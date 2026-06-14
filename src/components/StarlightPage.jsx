@@ -12,6 +12,7 @@ import gallery1    from '../../Starlight(4).jpeg';
 import gallery2    from '../../Starlight(5).jpeg';
 import gallery3    from '../../Starlight(6).jpeg';
 import gallery4    from '../../Starlight(7).jpeg';
+import editorialImg from '../../photoshotstar.jpeg';
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
@@ -523,6 +524,27 @@ export default function StarlightPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── EDITORIAL STATEMENT ──────────────────────────────────────── */}
+      <section className={styles.editorialSection}>
+        <img
+          src={editorialImg}
+          alt="Starlight Headliner Photoshoot"
+          className={styles.editorialImg}
+          draggable={false}
+        />
+        <div className={styles.editorialOverlay} />
+        <div className={styles.editorialContent}>
+          <span className={styles.editorialEyebrow}>The Craft</span>
+          <h2 className={styles.editorialTitle}>Crafted<br />After Dark</h2>
+          <p className={styles.editorialSub}>
+            Precision-installed fiber-optic starlight, tailored for a more elevated interior presence.
+          </p>
+          <a href="mailto:info@wraptorsmafia.com?subject=Starlight Headliner Request" className={styles.editorialCta}>
+            Start Your Build <span className={styles.editorialArrow}>→</span>
+          </a>
         </div>
       </section>
 
