@@ -1,11 +1,14 @@
 /* ══ HERO ══ */
 .hero {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  min-height: 100svh;
+  height: 100svh;
   background: #030303;
   overflow: hidden;
   isolation: isolate;
+  z-index: 40;
 }
 
 /* Gold hairline at section bottom */
@@ -75,6 +78,7 @@
   z-index: 50;
   pointer-events: none;
   opacity: 0;
+  will-change: opacity, transform;
 }
 
 /* ── Logo row: EST. | logo | 2016 ── */
@@ -115,6 +119,7 @@
   height: auto;
   user-select: none;
   fill: #ffffff;
+  will-change: filter;
 }
 
 /* ── WRAPTORS MAFIA — engraved, below logo ── */

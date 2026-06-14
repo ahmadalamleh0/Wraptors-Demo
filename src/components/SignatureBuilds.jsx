@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import styles from './SignatureBuilds.module.css';
 import masterVideoSrc from '../../MasterPieces.mp4';
 
@@ -243,27 +243,68 @@ const BUILDS = [
 
 // ── Card Component ──────────────────────────────────────────────────────────
 function BuildCard({ build }) {
-  const [hovered, setHovered]   = useState(false);
+  const cardRef  = useRef(null);
+  const autoRef  = useRef(null);   // setInterval id
+  const delayRef = useRef(null);   // setTimeout id
   const [imgIndex, setImgIndex] = useState(0);
 
-  useEffect(() => {
-    if (!hovered || !build.media || build.media.length <= 1) {
-      setImgIndex(0);
-      return;
-    }
-    const interval = setInterval(() => {
-      setImgIndex(prev => (prev + 1) % build.media.length);
-    }, 1800);
-    return () => clearInterval(interval);
-  }, [hovered, build.media]);
+  const images = build.media?.length ? build.media : [build.mainImage];
+  const count  = images.length;
 
-  const currentImage = build.media?.length > 0 ? build.media[imgIndex] : build.mainImage;
+  // Preload all images so switching is instant
+  useEffect(() => {
+    images.forEach(src => { if (src) { const i = new Image(); i.src = src; } });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const stopAll = useCallback(() => {
+    clearInterval(autoRef.current);
+    clearTimeout(delayRef.current);
+    autoRef.current  = null;
+    delayRef.current = null;
+  }, []);
+
+  const startCycle = useCallback(() => {
+    clearInterval(autoRef.current);
+    autoRef.current = setInterval(() => {
+      setImgIndex(i => (i + 1) % count);
+    }, 2200);
+  }, [count]);
+
+  // Tap / click: advance immediately, resume auto after 4 s pause
+  const handleTap = useCallback(() => {
+    if (count <= 1) return;
+    stopAll();
+    setImgIndex(i => (i + 1) % count);
+    delayRef.current = setTimeout(startCycle, 4000);
+  }, [count, stopAll, startCycle]);
+
+  // IO: start auto-cycle when card enters viewport, stop when it leaves
+  useEffect(() => {
+    if (count <= 1) return;
+    const el = cardRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        delayRef.current = setTimeout(startCycle, 2500);
+      } else {
+        stopAll();
+        setImgIndex(0);
+      }
+    }, { threshold: 0.3 });
+
+    io.observe(el);
+    return () => { io.disconnect(); stopAll(); };
+  }, [count, startCycle, stopAll]);
+
+  const currentImage = images[imgIndex];
 
   return (
     <article
       className={styles.card}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      ref={cardRef}
+      onClick={handleTap}
+      style={count > 1 ? { cursor: 'pointer' } : undefined}
     >
       <div className={styles.imageContainer}>
         {currentImage ? (
@@ -295,9 +336,9 @@ function BuildCard({ build }) {
               <span key={tag} className={styles.tag}>{tag}</span>
             ))}
           </div>
-          {build.media && build.media.length > 1 && (
+          {count > 1 && (
             <div className={styles.dotsContainer}>
-              {build.media.map((_, i) => (
+              {images.map((_, i) => (
                 <span key={i} className={`${styles.dot} ${i === imgIndex ? styles.activeDot : ''}`} />
               ))}
             </div>

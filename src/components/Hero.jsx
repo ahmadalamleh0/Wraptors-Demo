@@ -1,10 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Hero.module.css';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Floating star particles: [x%, y%, sizePx, delaySec, durationSec, driftXpx]
 const PARTICLES = [
@@ -40,23 +37,14 @@ export default function Hero() {
     const spot   = spotRef.current;
     const est    = estRef.current;
     const year   = yearRef.current;
+    const section = sectionRef.current;
 
     // ── 1. Initial hidden states ──────────────────────────────────────
-    gsap.set(lockup, { opacity: 0, y: 0 });
+    gsap.set(lockup, { opacity: 0 });
     gsap.set(img,    { filter: 'blur(24px) brightness(0)' });
-    // Text starts fully clipped (right-to-left), tight spacing, hot filter
-    gsap.set(topTxt, {
-      clipPath: 'inset(0 100% 0 0)',
-      x: -6,
-      letterSpacing: '0.05em',
-      filter: 'brightness(2.4) contrast(1.6)',
-    });
-    gsap.set(botTxt, {
-      clipPath: 'inset(0 100% 0 0)',
-      x: -6,
-      letterSpacing: '0.18em',
-      filter: 'brightness(2.4) contrast(1.6)',
-    });
+    // Text: clip hides it; letter-spacing stays at CSS value (animating it causes reflow)
+    gsap.set(topTxt, { clipPath: 'inset(0 100% 0 0)', x: -6, filter: 'brightness(2.4) contrast(1.6)' });
+    gsap.set(botTxt, { clipPath: 'inset(0 100% 0 0)', x: -6, filter: 'brightness(2.4) contrast(1.6)' });
     gsap.set([est, year], { opacity: 0 });
     gsap.set(bg,   { opacity: 0 });
     gsap.set(spot, { opacity: 0 });
@@ -66,74 +54,79 @@ export default function Hero() {
     const tl = gsap.timeline();
 
     // Background atmosphere
-    tl.to(bg,   { opacity: 1, duration: 4.5, ease: 'power2.inOut' }, 0);
-    tl.to(spot, { opacity: 1, duration: 3.0, ease: 'power2.out'   }, 0.3);
+    tl.to(bg,   { opacity: 1, duration: 2.0, ease: 'power2.inOut' }, 0);
+    tl.to(spot, { opacity: 1, duration: 1.4, ease: 'power2.out'   }, 0);
 
-    // Lockup fades in
-    tl.to(lockup, { opacity: 1, duration: 1.2, ease: 'power3.inOut' }, 0.3);
+    // Lockup snaps in fast
+    tl.to(lockup, { opacity: 1, duration: 0.5, ease: 'power2.inOut' }, 0.05);
 
-    // Logo: tighter 4-phase blur-to-sharp — fully resolved before text begins
-    tl.to(img, { filter: 'blur(14px) brightness(0.12)', duration: 0.6,  ease: 'power2.out'   }, 0.4);
-    tl.to(img, { filter: 'blur(6px)  brightness(0.42)', duration: 0.55, ease: 'power2.out'   }, 0.9);
-    tl.to(img, { filter: 'blur(1px)  brightness(0.82)', duration: 0.45, ease: 'power2.inOut' }, 1.35);
-    tl.to(img, { filter: 'blur(0px)  brightness(1.0)',  duration: 0.3,  ease: 'power3.out'   }, 1.7);
-    // Logo fully sharp at ~2.0s
+    // Logo: 3-phase blur-to-sharp, sharp at ~0.62s
+    tl.to(img, {
+      keyframes: [
+        { filter: 'blur(10px) brightness(0.2)', duration: 0.20, ease: 'power2.out' },
+        { filter: 'blur(2px)  brightness(0.75)', duration: 0.22, ease: 'power2.out' },
+        { filter: 'blur(0px)  brightness(1.0)',  duration: 0.18, ease: 'power3.out' },
+      ],
+    }, 0.02);
+    // Logo sharp at ~0.62s
 
-    // Engraved carve: WRAPTORS MAFIA — starts once logo is sharp
+    // Engraved carve: WRAPTORS MAFIA
     tl.to(topTxt, {
       clipPath: 'inset(0 0% 0 0)',
       x: 0,
-      letterSpacing: '0.18em',
       filter: 'brightness(1.0) contrast(1.0)',
-      duration: 1.4,
+      duration: 0.85,
       ease: 'power4.inOut',
-    }, 2.05);
+    }, 0.60);
 
     // Engraved carve: LOYALTY OVER ROYALTY
     tl.to(botTxt, {
       clipPath: 'inset(0 0% 0 0)',
       x: 0,
-      letterSpacing: '0.56em',
       filter: 'brightness(1.0) contrast(1.0)',
-      duration: 1.3,
+      duration: 0.75,
       ease: 'power4.inOut',
-    }, 2.7);
+    }, 1.10);
 
-    // EST. / 2016 settle in last
-    tl.to(est,  { opacity: 1, duration: 0.6, ease: 'power2.out' }, 3.5);
-    tl.to(year, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 3.65);
+    // EST. / 2016
+    tl.to(est,  { opacity: 1, duration: 0.35, ease: 'power2.out' }, 1.60);
+    tl.to(year, { opacity: 1, duration: 0.35, ease: 'power2.out' }, 1.70);
 
-    // Scroll cue
-    tl.to(scrollRef.current, { opacity: 1, duration: 0.8, ease: 'power2.out' }, 4.8);
+    // ── 3. Exit: slide the whole overlay upward immediately after reveal ──
+    // The hero is a fixed overlay (z-index 40). Animating translateY on it
+    // moves the lockup with it (fixed children re-parent when parent has a
+    // CSS transform). No scroll required — the transition is pure animation.
+    let exitFired = false;
+    let exitTween = null;
 
-    // ── 3. Scroll: whole lockup drifts up and fades out cleanly ──────
-    // No repositioning. No gold. The fixed lockup simply disappears.
-    let st;
-    const stTimer = setTimeout(() => {
-      st = ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1.5,
-        onUpdate(self) {
-          const p = self.progress;
-
-          gsap.set(lockup, {
-            opacity: gsap.utils.clamp(0, 1, 1 - p * 1.8),
-            y: -50 * p,
-          });
-
-          gsap.set(bg,   { opacity: gsap.utils.clamp(0, 1, 1 - p * 2.2) });
-          gsap.set(spot, { opacity: gsap.utils.clamp(0, 1, 1 - p * 2.2) });
-          gsap.set(scrollRef.current, { opacity: gsap.utils.clamp(0, 1, 1 - p * 5) });
+    function runExit() {
+      if (exitFired || !section) return;
+      exitFired = true;
+      window.removeEventListener('scroll',     onUserInput);
+      window.removeEventListener('touchstart', onUserInput);
+      exitTween = gsap.to(section, {
+        y: '-100%',
+        duration: 1.8,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          if (sectionRef.current) sectionRef.current.style.display = 'none';
         },
       });
-    }, 150);
+    }
+
+    // Early exit: if user scrolls or taps before the reveal finishes, run immediately
+    const onUserInput = () => runExit();
+    window.addEventListener('scroll',     onUserInput, { once: true, passive: true });
+    window.addEventListener('touchstart', onUserInput, { once: true, passive: true });
+
+    // Auto exit right when the last reveal animation completes
+    tl.call(runExit, null, '>');
 
     return () => {
       tl.kill();
-      clearTimeout(stTimer);
-      if (st) st.kill();
+      if (exitTween) exitTween.kill();
+      window.removeEventListener('scroll',     onUserInput);
+      window.removeEventListener('touchstart', onUserInput);
     };
   }, []);
 

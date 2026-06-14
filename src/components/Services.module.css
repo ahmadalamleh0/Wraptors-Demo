@@ -36,7 +36,7 @@
   margin: -72px auto 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 460px;   /* fixed height — consistent across all services */
+  grid-template-rows: 520px;   /* tall enough for 3-line service names + AuroraButton */
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.20);
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 30px 60px rgba(0, 0, 0, 0.55);
@@ -248,7 +248,7 @@
   .imgFrame {
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    height: 260px;              /* explicit height keeps flex chain intact */
+    height: 280px;              /* explicit height keeps flex chain intact */
     min-height: 0;
   }
 

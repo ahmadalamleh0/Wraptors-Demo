@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Services.module.css';
 
 import imgWrapping1   from '../../Wrappin(1new).jpeg';
@@ -7,6 +8,7 @@ import imgWrapping3   from '../../Wrapping Last_3.jpeg';
 import imgPPF1        from '../../PPF(last_1).jpeg';
 import imgPPF2        from '../../PPF(2New).jpeg';
 import imgPPF3        from '../../PPF(3New).jpeg';
+import imgAstonPPF    from '../../Signture Section/Aston_Martin(4).jpeg';
 import imgStarlight   from '../../Starlight_headliner.jpeg';
 import imgStarlight2  from '../../Starlight(2).jpeg';
 import imgStarlight3  from '../../Starlight(3).jpeg';
@@ -16,10 +18,14 @@ import imgCeramic3    from '../../Ceramic Coating(new3).jpeg';
 import imgCommercial1 from '../../commercial_wrapping(1).jpeg';
 import imgCommercial2 from '../../commercial_wrapping(2).jpeg';
 import imgCommercial3 from '../../Comercial_wrapping(new3).jpeg';
+import imgTint1       from '../../PPF(2New).jpeg';
+import imgTint2       from '../../PPF(3New).jpeg';
+import imgTint3       from '../../PPF(last_1).jpeg';
 
 const SERVICES = [
   {
     id: 'wraps',
+    slug: '/services/wraps',
     ghost: 'VEHICLE WRAPS',
     name: 'Vehicle Wraps',
     tags: ['Full Wrap', 'Color Change'],
@@ -28,23 +34,26 @@ const SERVICES = [
   },
   {
     id: 'ppf',
+    slug: '/services/ppf',
     ghost: 'PAINT PROTECTION FILM',
     name: 'Paint Protection Film',
     tags: ['Invisible Shield', 'Self-Healing'],
     desc: "Invisible armour for the paint beneath. Self-healing, optically clear film that shields your finish from the road's worst.",
-    imgs: [imgPPF3, imgPPF2, imgPPF1],
+    imgs: [imgAstonPPF, imgPPF3, imgPPF2, imgPPF1],
     imgPositions: [null, null, 'center 30%'],
   },
   {
     id: 'starlight',
+    slug: '/services/starlight',
     ghost: 'STARLIGHT HEADLINER',
     name: 'Starlight Headliner',
     tags: ['Fiber Optic', 'Custom Layouts'],
     desc: 'The night sky, inside your cabin. Thousands of fibre optic stars embedded into bespoke headliner panels — handcrafted to order.',
-    imgs: [imgStarlight, imgStarlight2, imgStarlight3],
+    imgs: [imgStarlight2, imgStarlight, imgStarlight3],
   },
   {
     id: 'ceramic',
+    slug: '/services/ceramic',
     ghost: 'CERAMIC COATING',
     name: 'Ceramic Coating',
     tags: ['9H Hardness', 'Hydrophobic'],
@@ -52,7 +61,17 @@ const SERVICES = [
     imgs: [imgCeramic1, imgCeramic2, imgCeramic3],
   },
   {
+    id: 'tint',
+    slug: '/services/tint',
+    ghost: 'WINDOW TINT',
+    name: 'Window Tint',
+    tags: ['Ceramic Film', 'UV Protection'],
+    desc: 'Premium ceramic window film that blocks UV, reduces heat, and delivers flawless clarity — installed to the millimetre.',
+    imgs: [imgTint1, imgTint2, imgTint3],
+  },
+  {
     id: 'commercial',
+    slug: null,
     ghost: 'COMMERCIAL WRAP',
     name: 'Commercial Wrap',
     tags: ['Fleet Wrapping', 'Brand Identity'],
@@ -126,10 +145,17 @@ function ServiceBlock({ svc, blockRef }) {
         <h3 className={styles.name}>{svc.name}</h3>
         <p className={styles.desc}>{svc.desc}</p>
 
-        <a href="#cta" className={styles.cta}>
-          Get a Quote
-          <span className={styles.ctaArrow} aria-hidden="true">→</span>
-        </a>
+        {svc.slug ? (
+          <Link to={svc.slug} className={styles.cta}>
+            Experience It
+            <span className={styles.ctaArrow} aria-hidden="true">→</span>
+          </Link>
+        ) : (
+          <a href="/#cta" className={styles.cta}>
+            Experience It
+            <span className={styles.ctaArrow} aria-hidden="true">→</span>
+          </a>
+        )}
       </div>
 
     </div>
