@@ -78,7 +78,7 @@
   z-index: 50;
   pointer-events: none;
   opacity: 0;
-  will-change: opacity, transform;
+  will-change: opacity;
 }
 
 /* ── Logo row: EST. | logo | 2016 ── */

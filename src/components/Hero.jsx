@@ -117,6 +117,8 @@ export default function Hero() {
         ease: 'power3.inOut',
         onComplete: () => {
           if (sectionRef.current) sectionRef.current.style.display = 'none';
+          // Signal navbar to show logo — hero is fully gone, logo should land at top
+          window.dispatchEvent(new CustomEvent('hero:exit'));
         },
       });
     }

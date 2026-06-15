@@ -12,17 +12,25 @@ const NAV_LINKS = [
 export default function Navbar({ alwaysVisible = false }) {
   const [scrolled,      setScrolled]      = useState(alwaysVisible);
   const [linksRevealed, setLinksRevealed] = useState(alwaysVisible);
+  const [logoReady,     setLogoReady]     = useState(alwaysVisible);
   const [menuOpen,      setMenuOpen]      = useState(false);
 
   useEffect(() => {
     if (alwaysVisible) return;
+    // Show logo immediately when hero exits (no scroll required)
+    const onHeroExit = () => setLogoReady(true);
+    window.addEventListener('hero:exit', onHeroExit, { once: true });
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > window.innerHeight * 0.88);
       setLinksRevealed(y > 40);
+      if (y > 40) setLogoReady(true);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('hero:exit', onHeroExit);
+    };
   }, [alwaysVisible]);
 
   return (
@@ -31,7 +39,7 @@ export default function Navbar({ alwaysVisible = false }) {
       {/* Logo mark */}
       <a href="/" className={styles.logo} aria-label="Wraptors — back to home">
         <WraptorsMafiaLogo
-          className={`${styles.navLogoMark} ${scrolled ? styles.navLogoVisible : ''}`}
+          className={`${styles.navLogoMark} ${logoReady ? styles.navLogoVisible : ''}`}
         />
       </a>
 

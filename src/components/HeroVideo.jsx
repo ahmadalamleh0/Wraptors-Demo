@@ -30,11 +30,11 @@ export default function HeroVideo() {
     // Older iOS Safari needs this attribute set imperatively
     video.setAttribute('webkit-playsinline', '');
 
-    // Skip the first 2 seconds — stronger visuals start there
-    video.currentTime = 2;
+    // Skip the first 3 seconds — stronger visuals start there
+    video.currentTime = 3;
 
-    // On every loop restart the browser rewinds to 0 — jump back to 2s
-    const skipIntro = () => { if (video.currentTime < 1.9) video.currentTime = 2; };
+    // On every loop restart the browser rewinds to 0 — jump back to 3s
+    const skipIntro = () => { if (video.currentTime < 2.9) video.currentTime = 3; };
     video.addEventListener('timeupdate', skipIntro);
 
     // Attempt play immediately — works when autoPlay attribute fires early
