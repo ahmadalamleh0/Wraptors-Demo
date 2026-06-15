@@ -30,6 +30,13 @@ export default function HeroVideo() {
     // Older iOS Safari needs this attribute set imperatively
     video.setAttribute('webkit-playsinline', '');
 
+    // Skip the first 2 seconds — stronger visuals start there
+    video.currentTime = 2;
+
+    // On every loop restart the browser rewinds to 0 — jump back to 2s
+    const skipIntro = () => { if (video.currentTime < 1.9) video.currentTime = 2; };
+    video.addEventListener('timeupdate', skipIntro);
+
     // Attempt play immediately — works when autoPlay attribute fires early
     video.play().catch(() => {});
 
@@ -66,6 +73,7 @@ export default function HeroVideo() {
       return () => {
         playIo.disconnect();
         revealIo.disconnect();
+        video.removeEventListener('timeupdate', skipIntro);
         document.removeEventListener('touchstart', retryPlay);
         document.removeEventListener('scroll',     retryPlay);
       };
@@ -94,6 +102,7 @@ export default function HeroVideo() {
     return () => {
       playIo.disconnect();
       st.kill();
+      video.removeEventListener('timeupdate', skipIntro);
       document.removeEventListener('touchstart', retryPlay);
       document.removeEventListener('scroll',     retryPlay);
     };

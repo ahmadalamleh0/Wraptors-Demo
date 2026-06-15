@@ -23,28 +23,31 @@ export default function Hero() {
   const logoWrapRef   = useRef(null);
   const logoImgRef    = useRef(null);
   const topTextRef    = useRef(null);   // WRAPTORS MAFIA
+  const brandRuleRef  = useRef(null);   // hairline divider
   const bottomTextRef = useRef(null);   // LOYALTY OVER ROYALTY
   const estRef        = useRef(null);   // EST.
   const yearRef       = useRef(null);   // 2016
   const scrollRef     = useRef(null);
 
   useEffect(() => {
-    const lockup = lockupRef.current;
-    const img    = logoImgRef.current;
-    const topTxt = topTextRef.current;
-    const botTxt = bottomTextRef.current;
-    const bg     = bgGlowRef.current;
-    const spot   = spotRef.current;
-    const est    = estRef.current;
-    const year   = yearRef.current;
-    const section = sectionRef.current;
+    const lockup    = lockupRef.current;
+    const img       = logoImgRef.current;
+    const topTxt    = topTextRef.current;
+    const brandRule = brandRuleRef.current;
+    const botTxt    = bottomTextRef.current;
+    const bg        = bgGlowRef.current;
+    const spot      = spotRef.current;
+    const est       = estRef.current;
+    const year      = yearRef.current;
+    const section   = sectionRef.current;
 
     // ── 1. Initial hidden states ──────────────────────────────────────
     gsap.set(lockup, { opacity: 0 });
     gsap.set(img,    { filter: 'blur(24px) brightness(0)' });
-    // Text: clip hides it; letter-spacing stays at CSS value (animating it causes reflow)
-    gsap.set(topTxt, { clipPath: 'inset(0 100% 0 0)', x: -6, filter: 'brightness(2.4) contrast(1.6)' });
-    gsap.set(botTxt, { clipPath: 'inset(0 100% 0 0)', x: -6, filter: 'brightness(2.4) contrast(1.6)' });
+    // Text: fade up from below — crisp, no fog or clip-wipe glow
+    gsap.set(topTxt,    { opacity: 0, y: 10 });
+    gsap.set(botTxt,    { opacity: 0, y: 7  });
+    gsap.set(brandRule, { opacity: 0, scaleX: 0 });
     gsap.set([est, year], { opacity: 0 });
     gsap.set(bg,   { opacity: 0 });
     gsap.set(spot, { opacity: 0 });
@@ -70,23 +73,27 @@ export default function Hero() {
     }, 0.02);
     // Logo sharp at ~0.62s
 
-    // Engraved carve: WRAPTORS MAFIA
+    // WRAPTORS MAFIA — clean fade up, no fog
     tl.to(topTxt, {
-      clipPath: 'inset(0 0% 0 0)',
-      x: 0,
-      filter: 'brightness(1.0) contrast(1.0)',
-      duration: 0.85,
-      ease: 'power4.inOut',
+      opacity: 1, y: 0,
+      duration: 0.62,
+      ease: 'power3.out',
     }, 0.60);
 
-    // Engraved carve: LOYALTY OVER ROYALTY
+    // Hairline rule expands from center — bridges brand name and motto
+    tl.to(brandRule, {
+      opacity: 1, scaleX: 1,
+      duration: 0.40,
+      ease: 'power2.inOut',
+      transformOrigin: 'center',
+    }, 1.05);
+
+    // LOYALTY OVER ROYALTY — clean fade up, slightly after rule
     tl.to(botTxt, {
-      clipPath: 'inset(0 0% 0 0)',
-      x: 0,
-      filter: 'brightness(1.0) contrast(1.0)',
-      duration: 0.75,
-      ease: 'power4.inOut',
-    }, 1.10);
+      opacity: 1, y: 0,
+      duration: 0.55,
+      ease: 'power3.out',
+    }, 1.15);
 
     // EST. / 2016
     tl.to(est,  { opacity: 1, duration: 0.35, ease: 'power2.out' }, 1.60);
@@ -161,8 +168,9 @@ export default function Hero() {
           <span ref={yearRef} className={styles.sideText}>2016</span>
         </div>
 
-        <p ref={topTextRef}    className={styles.topText}>WRAPTORS MAFIA</p>
-        <p ref={bottomTextRef} className={styles.bottomText}>LOYALTY OVER ROYALTY</p>
+        <p ref={topTextRef} className={styles.topText}>WRAPTORS MAFIA</p>
+        <div ref={brandRuleRef} className={styles.brandRule} aria-hidden="true" />
+        <p ref={bottomTextRef} className={styles.bottomText}>LOYALTY&nbsp;OVER&nbsp;ROYALTY</p>
 
         <div ref={scrollRef} className={styles.scrollCue} aria-hidden="true">
           <span className={styles.scrollText}>SCROLL</span>

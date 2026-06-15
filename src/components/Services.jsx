@@ -24,15 +24,6 @@ import imgTint3       from '../../PPF(last_1).jpeg';
 
 const SERVICES = [
   {
-    id: 'ppf',
-    slug: '/services/ppf',
-    ghost: 'PAINT PROTECTION FILM',
-    name: 'Paint Protection Film',
-    tags: ['Invisible Shield', 'Self-Healing'],
-    desc: "Invisible armour for the paint beneath. Self-healing, optically clear film that shields your finish from the road's worst.",
-    imgs: [imgAstonPPF],
-  },
-  {
     id: 'starlight',
     slug: '/services/starlight',
     ghost: 'STARLIGHT HEADLINER',
@@ -40,6 +31,15 @@ const SERVICES = [
     tags: ['Fiber Optic', 'Custom Layouts'],
     desc: 'The night sky, inside your cabin. Thousands of fibre optic stars embedded into bespoke headliner panels — handcrafted to order.',
     imgs: [imgStarlight2, imgStarlight, imgStarlight3],
+  },
+  {
+    id: 'ppf',
+    slug: '/services/ppf',
+    ghost: 'PAINT PROTECTION FILM',
+    name: 'Paint Protection Film',
+    tags: ['Invisible Shield', 'Self-Healing'],
+    desc: "Invisible armour for the paint beneath. Self-healing, optically clear film that shields your finish from the road's worst.",
+    imgs: [imgAstonPPF],
   },
   {
     id: 'wraps',
