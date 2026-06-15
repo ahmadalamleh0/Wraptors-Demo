@@ -29,11 +29,11 @@ import ppfBackBumper         from '../../PPF/back_bumper.jpeg';
 import ppfBackBumperMask     from '../../PPF/back_bumper_mask.png';
 
 // Prepared mobile screenshots — used instead of the mask/overlay system on phones
-import mobileHood           from '../../mobile assests/hood_mobile.png';
-import mobileFrontBumper    from '../../mobile assests/Front_bumper_mobile.png';
-import mobileFendersMirrors from '../../mobile assests/Fenders_mirrors_mobile.png';
-import mobileDoorsRear      from '../../mobile assests/Doors&rear Fender_mobil.png';
-import mobileRearBumper     from '../../mobile assests/Rearbumber-mobile.png';
+import mobileHood           from '../../mobile assests/Hood_new.png';
+import mobileFrontBumper    from '../../mobile assests/front_bumber_new.png';
+import mobileFendersMirrors from '../../mobile assests/ChatGPT Image Jun 15, 2026, 12_38_30 PM.png';
+import mobileDoorsRear      from '../../mobile assests/ChatGPT Image Jun 15, 2026, 12_36_02 PM.png';
+import mobileRearBumper     from '../../mobile assests/Rear.png';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
