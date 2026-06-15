@@ -1410,19 +1410,25 @@
 
 /* ── Mobile ── */
 @media (max-width: 767px) {
-  .layerHeader { margin-bottom: 36px; }
-  .lGrid  { gap: 20px; }
-  .lRow   { grid-template-columns: 148px 38px 1fr; }
+  .layerHeader { margin-bottom: 44px; }
+  .lGrid  { gap: 26px; }
+  .lRow   { grid-template-columns: 156px 38px 1fr; }
   .lFilm  { clip-path: polygon(0% 12%, 100% 0%, 100% 88%, 0% 100%); }
   .f_topcoat  { height: 22px; }
   .f_tpu      { height: 62px; }
   .f_adhesive { height: 20px; }
   .f_liner    { height: 44px; }
-  .lName       { font-size: 0.63rem; }
-  .lBullets li { font-size: 0.62rem; }
+  .lName       { font-size: 0.80rem; }
+  .lMicrons    { font-size: 0.66rem; }
+  .lBullets li { font-size: 0.70rem; }
 }
 
 @media (max-width: 480px) {
-  .lRow { grid-template-columns: 1fr; gap: 10px; }
-  .lPtr { display: none; }
+  .lRow   { grid-template-columns: 1fr; gap: 0; }
+  .lPtr   { display: none; }
+  .lLabel { align-items: center; padding-right: 0; padding-bottom: 12px; }
+  .lNum   { text-align: center; }
+  .lName  { font-size: 0.88rem; text-align: center; }
+  .lMicrons { text-align: center; font-size: 0.68rem; }
+  .lBullets li { font-size: 0.72rem; }
 }

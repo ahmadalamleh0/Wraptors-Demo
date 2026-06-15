@@ -29,7 +29,7 @@ import ppfBackBumper         from '../../PPF/back_bumper.jpeg';
 import ppfBackBumperMask     from '../../PPF/back_bumper_mask.png';
 
 // Prepared mobile screenshots — used instead of the mask/overlay system on phones
-import mobileHood           from '../../mobile assests/Hood_new.png';
+import mobileHood           from '../../mobile assests/hood.png';
 import mobileFrontBumper    from '../../mobile assests/front_bumber_new.png';
 import mobileFendersMirrors from '../../mobile assests/ChatGPT Image Jun 15, 2026, 12_38_30 PM.png';
 import mobileDoorsRear      from '../../mobile assests/ChatGPT Image Jun 15, 2026, 12_36_02 PM.png';
@@ -379,14 +379,12 @@ function CoverageExplorer() {
               ))}
             </div>
 
-            {/* Mobile-only: zone info shown below the photo, not over it */}
-            <div className={styles.mobileZoneInfo} aria-live="polite">
-              <span className={styles.mobileZoneEye}>
-                {activeZone.callout ? 'Protected Zone' : 'Overview'}
-              </span>
-              <h3 className={styles.mobileZoneTitle}>{activeZone.title}</h3>
-              <p className={styles.mobileZoneDesc}>{activeZone.desc}</p>
-            </div>
+            {/* Mobile: overview instruction only — zone images already carry their own text */}
+            {activeId === 'full-car' && (
+              <div className={styles.mobileZoneInfo}>
+                <p className={styles.mobileZoneDesc}>Select a panel below to see the coverage.</p>
+              </div>
+            )}
 
           </div>
 
