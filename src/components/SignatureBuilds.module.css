@@ -254,18 +254,15 @@
 }
 
 .image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: imgFadeIn 0.38s ease-out;
-  transition: transform 0.6s var(--ease-smooth);
+  opacity: 0;
+  transition: opacity 0.32s ease;
 }
-.card:hover .image { transform: scale(1.04); }
-
-@keyframes imgFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
+.imageActive { opacity: 1; }
 
 .imagePlaceholder {
   width: 100%;
@@ -400,6 +397,21 @@
   .card           { flex: 0 0 72vw; }
   .title         { font-size: clamp(60px, 18vw, 120px); }
   .categoryTitle { font-size: clamp(28px, 8vw, 52px); }
+
+  /* Remove expensive GPU blur on mobile — just fade+slide */
+  .animScript {
+    filter: none;
+    transition:
+      opacity   1.2s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .animScript.visible { filter: none; }
+
+  /* No hover lift on touch — saves a paint layer */
+  .card:hover { transform: none; box-shadow: none; }
+
+  /* Remove costly backdrop-blur on badge */
+  .cardBadge { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(0,0,0,0.72); }
 
   /* Dots — always visible on mobile, in-flow below tags */
   .dotsContainer {

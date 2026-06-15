@@ -251,11 +251,6 @@ function BuildCard({ build }) {
   const images = build.media?.length ? build.media : [build.mainImage];
   const count  = images.length;
 
-  // Preload all images so switching is instant
-  useEffect(() => {
-    images.forEach(src => { if (src) { const i = new Image(); i.src = src; } });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   const stopAll = useCallback(() => {
     clearInterval(autoRef.current);
     clearTimeout(delayRef.current);
@@ -297,8 +292,6 @@ function BuildCard({ build }) {
     return () => { io.disconnect(); stopAll(); };
   }, [count, startCycle, stopAll]);
 
-  const currentImage = images[imgIndex];
-
   return (
     <article
       className={styles.card}
@@ -307,17 +300,16 @@ function BuildCard({ build }) {
       style={count > 1 ? { cursor: 'pointer' } : undefined}
     >
       <div className={styles.imageContainer}>
-        {currentImage ? (
+        {/* All images stacked — opacity toggle only, no DOM mutations */}
+        {images.map((src, i) => (
           <img
-            src={currentImage}
-            className={styles.image}
-            alt={`${build.brandName} Signature Build`}
-            key={imgIndex}
-            loading="lazy"
+            key={src}
+            src={src}
+            className={`${styles.image} ${i === imgIndex ? styles.imageActive : ''}`}
+            alt={i === 0 ? `${build.brandName} Signature Build` : ''}
+            aria-hidden={i !== imgIndex ? true : undefined}
           />
-        ) : (
-          <div className={styles.imagePlaceholder} />
-        )}
+        ))}
 
         <div className={styles.overlay} />
 

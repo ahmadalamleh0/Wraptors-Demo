@@ -28,6 +28,13 @@ import ppfBackFenderDoorMask from '../../PPF/back_fender & door_mask.png';
 import ppfBackBumper         from '../../PPF/back_bumper.jpeg';
 import ppfBackBumperMask     from '../../PPF/back_bumper_mask.png';
 
+// Prepared mobile screenshots — used instead of the mask/overlay system on phones
+import mobileHood           from '../../mobile assests/hood_mobile.png';
+import mobileFrontBumper    from '../../mobile assests/Front_bumper_mobile.png';
+import mobileFendersMirrors from '../../mobile assests/Fenders_mirrors_mobile.png';
+import mobileDoorsRear      from '../../mobile assests/Doors&rear Fender_mobil.png';
+import mobileRearBumper     from '../../mobile assests/Rearbumber-mobile.png';
+
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 // callout.from = where the line originates (on the highlighted zone), as % of image
@@ -209,6 +216,16 @@ const LAYERS = [
   },
 ];
 
+// Maps each zone id to its prepared mobile screenshot
+const MOBILE_IMAGES = {
+  'full-car':          ppfFullCar,
+  'hood':              mobileHood,
+  'front-bumper':      mobileFrontBumper,
+  'fenders-mirrors':   mobileFendersMirrors,
+  'doors-rear-fender': mobileDoorsRear,
+  'rear-bumper':       mobileRearBumper,
+};
+
 // ── Coverage Explorer ─────────────────────────────────────────────────────────
 
 function CoverageExplorer() {
@@ -343,6 +360,23 @@ function CoverageExplorer() {
                 </div>
               )}
 
+            </div>
+
+            {/* Mobile photo stage — prepared screenshots, instant-swap with fade */}
+            <div className={styles.mobilePhotoStage}>
+              {ZONES.map(zone => (
+                <div
+                  key={zone.id}
+                  className={`${styles.photoSlot} ${activeId === zone.id ? styles.photoSlotOn : ''}`}
+                >
+                  <img
+                    src={MOBILE_IMAGES[zone.id]}
+                    className={styles.stagePhoto}
+                    alt=""
+                    draggable={false}
+                  />
+                </div>
+              ))}
             </div>
 
             {/* Mobile-only: zone info shown below the photo, not over it */}
@@ -491,16 +525,26 @@ export default function PPFPage() {
         </div>
       </section>
 
+      {/* ── 2. SHORT PROTECTION TEXT ─────────────────────────────── */}
+      <section className={styles.protectText}>
+        <div className={styles.container}>
+          <h2 className={styles.protectTitle}>Protect the finish before<br />the damage happens.</h2>
+          <p className={styles.protectSub}>Tell us your vehicle and preferred coverage. We handle the rest.</p>
+        </div>
+      </section>
+
+      {/* ── 3. COVERAGE EXPLORER ─────────────────────────────────── */}
+      <CoverageExplorer />
+
+      {/* ── 4. FILM CONSTRUCTION ─────────────────────────────────── */}
       <LayerBreakdown />
 
-      {/* ── DESCRIPTION IMAGE ────────────────────────────────── */}
+      {/* ── 5. PPF EXPLANATION IMAGE ─────────────────────────────── */}
       <section className={styles.descImgSection}>
         <img src={ppfDescImg} alt="" className={styles.descImg} draggable={false} />
       </section>
 
-      <CoverageExplorer />
-
-      {/* ── BENEFITS ─────────────────────────────────────────────────── */}
+      {/* ── 6. WHAT THE FILM DOES ────────────────────────────────── */}
       <section className={styles.benefitsSection}>
         <div className={styles.container}>
           <div className={styles.sectionHead}>
@@ -519,7 +563,7 @@ export default function PPFPage() {
         </div>
       </section>
 
-      {/* ── GALLERY ──────────────────────────────────────────────────── */}
+      {/* ── 7. PPF IN THE WILD ───────────────────────────────────── */}
       <section className={styles.gallerySection}>
         <div className={styles.container}>
           <div className={styles.sectionHead}>
@@ -539,7 +583,7 @@ export default function PPFPage() {
         </div>
       </section>
 
-      {/* ── AFTERCARE ────────────────────────────────────────────────── */}
+      {/* ── 8. AFTERCARE ─────────────────────────────────────────── */}
       <section className={styles.aftercareSection}>
         <div className={styles.container}>
           <div className={styles.sectionHead}>
@@ -551,7 +595,6 @@ export default function PPFPage() {
           </div>
         </div>
 
-        {/* Full-bleed scroll wrapper on mobile */}
         <div className={styles.aftercareScroll}>
           <div className={styles.aftercareTrack}>
             {AFTERCARE_PRODUCTS.map(product => (
@@ -593,11 +636,11 @@ export default function PPFPage() {
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────── */}
+      {/* ── 9. FINAL CTA ─────────────────────────────────────────── */}
       <section className={styles.ctaSection}>
         <div className={styles.container}>
           <span className={styles.eyebrow}>Get Protected</span>
-          <h2 className={styles.ctaTitle}>Protect the finish before<br />the damage happens.</h2>
+          <h2 className={styles.ctaTitle}>Ready to protect your finish?</h2>
           <p className={styles.ctaSub}>Tell us your vehicle and preferred coverage. We handle the rest.</p>
           <a
             href="mailto:info@wraptorsmafia.com?subject=PPF Coverage Request"

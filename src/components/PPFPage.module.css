@@ -41,6 +41,32 @@
   line-height: 1.65;
 }
 
+/* ── SHORT PROTECTION TEXT ───────────────────────────────────────────────── */
+.protectText {
+  background: #040408;
+  padding: 60px 0 52px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.protectTitle {
+  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.04em;
+  line-height: 1.18;
+  margin: 0 0 16px;
+}
+
+.protectSub {
+  font-size: 0.96rem;
+  color: rgba(255,255,255,0.40);
+  line-height: 1.65;
+  margin: 0 auto;
+  max-width: 480px;
+}
+
 /* ── DESCRIPTION IMAGE ───────────────────────────────────────────────────── */
 .descImgSection {
   display: block;
@@ -172,6 +198,15 @@
   box-shadow:
     0 0 0 1px rgba(255,255,255,0.08),
     0 24px 64px rgba(0,0,0,0.70);
+}
+
+/* Mobile-only prepared-image stage — hidden on desktop, shown on mobile */
+.mobilePhotoStage {
+  display: none;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/2;
+  background: #060609;
 }
 
 .photoSlot {
@@ -1037,6 +1072,13 @@
     line-height: 0.95;
   }
 
+  .protectText {
+    padding: 44px 0 36px;
+  }
+  .protectTitle {
+    font-size: clamp(1.3rem, 7vw, 1.8rem);
+  }
+
   .explorerSection,
   .layerSection,
   .aftercareSection,
@@ -1080,11 +1122,9 @@
   .explorerSection > .container { padding-left: 0; padding-right: 0; }
   /* Collapse gap so photo & controls sit flush */
   .explorerLayout { gap: 0; }
-  /* Full-width photo, taller, no rounded corners */
-  .photoStage { aspect-ratio: 4/3; border-radius: 0; min-height: 260px; }
-  /* Mask highlight is unreliable on iOS < 15.4 — hide to prevent
-     the whole image from being tinted when luminance mode falls back to alpha */
-  .filmHighlight { display: none; }
+  /* Swap stages: hide the live overlay system, show the prepared screenshots */
+  .photoStage { display: none; }
+  .mobilePhotoStage { display: block; aspect-ratio: 4/3; border-radius: 0; min-height: 260px; }
   /* Hide desktop-only decorations */
   .calloutSvg, .calloutLabel { display: none; }
   /* Hide all text overlaid on the photo */
