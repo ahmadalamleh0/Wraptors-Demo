@@ -41,6 +41,21 @@
   line-height: 1.65;
 }
 
+/* ── DESCRIPTION IMAGE ───────────────────────────────────────────────────── */
+.descImgSection {
+  display: block;
+  line-height: 0;
+  background: #040408;
+}
+
+.descImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
 /* ── HERO ────────────────────────────────────────────────────────────────── */
 .hero {
   position: relative;
@@ -277,6 +292,34 @@
 }
 
 .photoDescMobile { display: none; }
+
+/* Mobile zone info panel — hidden on desktop, revealed in mobile block below */
+.mobileZoneInfo { display: none; }
+.mobileZoneEye {
+  display: block;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(212,30,30,0.78);
+  margin-bottom: 6px;
+}
+.mobileZoneTitle {
+  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.04em;
+  margin: 0 0 8px;
+  line-height: 1.25;
+}
+.mobileZoneDesc {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.50);
+  line-height: 1.62;
+  margin: 0;
+}
 
 .calloutSvg {
   position: absolute;
@@ -1032,19 +1075,28 @@
   .galleryGrid  { grid-template-columns: 1fr; gap: 14px; }
   .galleryCard:nth-child(-n+2) { aspect-ratio: 16/10; }
 
+  /* ── Coverage Explorer: mobile ── */
+  /* Remove container side-padding so the photo goes full-bleed */
+  .explorerSection > .container { padding-left: 0; padding-right: 0; }
+  /* Collapse gap so photo & controls sit flush */
+  .explorerLayout { gap: 0; }
+  /* Full-width photo, taller, no rounded corners */
+  .photoStage { aspect-ratio: 4/3; border-radius: 0; min-height: 260px; }
+  /* Mask highlight is unreliable on iOS < 15.4 — hide to prevent
+     the whole image from being tinted when luminance mode falls back to alpha */
+  .filmHighlight { display: none; }
+  /* Hide desktop-only decorations */
   .calloutSvg, .calloutLabel { display: none; }
-  .photoDescMobile { display: block; }
-
-  .hotspot     { width: 48px; height: 48px; }
-  .hotspotRing { width: 30px; height: 30px; }
-  .hotspotDot  { width: 9px;  height: 9px; }
-  .hotspotLabel {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-    font-size: 0.48rem;
-    padding: 3px 7px 4px;
-    letter-spacing: 0.18em;
-  }
+  /* Hide all text overlaid on the photo */
+  .photoDesc { display: none !important; }
+  /* Remove tap-dot hotspots — zone buttons below replace them */
+  .hotspotLayer { display: none; }
+  /* Hide the redundant "Coverage Explorer" heading on mobile */
+  .ctrlHead { display: none; }
+  /* Restore padding for zone buttons and CTA */
+  .ctrlPanel { padding: 24px 20px 0; }
+  /* Zone info panel appears below the photo */
+  .mobileZoneInfo { display: block; padding: 18px 20px 4px; }
 }
 
 @media (max-width: 480px) {

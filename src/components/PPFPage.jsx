@@ -5,6 +5,7 @@ import Footer from './Footer';
 import styles from './PPFPage.module.css';
 
 import heroImg  from '../../WhatsApp Image 2026-06-15 at 10.04.28 AM.jpeg';
+import ppfDescImg from '../../PPF(description).png';
 import astonMartin4 from '../../Signture Section/Aston_Martin(4).jpeg';
 import gallery1 from '../../PPF(1New).jpeg';
 import gallery2 from '../../PPF(2New).jpeg';
@@ -251,6 +252,8 @@ function CoverageExplorer() {
                         maskImage: `url(${zone.mask})`,
                         WebkitMaskMode: 'luminance',
                         maskMode: 'luminance',
+                        WebkitMaskSize: 'cover',
+                        maskSize: 'cover',
                         WebkitMaskPosition: zone.photoPosition || 'center',
                         maskPosition: zone.photoPosition || 'center',
                       }}
@@ -341,6 +344,16 @@ function CoverageExplorer() {
               )}
 
             </div>
+
+            {/* Mobile-only: zone info shown below the photo, not over it */}
+            <div className={styles.mobileZoneInfo} aria-live="polite">
+              <span className={styles.mobileZoneEye}>
+                {activeZone.callout ? 'Protected Zone' : 'Overview'}
+              </span>
+              <h3 className={styles.mobileZoneTitle}>{activeZone.title}</h3>
+              <p className={styles.mobileZoneDesc}>{activeZone.desc}</p>
+            </div>
+
           </div>
 
           {/* ── Controls panel (right on desktop, below on mobile) ── */}
@@ -479,6 +492,11 @@ export default function PPFPage() {
       </section>
 
       <LayerBreakdown />
+
+      {/* ── DESCRIPTION IMAGE ────────────────────────────────── */}
+      <section className={styles.descImgSection}>
+        <img src={ppfDescImg} alt="" className={styles.descImg} draggable={false} />
+      </section>
 
       <CoverageExplorer />
 
