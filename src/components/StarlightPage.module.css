@@ -210,7 +210,7 @@
 
 .optBtn {
   flex: 1;
-  min-width: 72px;
+  min-width: 52px;
   padding: 9px 14px;
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.10);
@@ -242,6 +242,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 8px;
+  row-gap: 10px;
 }
 
 .colorBtn {
@@ -729,6 +730,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  margin-top: 36px;
   padding: 14px 32px;
   border-radius: 10px;
   border: 1px solid rgba(184, 212, 255, 0.30);
@@ -778,8 +780,17 @@
 
 @media (max-width: 768px) {
   .container { padding: 0 20px; }
-  .heroTitle { line-height: 0.95; }
-  .heroContent { padding: 0 20px; }
+  .heroContent {
+    padding: 0 20px;
+    width: 100%;
+    max-width: 100%;
+  }
+  .heroTitle {
+    font-size: clamp(2.0rem, 9.5vw, 3.2rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    word-break: break-word;
+  }
 
   .editorialOverlay {
     background:
@@ -822,7 +833,7 @@
 
   .controls { grid-template-columns: 1fr; }
 
-  .colorRow { grid-template-columns: repeat(5, 1fr); }
+  .colorRow { grid-template-columns: repeat(3, 1fr); }
 
   .presetsGrid { grid-template-columns: 1fr 1fr; }
 

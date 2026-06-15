@@ -16,7 +16,7 @@ import editorialImg from '../../photoshotstar.jpeg';
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
-const STAR_COUNTS = [1000, 1500, 2000];
+const STAR_COUNTS = [500, 1000, 1500, 2000, 2500];
 
 const COLORS = {
   'Pure White': [255, 255, 255],
@@ -24,6 +24,10 @@ const COLORS = {
   'Purple':     [192, 132, 252],
   'Warm Gold':  [251, 211, 141],
   'Red':        [252, 129, 129],
+  'Emerald':    [52,  211, 153],
+  'Rose':       [251, 113, 133],
+  'Aqua':       [103, 232, 249],
+  'Platinum':   [220, 226, 240],
 };
 
 const COLOR_HEX = {
@@ -32,6 +36,10 @@ const COLOR_HEX = {
   'Purple':     '#C084FC',
   'Warm Gold':  '#FBD38D',
   'Red':        '#FF6B6B',
+  'Emerald':    '#34D399',
+  'Rose':       '#FB7185',
+  'Aqua':       '#67E8F9',
+  'Platinum':   '#DCE2F0',
 };
 
 // amt  = max shimmer depth (0 = static, 1 = full range)
@@ -374,7 +382,6 @@ function BeforeAfter() {
 export default function StarlightPage() {
   const [count,    setCount]    = useState(DEFAULT.count);
   const [color,    setColor]    = useState(DEFAULT.color);
-  const [shooting, setShooting] = useState(DEFAULT.shooting);
   const [activePreset, setActivePreset] = useState(null);
   const previewRef = useRef(null);
 
@@ -382,7 +389,6 @@ export default function StarlightPage() {
     const p = PRESETS[name];
     setCount(p.count);
     setColor(p.color);
-    setShooting(p.shooting);
     setActivePreset(name);
     previewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
@@ -430,7 +436,7 @@ export default function StarlightPage() {
               {/* 2. 12% dark overlay for star readability — CSS div, not canvas */}
               <div className={styles.starOverlay} />
               {/* 3. Canvas — transparent, draws stars only */}
-              <StarCanvas count={count} color={color} twinkle="Balanced" shooting={shooting} />
+              <StarCanvas count={count} color={color} twinkle="Balanced" shooting={true} />
               {/* 4. Label */}
               <div className={styles.canvasLabel}>LIVE PREVIEW</div>
             </div>
@@ -473,21 +479,7 @@ export default function StarlightPage() {
                 </div>
               </div>
 
-              {/* Shooting Star */}
-              <div className={styles.controlGroup}>
-                <span className={styles.controlLabel}>Shooting Star</span>
-                <div className={styles.optRow}>
-                  {[true, false].map(val => (
-                    <button
-                      key={String(val)}
-                      className={`${styles.optBtn} ${shooting === val ? styles.optActive : ''}`}
-                      onClick={() => { setShooting(val); clearPreset(); }}
-                    >
-                      {val ? 'On' : 'Off'}
-                    </button>
-                  ))}
-                </div>
-              </div>
+
 
 
             </div>
@@ -539,9 +531,6 @@ export default function StarlightPage() {
         <div className={styles.editorialContent}>
           <span className={styles.editorialEyebrow}>The Craft</span>
           <h2 className={styles.editorialTitle}>Crafted<br />After Dark</h2>
-          <p className={styles.editorialSub}>
-            Precision-installed fiber-optic starlight, tailored for a more elevated interior presence.
-          </p>
           <a href="mailto:info@wraptorsmafia.com?subject=Starlight Headliner Request" className={styles.editorialCta}>
             Start Your Build <span className={styles.editorialArrow}>→</span>
           </a>
@@ -591,7 +580,6 @@ export default function StarlightPage() {
             {[
               { label: 'Stars', value: count.toLocaleString() },
               { label: 'Color', value: color },
-              { label: 'Shooting Star', value: shooting ? 'On' : 'Off' },
               ...(activePreset ? [{ label: 'Preset', value: activePreset }] : []),
             ].map(({ label, value }) => (
               <div key={label} className={styles.configPill}>
@@ -602,7 +590,7 @@ export default function StarlightPage() {
           </div>
 
           <a
-            href={`mailto:info@wraptorsmafia.com?subject=Starlight Headliner Request&body=Stars: ${count}%0AColor: ${color}%0AShooting Star: ${shooting ? 'On' : 'Off'}${activePreset ? `%0APreset: ${activePreset}` : ''}`}
+            href={`mailto:info@wraptorsmafia.com?subject=Starlight Headliner Request&body=Stars: ${count}%0AColor: ${color}${activePreset ? `%0APreset: ${activePreset}` : ''}`}
             className={styles.requestBtn}
           >
             Request This Setup

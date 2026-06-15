@@ -24,15 +24,6 @@ import imgTint3       from '../../PPF(last_1).jpeg';
 
 const SERVICES = [
   {
-    id: 'wraps',
-    slug: '/services/wraps',
-    ghost: 'VEHICLE WRAPS',
-    name: 'Vehicle Wraps',
-    tags: ['Full Wrap', 'Color Change'],
-    desc: 'Every colour. Every finish. Every vision. Precision-cut premium vinyl that transforms your vehicle and protects the paint beneath.',
-    imgs: [imgWrapping1, imgWrapping2, imgWrapping3],
-  },
-  {
     id: 'ppf',
     slug: '/services/ppf',
     ghost: 'PAINT PROTECTION FILM',
@@ -50,6 +41,15 @@ const SERVICES = [
     tags: ['Fiber Optic', 'Custom Layouts'],
     desc: 'The night sky, inside your cabin. Thousands of fibre optic stars embedded into bespoke headliner panels — handcrafted to order.',
     imgs: [imgStarlight2, imgStarlight, imgStarlight3],
+  },
+  {
+    id: 'wraps',
+    slug: '/services/wraps',
+    ghost: 'VEHICLE WRAPS',
+    name: 'Vehicle Wraps',
+    tags: ['Full Wrap', 'Color Change'],
+    desc: 'Every colour. Every finish. Every vision. Precision-cut premium vinyl that transforms your vehicle and protects the paint beneath.',
+    imgs: [imgWrapping1, imgWrapping2, imgWrapping3],
   },
   {
     id: 'ceramic',

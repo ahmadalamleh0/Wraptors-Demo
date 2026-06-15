@@ -1,5 +1,19 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigationType } from 'react-router-dom';
+import { useEffect } from 'react';
 import './App.css';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  const navType = useNavigationType();
+  useEffect(() => {
+    // PUSH = user clicked a link forward → go to top
+    // POP  = browser back/forward → let browser restore previous position
+    if (navType !== 'POP') {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, navType]);
+  return null;
+}
 
 // Home page sections
 import Navbar from './components/Navbar';
@@ -19,10 +33,10 @@ import Footer from './components/Footer';
 // Service page template
 import ServicePage from './components/ServicePage';
 import StarlightPage from './components/StarlightPage';
+import PPFPage from './components/PPFPage';
 
 // Hero images for each service page
 import heroWraps   from '../Wrappin(1new).jpeg';
-import heroPPF     from '../PPF(last_1).jpeg';
 import heroCeramic from '../Ceramic Coating(new1).jpeg';
 import heroTint    from '../PPF(2New).jpeg';
 
@@ -33,13 +47,6 @@ const SERVICE_PAGES = [
     eyebrow:  'Color & Finish',
     tagline:  'Every colour. Every finish. Every vision. Precision-cut premium vinyl that transforms your vehicle and protects the paint beneath.',
     heroImg:  heroWraps,
-  },
-  {
-    path:     '/services/ppf',
-    title:    'Paint Protection Film',
-    eyebrow:  'Invisible Shield',
-    tagline:  'Self-healing, optically clear film that protects your finish from the road\'s worst — without altering a single line.',
-    heroImg:  heroPPF,
   },
   {
     path:     '/services/ceramic',
@@ -81,9 +88,12 @@ function HomePage() {
 
 export default function App() {
   return (
+    <>
+    <ScrollToTop />
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/services/starlight" element={<StarlightPage />} />
+      <Route path="/services/ppf"      element={<PPFPage />} />
       {SERVICE_PAGES.map(svc => (
         <Route
           key={svc.path}
@@ -92,5 +102,6 @@ export default function App() {
         />
       ))}
     </Routes>
+    </>
   );
 }
