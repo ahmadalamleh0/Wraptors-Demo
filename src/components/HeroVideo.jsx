@@ -27,36 +27,82 @@ export default function HeroVideo() {
 
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-    // Older iOS Safari needs this attribute set imperatively
+    // ── Video attributes ──────────────────────────────────────────────
+    // Force muted as a JS property — iOS Safari ignores the HTML attribute alone
+    // and will block autoplay if it detects any audio intent.
+    video.muted = true;
+    // Both forms of playsInline — React's `playsInline` prop covers the standard
+    // attribute; this covers older WebKit (iPhone 6-era Safari).
+    video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
 
-    // Skip the first 3 seconds — stronger visuals start there
-    video.currentTime = 3;
+    // ── Start time: skip to the 3-second mark ─────────────────────────
+    // Setting currentTime before readyState >= 1 silently fails on mobile.
+    // We set it the moment metadata is available instead.
+    const applyStartTime = () => {
+      if (video.currentTime < 2.9) video.currentTime = 3;
+    };
 
-    // On every loop restart the browser rewinds to 0 — jump back to 3s
-    const skipIntro = () => { if (video.currentTime < 2.9) video.currentTime = 3; };
+    if (video.readyState >= 1) {
+      // Metadata already available (cached load)
+      applyStartTime();
+    } else {
+      video.addEventListener('loadedmetadata', applyStartTime, { once: true });
+    }
+
+    // On every loop the browser rewinds to 0 — snap back to 3s immediately
+    const skipIntro = () => {
+      if (video.currentTime < 2.9) video.currentTime = 3;
+    };
     video.addEventListener('timeupdate', skipIntro);
 
-    // Attempt play immediately — works when autoPlay attribute fires early
-    video.play().catch(() => {});
+    // ── Autoplay strategy ─────────────────────────────────────────────
+    // Guard: only call play() when the video is actually paused to avoid
+    // AbortError from overlapping play() calls.
+    const tryPlay = () => {
+      if (!video.paused) return;
+      video.play().catch(() => {
+        // Blocked — poster stays visible; retries below cover later interaction
+      });
+    };
 
-    // Retry the moment the user first touches or scrolls — covers iOS autoplay gate
-    const retryPlay = () => { if (video.paused) video.play().catch(() => {}); };
-    document.addEventListener('touchstart', retryPlay, { once: true, passive: true });
-    document.addEventListener('scroll',     retryPlay, { once: true, passive: true });
+    // First attempt — works when browser allows muted autoplay immediately
+    tryPlay();
 
-    // Shared: play/pause video on visibility
+    // iOS sometimes requires the first user gesture to unlock muted autoplay.
+    // Attach to all common first-interaction events; {once} auto-removes them.
+    const retryOnInteraction = () => tryPlay();
+    document.addEventListener('touchstart',  retryOnInteraction, { once: true, passive: true });
+    document.addEventListener('click',       retryOnInteraction, { once: true, passive: true });
+    document.addEventListener('scroll',      retryOnInteraction, { once: true, passive: true });
+
+    // Retry when the user returns to the tab (background → foreground on mobile)
+    const onVisibilityChange = () => { if (!document.hidden) tryPlay(); };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    // Play when section enters viewport, pause when it leaves (battery / data)
     const playIo = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) video.play().catch(() => {});
+        if (entry.isIntersecting) tryPlay();
         else video.pause();
       },
       { threshold: 0.1 }
     );
     playIo.observe(section);
 
+    // ── Section reveal ────────────────────────────────────────────────
+    const cleanup = () => {
+      playIo.disconnect();
+      video.removeEventListener('loadedmetadata', applyStartTime);
+      video.removeEventListener('timeupdate',     skipIntro);
+      document.removeEventListener('touchstart',       retryOnInteraction);
+      document.removeEventListener('click',            retryOnInteraction);
+      document.removeEventListener('scroll',           retryOnInteraction);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
+
     if (isMobile) {
-      // Mobile: lightweight one-shot reveal — no ScrollTrigger RAF overhead
+      // Mobile: lightweight one-shot reveal on intersection — avoids ScrollTrigger RAF
       const revealIo = new IntersectionObserver(
         ([entry]) => {
           if (!entry.isIntersecting) return;
@@ -70,13 +116,7 @@ export default function HeroVideo() {
         { threshold: 0.15 }
       );
       revealIo.observe(section);
-      return () => {
-        playIo.disconnect();
-        revealIo.disconnect();
-        video.removeEventListener('timeupdate', skipIntro);
-        document.removeEventListener('touchstart', retryPlay);
-        document.removeEventListener('scroll',     retryPlay);
-      };
+      return () => { cleanup(); revealIo.disconnect(); };
     }
 
     // Desktop: full scroll-driven scrub
@@ -99,13 +139,7 @@ export default function HeroVideo() {
       },
     });
 
-    return () => {
-      playIo.disconnect();
-      st.kill();
-      video.removeEventListener('timeupdate', skipIntro);
-      document.removeEventListener('touchstart', retryPlay);
-      document.removeEventListener('scroll',     retryPlay);
-    };
+    return () => { cleanup(); st.kill(); };
   }, []);
 
   return (
