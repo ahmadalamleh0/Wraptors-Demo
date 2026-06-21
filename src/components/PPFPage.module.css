@@ -41,32 +41,6 @@
   line-height: 1.65;
 }
 
-/* ── SHORT PROTECTION TEXT ───────────────────────────────────────────────── */
-.protectText {
-  background: #040408;
-  padding: 60px 0 52px;
-  text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.protectTitle {
-  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
-  font-weight: 400;
-  color: #fff;
-  letter-spacing: 0.04em;
-  line-height: 1.18;
-  margin: 0 0 16px;
-}
-
-.protectSub {
-  font-size: 0.96rem;
-  color: rgba(255,255,255,0.40);
-  line-height: 1.65;
-  margin: 0 auto;
-  max-width: 480px;
-}
-
 /* ── DESCRIPTION IMAGE ───────────────────────────────────────────────────── */
 .descImgSection {
   display: block;
@@ -1072,13 +1046,6 @@
     line-height: 0.95;
   }
 
-  .protectText {
-    padding: 44px 0 36px;
-  }
-  .protectTitle {
-    font-size: clamp(1.3rem, 7vw, 1.8rem);
-  }
-
   .explorerSection,
   .layerSection,
   .aftercareSection,
@@ -1131,8 +1098,9 @@
   .photoDesc { display: none !important; }
   /* Remove tap-dot hotspots — zone buttons below replace them */
   .hotspotLayer { display: none; }
-  /* Hide the redundant "Coverage Explorer" heading on mobile */
-  .ctrlHead { display: none; }
+  /* Section title — shown on mobile above the zone buttons */
+  .ctrlHead { display: block; margin-bottom: 20px; }
+  .explorerSub { display: none; }
   /* Restore padding for zone buttons and CTA */
   .ctrlPanel { padding: 24px 20px 0; }
   /* Zone info panel appears below the photo */

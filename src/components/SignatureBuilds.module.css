@@ -208,6 +208,8 @@
   scroll-snap-type: x mandatory;
   scroll-padding-left: 64px;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding-bottom: 20px;
@@ -233,6 +235,8 @@
   aspect-ratio: 3 / 4;
   cursor: pointer;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
+  -webkit-tap-highlight-color: transparent;
   transition:
     transform     0.6s var(--ease-smooth),
     border-color  0.6s var(--ease-smooth),
@@ -293,13 +297,20 @@
   width: auto;
   max-width: 160px;
   object-fit: contain;
-  filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.45));
+  /* Keep the filter constant — never animate it. Safari flashes black when
+     a filter transition starts because it briefly drops the compositing layer.
+     The glow is intentionally slightly stronger so default already looks premium. */
+  filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.55));
   opacity: 0.88;
-  transition: opacity 0.4s var(--ease-smooth), filter 0.4s var(--ease-smooth);
+  /* Only animate opacity — zero risk of compositing flash */
+  transition: opacity 0.3s var(--ease-smooth);
+  /* Stable GPU layer: prevents the compositing teardown/setup that causes flashes */
+  transform: translateZ(0);
 }
-.card:hover .logo {
+.card:hover .logo,
+.card:active .logo,
+.card:focus-visible .logo {
   opacity: 1;
-  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255,255,255,0.65));
 }
 
 /* Card content */
@@ -409,6 +420,9 @@
 
   /* No hover lift on touch — saves a paint layer */
   .card:hover { transform: none; box-shadow: none; }
+  /* Lock logo at full opacity on touch — no state-change flash */
+  .card:hover .logo,
+  .card:active .logo { opacity: 1; }
 
   /* Remove costly backdrop-blur on badge */
   .cardBadge { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(0,0,0,0.72); }

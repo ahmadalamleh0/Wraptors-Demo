@@ -18,9 +18,7 @@ import imgCeramic3    from '../../Ceramic Coating(new3).jpeg';
 import imgCommercial1 from '../../commercial_wrapping(1).jpeg';
 import imgCommercial2 from '../../commercial_wrapping(2).jpeg';
 import imgCommercial3 from '../../Comercial_wrapping(new3).jpeg';
-import imgTint1       from '../../PPF(2New).jpeg';
-import imgTint2       from '../../PPF(3New).jpeg';
-import imgTint3       from '../../PPF(last_1).jpeg';
+import imgTint        from '../../tint.jpeg';
 
 const SERVICES = [
   {
@@ -66,7 +64,7 @@ const SERVICES = [
     name: 'Window Tint',
     tags: ['Ceramic Film', 'UV Protection'],
     desc: 'Premium ceramic window film that blocks UV, reduces heat, and delivers flawless clarity — installed to the millimetre.',
-    imgs: [imgTint1, imgTint2, imgTint3],
+    imgs: [imgTint],
   },
   {
     id: 'commercial',

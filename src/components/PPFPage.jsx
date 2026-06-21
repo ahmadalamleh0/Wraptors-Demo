@@ -523,15 +523,7 @@ export default function PPFPage() {
         </div>
       </section>
 
-      {/* ── 2. SHORT PROTECTION TEXT ─────────────────────────────── */}
-      <section className={styles.protectText}>
-        <div className={styles.container}>
-          <h2 className={styles.protectTitle}>Protect the finish before<br />the damage happens.</h2>
-          <p className={styles.protectSub}>Tell us your vehicle and preferred coverage. We handle the rest.</p>
-        </div>
-      </section>
-
-      {/* ── 3. COVERAGE EXPLORER ─────────────────────────────────── */}
+      {/* ── 2. COVERAGE EXPLORER ─────────────────────────────────── */}
       <CoverageExplorer />
 
       {/* ── 4. FILM CONSTRUCTION ─────────────────────────────────── */}

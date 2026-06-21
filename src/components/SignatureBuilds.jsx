@@ -231,7 +231,7 @@ const BUILDS = [
   // Japanese Icons
   { brandName: "Lexus",     logo: lexusLogo,   mainImage: lexus1,   media: [lexus1, lexus2, lexus3, lexus4, lexus5],     serviceTags: ["CHROME RED INTERIOR", "AMBIENT LIGHTING", "CERAMIC COATING"], category: "japanese-icons" },
   { brandName: "Subaru",    logo: subaruLogo,  mainImage: subaru1,  media: [subaru1, subaru2, subaru3, subaru4, subaru5], serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],               category: "japanese-icons" },
-  { brandName: "Nissan GTR",logo: gtrLogo,     mainImage: gtr1,     media: [gtr1, gtr2, gtr3, gtr4, gtr5],               serviceTags: ["MATTE GUNMETAL METALLIC FINISH"],                          category: "japanese-icons", logoStyle: { filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.45))', opacity: 0.88 } },
+  { brandName: "Nissan GTR",logo: gtrLogo,     mainImage: gtr1,     media: [gtr1, gtr2, gtr3, gtr4, gtr5],               serviceTags: ["MATTE GUNMETAL METALLIC FINISH"],                          category: "japanese-icons" },
 
   // British Luxury
   { brandName: "Bentley",     logo: bentleyLogo, mainImage: bentley1, media: [bentley1, bentley2, bentley3, bentley4, bentley5],                           serviceTags: ["WIDEBODY CONVERSION", "FULL NARDO GRAY WRAP"],                                    category: "british-luxury" },
