@@ -540,12 +540,6 @@ export default function StarlightPage() {
       {/* ── PRESETS ──────────────────────────────────────────────────── */}
       <section className={styles.presetsSection}>
         <div className={styles.container}>
-          <div className={styles.sectionHead}>
-            <span className={styles.eyebrow}>Signature Collections</span>
-            <h2 className={styles.sectionTitle}>Curated Presets</h2>
-            <p className={styles.sectionSub}>Start with a collection, then make it your own.</p>
-          </div>
-
           <div className={styles.presetsGrid}>
             {Object.entries(PRESETS).map(([name, preset]) => (
               <button
