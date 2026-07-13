@@ -16,7 +16,6 @@ function ScrollToTop() {
 }
 
 import OfflinePresentationMode from './components/OfflinePresentationMode';
-import HeroVideoDebugHUD from './components/HeroVideoDebugHUD';
 import PresentationAdminControl from './components/PresentationAdminControl';
 
 // Home page sections
@@ -94,7 +93,6 @@ export default function App() {
   return (
     <>
     <ScrollToTop />
-    <HeroVideoDebugHUD />
     <OfflinePresentationMode />
     <PresentationAdminControl />
     <Routes>

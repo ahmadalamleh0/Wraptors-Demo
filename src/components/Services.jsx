@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Services.module.css';
 
@@ -77,10 +77,7 @@ const SERVICES = [
   },
 ];
 
-const INTERVAL_MS = 4000;
-
 function ServiceBlock({ svc, blockRef }) {
-  const [activeIdx, setActiveIdx] = useState(0);
   const localRef = useRef(null);
 
   const setRef = el => {
@@ -88,43 +85,24 @@ function ServiceBlock({ svc, blockRef }) {
     if (typeof blockRef === 'function') blockRef(el);
   };
 
-  useEffect(() => {
-    if (svc.imgs.length <= 1) return;
-    const el = localRef.current;
-    if (!el) return;
-    let id = null;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          if (!id) id = setInterval(
-            () => setActiveIdx(i => (i + 1) % svc.imgs.length),
-            INTERVAL_MS
-          );
-        } else {
-          clearInterval(id);
-          id = null;
-        }
-      },
-      { threshold: 0.3 }
-    );
-    io.observe(el);
-    return () => { clearInterval(id); io.disconnect(); };
-  }, [svc.imgs.length]);
+  // Locked to the first image only — no rotation, no timers, no carousel.
+  // svc.imgs may still carry additional images (used elsewhere, e.g. the
+  // service detail pages), but this card always renders imgs[0].
+  const mainImg = svc.imgs[0];
 
   return (
     <div className={styles.block} ref={setRef}>
 
-      {/* ── Left: image gallery ── */}
+      {/* ── Left: image ── */}
       <div className={styles.imgFrame}>
         <div className={styles.gallery}>
           <div className={styles.imgMain}>
             <img
-              key={activeIdx}
-              src={svc.imgs[activeIdx]}
+              src={mainImg}
               alt={svc.name}
               className={styles.img}
               loading="lazy"
-              style={svc.imgPositions?.[activeIdx] ? { objectPosition: svc.imgPositions[activeIdx] } : undefined}
+              style={svc.imgPositions?.[0] ? { objectPosition: svc.imgPositions[0] } : undefined}
             />
           </div>
 

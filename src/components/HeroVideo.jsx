@@ -82,19 +82,11 @@ export default function HeroVideo() {
       // ── Autoplay strategy ─────────────────────────────────────────────
       // Guard: only call play() when the video is actually paused to avoid
       // AbortError from overlapping play() calls.
-      // TEMPORARY DEBUG: the 'hero-video-debug' dispatches below only report
-      // the play() outcome for HeroVideoDebugHUD.jsx — remove both the event
-      // dispatches and that component once playback issues are confirmed
-      // fixed. They don't change autoplay/retry behavior at all.
       const tryPlay = () => {
         if (!video.paused) return;
-        video.play().then(
-          () => window.dispatchEvent(new CustomEvent('hero-video-debug', { detail: { playState: 'resolved' } })),
-          (err) => {
-            window.dispatchEvent(new CustomEvent('hero-video-debug', { detail: { playState: 'rejected', error: err?.message } }));
-            // Blocked — poster stays visible; retries below cover later interaction
-          }
-        );
+        video.play().catch(() => {
+          // Blocked — poster stays visible; retries below cover later interaction
+        });
       };
 
       // First attempt — works when browser allows muted autoplay immediately
@@ -110,18 +102,6 @@ export default function HeroVideo() {
       // Retry when the user returns to the tab (background → foreground on mobile)
       const onVisibilityChange = () => { if (!document.hidden) tryPlay(); };
       document.addEventListener('visibilitychange', onVisibilityChange);
-
-      // TEMPORARY DEBUG: Hero.jsx dispatches 'hero:exit' the instant its
-      // slide-away intro finishes and the section is hidden — this is the
-      // real "reveal complete" moment. Logging the video's actual currentTime
-      // right here (not a calculated estimate) is what the hero poster frame
-      // should be extracted from. Remove once the correct timestamp has been
-      // captured and the poster is regenerated from it.
-      const onHeroExit = () => {
-        console.log(`Hero reveal complete — video.currentTime: ${video.currentTime}`);
-        window.dispatchEvent(new CustomEvent('hero-video-debug', { detail: { revealCompleteAt: video.currentTime } }));
-      };
-      window.addEventListener('hero:exit', onHeroExit, { once: true });
 
       // Play when section enters viewport, pause when it leaves (battery / data)
       const playIo = new IntersectionObserver(
@@ -141,7 +121,6 @@ export default function HeroVideo() {
         document.removeEventListener('click',            retryOnInteraction);
         document.removeEventListener('scroll',           retryOnInteraction);
         document.removeEventListener('visibilitychange', onVisibilityChange);
-        window.removeEventListener('hero:exit', onHeroExit);
       };
     }
 
@@ -227,8 +206,13 @@ export default function HeroVideo() {
       <div className={styles.fadeTop}    aria-hidden="true" />
       <div className={styles.fadeBottom} aria-hidden="true" />
 
-      {/* Cinematic text block */}
-      <div className={styles.textOverlay} aria-hidden="false">
+      {/* Cinematic text block — Safe Mode gets a mobile-only modifier that
+          anchors it above the car instead of centering it (see .safeImage
+          and .textOverlaySafeMobile). Video Mode's layout is untouched. */}
+      <div
+        className={`${styles.textOverlay} ${!isVideoMode ? styles.textOverlaySafeMobile : ''}`}
+        aria-hidden="false"
+      >
         <p ref={line1Ref} className={styles.mainLine}>Crafted with purpose.</p>
         <p ref={line2Ref} className={styles.mainLine}>Built for legacy.</p>
         <div ref={rulerRef} className={styles.ruler} aria-hidden="true" />

@@ -42,6 +42,19 @@
   .safeImage { animation: none; }
 }
 
+/* Safe Mode mobile: the source photo's dark empty area (wall/lighting) only
+   occupies its top ~30%, which isn't enough headroom for the text block
+   above the car. Zooming in slightly and anchoring to the top crops some
+   of the least essential bottom of the frame (already faded to black by
+   .fadeBottom anyway) and pushes the car further down the viewport,
+   opening up more dark space up top for .textOverlaySafeMobile below. */
+@media (max-width: 768px) {
+  .safeImage {
+    background-size: auto 125%;
+    background-position: center top;
+  }
+}
+
 /* Black overlay — starts opaque, dissolves as section scrolls into view */
 .entryOverlay {
   position: absolute;
@@ -146,4 +159,16 @@
 @media (max-width: 480px) {
   .mainLine { font-size: 7.5vw; }
   .subLine  { letter-spacing: 0.20em; }
+}
+
+/* Safe Mode mobile only: the car (see .safeImage above) starts around
+   ~35-40% down the viewport, so anchor the text block to the top instead
+   of vertically centering it — centering is what put it on top of the
+   bodywork/wing in the first place. Video Mode's mobile layout (still
+   plain .textOverlay, centered) is completely unaffected. */
+@media (max-width: 768px) {
+  .textOverlaySafeMobile {
+    justify-content: flex-start;
+    padding-top: 9vh;
+  }
 }

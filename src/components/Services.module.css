@@ -1,7 +1,7 @@
 /* ══ SERVICES — Premium Detail Blocks ══ */
 .section {
   background: #000;
-  padding: 0 0 60px;
+  padding: 0 0 50px;
   position: relative;
 }
 
@@ -10,7 +10,7 @@
 .serviceZone {
   position: relative;
   overflow: hidden;
-  padding-bottom: 90px;
+  padding-bottom: 56px;
 }
 
 .ghostText {
@@ -23,7 +23,7 @@
   white-space: nowrap;
   overflow: hidden;
   line-height: 1;
-  padding-top: 36px;
+  padding-top: 20px;
   user-select: none;
   pointer-events: none;
 }
@@ -229,12 +229,19 @@
 }
 
 @media (max-width: 900px) {
-  .section      { padding: 0 0 40px; }
-  .serviceZone  { padding-bottom: 60px; }
+  .section      { padding: 0 0 28px; }
+  /* Tightened from 60px — that plus the ghost title's own box height and
+     the block's pull-up margin below was adding 100px+ of dead black
+     space between cards. Target: ~48-72px of breathing room between one
+     card's bottom edge and the next card's top edge. */
+  .serviceZone  { padding-bottom: 26px; }
 
   .ghostText {
     font-size: clamp(3.2rem, 18vw, 8rem);
-    padding-top: 24px;
+    padding-top: 10px;
+    /* Slightly brighter on mobile — same rgba(255,255,255,x) grey, just a
+       touch more contrast so it doesn't disappear behind small screens. */
+    color: rgba(255, 255, 255, 0.11);
   }
 
   .block {
@@ -242,7 +249,7 @@
     grid-template-rows: auto;   /* release the fixed 460px on mobile */
     overflow: visible;
     max-width: calc(100% - 40px);
-    margin: -48px auto 0;
+    margin: -56px auto 0;
   }
 
   .imgFrame {
