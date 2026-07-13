@@ -2,8 +2,17 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 import { fileURLToPath, URL } from 'node:url'
-import { RangeRequestsPlugin } from 'workbox-range-requests'
 import { VIDEOS_CACHE_NAME } from './src/lib/pwaCacheNames.js'
+
+// workbox-core (a transitive dep of workbox-range-requests) assumes a
+// browser/service-worker global `self` exists — true once this plugin runs
+// inside the generated service worker, but not while Node evaluates this
+// config file. `vite build`'s config loader tolerates the import fine, but
+// `vite dev`'s crashes with "self is not defined" without this polyfill.
+if (typeof globalThis.self === 'undefined') {
+  globalThis.self = globalThis
+}
+const { RangeRequestsPlugin } = await import('workbox-range-requests')
 
 // Broadcasts every stage of a video fetch handled by the service worker to
 // all open tabs via postMessage, so it's visible from the page itself (not

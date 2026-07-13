@@ -152,9 +152,30 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .section    { padding: 64px 0 72px; }
-  .header     { padding: 0 20px 44px; }
-  .logo       { height: 36px; }
+  /* .section already has position:relative from the base rule above */
+  .section    { padding: 64px 0; }
+  /* Very restrained warm glow behind the header/marquee so the section
+     reads as an intentional moment instead of dissolving into the
+     surrounding black — not a card, just enough to anchor it. */
+  .section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 65% 75% at 50% 38%, rgba(212, 0, 0, 0.055) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .header     {
+    padding: 0 20px 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .label      { color: rgba(255, 255, 255, 0.52); }
+  .sub        { color: rgba(255, 255, 255, 0.58); }
+
+  .marqueeOuter { position: relative; z-index: 1; }
+  .logo       { height: 36px; opacity: 0.85; }
   .logoItem   { padding: 0 52px; }
 }
 

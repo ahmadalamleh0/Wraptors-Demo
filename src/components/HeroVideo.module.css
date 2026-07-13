@@ -169,6 +169,6 @@
 @media (max-width: 768px) {
   .textOverlaySafeMobile {
     justify-content: flex-start;
-    padding-top: 9vh;
+    padding-top: 13vh;
   }
 }
