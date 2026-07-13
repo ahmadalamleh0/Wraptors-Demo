@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './HeroVideo.module.css';
 import { getPresentationMode, MODES } from '../lib/presentationMode';
 import heroSafeModeImage from '../assets/hero-safe-mode.jpg';
@@ -18,8 +17,6 @@ import heroVideoSrc from '../../final_hero(new).mp4';
 // transform rotates both the poster and the live video frames identically.
 import heroPoster   from '../assets/hero-poster.webp';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function HeroVideo() {
   // Read once per mount — the admin control (PresentationAdminControl.jsx)
   // changes this via a full page reload rather than live-swapping the
@@ -27,29 +24,71 @@ export default function HeroVideo() {
   const [mode] = useState(() => getPresentationMode());
   const isVideoMode = mode === MODES.VIDEO;
 
-  const sectionRef  = useRef(null);
-  const videoRef    = useRef(null);
-  const overlayRef  = useRef(null);
-  const line1Ref    = useRef(null);
-  const line2Ref    = useRef(null);
-  const rulerRef    = useRef(null);
-  const subLineRef  = useRef(null);
+  const sectionRef   = useRef(null);
+  const videoRef     = useRef(null); // also doubles as the Safe Mode image's ref — only one of the two ever renders
+  const overlayRef   = useRef(null);
+  const line1Ref      = useRef(null);
+  const line2Ref      = useRef(null);
+  const rulerRef       = useRef(null);
+  const subLineRef    = useRef(null);
+  const scrollCueRef  = useRef(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     const overlay = overlayRef.current;
+    const bg      = videoRef.current;
 
-    gsap.set([line1Ref.current, line2Ref.current], { opacity: 0, y: 26 });
-    gsap.set(rulerRef.current,  { scaleX: 0, transformOrigin: 'center center' });
-    gsap.set(subLineRef.current, { opacity: 0, y: 16 });
+    // ── Entrance timeline — plays once, triggered by Hero.jsx's 'hero:exit'
+    // (fired the instant its logo intro finishes sliding away), not by
+    // scroll position. This section fills the same viewport Hero's fixed
+    // overlay just vacated, so there's nothing to "scroll into" — a scrub
+    // tied to scroll progress never made sense here and looked static.
+    gsap.set(overlay, { opacity: 1 });
+    gsap.set(bg, { opacity: 0.82 });
+    gsap.set([line1Ref.current, line2Ref.current], { opacity: 0, y: 36 });
+    gsap.set(rulerRef.current, { scaleX: 0, transformOrigin: 'center center' });
+    gsap.set(subLineRef.current, { opacity: 0, y: 20 });
+    gsap.set(scrollCueRef.current, { opacity: 0, y: 8 });
 
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const entranceTl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+    entranceTl
+      .to(overlay, { opacity: 0, duration: 1.0 }, 0)
+      .to(bg,      { opacity: 1, duration: 1.1 }, 0)
+      .to(line1Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, 0.15)
+      .to(line2Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, 0.32)
+      .to(rulerRef.current,   { scaleX: 1,  duration: 0.8 },       0.55)
+      .to(subLineRef.current, { opacity: 1, y: 0, duration: 0.9 }, 0.72)
+      .to(scrollCueRef.current, { opacity: 1, y: 0, duration: 0.8 }, 0.95);
+
+    let entrancePlayed = false;
+    const playEntrance = () => {
+      if (entrancePlayed) return;
+      entrancePlayed = true;
+      entranceTl.play();
+    };
+    window.addEventListener('hero:exit', playEntrance, { once: true });
+    // Safety net in case 'hero:exit' never fires for some reason.
+    const entranceFallback = setTimeout(playEntrance, 6000);
+
+    // Fade the scroll cue out once the user actually starts scrolling; back
+    // in if they return to the very top. Only engages after the entrance
+    // has run, so it can't fight the entrance timeline's own opacity tween.
+    let cueHidden = false;
+    const onScroll = () => {
+      if (!entrancePlayed) return;
+      const shouldHide = window.scrollY > 12;
+      if (shouldHide !== cueHidden) {
+        cueHidden = shouldHide;
+        gsap.to(scrollCueRef.current, { opacity: shouldHide ? 0 : 1, duration: 0.35, ease: 'power2.out' });
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     // ── Video-only setup — Safe Mode renders a static image instead, so
     // none of this autoplay/currentTime/network machinery applies to it. ──
-    let cleanup = () => {};
+    let cleanupVideo = () => {};
     if (isVideoMode) {
-      const video = videoRef.current;
+      const video = bg;
 
       // Force muted as a JS property — iOS Safari ignores the HTML attribute alone
       // and will block autoplay if it detects any audio intent.
@@ -113,7 +152,7 @@ export default function HeroVideo() {
       );
       playIo.observe(section);
 
-      cleanup = () => {
+      cleanupVideo = () => {
         playIo.disconnect();
         video.removeEventListener('loadedmetadata', applyStartTime);
         video.removeEventListener('timeupdate',     skipIntro);
@@ -124,56 +163,20 @@ export default function HeroVideo() {
       };
     }
 
-    // ── Section reveal — shared by both modes ─────────────────────────
-    if (isMobile) {
-      // Mobile: lightweight one-shot reveal on intersection — avoids ScrollTrigger RAF
-      const revealIo = new IntersectionObserver(
-        ([entry]) => {
-          if (!entry.isIntersecting) return;
-          gsap.to(overlay,            { opacity: 0,  duration: 0.85, ease: 'power2.out', delay: 0.15 });
-          gsap.to(line1Ref.current,   { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.52 });
-          gsap.to(line2Ref.current,   { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.70 });
-          gsap.to(rulerRef.current,   { scaleX: 1,  duration: 0.5, ease: 'power2.out', delay: 0.90 });
-          gsap.to(subLineRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 1.05 });
-          revealIo.disconnect();
-        },
-        { threshold: 0.15 }
-      );
-      revealIo.observe(section);
-      return () => { cleanup(); revealIo.disconnect(); };
-    }
-
-    // Desktop: full scroll-driven scrub
-    const st = ScrollTrigger.create({
-      trigger: section,
-      start: 'top 88%',
-      end: 'top 10%',
-      scrub: true,
-      onUpdate(self) {
-        const p = self.progress;
-        gsap.set(overlay, { opacity: 1 - p });
-        const t1 = Math.max(0, Math.min(1, (p - 0.46) / 0.36));
-        const t2 = Math.max(0, Math.min(1, (p - 0.56) / 0.30));
-        const tr = Math.max(0, Math.min(1, (p - 0.64) / 0.24));
-        const ts = Math.max(0, Math.min(1, (p - 0.72) / 0.28));
-        gsap.set(line1Ref.current,   { opacity: t1, y: 26 * (1 - t1) });
-        gsap.set(line2Ref.current,   { opacity: t2, y: 26 * (1 - t2) });
-        gsap.set(rulerRef.current,   { scaleX: tr });
-        gsap.set(subLineRef.current, { opacity: ts, y: 16 * (1 - ts) });
-      },
-    });
-
-    return () => { cleanup(); st.kill(); };
-    // `isVideoMode` is derived once at mount (see the lazy useState above)
-    // and never changes for the life of this component, so this effect is
-    // still mount-only in practice.
+    return () => {
+      cleanupVideo();
+      window.removeEventListener('hero:exit', playEntrance);
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(entranceFallback);
+      entranceTl.kill();
+    };
   }, [isVideoMode]);
 
   return (
     <section ref={sectionRef} className={styles.section}>
 
-      {/* Black entry plane — scroll-driven fade (crossfades into whichever
-          background below is active, video or the safe-mode image) */}
+      {/* Black entry plane — crossfades into whichever background below is
+          active (video or the safe-mode image) as the entrance timeline plays */}
       <div ref={overlayRef} className={styles.entryOverlay} aria-hidden="true" />
 
       {isVideoMode ? (
@@ -190,6 +193,7 @@ export default function HeroVideo() {
         />
       ) : (
         <div
+          ref={videoRef}
           className={styles.safeImage}
           style={{
             // Dedicated subtle darkening for this layer specifically (on
@@ -219,6 +223,16 @@ export default function HeroVideo() {
         <p ref={subLineRef} className={styles.subLine}>
           Luxury wraps&nbsp;&nbsp;·&nbsp;&nbsp;Paint protection&nbsp;&nbsp;·&nbsp;&nbsp;Vehicle transformation
         </p>
+      </div>
+
+      {/* Scroll indicator — present in both modes, fades out once the user
+          actually starts scrolling (see the scroll listener above) */}
+      <div ref={scrollCueRef} className={styles.scrollCue} aria-hidden="true">
+        <span className={styles.scrollCueText}>Scroll</span>
+        <span className={styles.scrollCueLine} />
+        <svg className={styles.scrollCueChevron} width="14" height="8" viewBox="0 0 14 8" fill="none">
+          <path d="M1 1L7 7L13 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </div>
 
     </section>

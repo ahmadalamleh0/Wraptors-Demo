@@ -50,7 +50,7 @@
    opening up more dark space up top for .textOverlaySafeMobile below. */
 @media (max-width: 768px) {
   .safeImage {
-    background-size: auto 125%;
+    background-size: auto 130%;
     background-position: center top;
   }
 }
@@ -143,13 +143,75 @@
   will-change: transform, opacity;
 }
 
+/* ── Scroll indicator — bottom-center, sits inside the .fadeBottom dark
+   zone (28% of viewport height) so it never lands on a bright part of the
+   image/video. Present in both Video and Safe Mode. ── */
+.scrollCue {
+  position: absolute;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 28px);
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  pointer-events: none;
+}
+
+.scrollCueText {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+}
+
+.scrollCueLine {
+  display: block;
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.65), rgba(190, 10, 10, 0.85));
+  animation: scrollCuePulse 2.4s ease-in-out infinite;
+}
+
+.scrollCueChevron {
+  color: rgba(190, 10, 10, 0.9);
+  filter: drop-shadow(0 0 4px rgba(190, 10, 10, 0.35));
+  animation: scrollCueBounce 2.4s ease-in-out infinite;
+}
+
+@keyframes scrollCuePulse {
+  0%, 100% { opacity: 0.45; transform: scaleY(0.82); }
+  50%      { opacity: 1;    transform: scaleY(1); }
+}
+
+@keyframes scrollCueBounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollCueLine,
+  .scrollCueChevron { animation: none; }
+}
+
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .textOverlay { padding: 0 28px 4vh; }
-  .mainLine    { font-size: clamp(1.6rem, 7vw, 3rem); letter-spacing: 0.04em; will-change: auto; }
+  .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 22px); gap: 7px; }
+  .mainLine    {
+    font-size: clamp(2.6rem, 11vw, 4rem);
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    will-change: auto;
+  }
   .ruler       { margin: 22px auto 20px; will-change: auto; }
   .subLine     {
-    font-size: clamp(0.48rem, 2.5vw, 0.7rem);
+    font-size: clamp(0.62rem, 3.2vw, 0.85rem);
+    color: rgba(255, 255, 255, 0.55);
     letter-spacing: 0.28em;
     white-space: normal;
     will-change: auto;
@@ -157,18 +219,20 @@
 }
 
 @media (max-width: 480px) {
-  .mainLine { font-size: 7.5vw; }
   .subLine  { letter-spacing: 0.20em; }
 }
 
 /* Safe Mode mobile only: the car (see .safeImage above) starts around
-   ~35-40% down the viewport, so anchor the text block to the top instead
+   ~38-42% down the viewport, so anchor the text block to the top instead
    of vertically centering it — centering is what put it on top of the
    bodywork/wing in the first place. Video Mode's mobile layout (still
-   plain .textOverlay, centered) is completely unaffected. */
+   plain .textOverlay, centered) is completely unaffected. Padding trimmed
+   back down (13vh -> 9vh) to make room for the larger headline/subline
+   above, with the extra .safeImage zoom (125% -> 130%) buying back the
+   clearance so the text block still safely clears the car underneath. */
 @media (max-width: 768px) {
   .textOverlaySafeMobile {
     justify-content: flex-start;
-    padding-top: 13vh;
+    padding-top: 9vh;
   }
 }
