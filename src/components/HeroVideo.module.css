@@ -7,6 +7,19 @@
   overflow: hidden;
 }
 
+/* Mobile Safari's 100vh is the LARGEST possible viewport (toolbar hidden),
+   taller than what's actually on screen on first load (toolbar visible) —
+   that's why the scroll cue (anchored to .section's bottom) was rendering
+   below the real fold until the user scrolled once and the toolbar
+   collapsed. 100svh is the SMALLEST guaranteed viewport (toolbar showing),
+   so anchoring to it keeps the cue inside what's actually visible before
+   any scrolling. Kept as a mobile-only override — desktop is unaffected,
+   and the plain 100vh above still serves as the fallback for browsers
+   without svh support. */
+@media (max-width: 768px) {
+  .section { height: 100svh; }
+}
+
 /* Video is stored rotated 90° — swap dimensions so after rotation the
    landscape frame fills the full viewport correctly */
 .video {
@@ -17,6 +30,13 @@
   height: 100vw;
   transform: translate(-50%, -50%) rotate(-90deg);
   object-fit: cover;
+}
+
+/* Keep the rotated video's own sizing in sync with .section's mobile
+   height above, so Video Mode crops consistently with the real viewport
+   too (not just Safe Mode's plain-cover background image). */
+@media (max-width: 768px) {
+  .video { width: 100svh; }
 }
 
 /* Safe Mode background — a static image standing in for the video.
@@ -201,7 +221,7 @@
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .textOverlay { padding: 0 28px 4vh; }
-  .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 22px); gap: 7px; }
+  .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 28px); gap: 7px; }
   .mainLine    {
     font-size: clamp(2.6rem, 11vw, 4rem);
     line-height: 0.95;
