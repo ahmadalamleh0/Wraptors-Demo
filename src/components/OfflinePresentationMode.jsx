@@ -1,12 +1,37 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import styles from './OfflinePresentationMode.module.css';
+import { useCallback, useEffect, useRef } from 'react';
 import { VIDEOS_CACHE_NAME } from '../lib/pwaCacheNames';
 
 const LOG = '[OfflineMode]';
-const MAX_LOG_LINES = 60;
 
 function withTimeout(promise, ms) {
   return Promise.race([promise, new Promise((resolve) => setTimeout(resolve, ms))]);
+}
+
+// Background video pre-fetching must never compete with the live hero
+// <video> for bandwidth/connections during initial page load — doing so
+// was starving the hero video's own buffering and freezing it on its
+// poster. So: wait for the hero video to actually reach a healthy playing
+// state first (or window 'load' if there's no video on this page / it
+// never gets there), then add a grace period before starting the heavy
+// downloads. This never touches the video element beyond adding listeners.
+function waitForCriticalContentReady() {
+  return new Promise((resolve) => {
+    const video = document.querySelector('video');
+    if (!video) {
+      if (document.readyState === 'complete') resolve();
+      else window.addEventListener('load', () => resolve(), { once: true });
+      return;
+    }
+    if (video.readyState >= 3 /* HAVE_FUTURE_DATA */) {
+      resolve();
+      return;
+    }
+    const onReady = () => resolve();
+    video.addEventListener('canplay', onReady, { once: true });
+    video.addEventListener('playing', onReady, { once: true });
+    // Safety net so a blocked/failed autoplay doesn't delay prep forever.
+    setTimeout(onReady, 8000);
+  }).then(() => new Promise((resolve) => setTimeout(resolve, 1500)));
 }
 
 // No SW support, dev server (no SW registered there), or the visitor has
@@ -34,13 +59,17 @@ function getRequiredVideoSources() {
   return Array.from(seen, ([url, label]) => ({ url, label }));
 }
 
-// Downloads a video as a single full GET, forced past the HTTP cache
-// (cache: 'reload') so it can never be contaminated by a byte-range request
-// the <video> element may have already issued. Buffers sequentially (one
-// reader, no tee'd streams) while reporting progress, then writes a fresh
-// 200 Response into Cache Storage — then re-reads it back and runs the same
-// range-slicing function the service worker uses, to prove the entry is
-// actually usable offline before ever reporting success.
+// Downloads a video as a single full GET. Uses the browser's normal HTTP
+// cache (not 'reload') and a low fetch priority so this never competes with
+// the live hero <video>'s own buffering for bandwidth/connections — an
+// earlier version forced cache:'reload' at normal priority, which raced the
+// hero video for the same bytes on the same connection-limited origin and
+// was the actual cause of the hero freezing on its poster both online and
+// off. Buffers sequentially (one reader, no tee'd streams) while reporting
+// progress, then writes a fresh 200 Response into Cache Storage — then
+// re-reads it back and runs the same range-slicing function the service
+// worker uses, to prove the entry is actually usable offline before ever
+// reporting success.
 async function cacheVideoWithProgress(cache, { url, label }, onProgress, log) {
   log(`video download started: ${label}`);
   log(`exact video source URL (from rendered <video> element): ${url}`);
@@ -59,7 +88,7 @@ async function cacheVideoWithProgress(cache, { url, label }, onProgress, log) {
     log(`${label}: existing cache entry looks incomplete (${existingBlob.size} bytes) — re-downloading`);
   }
 
-  const response = await fetch(url, { cache: 'reload' });
+  const response = await fetch(url, { priority: 'low' });
   log(`HTTP response status for ${label}: ${response.status}${response.type === 'opaque' ? ' (opaque response — cannot verify, aborting)' : ''}`);
 
   if (response.type === 'opaque') {
@@ -144,137 +173,69 @@ async function verifyRangeSlicing(cache, url, label, log) {
   log(`range-slicing self-test for ${label}: OK (206, ${sliceLen} bytes for bytes=0-65535)`);
 }
 
+// No visible UI anymore (see PresentationAdminControl.jsx for the admin-
+// facing replacement) — this component exists purely to run the background
+// video pre-caching pipeline and log its progress to the console. Every
+// check described in the module-level functions above (full-200 fetch,
+// post-write verification, range-slicing self-test) still runs exactly as
+// before; only the on-page status badge was removed.
 export default function OfflinePresentationMode() {
-  const [status, setStatus] = useState(() => (canPrepareOffline() ? 'preparing' : 'hidden'));
-  const [percent, setPercent] = useState(0);
-  const [showDetails, setShowDetails] = useState(false);
-  const [logLines, setLogLines] = useState([]);
-  const progress = useRef(new Map());
   const runId = useRef(0);
 
-  const log = useCallback((message) => {
-    const line = `${new Date().toISOString().slice(11, 19)} ${message}`;
-    console.log(`${LOG} ${message}`);
-    setLogLines((prev) => [...prev.slice(-(MAX_LOG_LINES - 1)), line]);
-  }, []);
-
-  // Pure async kickoff — every setState call inside happens after an
-  // `await`, never synchronously in the caller's stack, so this is safe to
-  // invoke directly from the mount effect below.
   const beginCaching = useCallback(() => {
+    if (!canPrepareOffline()) return;
     const thisRun = ++runId.current;
-    progress.current = new Map();
-
-    const reportProgress = () => {
-      let loaded = 0;
-      let total = 0;
-      for (const entry of progress.current.values()) {
-        loaded += entry.loaded;
-        total += entry.total;
-      }
-      if (total > 0 && runId.current === thisRun) {
-        setPercent(Math.min(100, Math.round((loaded / total) * 100)));
-      }
-    };
+    const log = (message) => console.log(`${LOG} ${message}`);
 
     (async () => {
       try {
         const videos = getRequiredVideoSources();
         if (videos.length === 0) {
           log('no <video> elements found on this page — nothing to prepare');
-          if (runId.current === thisRun) setStatus('hidden');
           return;
         }
+
+        log('waiting for the live hero video to reach a healthy playing state before starting background downloads (avoids competing for bandwidth)');
+        await waitForCriticalContentReady();
+        if (runId.current !== thisRun) return;
 
         const [cache] = await Promise.all([
           caches.open(VIDEOS_CACHE_NAME),
           withTimeout(navigator.serviceWorker.ready, 15000),
         ]);
 
-        await Promise.all(
-          videos.map((video) =>
-            cacheVideoWithProgress(
-              cache,
-              video,
-              (loaded, total) => {
-                progress.current.set(video.url, { loaded, total });
-                reportProgress();
-              },
-              log
-            )
-          )
-        );
+        await Promise.all(videos.map((video) => cacheVideoWithProgress(cache, video, () => {}, log)));
 
         if (runId.current === thisRun) {
-          setPercent(100);
-          setStatus('ready');
-          log(`all ${videos.length} video(s) verified in Cache Storage as complete 200 responses — Ready For Offline Presentation`);
+          log(`all ${videos.length} video(s) verified in Cache Storage as complete 200 responses — assets cached (this does not by itself prove offline playback works)`);
         }
       } catch (err) {
         log(`ERROR: ${err?.message || err}`);
-        if (runId.current === thisRun) setStatus('error');
       }
     })();
-  }, [log]);
+  }, []);
 
   useEffect(() => {
-    if (!canPrepareOffline()) return; // initial state already 'hidden' — nothing to do
     beginCaching();
+
+    // No visible Retry / Clear & Re-download buttons anymore — exposed on
+    // window instead so they're still reachable from the console.
+    window.__wraptorsOfflinePrep = {
+      retry: beginCaching,
+      clearAndRedownload: async () => {
+        try {
+          await caches.delete(VIDEOS_CACHE_NAME);
+          console.log(`${LOG} cleared "${VIDEOS_CACHE_NAME}" cache for re-download`);
+        } catch (err) {
+          console.error(`${LOG} failed to clear cache:`, err);
+        }
+        beginCaching();
+      },
+    };
+    return () => {
+      delete window.__wraptorsOfflinePrep;
+    };
   }, [beginCaching]);
 
-  // Synchronous reset + relaunch — only ever called from click handlers
-  // (Retry / Clear & Re-download buttons), never from the effect above.
-  const retry = useCallback(() => {
-    setStatus('preparing');
-    setPercent(0);
-    beginCaching();
-  }, [beginCaching]);
-
-  const clearAndRedownload = useCallback(async () => {
-    try {
-      await caches.delete(VIDEOS_CACHE_NAME);
-      log(`cleared "${VIDEOS_CACHE_NAME}" cache for re-download`);
-    } catch (err) {
-      log(`ERROR clearing cache: ${err?.message || err}`);
-    }
-    retry();
-  }, [retry, log]);
-
-  if (status === 'hidden') return null;
-
-  return (
-    <div className={styles.wrap}>
-      <div className={styles.pill} role="status" aria-live="polite">
-        <span className={styles.icon} aria-hidden="true">{status === 'ready' ? '🟢' : '🔴'}</span>
-        <span className={styles.label}>
-          {status === 'preparing' && `Preparing Offline Demo… ${percent}%`}
-          {status === 'ready' && 'Ready For Offline Presentation'}
-          {status === 'error' && 'Offline video preparation failed'}
-        </span>
-        {status === 'preparing' && (
-          <span className={styles.track}>
-            <span className={styles.fill} style={{ width: `${percent}%` }} />
-          </span>
-        )}
-        {status === 'error' && (
-          <button type="button" className={styles.button} onClick={retry}>
-            Retry Video Download
-          </button>
-        )}
-        {status === 'ready' && (
-          <button type="button" className={styles.buttonGhost} onClick={clearAndRedownload}>
-            Clear &amp; Re-download Videos
-          </button>
-        )}
-        {(status === 'ready' || status === 'error') && (
-          <button type="button" className={styles.buttonGhost} onClick={() => setShowDetails((s) => !s)}>
-            {showDetails ? 'Hide' : 'View'} technical details
-          </button>
-        )}
-      </div>
-      {showDetails && (
-        <pre className={styles.details}>{logLines.join('\n') || 'No log output yet.'}</pre>
-      )}
-    </div>
-  );
+  return null;
 }

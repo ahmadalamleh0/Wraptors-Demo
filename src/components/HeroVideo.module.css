@@ -19,6 +19,29 @@
   object-fit: cover;
 }
 
+/* Safe Mode background — a static image standing in for the video.
+   Same full-bleed cover treatment, plus a slow Ken Burns drift so it reads
+   as a deliberate cinematic still rather than a paused/broken video. */
+.safeImage {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform-origin: center center;
+  animation: heroDrift 25s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes heroDrift {
+  0%   { transform: scale(1)     translate3d(0, 0, 0); }
+  100% { transform: scale(1.03)  translate3d(-1.1%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .safeImage { animation: none; }
+}
+
 /* Black overlay — starts opaque, dissolves as section scrolls into view */
 .entryOverlay {
   position: absolute;

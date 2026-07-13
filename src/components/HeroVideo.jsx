@@ -1,7 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './HeroVideo.module.css';
+import { getPresentationMode, MODES } from '../lib/presentationMode';
+import heroSafeModeImage from '../assets/hero-safe-mode.jpg';
 import heroVideoSrc from '../../final_hero(new).mp4';
 // Extracted from final_hero(new).mp4 at t=3.0s — the exact timestamp
 // `applyStartTime()` below always seeks to before playback begins (see
@@ -19,6 +21,12 @@ import heroPoster   from '../assets/hero-poster.webp';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroVideo() {
+  // Read once per mount — the admin control (PresentationAdminControl.jsx)
+  // changes this via a full page reload rather than live-swapping the
+  // video/GSAP setup mid-session, so this never needs to react afterward.
+  const [mode] = useState(() => getPresentationMode());
+  const isVideoMode = mode === MODES.VIDEO;
+
   const sectionRef  = useRef(null);
   const videoRef    = useRef(null);
   const overlayRef  = useRef(null);
@@ -28,7 +36,6 @@ export default function HeroVideo() {
   const subLineRef  = useRef(null);
 
   useEffect(() => {
-    const video   = videoRef.current;
     const section = sectionRef.current;
     const overlay = overlayRef.current;
 
@@ -38,80 +45,107 @@ export default function HeroVideo() {
 
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-    // ── Video attributes ──────────────────────────────────────────────
-    // Force muted as a JS property — iOS Safari ignores the HTML attribute alone
-    // and will block autoplay if it detects any audio intent.
-    video.muted = true;
-    // Both forms of playsInline — React's `playsInline` prop covers the standard
-    // attribute; this covers older WebKit (iPhone 6-era Safari).
-    video.setAttribute('playsinline', '');
-    video.setAttribute('webkit-playsinline', '');
+    // ── Video-only setup — Safe Mode renders a static image instead, so
+    // none of this autoplay/currentTime/network machinery applies to it. ──
+    let cleanup = () => {};
+    if (isVideoMode) {
+      const video = videoRef.current;
 
-    // ── Start time: skip to the 3-second mark ─────────────────────────
-    // Setting currentTime before readyState >= 1 silently fails on mobile.
-    // We set it the moment metadata is available instead.
-    const applyStartTime = () => {
-      if (video.currentTime < 2.9) video.currentTime = 3;
-    };
+      // Force muted as a JS property — iOS Safari ignores the HTML attribute alone
+      // and will block autoplay if it detects any audio intent.
+      video.muted = true;
+      // Both forms of playsInline — React's `playsInline` prop covers the standard
+      // attribute; this covers older WebKit (iPhone 6-era Safari).
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
 
-    if (video.readyState >= 1) {
-      // Metadata already available (cached load)
-      applyStartTime();
-    } else {
-      video.addEventListener('loadedmetadata', applyStartTime, { once: true });
+      // ── Start time: skip to the 3-second mark ─────────────────────────
+      // Setting currentTime before readyState >= 1 silently fails on mobile.
+      // We set it the moment metadata is available instead.
+      const applyStartTime = () => {
+        if (video.currentTime < 2.9) video.currentTime = 3;
+      };
+
+      if (video.readyState >= 1) {
+        // Metadata already available (cached load)
+        applyStartTime();
+      } else {
+        video.addEventListener('loadedmetadata', applyStartTime, { once: true });
+      }
+
+      // On every loop the browser rewinds to 0 — snap back to 3s immediately
+      const skipIntro = () => {
+        if (video.currentTime < 2.9) video.currentTime = 3;
+      };
+      video.addEventListener('timeupdate', skipIntro);
+
+      // ── Autoplay strategy ─────────────────────────────────────────────
+      // Guard: only call play() when the video is actually paused to avoid
+      // AbortError from overlapping play() calls.
+      // TEMPORARY DEBUG: the 'hero-video-debug' dispatches below only report
+      // the play() outcome for HeroVideoDebugHUD.jsx — remove both the event
+      // dispatches and that component once playback issues are confirmed
+      // fixed. They don't change autoplay/retry behavior at all.
+      const tryPlay = () => {
+        if (!video.paused) return;
+        video.play().then(
+          () => window.dispatchEvent(new CustomEvent('hero-video-debug', { detail: { playState: 'resolved' } })),
+          (err) => {
+            window.dispatchEvent(new CustomEvent('hero-video-debug', { detail: { playState: 'rejected', error: err?.message } }));
+            // Blocked — poster stays visible; retries below cover later interaction
+          }
+        );
+      };
+
+      // First attempt — works when browser allows muted autoplay immediately
+      tryPlay();
+
+      // iOS sometimes requires the first user gesture to unlock muted autoplay.
+      // Attach to all common first-interaction events; {once} auto-removes them.
+      const retryOnInteraction = () => tryPlay();
+      document.addEventListener('touchstart',  retryOnInteraction, { once: true, passive: true });
+      document.addEventListener('click',       retryOnInteraction, { once: true, passive: true });
+      document.addEventListener('scroll',      retryOnInteraction, { once: true, passive: true });
+
+      // Retry when the user returns to the tab (background → foreground on mobile)
+      const onVisibilityChange = () => { if (!document.hidden) tryPlay(); };
+      document.addEventListener('visibilitychange', onVisibilityChange);
+
+      // TEMPORARY DEBUG: Hero.jsx dispatches 'hero:exit' the instant its
+      // slide-away intro finishes and the section is hidden — this is the
+      // real "reveal complete" moment. Logging the video's actual currentTime
+      // right here (not a calculated estimate) is what the hero poster frame
+      // should be extracted from. Remove once the correct timestamp has been
+      // captured and the poster is regenerated from it.
+      const onHeroExit = () => {
+        console.log(`Hero reveal complete — video.currentTime: ${video.currentTime}`);
+        window.dispatchEvent(new CustomEvent('hero-video-debug', { detail: { revealCompleteAt: video.currentTime } }));
+      };
+      window.addEventListener('hero:exit', onHeroExit, { once: true });
+
+      // Play when section enters viewport, pause when it leaves (battery / data)
+      const playIo = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) tryPlay();
+          else video.pause();
+        },
+        { threshold: 0.1 }
+      );
+      playIo.observe(section);
+
+      cleanup = () => {
+        playIo.disconnect();
+        video.removeEventListener('loadedmetadata', applyStartTime);
+        video.removeEventListener('timeupdate',     skipIntro);
+        document.removeEventListener('touchstart',       retryOnInteraction);
+        document.removeEventListener('click',            retryOnInteraction);
+        document.removeEventListener('scroll',           retryOnInteraction);
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        window.removeEventListener('hero:exit', onHeroExit);
+      };
     }
 
-    // On every loop the browser rewinds to 0 — snap back to 3s immediately
-    const skipIntro = () => {
-      if (video.currentTime < 2.9) video.currentTime = 3;
-    };
-    video.addEventListener('timeupdate', skipIntro);
-
-    // ── Autoplay strategy ─────────────────────────────────────────────
-    // Guard: only call play() when the video is actually paused to avoid
-    // AbortError from overlapping play() calls.
-    const tryPlay = () => {
-      if (!video.paused) return;
-      video.play().catch(() => {
-        // Blocked — poster stays visible; retries below cover later interaction
-      });
-    };
-
-    // First attempt — works when browser allows muted autoplay immediately
-    tryPlay();
-
-    // iOS sometimes requires the first user gesture to unlock muted autoplay.
-    // Attach to all common first-interaction events; {once} auto-removes them.
-    const retryOnInteraction = () => tryPlay();
-    document.addEventListener('touchstart',  retryOnInteraction, { once: true, passive: true });
-    document.addEventListener('click',       retryOnInteraction, { once: true, passive: true });
-    document.addEventListener('scroll',      retryOnInteraction, { once: true, passive: true });
-
-    // Retry when the user returns to the tab (background → foreground on mobile)
-    const onVisibilityChange = () => { if (!document.hidden) tryPlay(); };
-    document.addEventListener('visibilitychange', onVisibilityChange);
-
-    // Play when section enters viewport, pause when it leaves (battery / data)
-    const playIo = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) tryPlay();
-        else video.pause();
-      },
-      { threshold: 0.1 }
-    );
-    playIo.observe(section);
-
-    // ── Section reveal ────────────────────────────────────────────────
-    const cleanup = () => {
-      playIo.disconnect();
-      video.removeEventListener('loadedmetadata', applyStartTime);
-      video.removeEventListener('timeupdate',     skipIntro);
-      document.removeEventListener('touchstart',       retryOnInteraction);
-      document.removeEventListener('click',            retryOnInteraction);
-      document.removeEventListener('scroll',           retryOnInteraction);
-      document.removeEventListener('visibilitychange', onVisibilityChange);
-    };
-
+    // ── Section reveal — shared by both modes ─────────────────────────
     if (isMobile) {
       // Mobile: lightweight one-shot reveal on intersection — avoids ScrollTrigger RAF
       const revealIo = new IntersectionObserver(
@@ -151,25 +185,44 @@ export default function HeroVideo() {
     });
 
     return () => { cleanup(); st.kill(); };
-  }, []);
+    // `isVideoMode` is derived once at mount (see the lazy useState above)
+    // and never changes for the life of this component, so this effect is
+    // still mount-only in practice.
+  }, [isVideoMode]);
 
   return (
     <section ref={sectionRef} className={styles.section}>
 
-      {/* Black entry plane — scroll-driven fade */}
+      {/* Black entry plane — scroll-driven fade (crossfades into whichever
+          background below is active, video or the safe-mode image) */}
       <div ref={overlayRef} className={styles.entryOverlay} aria-hidden="true" />
 
-      <video
-        ref={videoRef}
-        className={styles.video}
-        src={heroVideoSrc}
-        autoPlay
-        muted
-        playsInline
-        loop
-        preload="auto"
-        poster={heroPoster}
-      />
+      {isVideoMode ? (
+        <video
+          ref={videoRef}
+          className={styles.video}
+          src={heroVideoSrc}
+          autoPlay
+          muted
+          playsInline
+          loop
+          preload="auto"
+          poster={heroPoster}
+        />
+      ) : (
+        <div
+          className={styles.safeImage}
+          style={{
+            // Dedicated subtle darkening for this layer specifically (on
+            // top of the shared fadeTop/fadeBottom/textOverlay vignette
+            // below) — a still photo's highlights (chrome, floor lighting)
+            // need a touch more help than moving video for text contrast.
+            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.04) 42%, rgba(0,0,0,0.5) 100%), url(${heroSafeModeImage})`,
+          }}
+          role="img"
+          aria-label="Wraptors-wrapped Lamborghini, rear three-quarter view, in a dark studio bay"
+        />
+      )}
 
       <div className={styles.fadeTop}    aria-hidden="true" />
       <div className={styles.fadeBottom} aria-hidden="true" />

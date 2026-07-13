@@ -5,17 +5,60 @@ import { fileURLToPath, URL } from 'node:url'
 import { RangeRequestsPlugin } from 'workbox-range-requests'
 import { VIDEOS_CACHE_NAME } from './src/lib/pwaCacheNames.js'
 
-// Logs, from inside the service worker, whether an offline video request was
-// served from Cache Storage (hit) or found nothing cached (miss) — visible
-// in DevTools > Application > Service Workers console context.
-const videoCacheDiagnosticsPlugin = {
-  cachedResponseWillBeUsed: async ({ cachedResponse }) => {
-    if (cachedResponse) {
-      console.log('[SW] offline cache hit for video');
-    } else {
-      console.log('[SW] offline cache miss for video');
-    }
+// Broadcasts every stage of a video fetch handled by the service worker to
+// all open tabs via postMessage, so it's visible from the page itself (not
+// just the SW's own DevTools console context, which is easy to miss).
+// Each callback body is self-contained (no references to outer closures)
+// because workbox-build's generateSW serializes these functions by taking
+// their source text verbatim and inlining it into the generated sw.js —
+// anything defined outside the function body would be undefined at runtime.
+const videoFetchDiagnosticsPlugin = {
+  cacheKeyWillBeUsed: async ({ request }) => {
+    self.clients.matchAll({ includeUncontrolled: true }).then((clients) => {
+      for (const client of clients) {
+        client.postMessage({
+          source: 'wraptors-sw',
+          type: 'video-fetch-intercepted',
+          url: request.url,
+          range: request.headers.get('range') || null,
+        });
+      }
+    });
+    return request;
+  },
+  cachedResponseWillBeUsed: async ({ request, cachedResponse }) => {
+    const hit = !!cachedResponse;
+    console.log(hit ? '[SW] offline cache hit for video' : '[SW] offline cache miss for video');
+    self.clients.matchAll({ includeUncontrolled: true }).then((clients) => {
+      for (const client of clients) {
+        client.postMessage({
+          source: 'wraptors-sw',
+          type: 'video-cache-lookup',
+          url: request.url,
+          hit,
+        });
+      }
+    });
     return cachedResponse;
+  },
+  handlerDidRespond: async ({ request, response }) => {
+    if (response) {
+      self.clients.matchAll({ includeUncontrolled: true }).then((clients) => {
+        for (const client of clients) {
+          client.postMessage({
+            source: 'wraptors-sw',
+            type: 'video-response',
+            url: request.url,
+            status: response.status,
+            contentRange: response.headers.get('content-range') || null,
+            contentLength: response.headers.get('content-length') || null,
+            acceptRanges: response.headers.get('accept-ranges') || null,
+            contentType: response.headers.get('content-type') || null,
+          });
+        }
+      });
+    }
+    return response;
   },
 }
 
@@ -74,18 +117,30 @@ export default defineConfig({
             },
           },
           {
-            // Cinematic hero/masterpiece videos. CacheFirst so a cached video
-            // never re-downloads; RangeRequestsPlugin lets it still slice the
+            // Cinematic hero/masterpiece videos. NetworkFirst (not
+            // CacheFirst): a video already in Cache Storage must never
+            // silently shadow the network online — CacheFirst meant that
+            // once *any* entry existed under this URL, every future load
+            // (even with a perfectly good connection) got served from that
+            // cache entry forever, with no way to notice or recover from a
+            // stale/bad one short of manually clearing storage. NetworkFirst
+            // always prefers a live network response when one is available
+            // (matching normal online playback exactly) and only falls back
+            // to the cached copy when the network genuinely fails — which is
+            // the actual offline case this is meant to cover. The 5s
+            // network timeout is generous enough not to fight a slow-but-
+            // working connection while still failing over promptly offline.
+            // RangeRequestsPlugin lets the cached fallback still slice the
             // single cached full response to satisfy <video>'s Range: byte
-            // requests (needed for seeking/scrubbing), so this never breaks
-            // range requests. The cache only gets populated by an explicit,
-            // full (non-range) fetch — see OfflinePresentationMode.jsx — since
-            // a CacheFirst route can't turn a network 206 response into a
-            // cacheable entry (CacheableResponsePlugin only allows 0/200).
+            // requests (needed for seeking/scrubbing). The cache only gets
+            // populated by an explicit, full (non-range) fetch — see
+            // OfflinePresentationMode.jsx — since a 206 response can never
+            // be cached directly (CacheableResponsePlugin only allows 0/200).
             urlPattern: ({ request }) => request.destination === 'video',
-            handler: 'CacheFirst',
+            handler: 'NetworkFirst',
             options: {
               cacheName: VIDEOS_CACHE_NAME,
+              networkTimeoutSeconds: 5,
               matchOptions: { ignoreVary: true },
               expiration: {
                 maxEntries: 6,
@@ -95,10 +150,10 @@ export default defineConfig({
               cacheableResponse: { statuses: [0, 200] },
               // No shorthand exists for range-request support, so these are
               // passed as real plugin objects; workbox-build serializes them
-              // into the generated sw.js. Logger runs first so it reports on
-              // the original full cached entry before RangeRequestsPlugin
-              // slices it into a 206.
-              plugins: [videoCacheDiagnosticsPlugin, new RangeRequestsPlugin()],
+              // into the generated sw.js. Diagnostics plugin runs first so
+              // it reports on the original full cached entry before
+              // RangeRequestsPlugin slices it into a 206.
+              plugins: [videoFetchDiagnosticsPlugin, new RangeRequestsPlugin()],
             },
           },
         ],

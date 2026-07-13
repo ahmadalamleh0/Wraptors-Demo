@@ -16,6 +16,8 @@ function ScrollToTop() {
 }
 
 import OfflinePresentationMode from './components/OfflinePresentationMode';
+import HeroVideoDebugHUD from './components/HeroVideoDebugHUD';
+import PresentationAdminControl from './components/PresentationAdminControl';
 
 // Home page sections
 import Navbar from './components/Navbar';
@@ -92,7 +94,9 @@ export default function App() {
   return (
     <>
     <ScrollToTop />
+    <HeroVideoDebugHUD />
     <OfflinePresentationMode />
+    <PresentationAdminControl />
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/services/starlight" element={<StarlightPage />} />
