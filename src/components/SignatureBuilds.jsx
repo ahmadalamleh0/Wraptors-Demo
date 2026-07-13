@@ -164,7 +164,6 @@ import ferrariWhite6 from '../../Ferrari(white_6).jpeg';
 import ferrariWhite7 from '../../Ferrari(white_7).jpeg';
 
 // Urus (project root — note double dots in filenames)
-import urus1 from '../../Urus_1.jpeg';
 import urus2 from '../../Urus_2..jpeg';
 import urus4 from '../../Urus_4..jpeg';
 
@@ -219,7 +218,7 @@ const BUILDS = [
   { brandName: "Ferrari F8",         logo: ferrariGesLogo,  mainImage: ferrari1,      media: [ferrari1, ferrari2, ferrari3, ferrari4, ferrari5, ferrari6],                                                                serviceTags: ["FULL-BODY PAINT PROTECTION FILM", "DEEP BLUE INTERIOR ACCENTS"],                                              category: "italian-exotics" },
   { brandName: "Lamborghini",        logo: lamborghiniLogo, mainImage: lamboPurple1,  media: [lamboPurple1, lamboPurple2, lamboPurple3, lamboPurple4, lamboPurple5],                                                     serviceTags: ["TWO-TONE FINISH", "SATIN BLACK UPPER", "MATTE ICED TITANIUM PINK LOWER"],                                     category: "italian-exotics" },
   { brandName: "Ferrari 488 Spider", logo: ferrariGesLogo,  mainImage: ferrariRed1,   media: [ferrariRed1, ferrariRed2, ferrariRed3, ferrariRed4, ferrariRed5],                                                          serviceTags: ["GLOSS CARMEN RED", "DOOR TRIMS", "GLOSS BLACK ACCENTS"],                                                      category: "italian-exotics" },
-  { brandName: "Lamborghini Urus",   logo: lamborghiniLogo, mainImage: urus1,         media: [urus1, urus2, urus4],                                                                                                      serviceTags: ["BLOSSOM COLOR WRAP"],                                                                                         category: "italian-exotics" },
+  { brandName: "Lamborghini Urus",   logo: lamborghiniLogo, mainImage: urus2,         media: [urus2, urus4],                                                                                                              serviceTags: ["BLOSSOM COLOR WRAP"],                                                                                         category: "italian-exotics" },
   { brandName: "Ferrari",            logo: ferrariGesLogo,  mainImage: ferrariWhite1, media: [ferrariWhite1, ferrariWhite2, ferrariWhite3, ferrariWhite4, ferrariWhite5, ferrariWhite6, ferrariWhite7],                  serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],                                                                   category: "italian-exotics" },
 
   // American Muscle

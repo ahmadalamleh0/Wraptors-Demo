@@ -15,6 +15,8 @@ function ScrollToTop() {
   return null;
 }
 
+import OfflinePresentationMode from './components/OfflinePresentationMode';
+
 // Home page sections
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -90,6 +92,7 @@ export default function App() {
   return (
     <>
     <ScrollToTop />
+    <OfflinePresentationMode />
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/services/starlight" element={<StarlightPage />} />

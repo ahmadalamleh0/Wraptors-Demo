@@ -37,7 +37,7 @@ const SERVICES = [
     name: 'Paint Protection Film',
     tags: ['Invisible Shield', 'Self-Healing'],
     desc: "Invisible armour for the paint beneath. Self-healing, optically clear film that shields your finish from the road's worst.",
-    imgs: [imgAstonPPF],
+    imgs: [imgAstonPPF, imgPPF1, imgPPF2, imgPPF3],
   },
   {
     id: 'wraps',

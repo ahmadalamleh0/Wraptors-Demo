@@ -3,7 +3,18 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './HeroVideo.module.css';
 import heroVideoSrc from '../../final_hero(new).mp4';
-import heroPoster   from '../assets/hero.png';
+// Extracted from final_hero(new).mp4 at t=3.0s — the exact timestamp
+// `applyStartTime()` below always seeks to before playback begins (see
+// "Start time" comment). That seek finishes long before the Hero.jsx logo
+// intro's slide-away reveal completes (~3.9s after mount; see Hero.jsx's
+// GSAP timeline + its 1.8s exit tween), so this poster is pixel-matched to
+// the first frame this section ever actually shows — no jump on handoff.
+// One shared source video/CSS treatment covers both desktop and mobile
+// (see .video below), so a single poster is correct for both.
+// The raw stream is stored portrait (see .video's rotate(-90deg) below);
+// this poster is left in that same raw orientation so the shared CSS
+// transform rotates both the poster and the live video frames identically.
+import heroPoster   from '../assets/hero-poster.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 

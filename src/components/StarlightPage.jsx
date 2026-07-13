@@ -87,7 +87,7 @@ function sampleMask(maskData, cx, cy) {
 
 function generateStars(count, maskData) {
   return Array.from({ length: count }, () => {
-    let x, y, depth = 0, attempts = 0;
+    let x, y, depth, attempts = 0;
     do {
       x = Math.random();
       y = Math.random() * 0.82;
@@ -334,6 +334,7 @@ function StarCanvas({ count, color, twinkle, shooting }) {
 
 function BeforeAfter() {
   const [pos, setPos] = useState(50);
+  const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef(null);
   const dragging = useRef(false);
 
@@ -341,6 +342,16 @@ function BeforeAfter() {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     setPos(Math.max(4, Math.min(96, ((clientX - rect.left) / rect.width) * 100)));
+  }, []);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const updateWidth = () => setContainerWidth(el.clientWidth);
+    updateWidth();
+    const ro = new ResizeObserver(updateWidth);
+    ro.observe(el);
+    return () => ro.disconnect();
   }, []);
 
   return (
@@ -359,7 +370,7 @@ function BeforeAfter() {
 
       {/* Before — clipped left portion */}
       <div className={styles.baBefore} style={{ width: `${pos}%` }}>
-        <img src={beforeImg} alt="Standard Interior" draggable={false} style={{ width: containerRef.current?.clientWidth || '100vw' }} />
+        <img src={beforeImg} alt="Standard Interior" draggable={false} style={{ width: containerWidth || '100vw' }} />
         <span className={styles.baLabel}>BEFORE</span>
       </div>
 

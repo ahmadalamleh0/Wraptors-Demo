@@ -3,7 +3,100 @@
    Dark luxury automotive. Cinema-grade. No compromises.
    ═══════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700;900&family=Inter:wght@300;400;500&family=Rajdhani:wght@400;500;600;700&display=swap');
+/* Self-hosted (originally Google Fonts — latin subset only, this site is
+   English-only). Downloaded once from fonts.gstatic.com; no runtime request
+   to any Google domain happens anymore, so these work fully offline. */
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('./assets/fonts/google/bebas-neue-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cinzel is shipped by Google as a single variable file; both weights below
+   sample the same file at different points on its weight axis. */
+@font-face {
+  font-family: 'Cinzel';
+  src: url('./assets/fonts/google/cinzel-variable.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cinzel';
+  src: url('./assets/fonts/google/cinzel-variable.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Inter is also a single variable file covering 300–600. */
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/google/inter-variable.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/google/inter-variable.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/google/inter-variable.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/google/inter-variable.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Rajdhani ships as separate static files per weight. */
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('./assets/fonts/google/rajdhani-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('./assets/fonts/google/rajdhani-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('./assets/fonts/google/rajdhani-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('./assets/fonts/google/rajdhani-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: 'Jarvane';
