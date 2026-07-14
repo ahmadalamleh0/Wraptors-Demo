@@ -38,27 +38,47 @@ export default function HeroVideo() {
     const overlay = overlayRef.current;
     const bg      = videoRef.current;
 
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    // Safe Mode's background is a static, preloaded image (see the
+    // fetchpriority="high" preload in index.html, scoped to this same
+    // breakpoint) — it's already fully decoded underneath the overlay by
+    // the time the intro clears, so it can reveal near-instantly instead
+    // of the slower cinematic settle used elsewhere. Without this, the
+    // overlay's original 1s fade (tuned for a video that's still
+    // buffering/settling in) read as a brief black gap after the intro,
+    // since there was nothing yet to fade *into*. Video Mode (any width)
+    // and Safe Mode on desktop are unaffected.
+    const isSafeModeMobile = !isVideoMode && isMobile;
+
     // ── Entrance timeline — plays once, triggered by Hero.jsx's 'hero:exit'
     // (fired the instant its logo intro finishes sliding away), not by
     // scroll position. This section fills the same viewport Hero's fixed
     // overlay just vacated, so there's nothing to "scroll into" — a scrub
     // tied to scroll progress never made sense here and looked static.
     gsap.set(overlay, { opacity: 1 });
-    gsap.set(bg, { opacity: 0.82 });
+    gsap.set(bg, { opacity: isSafeModeMobile ? 1 : 0.82 });
     gsap.set([line1Ref.current, line2Ref.current], { opacity: 0, y: 36 });
     gsap.set(rulerRef.current, { scaleX: 0, transformOrigin: 'center center' });
     gsap.set(subLineRef.current, { opacity: 0, y: 20 });
     gsap.set(scrollCueRef.current, { opacity: 0, y: 8 });
 
     const entranceTl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+    if (isSafeModeMobile) {
+      // Image is already there — just clear the overlay quickly, then run
+      // the exact same text sequence and stagger rhythm as everywhere else.
+      entranceTl.to(overlay, { opacity: 0, duration: 0.25, ease: 'power1.out' }, 0);
+    } else {
+      entranceTl
+        .to(overlay, { opacity: 0, duration: 1.0 }, 0)
+        .to(bg,      { opacity: 1, duration: 1.1 }, 0);
+    }
+    const textStart = isSafeModeMobile ? 0.25 : 0.15;
     entranceTl
-      .to(overlay, { opacity: 0, duration: 1.0 }, 0)
-      .to(bg,      { opacity: 1, duration: 1.1 }, 0)
-      .to(line1Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, 0.15)
-      .to(line2Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, 0.32)
-      .to(rulerRef.current,   { scaleX: 1,  duration: 0.8 },       0.55)
-      .to(subLineRef.current, { opacity: 1, y: 0, duration: 0.9 }, 0.72)
-      .to(scrollCueRef.current, { opacity: 1, y: 0, duration: 0.8 }, 0.95);
+      .to(line1Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, textStart)
+      .to(line2Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, textStart + 0.17)
+      .to(rulerRef.current,   { scaleX: 1,  duration: 0.8 },       textStart + 0.40)
+      .to(subLineRef.current, { opacity: 1, y: 0, duration: 0.9 }, textStart + 0.57)
+      .to(scrollCueRef.current, { opacity: 1, y: 0, duration: 0.8 }, textStart + 0.80);
 
     let entrancePlayed = false;
     const playEntrance = () => {

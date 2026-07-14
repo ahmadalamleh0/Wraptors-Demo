@@ -13,6 +13,11 @@
     <!-- Fonts are self-hosted (src/index.css) — no external font requests. -->
     <link rel="preload" href="/src/assets/fonts/google/bebas-neue-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/src/assets/fonts/google/rajdhani-600.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Safe Mode's hero background — mobile defaults to Safe Mode, and this
+         needs to already be decoded by the time the logo intro clears so
+         there's no black gap before it's revealed (see HeroVideo.jsx). The
+         `media` attribute means desktop browsers skip this fetch entirely. -->
+    <link rel="preload" href="/src/assets/hero-safe-mode.jpg" as="image" fetchpriority="high" media="(max-width: 768px)" />
   </head>
   <body>
     <div id="root"></div>
