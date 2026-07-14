@@ -29,6 +29,10 @@ export default function Hero() {
     const year      = yearRef.current;
     const section   = sectionRef.current;
 
+    // TEMPORARY DEBUG — remove once the Safe Mode black-flash fix is
+    // confirmed on real devices.
+    console.log('[HeroDebug] Intro starts at', performance.now().toFixed(1));
+
     // ── 1. Initial states ─────────────────────────────────────────────
     gsap.set(lockup,   { opacity: 0 });
     gsap.set(logoClip, { clipPath: 'inset(0 0 100% 0)' }); // hidden; reveals top-to-bottom
@@ -105,6 +109,8 @@ export default function Hero() {
         ease: 'power3.inOut',
         onComplete: () => {
           if (sectionRef.current) sectionRef.current.style.display = 'none';
+          // TEMPORARY DEBUG — remove alongside the one above.
+          console.log('[HeroDebug] Intro clears at', performance.now().toFixed(1));
           window.dispatchEvent(new CustomEvent('hero:exit'));
         },
       });

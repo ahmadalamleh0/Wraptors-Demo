@@ -5,85 +5,84 @@ import { getPresentationMode, MODES } from '../lib/presentationMode';
 import heroSafeModeImage from '../assets/hero-safe-mode.jpg';
 import heroVideoSrc from '../../final_hero(new).mp4';
 // Extracted from final_hero(new).mp4 at t=3.0s — the exact timestamp
-// `applyStartTime()` below always seeks to before playback begins (see
-// "Start time" comment). That seek finishes long before the Hero.jsx logo
-// intro's slide-away reveal completes (~3.9s after mount; see Hero.jsx's
-// GSAP timeline + its 1.8s exit tween), so this poster is pixel-matched to
-// the first frame this section ever actually shows — no jump on handoff.
-// One shared source video/CSS treatment covers both desktop and mobile
-// (see .video below), so a single poster is correct for both.
-// The raw stream is stored portrait (see .video's rotate(-90deg) below);
-// this poster is left in that same raw orientation so the shared CSS
-// transform rotates both the poster and the live video frames identically.
-import heroPoster   from '../assets/hero-poster.webp';
+// `applyStartTime()` below always seeks to before playback begins. In Video
+// Mode this is now also rendered as a permanent <img> layer (see below),
+// not just a <video poster> — so it's what's visible the instant this
+// section mounts, and for as long as actual playback hasn't started yet.
+import heroPoster from '../assets/hero-poster.webp';
+
+// TEMPORARY DEBUG — remove once the Safe Mode black-flash fix is confirmed
+// on real devices. Logs image-readiness at the exact moment the intro
+// clears, which is the only thing that actually proves there's no gap.
+const DEBUG_HERO = true;
 
 export default function HeroVideo() {
-  // Read once per mount — the admin control (PresentationAdminControl.jsx)
-  // changes this via a full page reload rather than live-swapping the
-  // video/GSAP setup mid-session, so this never needs to react afterward.
+  // Read once per mount, synchronously, before first paint — the admin
+  // control (PresentationAdminControl.jsx) changes this via a full page
+  // reload rather than live-swapping the video/GSAP setup mid-session, so
+  // there is never a render where the mode is unknown or defaults to the
+  // wrong thing and then flips.
   const [mode] = useState(() => getPresentationMode());
   const isVideoMode = mode === MODES.VIDEO;
 
-  const sectionRef   = useRef(null);
-  const videoRef     = useRef(null); // also doubles as the Safe Mode image's ref — only one of the two ever renders
-  const overlayRef   = useRef(null);
-  const line1Ref      = useRef(null);
-  const line2Ref      = useRef(null);
-  const rulerRef       = useRef(null);
-  const subLineRef    = useRef(null);
-  const scrollCueRef  = useRef(null);
+  const sectionRef    = useRef(null);
+  const imageRef      = useRef(null); // permanent background image — always mounted, both modes, opacity 1 from first paint
+  const videoRef      = useRef(null); // Video Mode only
+  const line1Ref       = useRef(null);
+  const line2Ref       = useRef(null);
+  const rulerRef        = useRef(null);
+  const subLineRef     = useRef(null);
+  const scrollCueRef   = useRef(null);
+
+  useEffect(() => {
+    if (!DEBUG_HERO) return;
+    const img = imageRef.current;
+    console.log('[HeroDebug] permanent image mounted at', performance.now().toFixed(1), {
+      mode,
+      complete: img?.complete,
+      naturalWidth: img?.naturalWidth,
+    });
+  }, [mode]);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const overlay = overlayRef.current;
-    const bg      = videoRef.current;
 
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    // Safe Mode's background is a static, preloaded image (see the
-    // fetchpriority="high" preload in index.html, scoped to this same
-    // breakpoint) — it's already fully decoded underneath the overlay by
-    // the time the intro clears, so it can reveal near-instantly instead
-    // of the slower cinematic settle used elsewhere. Without this, the
-    // overlay's original 1s fade (tuned for a video that's still
-    // buffering/settling in) read as a brief black gap after the intro,
-    // since there was nothing yet to fade *into*. Video Mode (any width)
-    // and Safe Mode on desktop are unaffected.
-    const isSafeModeMobile = !isVideoMode && isMobile;
-
-    // ── Entrance timeline — plays once, triggered by Hero.jsx's 'hero:exit'
+    // ── Text-only entrance — plays once, triggered by Hero.jsx's 'hero:exit'
     // (fired the instant its logo intro finishes sliding away), not by
-    // scroll position. This section fills the same viewport Hero's fixed
-    // overlay just vacated, so there's nothing to "scroll into" — a scrub
-    // tied to scroll progress never made sense here and looked static.
-    gsap.set(overlay, { opacity: 1 });
-    gsap.set(bg, { opacity: isSafeModeMobile ? 1 : 0.82 });
+    // scroll position or a fade tied to background readiness. The permanent
+    // <img> below is already fully visible from the very first paint, so
+    // there is nothing left for this timeline to reveal but the text —
+    // the previous version's separate "entryOverlay" black plane (which
+    // only started fading *after* this event fired) was itself the black
+    // gap: Hero.jsx's own slide-away just uncovered *another* opaque black
+    // layer, which then had its own fade still left to run.
     gsap.set([line1Ref.current, line2Ref.current], { opacity: 0, y: 36 });
     gsap.set(rulerRef.current, { scaleX: 0, transformOrigin: 'center center' });
     gsap.set(subLineRef.current, { opacity: 0, y: 20 });
     gsap.set(scrollCueRef.current, { opacity: 0, y: 8 });
 
     const entranceTl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
-    if (isSafeModeMobile) {
-      // Image is already there — just clear the overlay quickly, then run
-      // the exact same text sequence and stagger rhythm as everywhere else.
-      entranceTl.to(overlay, { opacity: 0, duration: 0.25, ease: 'power1.out' }, 0);
-    } else {
-      entranceTl
-        .to(overlay, { opacity: 0, duration: 1.0 }, 0)
-        .to(bg,      { opacity: 1, duration: 1.1 }, 0);
-    }
-    const textStart = isSafeModeMobile ? 0.25 : 0.15;
     entranceTl
-      .to(line1Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, textStart)
-      .to(line2Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, textStart + 0.17)
-      .to(rulerRef.current,   { scaleX: 1,  duration: 0.8 },       textStart + 0.40)
-      .to(subLineRef.current, { opacity: 1, y: 0, duration: 0.9 }, textStart + 0.57)
-      .to(scrollCueRef.current, { opacity: 1, y: 0, duration: 0.8 }, textStart + 0.80);
+      .to(line1Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, 0)
+      .to(line2Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, 0.17)
+      .to(rulerRef.current,   { scaleX: 1,  duration: 0.8 },       0.40)
+      .to(subLineRef.current, { opacity: 1, y: 0, duration: 0.9 }, 0.57)
+      .to(scrollCueRef.current, { opacity: 1, y: 0, duration: 0.8 }, 0.80);
 
     let entrancePlayed = false;
     const playEntrance = () => {
       if (entrancePlayed) return;
       entrancePlayed = true;
+      if (DEBUG_HERO) {
+        const img = imageRef.current;
+        const computed = img ? getComputedStyle(img).opacity : null;
+        console.log('[HeroDebug] intro clears (HeroVideo side) at', performance.now().toFixed(1), {
+          mode,
+          complete: img?.complete,
+          naturalWidth: img?.naturalWidth,
+          computedOpacity: computed,
+        });
+      }
       entranceTl.play();
     };
     window.addEventListener('hero:exit', playEntrance, { once: true });
@@ -104,11 +103,16 @@ export default function HeroVideo() {
     };
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // ── Video-only setup — Safe Mode renders a static image instead, so
-    // none of this autoplay/currentTime/network machinery applies to it. ──
+    // ── Video-only setup — Safe Mode has no <video> element at all, just
+    // the permanent <img> above. In Video Mode, the video starts invisible
+    // (opacity 0) and only reveals itself once real playback begins (the
+    // native 'playing' event, not just play() resolving) — so if autoplay
+    // is blocked, slow, or fails outright, the permanent image underneath
+    // is what the user sees instead of black. ──
     let cleanupVideo = () => {};
     if (isVideoMode) {
-      const video = bg;
+      const video = videoRef.current;
+      gsap.set(video, { opacity: 0 });
 
       // Force muted as a JS property — iOS Safari ignores the HTML attribute alone
       // and will block autoplay if it detects any audio intent.
@@ -138,13 +142,23 @@ export default function HeroVideo() {
       };
       video.addEventListener('timeupdate', skipIntro);
 
+      // Reveal the video over the permanent image only once real frames are
+      // actually being rendered — not merely when play() resolves.
+      let videoRevealed = false;
+      const onPlaying = () => {
+        if (videoRevealed) return;
+        videoRevealed = true;
+        gsap.to(video, { opacity: 1, duration: 0.5, ease: 'power1.out' });
+      };
+      video.addEventListener('playing', onPlaying);
+
       // ── Autoplay strategy ─────────────────────────────────────────────
       // Guard: only call play() when the video is actually paused to avoid
       // AbortError from overlapping play() calls.
       const tryPlay = () => {
         if (!video.paused) return;
         video.play().catch(() => {
-          // Blocked — poster stays visible; retries below cover later interaction
+          // Blocked — permanent image stays visible; retries below cover later interaction
         });
       };
 
@@ -176,6 +190,7 @@ export default function HeroVideo() {
         playIo.disconnect();
         video.removeEventListener('loadedmetadata', applyStartTime);
         video.removeEventListener('timeupdate',     skipIntro);
+        video.removeEventListener('playing',        onPlaying);
         document.removeEventListener('touchstart',       retryOnInteraction);
         document.removeEventListener('click',            retryOnInteraction);
         document.removeEventListener('scroll',           retryOnInteraction);
@@ -190,16 +205,29 @@ export default function HeroVideo() {
       clearTimeout(entranceFallback);
       entranceTl.kill();
     };
-  }, [isVideoMode]);
+  }, [isVideoMode, mode]);
 
   return (
     <section ref={sectionRef} className={styles.section}>
 
-      {/* Black entry plane — crossfades into whichever background below is
-          active (video or the safe-mode image) as the entrance timeline plays */}
-      <div ref={overlayRef} className={styles.entryOverlay} aria-hidden="true" />
+      {/* Permanent background image — mounted unconditionally on the very
+          first render, opacity:1 from the start, never faded, never gated
+          on load/onLoad/isLoaded. This is the one layer that must never be
+          black: in Video Mode it's the frame-matched poster shown until
+          real playback begins (or if it never does); in Safe Mode it's the
+          whole background. */}
+      <img
+        ref={imageRef}
+        src={isVideoMode ? heroPoster : heroSafeModeImage}
+        alt=""
+        className={`${styles.heroImage} ${!isVideoMode ? styles.heroImageSafe : ''}`}
+        loading="eager"
+        fetchPriority="high"
+        decoding="sync"
+      />
+      {!isVideoMode && <div className={styles.heroImageGradient} aria-hidden="true" />}
 
-      {isVideoMode ? (
+      {isVideoMode && (
         <video
           ref={videoRef}
           className={styles.video}
@@ -209,21 +237,6 @@ export default function HeroVideo() {
           playsInline
           loop
           preload="auto"
-          poster={heroPoster}
-        />
-      ) : (
-        <div
-          ref={videoRef}
-          className={styles.safeImage}
-          style={{
-            // Dedicated subtle darkening for this layer specifically (on
-            // top of the shared fadeTop/fadeBottom/textOverlay vignette
-            // below) — a still photo's highlights (chrome, floor lighting)
-            // need a touch more help than moving video for text contrast.
-            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.04) 42%, rgba(0,0,0,0.5) 100%), url(${heroSafeModeImage})`,
-          }}
-          role="img"
-          aria-label="Wraptors-wrapped Lamborghini, rear three-quarter view, in a dark studio bay"
         />
       )}
 
@@ -231,7 +244,7 @@ export default function HeroVideo() {
       <div className={styles.fadeBottom} aria-hidden="true" />
 
       {/* Cinematic text block — Safe Mode gets a mobile-only modifier that
-          anchors it above the car instead of centering it (see .safeImage
+          anchors it above the car instead of centering it (see .heroImageSafe
           and .textOverlaySafeMobile). Video Mode's layout is untouched. */}
       <div
         className={`${styles.textOverlay} ${!isVideoMode ? styles.textOverlaySafeMobile : ''}`}
