@@ -22,13 +22,13 @@ import imgTint        from '../../tint.jpeg';
 
 const SERVICES = [
   {
-    id: 'starlight',
-    slug: '/services/starlight',
-    ghost: 'STARLIGHT HEADLINER',
-    name: 'Starlight Headliner',
-    tags: ['Fiber Optic', 'Custom Layouts'],
-    desc: 'The night sky, inside your cabin. Thousands of fibre optic stars embedded into bespoke headliner panels — handcrafted to order.',
-    imgs: [imgStarlight2, imgStarlight, imgStarlight3],
+    id: 'wraps',
+    slug: '/services/wraps',
+    ghost: 'VEHICLE WRAPS',
+    name: 'Vehicle Wraps',
+    tags: ['Full Wrap', 'Color Change'],
+    desc: 'Every colour. Every finish. Every vision. Precision-cut premium vinyl that transforms your vehicle and protects the paint beneath.',
+    imgs: [imgWrapping1, imgWrapping2, imgWrapping3],
   },
   {
     id: 'ppf',
@@ -40,13 +40,13 @@ const SERVICES = [
     imgs: [imgAstonPPF, imgPPF1, imgPPF2, imgPPF3],
   },
   {
-    id: 'wraps',
-    slug: '/services/wraps',
-    ghost: 'VEHICLE WRAPS',
-    name: 'Vehicle Wraps',
-    tags: ['Full Wrap', 'Color Change'],
-    desc: 'Every colour. Every finish. Every vision. Precision-cut premium vinyl that transforms your vehicle and protects the paint beneath.',
-    imgs: [imgWrapping1, imgWrapping2, imgWrapping3],
+    id: 'starlight',
+    slug: '/services/starlight',
+    ghost: 'STARLIGHT HEADLINER',
+    name: 'Starlight Headliner',
+    tags: ['Fiber Optic', 'Custom Layouts'],
+    desc: 'The night sky, inside your cabin. Thousands of fibre optic stars embedded into bespoke headliner panels — handcrafted to order.',
+    imgs: [imgStarlight2, imgStarlight, imgStarlight3],
   },
   {
     id: 'ceramic',
