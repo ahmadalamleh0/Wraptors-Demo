@@ -26,7 +26,9 @@ import Statement from './components/Statement';
 import ServicesIntro from './components/ServicesIntro';
 import Services from './components/Services';
 import SignatureBuilds from './components/SignatureBuilds';
-import VehicleSelectorSection from './components/VehicleSelectorSection';
+// Vehicle selector and quote form preserved but disabled for this deploy —
+// see src/features/vehicle-selector/README.md and
+// src/features/quote-form-draft/README.md to restore either one.
 import TrustedBrands from './components/TrustedBrands';
 import GlobalLocations from './components/GlobalLocations';
 import Icons from './components/Icons';
@@ -79,7 +81,6 @@ function HomePage() {
         <Services />
         <Statement />
         <SignatureBuilds />
-        <VehicleSelectorSection />
         <TrustedBrands />
         <GlobalLocations />
         <Icons />

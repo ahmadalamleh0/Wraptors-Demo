@@ -7,7 +7,7 @@
    and the whole feature stays removable as one unit. */
 @font-face {
   font-family: 'Exo 2';
-  src: url('../assets/fonts/google/exo2-variable.woff2') format('woff2');
+  src: url('../../assets/fonts/google/exo2-variable.woff2') format('woff2');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
