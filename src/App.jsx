@@ -31,9 +31,15 @@ import SignatureBuilds from './components/SignatureBuilds';
 // src/features/quote-form-draft/README.md to restore either one.
 import TrustedBrands from './components/TrustedBrands';
 import GlobalLocations from './components/GlobalLocations';
+import ClientReviews from './components/ClientReviews';
+// Contact section temporarily taken off the live site — component
+// untouched at src/components/ContactSection.jsx, restore by re-adding
+// this import and <ContactSection /> below ClientReviews.
 import Icons from './components/Icons';
 import Reviews from './components/Reviews';
-import Academy from './components/Academy';
+// Academy ("Learn the craft behind the transformation") temporarily taken
+// off the live site — component untouched at src/components/Academy.jsx,
+// restore by re-adding this import and <Academy /> below Reviews.
 import Footer from './components/Footer';
 
 // Service page template
@@ -83,9 +89,9 @@ function HomePage() {
         <SignatureBuilds />
         <TrustedBrands />
         <GlobalLocations />
+        <ClientReviews />
         <Icons />
         <Reviews />
-        <Academy />
       </main>
       <Footer />
     </>

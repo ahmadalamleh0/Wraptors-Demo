@@ -83,9 +83,9 @@ export default defineConfig({
         'apple-touch-icon-180x180.png',
       ],
       manifest: {
-        name: 'WRAPTORS — The Global Car Customization Empire',
+        name: "WRAPTORS — Dubai's Destination for Premium Wraps & Styling",
         short_name: 'Wraptors',
-        description: 'Premium vehicle wraps, ceramic coating, PPF and window tint — the global car customization empire.',
+        description: "Dubai's destination for premium wraps, tint, and automotive styling.",
         theme_color: '#0a0a0a',
         background_color: '#0a0a0a',
         display: 'standalone',
