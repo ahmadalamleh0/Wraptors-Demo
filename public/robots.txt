@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wraptors.netlify.app/sitemap.xml

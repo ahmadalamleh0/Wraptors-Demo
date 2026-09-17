@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import RelatedInsights from './RelatedInsights';
 import styles from './ServicePage.module.css';
+import { useDocumentMeta } from '../lib/useDocumentMeta';
+import { SITE_URL } from '../lib/siteConfig';
 
-export default function ServicePage({ title, eyebrow, tagline, heroImg }) {
+export default function ServicePage({ title, eyebrow, tagline, heroImg, learnCategory, path }) {
+  useDocumentMeta(
+    `${title} in Dubai | Wraptors`,
+    tagline || `${title} from Wraptors Dubai — premium automotive customization at our Al Quoz studio.`,
+    path ? `${SITE_URL}${path}` : undefined
+  );
+
   return (
     <>
       <Navbar alwaysVisible />
@@ -53,6 +62,8 @@ export default function ServicePage({ title, eyebrow, tagline, heroImg }) {
             </a>
           </div>
         </section>
+
+        {learnCategory && <RelatedInsights category={learnCategory} />}
 
       </main>
       <Footer />

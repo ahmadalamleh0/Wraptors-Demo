@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://wraptors.netlify.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+
+  <url><loc>https://wraptors.netlify.app/about</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/book</loc><priority>0.7</priority></url>
+
+  <!-- Services -->
+  <url><loc>https://wraptors.netlify.app/services/wraps</loc><priority>0.9</priority></url>
+  <url><loc>https://wraptors.netlify.app/services/ppf</loc><priority>0.9</priority></url>
+  <url><loc>https://wraptors.netlify.app/services/ceramic</loc><priority>0.9</priority></url>
+  <url><loc>https://wraptors.netlify.app/services/tint</loc><priority>0.9</priority></url>
+  <url><loc>https://wraptors.netlify.app/services/starlight</loc><priority>0.8</priority></url>
+
+  <!-- GEO — service areas -->
+  <url><loc>https://wraptors.netlify.app/areas/dubai</loc><priority>0.8</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/al-quoz</loc><priority>0.9</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/palm-jumeirah</loc><priority>0.8</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/jumeirah</loc><priority>0.8</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/dubai-marina</loc><priority>0.8</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/jbr</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/downtown-dubai</loc><priority>0.8</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/business-bay</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/difc</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/dubai-hills-estate</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/emirates-hills</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/arabian-ranches</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/jlt</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/motor-city</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/al-barsha</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/jvc</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/meydan</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/areas/nad-al-sheba</loc><priority>0.7</priority></url>
+
+  <!-- Learn hub + categories -->
+  <url><loc>https://wraptors.netlify.app/learn</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/category/vehicle-wraps</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/category/paint-protection-film</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/category/ceramic-coating</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/category/window-tint</loc><priority>0.7</priority></url>
+
+  <!-- Learn — Vehicle Wraps -->
+  <url><loc>https://wraptors.netlify.app/learn/car-wrap-cost-dubai</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/how-long-does-car-wrap-last-dubai</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/vinyl-wrap-vs-paint-dubai</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/full-wrap-vs-partial-wrap</loc><priority>0.7</priority></url>
+
+  <!-- Learn — Paint Protection Film -->
+  <url><loc>https://wraptors.netlify.app/learn/is-ppf-worth-it-dubai</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/ppf-vs-ceramic-coating</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/clear-ppf-vs-colour-ppf</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/how-long-does-ppf-last-dubai</loc><priority>0.7</priority></url>
+
+  <!-- Learn — Ceramic Coating -->
+  <url><loc>https://wraptors.netlify.app/learn/is-ceramic-coating-worth-it-dubai</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/how-long-does-ceramic-coating-last-dubai</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/ceramic-coating-vs-ppf</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/what-does-ceramic-coating-protect</loc><priority>0.7</priority></url>
+
+  <!-- Learn — Window Tint -->
+  <url><loc>https://wraptors.netlify.app/learn/window-tinting-dubai-guide</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/ceramic-tint-vs-regular-tint</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/how-long-does-window-tint-last-dubai</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptors.netlify.app/learn/window-tint-dubai-heat</loc><priority>0.7</priority></url>
+</urlset>

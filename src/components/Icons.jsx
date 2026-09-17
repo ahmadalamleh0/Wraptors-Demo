@@ -22,6 +22,10 @@ function IconCard({ card, delay }) {
       ([entry]) => {
         if (!entry.isIntersecting) return;
         setTimeout(() => el.classList.add(styles.cardVisible), delay);
+        // Auto-flip to the second image on arrival instead of waiting for a
+        // hover that doesn't exist on mobile — a beat after the reveal so
+        // it reads as a deliberate follow-up, not a jump-cut.
+        setTimeout(() => setActive(1), delay + 650);
         io.disconnect();
       },
       { threshold: 0.12 }

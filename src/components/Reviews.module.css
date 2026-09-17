@@ -328,15 +328,22 @@
   50%       { opacity: 1;   transform: translateY(20px); }
 }
 
-/* ── Responsive ── */
+/* ── Responsive ──
+   Mobile keeps all four stats in one dense row instead of a 2x2 grid —
+   the 1px grid gap against .statsRow's background still reads as thin
+   dividers between cells, same technique as desktop, just four columns
+   instead of two. */
 @media (max-width: 960px) {
-  .section { padding: 100px 28px; }
-  .statsRow { grid-template-columns: repeat(2, 1fr); }
+  .section    { padding: 64px 20px; }
+  .inner      { gap: 26px; }
+  .statsRow   { grid-template-columns: repeat(4, 1fr); }
+  .stat       { padding: 16px 6px; gap: 6px; }
+  .statValue  { font-size: clamp(17px, 5.6vw, 23px); letter-spacing: 0; }
+  .statLabel  { font-size: 7px; letter-spacing: 0.08em; line-height: 1.35; }
   .reviewGrid { grid-template-columns: 1fr; }
   .streak1, .streak2, .streak3 { animation: none; }
 }
 
 @media (max-width: 480px) {
-  .statsRow { grid-template-columns: 1fr 1fr; }
   .card { padding: 28px 24px; }
 }

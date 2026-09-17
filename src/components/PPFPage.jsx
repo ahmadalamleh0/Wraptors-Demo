@@ -2,7 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import RelatedInsights from './RelatedInsights';
 import styles from './PPFPage.module.css';
+import { useDocumentMeta } from '../lib/useDocumentMeta';
+import { SITE_URL } from '../lib/siteConfig';
 
 import heroImg  from '../../WhatsApp Image 2026-06-15 at 10.04.28 AM.jpeg';
 import ppfDescImg from '../../PPF(description).png';
@@ -505,6 +508,12 @@ function LayerBreakdown() {
 // ── Main Page ─────────────────────────────────────────────────────────────────
 
 export default function PPFPage() {
+  useDocumentMeta(
+    'Paint Protection Film (PPF) in Dubai | Wraptors',
+    'Clear and colour paint protection film installed at the Wraptors Dubai studio in Al Quoz — precision-cut coverage that protects your finish from road debris, sun and daily wear.',
+    `${SITE_URL}/services/ppf`
+  );
+
   return (
     <>
       <Navbar alwaysVisible />
@@ -625,6 +634,8 @@ export default function PPFPage() {
           </div>
         </div>
       </section>
+
+      <RelatedInsights category="paint-protection-film" />
 
       {/* ── 9. FINAL CTA ─────────────────────────────────────────── */}
       <section className={styles.ctaSection}>

@@ -27,7 +27,7 @@ const SERVICES = [
     ghost: 'VEHICLE WRAPS',
     name: 'Vehicle Wraps',
     tags: ['Full Wrap', 'Color Change'],
-    desc: 'Every colour. Every finish. Every vision. Precision-cut premium vinyl that transforms your vehicle and protects the paint beneath.',
+    desc: 'Premium vinyl in any colour or finish — precision-cut to transform and protect your paint.',
     imgs: [imgWrapping1, imgWrapping2, imgWrapping3],
   },
   {
@@ -36,7 +36,7 @@ const SERVICES = [
     ghost: 'PAINT PROTECTION FILM',
     name: 'Paint Protection Film',
     tags: ['Invisible Shield', 'Self-Healing'],
-    desc: "Invisible armour for the paint beneath. Self-healing, optically clear film that shields your finish from the road's worst.",
+    desc: "Self-healing, optically clear film — invisible armour that shields your paint from the road.",
     imgs: [imgAstonPPF, imgPPF1, imgPPF2, imgPPF3],
   },
   {
@@ -45,7 +45,7 @@ const SERVICES = [
     ghost: 'STARLIGHT HEADLINER',
     name: 'Starlight Headliner',
     tags: ['Fiber Optic', 'Custom Layouts'],
-    desc: 'The night sky, inside your cabin. Thousands of fibre optic stars embedded into bespoke headliner panels — handcrafted to order.',
+    desc: 'The night sky, inside your cabin — thousands of fibre optic stars, handcrafted to order.',
     imgs: [imgStarlight2, imgStarlight, imgStarlight3],
   },
   {
@@ -54,7 +54,7 @@ const SERVICES = [
     ghost: 'CERAMIC COATING',
     name: 'Ceramic Coating',
     tags: ['9H Hardness', 'Hydrophobic'],
-    desc: 'Glass-hard protection with a permanent shine. 9H-rated ceramic formula that bonds permanently to your paint for years of effortless gloss.',
+    desc: '9H-rated ceramic formula that bonds permanently — glass-hard protection, years of gloss.',
     imgs: [imgCeramic1, imgCeramic2, imgCeramic3],
   },
   {
@@ -63,7 +63,7 @@ const SERVICES = [
     ghost: 'WINDOW TINT',
     name: 'Window Tint',
     tags: ['Ceramic Film', 'UV Protection'],
-    desc: 'Premium ceramic window film that blocks UV, reduces heat, and delivers flawless clarity — installed to the millimetre.',
+    desc: 'Premium ceramic film that blocks UV and heat, installed to the millimetre for flawless clarity.',
     imgs: [imgTint],
   },
   {
@@ -72,7 +72,7 @@ const SERVICES = [
     ghost: 'COMMERCIAL WRAP',
     name: 'Commercial Wrap',
     tags: ['Fleet Wrapping', 'Brand Identity'],
-    desc: 'Turn every vehicle into a moving billboard. Full fleet wrapping with precision-cut branding that drives your business wherever it goes.',
+    desc: 'Turn every vehicle into a moving billboard — full fleet wraps with precision-cut brand identity.',
     imgs: [imgCommercial1, imgCommercial2, imgCommercial3],
   },
 ];

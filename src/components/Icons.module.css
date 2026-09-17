@@ -200,19 +200,24 @@
 }
 .card:hover .cardLabel { color: rgba(255, 255, 255, 0.95); }
 
-/* ── Mobile ── */
+/* ── Mobile ──
+   Two cards side by side instead of stacked — keeps both visually
+   substantial (4:5 editorial ratio) while cutting the section's vertical
+   footprint roughly in half versus the old single-column stack. */
 @media (max-width: 900px) {
   .section    { padding: 80px 28px 100px; }
   .header     { margin-bottom: 56px; }
   .title      { font-size: clamp(4rem, 18vw, 9rem); margin-bottom: 38px; }
-  .grid       { grid-template-columns: 1fr; gap: 20px; max-width: 560px; }
-  .card       { aspect-ratio: 4 / 3; }
+  .grid       { grid-template-columns: 1fr 1fr; gap: 10px; max-width: 640px; }
+  .card       { aspect-ratio: 4 / 5; }
   .card:hover { transform: none; }
-  .cardFooter { padding: 0 24px 28px; }
+  .cardFooter { padding: 0 16px 18px; }
+  .cardRule   { margin-bottom: 12px; }
+  .cardLabel  { font-size: 0.54rem; letter-spacing: 0.2em; }
 }
 
 @media (max-width: 480px) {
   .section    { padding: 64px 20px 80px; }
-  .card       { aspect-ratio: 3 / 4; }
-  .cardFooter { padding: 0 20px 24px; }
+  .grid       { gap: 8px; }
+  .cardFooter { padding: 0 14px 16px; }
 }

@@ -8,7 +8,7 @@ import logoSuntek from '../../suntek-logo.svg';
 
 const BRANDS = [
   { name: '3M',             src: logo3m,     style: { filter: 'none' } },
-  { name: 'HEXIS Canada',   src: logoHexis,  style: { filter: 'none' } },
+  { name: 'HEXIS',          src: logoHexis,  style: { filter: 'none' } },
   { name: 'Avery Dennison', src: logoAvery  },
   { name: 'STEK',           src: logoStek   },
   { name: 'SunTek',         src: logoSuntek, style: { filter: 'none' } },

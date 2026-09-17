@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './ClientReviews.module.css';
 
-// Real client reviews (lightly cleaned up for spacing/punctuation only —
-// wording and sentiment are unchanged). Ratings inferred as 5 stars from
-// the uniformly glowing tone since none of these came with an explicit
-// numeric rating attached.
+// Real client reviews (lightly cleaned up for spacing/punctuation, and with
+// "Toronto"/"Mississauga" location mentions dropped for the Dubai site —
+// every other word is unchanged). Ratings inferred as 5 stars from the
+// uniformly glowing tone since none of these came with an explicit numeric
+// rating attached.
 const REVIEWS = [
   {
     name: 'Frank Leone',
@@ -21,19 +22,19 @@ const REVIEWS = [
   {
     name: 'Fernando Torraca',
     rating: 5,
-    text: "Chose Wraptors Toronto for the wrap on my new MDX. After meeting with Stas and discussing options, I knew I was in the right place. I trusted them with the work and couldn't be more thrilled — they far exceeded my expectations. I'm so glad I trusted their suggestions; they know their stuff. The interactions with everyone at Wraptors were exceptional. The store is friendly and inviting. Phenomenal experience!",
+    text: "Chose Wraptors for the wrap on my new MDX. After meeting with Stas and discussing options, I knew I was in the right place. I trusted them with the work and couldn't be more thrilled — they far exceeded my expectations. I'm so glad I trusted their suggestions; they know their stuff. The interactions with everyone at Wraptors were exceptional. The store is friendly and inviting. Phenomenal experience!",
     tag: 'Acura MDX · Full Wrap',
   },
   {
     name: 'Jerry .R',
     rating: 5,
-    text: "I had an excellent experience at the Wraptors Mississauga location. I spoke to Christel about the racing stripes on my Mustang Shelby, and she was very knowledgeable and super friendly. The staff were very friendly and professional. I also dealt with Christel's husband, and he was super cool and friendly too. I strongly believe this is why they're so successful, and it's amazing to see the excellent work, customer service, and organization they've built. My car was a small job, but they treated me like I had a Ferrari, and I felt very comfortable dealing with them. I highly recommend Wraptors — they also had very fair prices, and I'll be using them again for my other vehicles.",
+    text: "I had an excellent experience at Wraptors. I spoke to Christel about the racing stripes on my Mustang Shelby, and she was very knowledgeable and super friendly. The staff were very friendly and professional. I also dealt with Christel's husband, and he was super cool and friendly too. I strongly believe this is why they're so successful, and it's amazing to see the excellent work, customer service, and organization they've built. My car was a small job, but they treated me like I had a Ferrari, and I felt very comfortable dealing with them. I highly recommend Wraptors — they also had very fair prices, and I'll be using them again for my other vehicles.",
     tag: 'Ford Mustang Shelby · Racing Stripes',
   },
   {
     name: 'Rishan Veer',
     rating: 5,
-    text: "I recently had my car wrapped at Wraptors Toronto, and I'm beyond impressed with the results! From the first consultation to the final reveal, the entire process was professional, smooth, and stress-free. The team is incredibly knowledgeable and helped me choose the perfect finish for my car. Their attention to detail is unreal — clean edges, zero bubbles, and a flawless finish that looks even better than factory paint. The transformation is absolutely stunning and turns heads everywhere I go. What really stood out was their dedication to quality and customer satisfaction — they treated my car with extreme care and made sure everything was perfect before handing it back. The pricing was fair, the timeline was accurate, and the overall service exceeded my expectations. If you're thinking about wrapping your car, I highly recommend Wraptors Toronto. You won't regret it!",
+    text: "I recently had my car wrapped at Wraptors, and I'm beyond impressed with the results! From the first consultation to the final reveal, the entire process was professional, smooth, and stress-free. The team is incredibly knowledgeable and helped me choose the perfect finish for my car. Their attention to detail is unreal — clean edges, zero bubbles, and a flawless finish that looks even better than factory paint. The transformation is absolutely stunning and turns heads everywhere I go. What really stood out was their dedication to quality and customer satisfaction — they treated my car with extreme care and made sure everything was perfect before handing it back. The pricing was fair, the timeline was accurate, and the overall service exceeded my expectations. If you're thinking about wrapping your car, I highly recommend Wraptors. You won't regret it!",
     tag: 'Full Vehicle Wrap',
   },
 ];

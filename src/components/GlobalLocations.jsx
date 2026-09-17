@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import styles from './GlobalLocations.module.css';
 import MilitaryMap from '../../components/TacticalGlobe';
+import flagAE from '../../UAE(FLAG).svg';
 import flagCA from '../../CANADA(FLAG).svg';
 import flagUS from '../../USA(FLAG).svg';
 import flagZA from '../../SA(FLAG).svg';
@@ -181,9 +182,17 @@ function GlobeLines({ markers, interaction }) {
 }
 
 /* ── Location data ────────────────────────────────────────── */
-const FLAG_MAP = { CA: flagCA, US: flagUS, ZA: flagZA };
+const FLAG_MAP = { AE: flagAE, CA: flagCA, US: flagUS, ZA: flagZA };
 
 const REGIONS = [
+  {
+    code: 'AE',
+    name: 'United Arab Emirates',
+    count: '1',
+    locations: [
+      { name: 'Dubai' },
+    ],
+  },
   {
     code: 'CA',
     name: 'Canada',
@@ -222,13 +231,13 @@ const REGIONS = [
 ];
 
 const STATS = [
-  { to: 14, suffix: '', label: 'Locations' },
-  { to: 3,  suffix: '', label: 'Countries' },
+  { to: 15, suffix: '', label: 'Locations' },
+  { to: 4,  suffix: '', label: 'Countries' },
 ];
 
 /* ── TacticalGlobe configuration ─────────────────────────── */
 const GLOBE_MARKERS = [
-  { label: 'Mississauga · ON',     description: 'Headquarters · Ontario',  latitude: 43.589,  longitude: -79.644,  color: '#cc2200' },
+  { label: 'Mississauga · ON',     description: 'Headquarters · Ontario',   latitude: 43.589,  longitude: -79.644,  color: '#cc2200' },
   { label: 'Vaughan · ON',         description: 'Ontario',                  latitude: 43.837,  longitude: -79.508,  color: '#cc2200' },
   { label: 'Ottawa · ON',          description: 'Ontario',                  latitude: 45.421,  longitude: -75.697,  color: '#cc2200' },
   { label: 'Hamilton · ON',        description: 'Ontario',                  latitude: 43.256,  longitude: -79.871,  color: '#cc2200' },
@@ -238,6 +247,9 @@ const GLOBE_MARKERS = [
   { label: 'Fort Lauderdale · FL', description: 'Florida, USA',             latitude: 26.122,  longitude: -80.137,  color: '#cc2200' },
   { label: 'Orlando · FL',         description: 'Florida, USA',             latitude: 28.538,  longitude: -81.379,  color: '#cc2200' },
   { label: 'Cape Town · ZA',       description: 'South Africa',             latitude: -33.925, longitude: 18.424,   color: '#cc2200' },
+  // Appended (not inserted at index 0) so LINE_PAIRS below — which
+  // hardcodes marker indices — doesn't need renumbering.
+  { label: 'Dubai · UAE',          description: 'United Arab Emirates',     latitude: 25.2048, longitude: 55.2708, color: '#cc2200' },
 ];
 
 const GLOBE_MAP_STYLE = {
@@ -365,7 +377,7 @@ export default function GlobalLocations() {
           {REGIONS.map((region, i) => (
             <div
               key={region.code}
-              className={`${styles.region} ${styles[`region${region.code}`]} ${revealed ? styles.in : ''}`}
+              className={`${styles.region} ${styles[`region${region.code}`]} ${region.locations.length <= 2 ? styles.regionCompact : ''} ${revealed ? styles.in : ''}`}
               style={{ transitionDelay: revealed ? `${0.48 + i * 0.13}s` : '0s' }}
             >
               <div className={styles.regionHeader}>
@@ -374,7 +386,11 @@ export default function GlobalLocations() {
                 <span className={styles.regionCount}>{region.count}</span>
               </div>
 
-              <div className={`${styles.locationList} ${region.code === 'CA' ? styles.locationListCA : ''}`}>
+              {/* Any region with more than a handful of locations switches
+                  from a single vertical list to a 2-column grid — not
+                  hardcoded to a specific country, so it applies automatically
+                  to whichever region grows a long list later. */}
+              <div className={`${styles.locationList} ${region.locations.length > 4 ? styles.locationListGrid : ''}`}>
                 {region.locations.map(loc => (
                   <div key={loc.name} className={`${styles.locItem} ${loc.isHQ ? styles.locHQ : ''}`}>
                     <span className={styles.locDot} aria-hidden="true" />

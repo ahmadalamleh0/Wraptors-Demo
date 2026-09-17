@@ -36,7 +36,10 @@
   margin: -72px auto 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 520px;   /* tall enough for 3-line service names + AuroraButton */
+  /* Shortened from 520px — with the info panel now top-aligned instead of
+     centered (see .info), the old height just left a large empty gap under
+     the CTA. 440px still keeps the image substantial/cinematic. */
+  grid-template-rows: 440px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.20);
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 30px 60px rgba(0, 0, 0, 0.55);
@@ -142,10 +145,14 @@
     calc(100% - 28px) 10px,              calc(100% - 11px) 10px,
     calc(100% - 28px) calc(100% - 11px), calc(100% - 11px) calc(100% - 28px);
   background-repeat: no-repeat;
-  padding: 36px 48px;
+  padding: 36px 48px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* Top-aligned instead of centered — with a shorter description (max two
+     lines) the content group now sits together near the top, with the CTA
+     following right underneath it instead of floating in the middle of a
+     tall box with empty space both above and below. */
+  justify-content: flex-start;
   overflow: hidden;
 }
 
@@ -186,7 +193,7 @@
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.58);
   line-height: 1.9;
-  margin: 0 0 26px;
+  margin: 0 0 24px;
   max-width: 360px;
 }
 
@@ -259,12 +266,12 @@
     min-height: 0;
   }
 
-  .info       { padding: 40px 32px; }
+  .info       { padding: 40px 32px 24px; }
   .name       { font-size: clamp(2.6rem, 10vw, 4rem); }
-  .desc       { margin-bottom: 36px; }
+  .desc       { margin-bottom: 24px; }
 }
 
 @media (max-width: 480px) {
   .block         { max-width: calc(100% - 28px); }
-  .info          { padding: 32px 24px; }
+  .info          { padding: 32px 24px 20px; }
 }

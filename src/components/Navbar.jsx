@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
 
@@ -52,6 +53,16 @@ export default function Navbar({ alwaysVisible = false }) {
             </a>
           </li>
         ))}
+        <li>
+          <Link to="/about" className={styles.link} onClick={() => setMenuOpen(false)}>
+            About
+          </Link>
+        </li>
+        <li>
+          <Link to="/learn" className={styles.link} onClick={() => setMenuOpen(false)}>
+            Learn
+          </Link>
+        </li>
         <li className={styles.mobileCta}>
           <a href="/#cta" className="btn-primary" onClick={() => setMenuOpen(false)}>
             Start Your Build

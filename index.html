@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WRAPTORS — Dubai's Destination for Premium Wraps, Tint & Styling</title>
     <meta name="description" content="Premium vehicle wraps, ceramic coating, PPF, and window tint — precision automotive customization in Dubai." />
+    <link rel="canonical" href="https://wraptors.netlify.app/" />
 
     <!-- Open Graph / social sharing (Instagram, Facebook, WhatsApp, iMessage).
          Meta's crawler (used by Instagram/Facebook) does not execute
@@ -36,6 +37,29 @@
     <meta name="twitter:title" content="Dubai's Destination for Premium Wraps, Tint & Styling" />
     <meta name="twitter:description" content="Premium vehicle wraps, ceramic coating, PPF, and window tint — precision automotive customization in Dubai." />
     <meta name="twitter:image" content="https://wraptors.netlify.app/og-image.jpg" />
+
+    <!-- Structured data — lets Google show Wraptors as a local business
+         (address, phone, map pin) in search results. Static in the HTML
+         for the same reason the Open Graph tags above are. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AutomotiveBusiness",
+        "name": "Wraptors Dubai",
+        "image": "https://wraptors.netlify.app/og-image.jpg",
+        "url": "https://wraptors.netlify.app/",
+        "telephone": "+971502532392",
+        "priceRange": "$$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "32 9B St, Al Quoz Industrial Area 4",
+          "addressLocality": "Dubai",
+          "addressCountry": "AE"
+        },
+        "areaServed": "Dubai, United Arab Emirates",
+        "description": "Dubai's destination for premium vehicle wraps, tint, ceramic coating, PPF, and automotive styling."
+      }
+    </script>
 
     <!-- Fonts are self-hosted (src/index.css) — no external font requests. -->
     <link rel="preload" href="/src/assets/fonts/google/bebas-neue-400.woff2" as="font" type="font/woff2" crossorigin />

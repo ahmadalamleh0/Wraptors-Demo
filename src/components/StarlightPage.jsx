@@ -4,6 +4,8 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import StarfieldBg from './StarfieldBg';
 import styles from './StarlightPage.module.css';
+import { useDocumentMeta } from '../lib/useDocumentMeta';
+import { SITE_URL } from '../lib/siteConfig';
 import interiorImg from '../../Starlight(1)_tool.jpg';
 import beforeImg   from '../../before.png';
 import afterImg    from '../../Starlight(3).jpeg';
@@ -395,6 +397,12 @@ export default function StarlightPage() {
   const [color,    setColor]    = useState(DEFAULT.color);
   const [activePreset, setActivePreset] = useState(null);
   const previewRef = useRef(null);
+
+  useDocumentMeta(
+    'Starlight Headliner Dubai | Custom Fibre-Optic Ceiling | Wraptors',
+    'Bespoke fibre-optic starlight headliners installed in Dubai — thousands of hand-laid stars, custom colour and density, built to order at the Wraptors Al Quoz studio.',
+    `${SITE_URL}/services/starlight`
+  );
 
   const applyPreset = (name) => {
     const p = PRESETS[name];

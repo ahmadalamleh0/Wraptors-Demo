@@ -383,10 +383,13 @@
   font-weight: 600;
 }
 
-/* ── Region panels ── */
+/* ── Region panels — stacked vertically, one country per row. Each block
+   is content-height based (no forced equal-height grid row), so a
+   1-2-location country reads as a compact strip instead of matching
+   Canada's tall panel. ── */
 .regions {
-  display: grid;
-  grid-template-columns: 2fr 1.1fr 1.1fr;
+  display: flex;
+  flex-direction: column;
   gap: 1px;
   background: rgba(255,255,255,0.04);
   max-width: 1100px;
@@ -405,6 +408,20 @@
 }
 
 .region:hover { background: rgba(255,255,255,0.012); }
+
+/* Countries with only 1-2 locations (UAE, USA, South Africa): same flag/
+   header/divider treatment, far less vertical padding, and the location(s)
+   sit in one horizontal row instead of a tall single-column stack. */
+.regionCompact {
+  padding: 18px 36px 20px;
+  gap: 14px;
+}
+
+.regionCompact .locationList {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px 32px;
+}
 
 /* Canada — primary red border */
 .regionCA { border-top-color: rgba(212,0,0,0.48); }
@@ -451,11 +468,16 @@
   gap: 12px;
 }
 
-/* Canada: 2-column grid */
-.locationListCA {
+/* Regions with many locations: 2-column grid instead of one long list.
+   minmax(0, 1fr) — not plain 1fr — so a long name can never force the
+   track wider than its share and blow out the grid on a narrow phone;
+   it just wraps within its own column instead. This layout holds at
+   every width down to 360px; nothing below re-collapses it to 1fr. */
+.locationListGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px 22px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 20px;
+  row-gap: 16px;
 }
 
 /* Individual location item */
@@ -464,6 +486,11 @@
   align-items: center;
   gap: 9px;
   cursor: default;
+  /* min-width:0 lets this flex item actually respect its ~125px grid
+     column at narrow widths instead of forcing it wider (default flex
+     min-width is auto = content's natural size). Without this, a long
+     name + HQ badge together could push past the column edge. */
+  min-width: 0;
 }
 
 .locDot {
@@ -483,6 +510,12 @@
   color: rgba(255,255,255,0.58);
   font-weight: 600;
   transition: color 0.25s;
+  /* Fallback only — the longest name (Mississauga) plus the HQ badge is
+     close to the edge of a ~125px column at 375px. This never engages in
+     the common case; it just means a name wraps instead of overflowing
+     into the next column on the rare tight combination. */
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .locBadge {
@@ -557,10 +590,6 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 1100px) {
-  .regions { grid-template-columns: 1.6fr 1fr 1fr; }
-}
-
 @media (max-width: 960px) {
   .section  { padding: 110px 28px; }
   .inner    { gap: 52px; }
@@ -570,8 +599,6 @@
   .aura2    { width: calc(clamp(280px, 72vw, 400px) + 76px); height: calc(clamp(280px, 72vw, 400px) + 76px); top: -38px; }
   .aura3    { width: calc(clamp(280px, 72vw, 400px) + 130px); height: calc(clamp(280px, 72vw, 400px) + 130px); top: -65px; }
   .auraScan { width: clamp(280px, 72vw, 400px); height: clamp(280px, 72vw, 400px); }
-  .regions  { grid-template-columns: 1fr; }
-  .locationListCA { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -584,6 +611,13 @@
 @media (max-width: 560px) {
   .title        { font-size: clamp(40px, 9vw, 64px); }
   .region       { padding: 24px 24px 30px; }
+  .regionCompact { padding: 16px 24px 18px; }
   .statsRow     { max-width: 100%; }
-  .locationListCA { grid-template-columns: 1fr; }
+}
+
+/* Only truly tiny/legacy screens (well below any current phone — iPhone SE
+   is 375px, the narrowest common device) drop to a single column. 375,
+   390, 414 and 430px all stay 2-column. */
+@media (max-width: 340px) {
+  .locationListGrid { grid-template-columns: 1fr; }
 }

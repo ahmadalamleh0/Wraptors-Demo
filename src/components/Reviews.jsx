@@ -53,8 +53,7 @@ export default function Reviews() {
         {/* Header */}
         <div className={styles.header}>
           <h2 className={styles.title}>
-            PROOF IN EVERY<br />
-            <span className="chrome-text">FINISH.</span>
+            PROOF IN EVERY <span className="chrome-text">FINISH.</span>
           </h2>
         </div>
 

@@ -152,8 +152,10 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  /* .section already has position:relative from the base rule above */
-  .section    { padding: 64px 0; }
+  /* .section already has position:relative from the base rule above.
+     Top padding cut roughly in half so the section starts much sooner
+     after whatever comes before it — bottom padding left as-is. */
+  .section    { padding: 34px 0 64px; }
   /* Very restrained warm glow behind the header/marquee so the section
      reads as an intentional moment instead of dissolving into the
      surrounding black — not a card, just enough to anchor it. */
@@ -167,11 +169,12 @@
   }
 
   .header     {
-    padding: 0 20px 28px;
+    padding: 0 20px 16px;
     position: relative;
     z-index: 1;
   }
-  .label      { color: rgba(255, 255, 255, 0.52); }
+  .label      { color: rgba(255, 255, 255, 0.52); margin-bottom: 10px; }
+  .title      { margin-bottom: 8px; }
   .sub        { color: rgba(255, 255, 255, 0.58); }
 
   .marqueeOuter { position: relative; z-index: 1; }

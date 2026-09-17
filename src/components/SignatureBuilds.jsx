@@ -207,8 +207,8 @@ const CATEGORIES = [
 
 const BUILDS = [
   // German Precision
-  { brandName: "BMW G80 M3",         logo: bmwLogo,       mainImage: bmw1,       media: [bmw1, bmw2, bmw3, bmw4, bmw5, bmw6, bmw7],                           serviceTags: ["SATIN BLACK", "ORANGE CALIPERS", "WINDOW TINTS"],              category: "german-precision" },
   { brandName: "BRABUS 800 S-Class", logo: amgLogo,       mainImage: amg2,       media: [amg2, amg1, amg3, amg4, amg5, amg6],                                 serviceTags: ["RASPBERRY BLUE", "BRABUS CONVERSION", "STARLIGHT"],            category: "german-precision" },
+  { brandName: "BMW G80 M3",         logo: bmwLogo,       mainImage: bmw1,       media: [bmw1, bmw2, bmw3, bmw4, bmw5, bmw6, bmw7],                           serviceTags: ["SATIN BLACK", "ORANGE CALIPERS", "WINDOW TINTS"],              category: "german-precision" },
   { brandName: "Porsche 911 GTS",    logo: porscheLogo,   mainImage: porsch2,    media: [porsch2, porsch1, porsch3, porsch4, porsch5, porsch6],                 serviceTags: ["GLOSS MIDNIGHT GREEN", "SATIN GOLD WHEELS", "CERAMIC COATING"], category: "german-precision" },
   { brandName: "Mercedes S580",      logo: maybachLogo,   mainImage: maybach1,   media: [maybach1, maybach2, maybach3, maybach4, maybach5, maybach6],           serviceTags: ["TWO-TONE", "SATIN WHITE ALUMINUM"],                            category: "german-precision" },
   { brandName: "Audi RS6",           logo: audiLogo,      mainImage: audi1,      media: [audi1, audi2, audi3, audi4, audi5, audi6, audi7],                     serviceTags: ["PAINT PROTECTION FILM"],                                                         category: "german-precision" },
@@ -233,8 +233,8 @@ const BUILDS = [
   { brandName: "Nissan GTR",logo: gtrLogo,     mainImage: gtr1,     media: [gtr1, gtr2, gtr3, gtr4, gtr5],               serviceTags: ["MATTE GUNMETAL METALLIC FINISH"],                          category: "japanese-icons" },
 
   // British Luxury
-  { brandName: "Bentley",     logo: bentleyLogo, mainImage: bentley1, media: [bentley1, bentley2, bentley3, bentley4, bentley5],                           serviceTags: ["WIDEBODY CONVERSION", "FULL NARDO GRAY WRAP"],                                    category: "british-luxury" },
   { brandName: "Rolls-Royce", logo: rollsLogo,   mainImage: rolls1,   media: [rolls1, rolls2, rolls3, rolls4, rolls6, rolls7],                             serviceTags: ["SATIN BLACK FINISH", "BLACKED-OUT TRIM"],                                         category: "british-luxury" },
+  { brandName: "Bentley",     logo: bentleyLogo, mainImage: bentley1, media: [bentley1, bentley2, bentley3, bentley4, bentley5],                           serviceTags: ["WIDEBODY CONVERSION", "FULL NARDO GRAY WRAP"],                                    category: "british-luxury" },
   { brandName: "Aston Martin",logo: astonLogo,   mainImage: aston5,   media: [aston5, aston1, aston2, aston3, aston4, aston6],                             serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],                                       category: "british-luxury" },
   { brandName: "Range Rover", logo: rangeLogo,   mainImage: range1,   media: [range1, range2, range3, range5],                                              serviceTags: ["MATTE DEAD BLACK", "GLOSS BLACK RIMS", "FRONT WINDOW TINT", "CERAMIC COATING"],  category: "british-luxury" },
   { brandName: "McLaren",     logo: mclarenLogo, mainImage: mclaren1, media: [mclaren1, mclaren2, mclaren3, mclaren4, mclaren5, mclaren6, mclaren7, mclaren8, mclaren9], serviceTags: ["FULL SATIN BLACK WRAP", "CARBON FIBER ACCENTS"], category: "british-luxury" },
@@ -422,7 +422,6 @@ export default function SignatureBuilds() {
         <div className={styles.headerFadeBottom} aria-hidden="true" />
 
         {/* Text content */}
-        <span className={`${styles.label} ${styles.animLeft}`}>Signature Builds</span>
         <h2 className={`${styles.title} ${styles.animScript}`}>Masterpieces</h2>
         <p className={`${styles.subtitle} ${styles.animLeft} ${styles.delay2}`}>
           A selection of vehicles completed in-house.

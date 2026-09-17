@@ -11,9 +11,13 @@ const NAV_LINKS = [
 ];
 
 const CONTACT = [
-  { icon: <LocIcon />,   text: 'Mississauga, Ontario — HQ' },
-  { icon: <MailIcon />,  text: 'info@wraptors.com'         },
-  { icon: <PhoneIcon />, text: '+1 (905) 123-4567'         },
+  {
+    icon: <LocIcon />,
+    text: 'Al Quoz Industrial Area 4, Dubai — Studio',
+    href: 'https://maps.google.com/?q=Wraptors+Dubai+32+9B+St+Al+Quoz+Industrial+Area+4+Dubai+UAE',
+  },
+  { icon: <MailIcon />,  text: 'info@wraptors.com',   href: 'mailto:info@wraptors.com' },
+  { icon: <PhoneIcon />, text: '+971 50 253 2392',    href: 'tel:+971502532392'        },
 ];
 
 const SOCIALS = [
@@ -85,10 +89,16 @@ export default function Footer() {
           <div className={styles.col}>
             <h4 className={styles.colHeading}>Contact</h4>
             {CONTACT.map(c => (
-              <p key={c.text} className={styles.contactRow}>
+              <a
+                key={c.text}
+                href={c.href}
+                className={styles.contactRow}
+                target={c.href?.startsWith('http') ? '_blank' : undefined}
+                rel={c.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
                 <span className={styles.contactIcon} aria-hidden="true">{c.icon}</span>
                 {c.text}
-              </p>
+              </a>
             ))}
           </div>
 

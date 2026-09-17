@@ -40,7 +40,7 @@ export default function Founder() {
           </p>
 
           <p className={styles.body}>
-            From the streets of Mississauga to Cape Town, we don't just wrap
+            From the streets of Dubai to Cape Town, we don't just wrap
             cars — we shape how they're perceived. Every vehicle is a canvas.
             Every client is a collaborator.
           </p>

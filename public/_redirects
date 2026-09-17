@@ -1,1 +1,7 @@
-/* /index.html 200
+# Every real route the app defines (home, services, GEO areas, Learn hub/
+# categories/articles) is prerendered to a real static file by
+# scripts/prerender.mjs, and static files always take priority over this
+# file on Netlify — so this catch-all only ever fires for a genuinely
+# invalid path, which is exactly when it should 404 rather than pretend to
+# be the homepage.
+/*  /404.html  404
