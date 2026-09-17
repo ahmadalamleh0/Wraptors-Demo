@@ -65,19 +65,27 @@
 
 /* ── Mobile — overlay fades on scroll-in, text cascades after ── */
 @media (max-width: 768px) {
-  .section      { padding: 84px 36px 100px; min-height: auto; }
+  /* Bottom padding trimmed further, and the ruler's own margins are now
+     asymmetric (tighter above than below) rather than centered, so the
+     divider reads as closer to the first line while the whole block
+     still tightens overall. */
+  .section      { padding: 40px 36px 34px; min-height: auto; }
   .contextLine  { font-size: clamp(1.1rem, 5.5vw, 2.4rem); letter-spacing: 0.06em; will-change: opacity, transform; }
-  .ruler        { margin: 32px auto; will-change: opacity, transform; }
+  .ruler        { margin: 14px auto 22px; will-change: opacity, transform; }
   .mainLine     { font-size: clamp(2.6rem, 11vw, 6rem); will-change: opacity, transform; }
   /* Overlay stays visible on mobile — JS fades it out when section enters view */
 
-  /* Bottom gradient — bridges into the dark Masterpieces header below */
+  /* Bottom gradient — bridges into the dark Masterpieces header below.
+     Shorter still, and the darkening itself is pushed later inside that
+     shorter span (55% vs 30%), so the visible fade is really only the
+     last ~15px right at the seam — the headline above it stays on clean
+     white rather than reading as sitting inside the transition. */
   .section::after {
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 130px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 55%, #000 100%);
+    height: 40px;
+    background: linear-gradient(to bottom, transparent 0%, transparent 55%, rgba(0,0,0,0.7) 80%, #000 100%);
     z-index: 11;
     pointer-events: none;
   }
@@ -87,7 +95,7 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 80px;
+    height: 48px;
     background: linear-gradient(to bottom, #000 0%, transparent 100%);
     z-index: 11;
     pointer-events: none;
@@ -95,7 +103,7 @@
 }
 
 @media (max-width: 480px) {
-  .section      { padding: 76px 28px 88px; }
+  .section      { padding: 36px 28px 30px; }
   .contextLine  { font-size: 6vw; }
   .mainLine     { font-size: 12.5vw; }
 }

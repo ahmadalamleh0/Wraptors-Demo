@@ -17,25 +17,45 @@ export default function Statement() {
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     if (isMobile) {
-      // ── Mobile: overlay stays visible initially so Statement never bleeds through below HeroVideo
-      // It fades out once the section properly enters the viewport, then text cascades in
-      gsap.set(lines, { opacity: 0, y: 18 });
-      gsap.set(lines[1], { scale: 1.04 });
-      gsap.set(ruler, { opacity: 0, scaleX: 0, transformOrigin: 'left center' });
+      // ── Mobile: tied directly to scroll position (scrub, no pin) rather
+      // than a fixed-duration timer fired once on entry. A timer was fine
+      // for the old, much taller section, but on the shortened section it
+      // could still be mid-reveal after the section had already scrolled
+      // past, which read as a jump-cut into Masterpieces. Scrubbing means
+      // the reveal always finishes in sync with actual scroll position, no
+      // matter how tall the section is, and it reverses cleanly on scroll
+      // up for free. No pin either: this is a quick editorial beat, not a
+      // full-screen held moment, so no extra scroll distance is added —
+      // the "hold" is just the section's own remaining height after the
+      // reveal completes, scrolled through normally.
+      gsap.set(lines, { opacity: 0, y: 14 });
+      gsap.set(lines[1], { scale: 1.03 });
+      gsap.set(ruler, { scaleX: 0, transformOrigin: 'left center' });
 
-      const io = new IntersectionObserver(
-        ([entry]) => {
-          if (!entry.isIntersecting) return;
-          gsap.to(overlay,  { opacity: 0, duration: 0.55, ease: 'power2.out' });
-          gsap.to(lines[0], { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: 0.18 });
-          gsap.to(ruler,    { opacity: 1, scaleX: 1, duration: 0.5, ease: 'power2.out', delay: 0.5 });
-          gsap.to(lines[1], { opacity: 1, y: 0, scale: 1, duration: 0.75, ease: 'power2.out', delay: 0.75 });
-          io.disconnect();
-        },
-        { threshold: 0.25 }
-      );
-      io.observe(section);
-      return () => io.disconnect();
+      // With the section this short, a wide viewport-percent scrub range
+      // (e.g. the old 82%→30%) outlasts the section's own height, so the
+      // reveal was still finishing well after Masterpieces had already
+      // started creeping into view below it — no hold, just overlap. This
+      // narrower range keeps the reveal's scroll distance smaller than the
+      // section's own remaining height after it, leaving a brief but real
+      // gap before the next section arrives.
+      const ctx = gsap.context(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 90%',
+            end: 'top 82%',
+            scrub: true,
+          },
+        });
+
+        tl.to(overlay,  { opacity: 0, duration: 0.22 }, 0);
+        tl.to(lines[0], { opacity: 1, y: 0, duration: 0.22 }, 0.16);
+        tl.to(ruler,    { scaleX: 1, duration: 0.18 }, 0.42);
+        tl.to(lines[1], { opacity: 1, y: 0, scale: 1, duration: 0.26 }, 0.58);
+      }, sectionRef);
+
+      return () => ctx.revert();
     }
 
     // ── Desktop: full GSAP pin + scrub ──────────────────────────────────
@@ -73,7 +93,7 @@ export default function Statement() {
           bigger line now centers entirely on this one. */}
       <div className={styles.inner}>
         <p data-line className={styles.contextLine}>
-          WHEN YOU DRIVE WRAPTORS,
+          WHEN YOU DRIVE A WRAPTORS BUILD,
         </p>
         <div data-ruler className={styles.ruler} aria-hidden="true" />
         <p data-line className={styles.mainLine}>

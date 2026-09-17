@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import RelatedInsights from './RelatedInsights';
+import AftercareSection from './AftercareSection';
+import ServiceFaqSection from './ServiceFaqSection';
 import styles from './PPFPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { SITE_URL } from '../lib/siteConfig';
@@ -17,9 +19,6 @@ import gallery3 from '../../PPF(3New).jpeg';
 
 import ppfFullCar            from '../../PPF/full_car.jpeg';
 
-import productWaterless   from '../../Products/Carwaterless.webp';
-import productVinyl       from '../../Products/Vinalprotectionwebp.webp';
-import productFullPackage from '../../Products/full package.webp';
 import ppfHood               from '../../PPF/Hood.jpeg';
 import ppfHoodMask           from '../../PPF/Hood_mask.png';
 import ppfFrontBumper        from '../../PPF/front_bumper.jpeg';
@@ -158,30 +157,6 @@ const BENEFITS = [
         <path d="M16 8V16L21 20" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-  },
-];
-
-const AFTERCARE_PRODUCTS = [
-  {
-    id: 'waterless-wash',
-    name: 'Waterless Car Wash',
-    desc: 'Plant-based formula that cleans, shines, and repels UV, dust, and fog — all without a single drop of water. Safe on PPF and coated surfaces.',
-    img: productWaterless,
-    link: 'https://wraptorsstore.com',
-  },
-  {
-    id: 'full-package',
-    name: 'Full Detailing Package',
-    desc: 'Everything you need in one premium kit — interior shiner, car shampoo, waterless wash, anti-fog glass cleaner, tire shine, and more.',
-    img: productFullPackage,
-    link: 'https://wraptorsstore.com',
-  },
-  {
-    id: 'vinyl-protectant',
-    name: 'Vinyl Protectant',
-    desc: 'Ultimate vinyl elixir with a UV shield and lasting shine. Keeps wrapped and filmed surfaces looking fresh, deep, and protected against the elements.',
-    img: productVinyl,
-    link: 'https://wraptorsstore.com',
   },
 ];
 
@@ -582,58 +557,10 @@ export default function PPFPage() {
         </div>
       </section>
 
-      {/* ── 8. AFTERCARE ─────────────────────────────────────────── */}
-      <section className={styles.aftercareSection}>
-        <div className={styles.container}>
-          <div className={styles.sectionHead}>
-            <span className={styles.eyebrow}>Aftercare</span>
-            <h2 className={styles.sectionTitle}>Don't Forget the Aftercare</h2>
-            <p className={styles.sectionSub}>
-              Keep your protected finish looking fresh with Wraptors-approved care products.
-            </p>
-          </div>
-        </div>
+      <ServiceFaqSection service="ppf" />
 
-        <div className={styles.aftercareScroll}>
-          <div className={styles.aftercareTrack}>
-            {AFTERCARE_PRODUCTS.map(product => (
-              <div key={product.id} className={styles.aftercareCard}>
-                <div className={styles.aftercareImgWrap}>
-                  {product.img ? (
-                    <img
-                      src={product.img}
-                      alt={product.name}
-                      className={styles.aftercareImg}
-                      draggable={false}
-                    />
-                  ) : (
-                    <div className={styles.aftercarePlaceholder} aria-hidden="true">
-                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                        <rect x="4" y="8" width="24" height="17" rx="2" stroke="rgba(255,255,255,0.14)" strokeWidth="1.2" />
-                        <circle cx="12" cy="15" r="3" stroke="rgba(255,255,255,0.14)" strokeWidth="1.2" />
-                        <path d="M4 22L10 16L15 21L20 17L28 22" stroke="rgba(255,255,255,0.14)" strokeWidth="1.2" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-                <div className={styles.aftercareBody}>
-                  <h3 className={styles.aftercareName}>{product.name}</h3>
-                  <p className={styles.aftercareDesc}>{product.desc}</p>
-                  <a
-                    href={product.link}
-                    className={styles.aftercareBtn}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Shop Product
-                    <span className={styles.aftercareBtnArrow}>→</span>
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── 8. AFTERCARE ─────────────────────────────────────────── */}
+      <AftercareSection service="ppf" />
 
       <RelatedInsights category="paint-protection-film" />
 

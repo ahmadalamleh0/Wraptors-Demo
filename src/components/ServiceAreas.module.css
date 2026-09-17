@@ -84,4 +84,7 @@
 @media (max-width: 480px) {
   .section { padding: 48px 20px 60px; }
   .pill    { font-size: 0.68rem; padding: 8px 16px; }
+  /* Editorial, less accented on mobile — same size/spacing, just white
+     instead of red so the section reads calmer. */
+  .eyebrow { color: #fff; }
 }

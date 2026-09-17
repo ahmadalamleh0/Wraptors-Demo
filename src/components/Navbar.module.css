@@ -225,51 +225,60 @@
     pointer-events: auto;
   }
 
-  /* Top row — logo + close control, aligned the same way the real nav
-     bar's own logo/burger are, since the opaque panel covers the nav
-     bar underneath while open. */
+  /* Top row — logo + close control. The panel covers the real nav bar
+     underneath while open, so this row carries the same job on its own. */
   .mobileMenuTop {
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 22px 28px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 24px 24px 0;
   }
 
   .mobileMenuLogo { display: flex; align-items: center; }
-  .mobileMenuLogoMark { width: 32px; height: 32px; fill: #fff; display: block; }
+  .mobileMenuLogoMark { width: 36px; height: 36px; fill: #fff; display: block; }
 
+  /* Large close control inside a rounded, outlined square. */
   .mobileMenuClose {
+    position: relative;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: none;
-    border: none;
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 14px;
     padding: 0;
     cursor: pointer;
+    transition: border-color 0.2s ease;
   }
   .mobileMenuClose span {
     position: absolute;
-    width: 20px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.75);
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 1.5px;
+    background: rgba(255, 255, 255, 0.85);
   }
-  .mobileMenuClose span:nth-child(1) { transform: rotate(45deg); }
-  .mobileMenuClose span:nth-child(2) { transform: rotate(-45deg); }
+  .mobileMenuClose span:nth-child(1) { transform: translate(-50%, -50%) rotate(45deg); }
+  .mobileMenuClose span:nth-child(2) { transform: translate(-50%, -50%) rotate(-45deg); }
+  .mobileMenuClose:hover { border-color: rgba(255, 255, 255, 0.75); }
   .mobileMenuClose:hover span { background: #fff; }
 
   /* Body — scrolls only if content genuinely exceeds the viewport;
-     everything above (the top row) stays fixed in place. */
+     everything above (the top row) stays fixed in place. The list sits
+     at the top, the footer block at the bottom, with flex pushing
+     whatever room is left in between — clean negative space by
+     construction, not a fixed magic-number gap. */
   .mobileMenuScroll {
     flex: 1;
     min-height: 0;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    padding: 8px 32px 40px;
+    padding: 52px 32px 32px;
   }
 
   .mobileMenuList {
@@ -278,53 +287,91 @@
     padding: 0;
   }
 
-  /* Consistent row height per item — a fixed-height flex row per link
-     rather than gap-based spacing, so nothing can ever overlap. */
+  /* No divider rows, no fixed height — generous margin-based spacing so
+     the list reads as one tall, editorial stack rather than a settings
+     menu. Each item starts hidden/offset and eases in on open, staggered
+     per-item via the inline transition-delay set in Navbar.jsx. */
   .mobileMenuItem {
-    height: 56px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 14px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.36s var(--ease-cinema), transform 0.36s var(--ease-cinema);
+  }
+  .mobileMenuOpen .mobileMenuItem {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .mobileMenuLink {
     display: block;
     width: 100%;
-    font-family: var(--font-ui);
-    font-size: 17px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.68);
     text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  .mobileMenuLink:hover,
-  .mobileMenuLink:active { color: #fff; }
-
-  /* CTA gets its own clearly separated space below the list, not
-     overlapping the last nav row. */
-  .mobileMenuCtaRow {
-    margin-top: 32px;
-    flex-shrink: 0;
   }
 
-  .mobileMenuCta {
+  /* Big, slanted, editorial type — inactive pages sit in muted dark grey,
+     the current page in bright white via .mobileMenuLinkActive below. */
+  .mobileMenuLinkText {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-style: italic;
+    transform: skewX(-8deg);
+    font-size: clamp(1.7rem, 8vw, 2.4rem);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 1.15;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .mobileMenuLink:hover .mobileMenuLinkText { color: rgba(255, 255, 255, 0.6); }
+
+  .mobileMenuLinkActive .mobileMenuLinkText {
+    color: #fff;
+    border-bottom-color: #fff;
+  }
+
+  /* Footer block — socials, then legal links, pinned to the bottom by
+     the scroll container's flex column with the list above taking only
+     what it needs. */
+  .mobileMenuFooter {
+    margin-top: auto;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .mobileMenuSocials {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .mobileMenuSocial {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    width: 100%;
-    background: var(--red, #d40000);
-    color: #fff;
-    text-decoration: none;
-    font-family: var(--font-ui);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    padding: 18px 24px;
-    transition: background 0.25s ease;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.2s ease;
   }
-  .mobileMenuCta:hover { background: var(--red-bright, #ff1a1a); }
+  .mobileMenuSocial:hover { color: #fff; }
+
+  .mobileMenuLegal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-ui);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.32);
+  }
+  .mobileMenuLegal a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .mobileMenuLegal a:hover { color: rgba(255, 255, 255, 0.6); }
 }

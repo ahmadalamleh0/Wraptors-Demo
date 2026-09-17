@@ -31,6 +31,7 @@ import SignatureBuilds from './components/SignatureBuilds';
 // src/features/quote-form-draft/README.md to restore either one.
 import TrustedBrands from './components/TrustedBrands';
 import GlobalLocations from './components/GlobalLocations';
+import QuoteSection from './components/QuoteSection';
 import ClientReviews from './components/ClientReviews';
 import ServiceAreas from './components/ServiceAreas';
 // Contact section temporarily taken off the live site — component
@@ -108,6 +109,7 @@ function HomePage() {
         <SignatureBuilds />
         <TrustedBrands />
         <GlobalLocations />
+        <QuoteSection />
         <ClientReviews />
         <ServiceAreas />
         <Icons />

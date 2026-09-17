@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
 
@@ -12,19 +12,61 @@ const NAV_LINKS = [
 ];
 
 // Full-screen mobile menu — a deliberately separate, simplified list from
-// the desktop nav above rather than the same items reflowed, per the
-// requested HOME → CONTACT running order.
+// the desktop nav above rather than the same items reflowed. `match`
+// determines the "active" (bright white + underline) item from the
+// current pathname; anchor-only items (Services, Locations, Franchise,
+// Culture, Contact) live on the homepage but aren't a distinct route, so
+// they never light up as active — only Home/About/Learn can.
 const MOBILE_NAV_LINKS = [
-  { label: 'Home',      href: '/'            },
-  { label: 'Services',  href: '/#services'   },
-  { label: 'Builds',    href: '/#timeline'   },
-  { label: 'Locations', href: '/#locations'  },
-  { label: 'Learn',     to:   '/learn'       },
-  { label: 'About',     to:   '/about'       },
-  { label: 'Contact',   href: '/#contact'    },
+  { label: 'Home',      href: '/',          match: (p) => p === '/' },
+  { label: 'Services',  href: '/#services'  },
+  { label: 'Locations', href: '/#locations' },
+  { label: 'Franchise', href: '/#timeline'  },
+  { label: 'Culture',   href: '/#founder'   },
+  { label: 'About',     to:   '/about',     match: (p) => p === '/about' },
+  { label: 'Learn',     to:   '/learn',     match: (p) => p.startsWith('/learn') },
+  { label: 'Contact',   href: '/#contact'   },
 ];
 
+const MOBILE_SOCIALS = [
+  { label: 'Instagram', href: 'https://instagram.com/wraptors', icon: <InstagramGlyph /> },
+  { label: 'YouTube',   href: 'https://www.youtube.com/@TorontoWraptors', icon: <YouTubeGlyph /> },
+  { label: 'LinkedIn',  href: 'https://linkedin.com', icon: <LinkedInGlyph /> },
+];
+
+function InstagramGlyph() {
+  return (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  );
+}
+
+function YouTubeGlyph() {
+  return (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function LinkedInGlyph() {
+  return (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 4.5h16A1.5 1.5 0 0 1 21.5 6v12a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V6A1.5 1.5 0 0 1 4 4.5z" />
+      <line x1="7" y1="10.5" x2="7" y2="16" />
+      <circle cx="7" cy="7.3" r="0.6" fill="currentColor" stroke="none" />
+      <path d="M11 16v-3.4c0-1.5 1-2.6 2.4-2.6 1.4 0 2.6 1 2.6 2.6V16" />
+      <line x1="11" y1="10.5" x2="11" y2="16" />
+    </svg>
+  );
+}
+
 export default function Navbar({ alwaysVisible = false }) {
+  const location = useLocation();
   const [scrolled,      setScrolled]      = useState(alwaysVisible);
   const [linksRevealed, setLinksRevealed] = useState(alwaysVisible);
   const [logoReady,     setLogoReady]     = useState(alwaysVisible);
@@ -87,30 +129,50 @@ export default function Navbar({ alwaysVisible = false }) {
 
       <div className={styles.mobileMenuScroll}>
         <ul className={styles.mobileMenuList}>
-          {MOBILE_NAV_LINKS.map(({ label, href, to }) => (
-            <li key={label} className={styles.mobileMenuItem}>
-              {to ? (
-                <Link to={to} className={styles.mobileMenuLink} onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
-                  {label}
-                </Link>
-              ) : (
-                <a href={href} className={styles.mobileMenuLink} onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
-                  {label}
-                </a>
-              )}
-            </li>
-          ))}
+          {MOBILE_NAV_LINKS.map(({ label, href, to, match }, i) => {
+            const active = match ? match(location.pathname) : false;
+            const linkClass = `${styles.mobileMenuLink} ${active ? styles.mobileMenuLinkActive : ''}`;
+            return (
+              <li
+                key={label}
+                className={styles.mobileMenuItem}
+                style={{ transitionDelay: menuOpen ? `${0.28 + i * 0.045}s` : '0s' }}
+              >
+                {to ? (
+                  <Link to={to} className={linkClass} onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
+                    <span className={styles.mobileMenuLinkText}>{label}</span>
+                  </Link>
+                ) : (
+                  <a href={href} className={linkClass} onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
+                    <span className={styles.mobileMenuLinkText}>{label}</span>
+                  </a>
+                )}
+              </li>
+            );
+          })}
         </ul>
 
-        <div className={styles.mobileMenuCtaRow}>
-          <a
-            href="/#cta"
-            className={styles.mobileMenuCta}
-            onClick={closeMenu}
-            tabIndex={menuOpen ? 0 : -1}
-          >
-            Start Your Build <span aria-hidden="true">→</span>
-          </a>
+        <div className={styles.mobileMenuFooter}>
+          <div className={styles.mobileMenuSocials}>
+            {MOBILE_SOCIALS.map(({ label, href, icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mobileMenuSocial}
+                aria-label={label}
+                tabIndex={menuOpen ? 0 : -1}
+              >
+                {icon}
+              </a>
+            ))}
+          </div>
+          <div className={styles.mobileMenuLegal}>
+            <a href="#" tabIndex={menuOpen ? 0 : -1}>Terms and Conditions</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="#" tabIndex={menuOpen ? 0 : -1}>Privacy Policy</a>
+          </div>
         </div>
       </div>
     </div>

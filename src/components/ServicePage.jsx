@@ -2,11 +2,17 @@ import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import RelatedInsights from './RelatedInsights';
+import AftercareSection from './AftercareSection';
+import ServiceFaqSection from './ServiceFaqSection';
 import styles from './ServicePage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { SITE_URL } from '../lib/siteConfig';
 
 export default function ServicePage({ title, eyebrow, tagline, heroImg, learnCategory, path }) {
+  // Paths are '/services/<id>' and that id matches the service keys used
+  // in src/data/aftercareProducts.js (wraps, ceramic, tint), so there's
+  // nothing new to wire up per page here.
+  const serviceId = path?.split('/').pop();
   useDocumentMeta(
     `${title} in Dubai | Wraptors`,
     tagline || `${title} from Wraptors Dubai — premium automotive customization at our Al Quoz studio.`,
@@ -63,6 +69,8 @@ export default function ServicePage({ title, eyebrow, tagline, heroImg, learnCat
           </div>
         </section>
 
+        <ServiceFaqSection service={serviceId} />
+        <AftercareSection service={serviceId} />
         {learnCategory && <RelatedInsights category={learnCategory} />}
 
       </main>

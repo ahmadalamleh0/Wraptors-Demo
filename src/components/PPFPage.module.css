@@ -769,125 +769,9 @@
 .compGood .compList li::before { background: rgba(212,30,30,0.65); }
 .compGood .compList li          { color: rgba(255,255,255,0.52); }
 
-/* ── AFTERCARE ───────────────────────────────────────────────────────────── */
-.aftercareSection {
-  background: #05050c;
-  padding: 96px 0 88px;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  overflow: hidden;
-}
-
-/* Desktop: grid inside the normal container */
-.aftercareScroll {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-
-.aftercareTrack {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.aftercareCard {
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.07);
-  background: rgba(255,255,255,0.025);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), border-color 0.32s ease, box-shadow 0.32s ease;
-}
-.aftercareCard:hover {
-  transform: translateY(-6px);
-  border-color: rgba(212,30,30,0.22);
-  box-shadow: 0 22px 52px rgba(0,0,0,0.46);
-}
-
-.aftercareImgWrap {
-  aspect-ratio: 4/3;
-  overflow: hidden;
-  position: relative;
-  background: #0a0a12;
-}
-
-.aftercareImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.48s cubic-bezier(0.22,1,0.36,1);
-}
-.aftercareCard:hover .aftercareImg { transform: scale(1.05); }
-
-/* Placeholder shown until real product images are added */
-.aftercarePlaceholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #0d0d18 0%, #141426 100%);
-}
-
-.aftercareBody {
-  padding: 22px 22px 26px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 10px;
-}
-
-.aftercareName {
-  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
-  font-size: 0.76rem;
-  font-weight: 400;
-  color: #fff;
-  letter-spacing: 0.04em;
-  line-height: 1.32;
-  margin: 0;
-}
-
-.aftercareDesc {
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.38);
-  line-height: 1.66;
-  margin: 0;
-  flex: 1;
-}
-
-.aftercareBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 6px;
-  padding: 10px 18px;
-  border-radius: 10px;
-  border: 1px solid rgba(212,30,30,0.30);
-  background: rgba(212,30,30,0.06);
-  color: rgba(255,255,255,0.78);
-  font-family: var(--font-ui, sans-serif);
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  text-decoration: none;
-  align-self: flex-start;
-  transition: all 0.20s ease;
-}
-.aftercareBtn:hover {
-  border-color: rgba(212,30,30,0.60);
-  background: rgba(212,30,30,0.13);
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-.aftercareBtnArrow {
-  font-size: 0.9rem;
-  transition: transform 0.18s ease;
-}
-.aftercareBtn:hover .aftercareBtnArrow { transform: translateX(3px); }
+/* Aftercare now lives in the shared AftercareSection component/module
+   (src/components/AftercareSection.jsx) — rendered below via
+   <AftercareSection service="ppf" />, not styled here anymore. */
 
 /* ── GALLERY ─────────────────────────────────────────────────────────────── */
 .gallerySection {
@@ -1028,7 +912,6 @@
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 1100px) {
   .explorerLayout  { grid-template-columns: 1fr 340px; gap: 36px; }
-  .aftercareTrack  { grid-template-columns: repeat(3, 1fr); }
   .benefitsGrid    { grid-template-columns: 1fr 1fr; }
 }
 
@@ -1048,35 +931,10 @@
 
   .explorerSection,
   .layerSection,
-  .aftercareSection,
   .benefitsSection,
   .gallerySection,
   .ctaSection {
     padding: 64px 0 52px;
-  }
-
-  /* Mobile: horizontal scroll carousel */
-  .aftercareScroll {
-    padding: 0;
-    max-width: none;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .aftercareScroll::-webkit-scrollbar { display: none; }
-  .aftercareTrack {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    padding: 0 20px 4px;
-    width: max-content;
-  }
-  .aftercareCard {
-    min-width: 260px;
-    max-width: 260px;
-    flex-shrink: 0;
-    scroll-snap-align: start;
   }
 
   .zoneGrid     { grid-template-columns: 1fr 1fr; }

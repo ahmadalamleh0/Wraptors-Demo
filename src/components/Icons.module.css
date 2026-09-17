@@ -207,6 +207,9 @@
 @media (max-width: 900px) {
   .section    { padding: 80px 28px 100px; }
   .header     { margin-bottom: 56px; }
+  /* Editorial, less accented on mobile — same size/spacing, just white
+     instead of red so the section reads calmer. */
+  .eyebrow    { color: #fff; }
   .title      { font-size: clamp(4rem, 18vw, 9rem); margin-bottom: 38px; }
   .grid       { grid-template-columns: 1fr 1fr; gap: 10px; max-width: 640px; }
   .card       { aspect-ratio: 4 / 5; }
