@@ -190,7 +190,7 @@ const REGIONS = [
     name: 'United Arab Emirates',
     count: '1',
     locations: [
-      { name: 'Dubai' },
+      { name: 'Dubai', instagram: 'wraptors.dubai' },
     ],
   },
   {
@@ -198,17 +198,17 @@ const REGIONS = [
     name: 'Canada',
     count: '11',
     locations: [
-      { name: 'Mississauga', isHQ: true },
-      { name: 'Vaughan'               },
-      { name: 'Ottawa'                },
-      { name: 'Whitby'                },
-      { name: 'Oakville'              },
-      { name: 'Hamilton'              },
-      { name: 'Waterloo'              },
-      { name: 'Barrie'                },
-      { name: 'Kingston'              },
-      { name: 'Calgary'               },
-      { name: 'Vancouver'             },
+      { name: 'Mississauga', isHQ: true, instagram: 'wraptors.toronto' },
+      { name: 'Vaughan',               instagram: 'wraptors.vaughan'   },
+      { name: 'Ottawa',                instagram: 'wraptors.ottawa'    },
+      { name: 'Whitby',                instagram: 'wraptors.east'      },
+      { name: 'Oakville',              instagram: 'wraptorsoakville'   },
+      { name: 'Hamilton',              instagram: 'wraptors.hamilton'  },
+      { name: 'Waterloo',              instagram: 'wraptors.tricity'   },
+      { name: 'Barrie',                instagram: 'wraptors.north'     },
+      { name: 'Kingston',              instagram: 'wraptors.kingston'  },
+      { name: 'Calgary',               instagram: 'wraptors.calgary'   },
+      { name: 'Vancouver',             instagram: 'wraptors.vancity'   },
     ],
   },
   {
@@ -216,8 +216,8 @@ const REGIONS = [
     name: 'United States',
     count: '2',
     locations: [
-      { name: 'Fort Lauderdale' },
-      { name: 'Orlando'         },
+      { name: 'Fort Lauderdale', instagram: 'wraptors.usa'    },
+      { name: 'Orlando',         instagram: 'wraptors.orlando' },
     ],
   },
   {
@@ -225,10 +225,12 @@ const REGIONS = [
     name: 'South Africa',
     count: '1',
     locations: [
-      { name: 'Cape Town' },
+      { name: 'Cape Town', instagram: 'wraptors.capetown' },
     ],
   },
 ];
+
+const instagramUrl = (handle) => `https://instagram.com/${handle}`;
 
 const STATS = [
   { to: 15, suffix: '', label: 'Locations' },
@@ -294,6 +296,16 @@ const GLOBE_INTERACTION = {
   showStars:       !IS_MOBILE,
   showLabels:      !IS_MOBILE,
 };
+
+function InstagramIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  );
+}
 
 /* ── Component ───────────────────────────────────────────── */
 export default function GlobalLocations() {
@@ -393,9 +405,23 @@ export default function GlobalLocations() {
               <div className={`${styles.locationList} ${region.locations.length > 4 ? styles.locationListGrid : ''}`}>
                 {region.locations.map(loc => (
                   <div key={loc.name} className={`${styles.locItem} ${loc.isHQ ? styles.locHQ : ''}`}>
-                    <span className={styles.locDot} aria-hidden="true" />
-                    <span className={styles.locName}>{loc.name}</span>
-                    {loc.isHQ && <span className={styles.locBadge}>HQ</span>}
+                    <span className={styles.locLeft}>
+                      <span className={styles.locDot} aria-hidden="true" />
+                      <span className={styles.locName}>{loc.name}</span>
+                      {loc.isHQ && <span className={styles.locBadge}>HQ</span>}
+                    </span>
+                    {loc.instagram && (
+                      <a
+                        href={instagramUrl(loc.instagram)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.locInstagram}
+                        aria-label={`${loc.name} on Instagram`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <InstagramIcon />
+                      </a>
+                    )}
                   </div>
                 ))}
               </div>

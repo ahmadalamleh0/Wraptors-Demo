@@ -153,11 +153,6 @@
   visibility: hidden;
 }
 
-/* ── Mobile CTA (inside drawer) ── */
-.mobileCta {
-  display: none;
-}
-
 /* ── Mobile burger ── */
 .burger {
   display: none;
@@ -194,48 +189,142 @@
   .nav        { padding: 22px 28px; }
   .navScrolled{ padding: 14px 28px; }
 
-  .links {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 300px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 28px;
-    background: rgba(3, 3, 3, 0.98);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 48px 40px;
-    margin-left: 0;
-    transform: translateX(100%);
-    transition: transform 0.45s var(--ease-cinema);
-    z-index: 199;
-  }
-
-  /* Red top accent line on the drawer */
-  .links::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 2px;
-    height: 64px;
-    background: linear-gradient(to bottom, var(--red), transparent);
-  }
-
-  .linksOpen { transform: translateX(0); }
-
-  .link {
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.6);
-    letter-spacing: 0.2em;
-  }
-
+  /* Desktop nav list is fully replaced by .mobileMenu below — not reflowed
+     into a partial drawer. */
+  .links     { display: none; }
   .navCta    { display: none; }
-  .mobileCta { display: block; margin-top: 16px; width: 100%; }
-  .mobileCta a { width: 100%; justify-content: center; }
   .burger    { display: flex; }
+}
+
+/* ══ FULL-SCREEN MOBILE MENU ══
+   One opaque panel, not a drawer sitting over the page. Always in the DOM
+   (so it can transition), but inert and invisible until .mobileMenuOpen —
+   reachable only through the burger, which itself only renders ≤960px. */
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    /* Solid, not translucent — zero page content should show through. */
+    background: #060606;
+    z-index: 10000; /* above the 200/199 nav layers and any floating control (e.g. PresentationAdminControl at 9999) */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease-cinema), visibility 0.4s;
+  }
+
+  .mobileMenuOpen {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Top row — logo + close control, aligned the same way the real nav
+     bar's own logo/burger are, since the opaque panel covers the nav
+     bar underneath while open. */
+  .mobileMenuTop {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .mobileMenuLogo { display: flex; align-items: center; }
+  .mobileMenuLogoMark { width: 32px; height: 32px; fill: #fff; display: block; }
+
+  .mobileMenuClose {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  .mobileMenuClose span {
+    position: absolute;
+    width: 20px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.75);
+  }
+  .mobileMenuClose span:nth-child(1) { transform: rotate(45deg); }
+  .mobileMenuClose span:nth-child(2) { transform: rotate(-45deg); }
+  .mobileMenuClose:hover span { background: #fff; }
+
+  /* Body — scrolls only if content genuinely exceeds the viewport;
+     everything above (the top row) stays fixed in place. */
+  .mobileMenuScroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 32px 40px;
+  }
+
+  .mobileMenuList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Consistent row height per item — a fixed-height flex row per link
+     rather than gap-based spacing, so nothing can ever overlap. */
+  .mobileMenuItem {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .mobileMenuLink {
+    display: block;
+    width: 100%;
+    font-family: var(--font-ui);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.68);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .mobileMenuLink:hover,
+  .mobileMenuLink:active { color: #fff; }
+
+  /* CTA gets its own clearly separated space below the list, not
+     overlapping the last nav row. */
+  .mobileMenuCtaRow {
+    margin-top: 32px;
+    flex-shrink: 0;
+  }
+
+  .mobileMenuCta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: var(--red, #d40000);
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    padding: 18px 24px;
+    transition: background 0.25s ease;
+  }
+  .mobileMenuCta:hover { background: var(--red-bright, #ff1a1a); }
 }

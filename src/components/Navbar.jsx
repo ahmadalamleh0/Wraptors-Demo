@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
@@ -8,6 +9,19 @@ const NAV_LINKS = [
   { label: 'Locations', href: '/#locations' },
   { label: 'Franchise', href: '/#timeline'  },
   { label: 'Culture',   href: '/#founder'   },
+];
+
+// Full-screen mobile menu — a deliberately separate, simplified list from
+// the desktop nav above rather than the same items reflowed, per the
+// requested HOME → CONTACT running order.
+const MOBILE_NAV_LINKS = [
+  { label: 'Home',      href: '/'            },
+  { label: 'Services',  href: '/#services'   },
+  { label: 'Builds',    href: '/#timeline'   },
+  { label: 'Locations', href: '/#locations'  },
+  { label: 'Learn',     to:   '/learn'       },
+  { label: 'About',     to:   '/about'       },
+  { label: 'Contact',   href: '/#contact'    },
 ];
 
 export default function Navbar({ alwaysVisible = false }) {
@@ -34,7 +48,76 @@ export default function Navbar({ alwaysVisible = false }) {
     };
   }, [alwaysVisible]);
 
+  // Lock page scroll while the full-screen mobile menu is open.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prevOverflow; };
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+
+  // Portalled to document.body: nested inside <nav> (position:fixed,
+  // z-index:200), this panel's own z-index would only ever be compared
+  // against .nav's *other children* — .nav's stacking context as a whole
+  // still loses to any higher-z-index element elsewhere in the document
+  // (e.g. PresentationAdminControl's floating gear at 9999). Rendering at
+  // the body level puts its z-index in direct competition with everything
+  // else on the page, which is what "above ... all floating controls"
+  // actually requires.
+  const mobileMenu = (
+    <div
+      className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}
+      aria-hidden={!menuOpen}
+    >
+      <div className={styles.mobileMenuTop}>
+        <Link to="/" className={styles.mobileMenuLogo} aria-label="Wraptors — home" onClick={closeMenu}>
+          <WraptorsMafiaLogo className={styles.mobileMenuLogoMark} />
+        </Link>
+        <button
+          className={styles.mobileMenuClose}
+          onClick={closeMenu}
+          aria-label="Close menu"
+          tabIndex={menuOpen ? 0 : -1}
+        >
+          <span /><span />
+        </button>
+      </div>
+
+      <div className={styles.mobileMenuScroll}>
+        <ul className={styles.mobileMenuList}>
+          {MOBILE_NAV_LINKS.map(({ label, href, to }) => (
+            <li key={label} className={styles.mobileMenuItem}>
+              {to ? (
+                <Link to={to} className={styles.mobileMenuLink} onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
+                  {label}
+                </Link>
+              ) : (
+                <a href={href} className={styles.mobileMenuLink} onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
+                  {label}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        <div className={styles.mobileMenuCtaRow}>
+          <a
+            href="/#cta"
+            className={styles.mobileMenuCta}
+            onClick={closeMenu}
+            tabIndex={menuOpen ? 0 : -1}
+          >
+            Start Your Build <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
+    <>
     <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''} ${!linksRevealed ? styles.navHeroMode : ''}`}>
 
       {/* Logo mark */}
@@ -45,28 +128,23 @@ export default function Navbar({ alwaysVisible = false }) {
       </a>
 
       {/* Desktop links */}
-      <ul className={`${styles.links} ${menuOpen ? styles.linksOpen : ''}`}>
+      <ul className={styles.links}>
         {NAV_LINKS.map(({ label, href }) => (
           <li key={label}>
-            <a href={href} className={styles.link} onClick={() => setMenuOpen(false)}>
+            <a href={href} className={styles.link}>
               {label}
             </a>
           </li>
         ))}
         <li>
-          <Link to="/about" className={styles.link} onClick={() => setMenuOpen(false)}>
+          <Link to="/about" className={styles.link}>
             About
           </Link>
         </li>
         <li>
-          <Link to="/learn" className={styles.link} onClick={() => setMenuOpen(false)}>
+          <Link to="/learn" className={styles.link}>
             Learn
           </Link>
-        </li>
-        <li className={styles.mobileCta}>
-          <a href="/#cta" className="btn-primary" onClick={() => setMenuOpen(false)}>
-            Start Your Build
-          </a>
         </li>
       </ul>
 
@@ -75,7 +153,7 @@ export default function Navbar({ alwaysVisible = false }) {
         Start Your Build
       </a>
 
-      {/* Mobile burger */}
+      {/* Mobile burger — opens the full-screen mobile menu below */}
       <button
         className={`${styles.burger} ${menuOpen ? styles.burgerOpen : ''}`}
         onClick={() => setMenuOpen(v => !v)}
@@ -86,5 +164,7 @@ export default function Navbar({ alwaysVisible = false }) {
       </button>
 
     </nav>
+    {createPortal(mobileMenu, document.body)}
+    </>
   );
 }

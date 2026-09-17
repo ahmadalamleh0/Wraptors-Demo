@@ -86,7 +86,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className={styles.col}>
+          <div id="contact" className={styles.col}>
             <h4 className={styles.colHeading}>Contact</h4>
             {CONTACT.map(c => (
               <a

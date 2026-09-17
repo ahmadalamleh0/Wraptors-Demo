@@ -56,6 +56,9 @@ const SERVICES = [
     tags: ['9H Hardness', 'Hydrophobic'],
     desc: '9H-rated ceramic formula that bonds permanently — glass-hard protection, years of gloss.',
     imgs: [imgCeramic1, imgCeramic2, imgCeramic3],
+    // Biased up slightly so the mobile overlay's bottom-left title doesn't
+    // land on the license plate/badge at the very bottom of the source photo.
+    imgPositions: ['center 25%'],
   },
   {
     id: 'tint',
@@ -106,18 +109,27 @@ function ServiceBlock({ svc, blockRef }) {
             />
           </div>
 
+          {/* Mobile-only: service identity lives on the image itself (tags +
+              title, bottom-left, over a bottom-up gradient). Desktop keeps
+              tags/title in .info instead — see .imgOverlay/.infoHead in
+              Services.module.css for which breakpoint shows which copy. */}
+          <div className={styles.imgOverlay} aria-hidden="true">
+            <span className={styles.overlayTags}>{svc.tags.join(' · ')}</span>
+            <h3 className={styles.overlayName}>{svc.name}</h3>
+          </div>
         </div>
       </div>
 
       {/* ── Right: info ── */}
       <div className={styles.info}>
-        <div className={styles.tags}>
-          {svc.tags.map(t => (
-            <span key={t} className={styles.tag}>{t}</span>
-          ))}
+        <div className={styles.infoHead}>
+          <div className={styles.tags}>
+            {svc.tags.map(t => (
+              <span key={t} className={styles.tag}>{t}</span>
+            ))}
+          </div>
+          <h3 className={styles.name}>{svc.name}</h3>
         </div>
-
-        <h3 className={styles.name}>{svc.name}</h3>
         <p className={styles.desc}>{svc.desc}</p>
 
         {svc.slug ? (

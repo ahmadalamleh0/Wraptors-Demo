@@ -29,7 +29,7 @@
   text-align: center;
 }
 
-/* ── Context lines — subdued setup ── */
+/* ── Context line — subdued setup for the single statement below ── */
 .contextLine {
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 2.6vw, 3.4rem);
@@ -38,7 +38,7 @@
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.38);
   line-height: 1.25;
-  margin: 0 0 0.25em;
+  margin: 0;
 }
 
 /* ── Red blade separator ── */
@@ -46,41 +46,29 @@
   width: 52px;
   height: 1px;
   background: rgba(180, 0, 0, 0.65);
-  margin: 52px auto;
+  margin: 44px auto;
   box-shadow: 0 0 6px rgba(180, 0, 0, 0.20);
 }
 
-/* ── "I DON'T FOLLOW TRENDS" ── */
-.declareLine {
+/* ── "YOU SET THE TONE." — now the section's one statement, so it carries
+   real weight, just not the old single-word-payoff scale. ── */
+.mainLine {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 6vw, 8.5rem);
+  font-size: clamp(3.2rem, 7.5vw, 10rem);
   font-weight: 400;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.72);
-  line-height: 1.0;
-  margin: 0 0 0.1em;
-}
-
-/* ── "I MAKE THEM" — the hero line ── */
-.impactLine {
-  font-family: var(--font-display);
-  font-size: clamp(5rem, 13.5vw, 18rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: #000;
-  line-height: 0.88;
+  line-height: 0.95;
   margin: 0;
 }
 
 /* ── Mobile — overlay fades on scroll-in, text cascades after ── */
 @media (max-width: 768px) {
-  .section      { padding: 100px 36px 120px; min-height: auto; }
+  .section      { padding: 84px 36px 100px; min-height: auto; }
   .contextLine  { font-size: clamp(1.1rem, 5.5vw, 2.4rem); letter-spacing: 0.06em; will-change: opacity, transform; }
-  .ruler        { margin: 40px auto; will-change: opacity, transform; }
-  .declareLine  { font-size: clamp(2.4rem, 9vw, 5rem); will-change: opacity, transform; }
-  .impactLine   { font-size: clamp(4rem, 17vw, 8rem); will-change: opacity, transform; }
+  .ruler        { margin: 32px auto; will-change: opacity, transform; }
+  .mainLine     { font-size: clamp(2.6rem, 11vw, 6rem); will-change: opacity, transform; }
   /* Overlay stays visible on mobile — JS fades it out when section enters view */
 
   /* Bottom gradient — bridges into the dark Masterpieces header below */
@@ -107,8 +95,7 @@
 }
 
 @media (max-width: 480px) {
-  .section      { padding: 88px 28px 100px; }
+  .section      { padding: 76px 28px 88px; }
   .contextLine  { font-size: 6vw; }
-  .declareLine  { font-size: 10vw; }
-  .impactLine   { font-size: 18.5vw; }
+  .mainLine     { font-size: 12.5vw; }
 }

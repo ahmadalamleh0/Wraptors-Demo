@@ -484,12 +484,23 @@
 .locItem {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 9px;
   cursor: default;
   /* min-width:0 lets this flex item actually respect its ~125px grid
      column at narrow widths instead of forcing it wider (default flex
      min-width is auto = content's natural size). Without this, a long
      name + HQ badge together could push past the column edge. */
+  min-width: 0;
+}
+
+/* Dot + name + HQ badge grouped so the optional Instagram icon can dock at
+   the far right via .locItem's space-between, independent of this group's
+   own length. */
+.locLeft {
+  display: flex;
+  align-items: center;
+  gap: 9px;
   min-width: 0;
 }
 
@@ -527,6 +538,25 @@
   background: var(--red);
   color: #fff;
   flex-shrink: 0;
+}
+
+/* Instagram — subtle, far right; grey/white at rest, red on hover so it
+   reads as an affordance without competing with the city name. */
+.locInstagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin: -3px -4px -3px 0;
+  color: rgba(255, 255, 255, 0.32);
+  transition: color 0.22s ease;
+}
+
+.locInstagram:hover,
+.locInstagram:focus-visible {
+  color: var(--red-bright, #ff1a1a);
 }
 
 /* HQ state */

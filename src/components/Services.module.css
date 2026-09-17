@@ -127,6 +127,13 @@
   to   { opacity: 1; }
 }
 
+/* ── Mobile-only image overlay (tags + title on the image itself) — hidden
+   on desktop, where .infoHead carries the same copy instead. See the
+   900px breakpoint below for the swap. ── */
+.imgOverlay {
+  display: none;
+}
+
 
 /* ══ INFO PANEL ══ */
 .info {
@@ -155,6 +162,11 @@
   justify-content: flex-start;
   overflow: hidden;
 }
+
+/* ── Info head — wraps tags + title so the pair can be hidden together
+   on mobile once the same copy moves onto the image (.imgOverlay). No
+   layout effect on desktop. ── */
+.infoHead {}
 
 /* ── Tags ── */
 .tags {
@@ -262,13 +274,69 @@
   .imgFrame {
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    height: 280px;              /* explicit height keeps flex chain intact */
+    height: 280px;              /* explicit height keeps flex chain intact — imagery stays full-size */
     min-height: 0;
   }
 
-  .info       { padding: 40px 32px 24px; }
-  .name       { font-size: clamp(2.6rem, 10vw, 4rem); }
-  .desc       { margin-bottom: 24px; }
+  /* Service identity moves onto the image: tags + title bottom-left, over
+     a bottom-up gradient that leaves most of the photo untouched. */
+  .imgOverlay {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    inset: 0;
+    justify-content: flex-end;
+    padding: 20px 20px 16px;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.82) 0%,
+      rgba(0, 0, 0, 0.5) 30%,
+      rgba(0, 0, 0, 0.12) 62%,
+      transparent 100%
+    );
+    z-index: 2;
+  }
+
+  .overlayTags {
+    font-family: var(--font-ui);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 6px;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  }
+
+  .overlayName {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 9vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 0.95;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+  }
+
+  /* Tags + title now live on the image (.imgOverlay) — info panel keeps
+     only the description and CTA, so its footprint shrinks a lot. */
+  .infoHead   { display: none; }
+
+  .info       { padding: 20px 24px 22px; }
+  .desc       {
+    margin-bottom: 18px;
+    /* Max two lines, per the design brief — anything longer is clipped
+       with an ellipsis rather than growing the card. */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  /* Centered as its own balanced element under the (left-aligned)
+     description — not stretched full-width. */
+  .cta        { padding: 13px 26px; align-self: center; }
 }
 
 @media (max-width: 480px) {

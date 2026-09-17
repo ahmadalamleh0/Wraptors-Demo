@@ -197,12 +197,15 @@ import srt3 from '../../Signture Section/SRT(3).jpeg';
 import srt4 from '../../Signture Section/SRT(4).jpeg';
 import srt5 from '../../Signture Section/SRT(5).jpeg';
 
+// Japanese Icons is intentionally not rendered — homepage is curated down
+// to Italian/German/British/American for now. Its BUILDS entries below
+// stay in place (category: "japanese-icons") so the row can come back
+// later just by re-adding it here; nothing else needs to change.
 const CATEGORIES = [
   { id: 'german-precision', label: 'German Precision' },
   { id: 'italian-exotics',  label: 'Italian Exotics'  },
   { id: 'british-luxury',   label: 'British Luxury'   },
   { id: 'american-muscle',  label: 'American Muscle'  },
-  { id: 'japanese-icons',   label: 'Japanese Icons'   },
 ];
 
 const BUILDS = [
