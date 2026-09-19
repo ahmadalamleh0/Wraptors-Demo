@@ -42,75 +42,7 @@
   line-height: 1.6;
 }
 
-/* ── HERO ────────────────────────────────────────────────────────────────── */
-.hero {
-  position: relative;
-  height: 100svh;
-  min-height: 580px;
-  background: #040408;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: 10vh;
-}
-
-/* StarfieldBg overlays the hero — text must sit above it */
-
-.heroContent {
-  position: relative;
-  z-index: 3;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0 32px;
-  width: 100%;
-}
-
-.backBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-ui, sans-serif);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.38);
-  text-decoration: none;
-  margin-bottom: 28px;
-  transition: color 0.2s;
-}
-.backBtn:hover { color: rgba(255,255,255,0.75); }
-
-.heroEyebrow {
-  display: block;
-  font-family: var(--font-ui, sans-serif);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-  color: rgba(184, 212, 255, 0.70);
-  margin-bottom: 16px;
-}
-
-.heroTitle {
-  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
-  font-size: clamp(3.2rem, 8.5vw, 7.5rem);
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  line-height: 0.92;
-  color: #fff;
-  margin: 0 0 24px;
-  text-shadow:
-    0 0 60px rgba(184,212,255,0.20),
-    0 2px 0 rgba(0,0,0,0.8);
-}
-
-.heroSub {
-  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
-  color: rgba(255,255,255,0.52);
-  line-height: 1.65;
-  max-width: 520px;
-  margin: 0;
-}
+/* ── HERO — lives in the shared ServiceHero component now. ── */
 
 /* ── INTERACTIVE PREVIEW ─────────────────────────────────────────────────── */
 .previewSection {
@@ -780,17 +712,6 @@
 
 @media (max-width: 768px) {
   .container { padding: 0 20px; }
-  .heroContent {
-    padding: 0 20px;
-    width: 100%;
-    max-width: 100%;
-  }
-  .heroTitle {
-    font-size: clamp(2.0rem, 9.5vw, 3.2rem);
-    line-height: 0.95;
-    letter-spacing: 0.02em;
-    word-break: break-word;
-  }
 
   .editorialOverlay {
     background:

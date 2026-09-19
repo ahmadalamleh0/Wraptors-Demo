@@ -16,7 +16,6 @@ function ScrollToTop() {
 }
 
 import OfflinePresentationMode from './components/OfflinePresentationMode';
-import PresentationAdminControl from './components/PresentationAdminControl';
 
 // Home page sections
 import Navbar from './components/Navbar';
@@ -63,36 +62,98 @@ import NotFoundPage from './components/NotFoundPage';
 import AboutPage from './components/AboutPage';
 import BookingCTA from './components/BookingCTA';
 import BookingPage from './components/BookingPage';
+import WrapsPage from './components/WrapsPage';
 
-// Hero images for each service page
-import heroWraps   from '../Wrappin(1new).jpeg';
-import heroCeramic from '../Ceramic Coating(new1).jpeg';
-import heroTint    from '../PPF(2New).jpeg';
+// Hero images for each generic service page (Vehicle Wraps, PPF and
+// Starlight have their own dedicated page components with bespoke
+// content; these three share the ServicePage template).
+import heroCeramic    from '../Wraptors Media/779201054_18418163902146462_3362369227410745315_n.jpg';
+import ceramicNew2    from '../Ceramic Coating(new2).jpeg';
+import ceramicNew3    from '../Ceramic Coating(new3).jpeg';
+import ceramicBanner1 from '../Wraptors Media/730941504_18409686289146462_8126761517611540665_n.jpg';
+import lambo1         from '../Wraptors Media/572658115_18375844528146462_7044016670246006823_n.jpg';
+import lambo2         from '../Wraptors Media/573643633_18375844501146462_1338566802707597600_n.jpg';
+import lambo3         from '../Wraptors Media/574454404_18375844462146462_4088331334435453680_n.jpg';
+import heroTint       from '../Wraptors Media/632236695_18389471176146462_2559334672996249216_n.jpg';
+import heroCommercial from '../commercial_wrapping(1).jpeg';
 
+// Every service page follows the same hero + intro system (see
+// ServiceHero / ServiceIntroSection) — only media and wording change here.
 const SERVICE_PAGES = [
-  {
-    path:     '/services/wraps',
-    title:    'Vehicle Wraps',
-    eyebrow:  'Color & Finish',
-    tagline:  'Every colour. Every finish. Every vision. Precision-cut premium vinyl that transforms your vehicle and protects the paint beneath.',
-    heroImg:  heroWraps,
-    learnCategory: 'vehicle-wraps',
-  },
   {
     path:     '/services/ceramic',
     title:    'Ceramic Coating',
-    eyebrow:  'Surface Protection',
-    tagline:  'Glass-hard protection with a permanent shine. 9H-rated ceramic formula that bonds to your paint for years of effortless gloss.',
+    heroEyebrow: 'Wraptors Dubai · Ceramic Coating',
+    heroHeadline: 'Finish, Locked In.',
+    heroSupportingLine: 'Paint Enhancement · Ceramic Protection · Deep Gloss',
     heroImg:  heroCeramic,
+    introImage: ceramicNew2,
+    benefits: [
+      { num: '01', title: 'Long-Lasting Shine',        desc: 'Helps keep the paint glossy, vibrant and easier to maintain over time.' },
+      { num: '02', title: 'Showroom-Quality Finish',   desc: 'Adds depth and clarity to the paint for a smoother, more reflective finish.' },
+      { num: '03', title: 'Paint Defense',             desc: 'Helps protect against oxidation, stains, bird droppings and light surface marks.' },
+      { num: '04', title: 'Easier Maintenance',        desc: 'Dirt and contamination are easier to remove, reducing the effort needed to keep the car looking clean.' },
+    ],
+    galleryImages: [lambo1, lambo2, lambo3],
+    tagline:  'Glass-hard protection with a permanent shine. 9H-rated ceramic formula that bonds to your paint for years of effortless gloss.',
+    introKicker: 'Your Finish',
+    introStatement: 'Refined.',
+    introDescription: 'Ceramic coating at Wraptors starts with the condition of the paint. We inspect and prepare the surface first, correct or enhance it where required, then apply the coating to preserve the finish, improve gloss and make ongoing maintenance easier.',
+    processEyebrow: 'The Process',
+    processHeading: 'From Prep To Protection.',
+    processSteps: [
+      {
+        n: '01',
+        title: 'Inspection',
+        desc: 'We begin by checking the condition of the paint and understanding what the vehicle needs before any coating is applied. This tells us whether the finish is ready as it is or needs correction first.',
+      },
+      {
+        n: '02',
+        title: 'Preparation',
+        desc: 'The vehicle is washed, decontaminated and properly prepared so the surface is clean and ready for correction or coating. This stage is critical to how well the final result performs.',
+      },
+      {
+        n: '03',
+        title: 'Paint Refinement',
+        desc: 'Where needed, the paint is corrected or enhanced to improve gloss, clarity and overall finish before it is sealed. Coating should preserve a strong finish, not cover a weak one.',
+      },
+      {
+        n: '04',
+        title: 'Coating & Final Finish',
+        desc: 'The ceramic coating is applied with attention to coverage and finish, then the vehicle is checked and completed so the final result looks clean, deep and properly protected.',
+      },
+    ],
+    splitBanner: {
+      img1: ceramicBanner1,
+      img2: ceramicNew3,
+      text: 'GLOSS THAT LASTS.',
+    },
     learnCategory: 'ceramic-coating',
   },
   {
     path:     '/services/tint',
     title:    'Window Tint',
-    eyebrow:  'Privacy & Protection',
-    tagline:  'Premium ceramic window film that blocks UV, reduces heat, and delivers flawless clarity — installed to the millimetre.',
+    heroEyebrow: 'Wraptors Dubai · Window Tint',
+    heroHeadline: 'Control The Cabin.',
+    heroSupportingLine: 'Ceramic Tint · Heat Rejection · Privacy',
     heroImg:  heroTint,
+    tagline:  'Premium ceramic window film that blocks UV, reduces heat, and delivers flawless clarity — installed to the millimetre.',
+    introKicker: 'Your Cabin',
+    introStatement: 'Controlled.',
+    introDescription: 'Window film is selected around more than darkness. At Wraptors, tint is approached around heat performance, privacy, visibility and the appearance of the vehicle, then installed cleanly across the glass for a finish that belongs with the car.',
     learnCategory: 'window-tint',
+  },
+  {
+    path:     '/services/commercial',
+    title:    'Commercial Wraps',
+    heroEyebrow: 'Wraptors Dubai · Commercial Wraps',
+    heroHeadline: 'Brand In Motion.',
+    heroSupportingLine: 'Fleet Wraps · Commercial Graphics · Brand Application',
+    heroImg:  heroCommercial,
+    tagline:  'Turn every vehicle into a moving billboard — full fleet wraps with precision-cut brand identity.',
+    introKicker: 'Your Brand',
+    introStatement: 'In Motion.',
+    introDescription: 'From a single commercial vehicle to a growing fleet, Wraptors turns the vehicle itself into brand real estate. Artwork, placement, colour and coverage are planned around the body so the identity stays clear, consistent and recognizable on the road.',
   },
 ];
 
@@ -127,9 +188,9 @@ export default function App() {
     <>
     <ScrollToTop />
     <OfflinePresentationMode />
-    <PresentationAdminControl />
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/services/wraps"    element={<WrapsPage />} />
       <Route path="/services/starlight" element={<StarlightPage />} />
       <Route path="/services/ppf"      element={<PPFPage />} />
       {SERVICE_PAGES.map(svc => (

@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import ServiceHero from './ServiceHero';
+import ServiceIntroSection from './ServiceIntroSection';
 import StarfieldBg from './StarfieldBg';
 import styles from './StarlightPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -418,20 +419,20 @@ export default function StarlightPage() {
     <>
       <Navbar alwaysVisible />
 
-      {/* ── HERO ─────────────────────────────────────────────────────── */}
-      <section className={styles.hero}>
-        <StarfieldBg />
+      {/* ── HERO — shared ServiceHero, same family as every service page ── */}
+      <ServiceHero
+        eyebrow="Wraptors Dubai · Starlight"
+        headline="Night, Built In."
+        supportingLine="Starlight Headliners · Custom Patterns · Cabin Detailing"
+        media={<StarfieldBg />}
+      />
 
-        <div className={styles.heroContent}>
-          <Link to="/" className={styles.backBtn}>← All Services</Link>
-          <span className={styles.heroEyebrow}>Interior Craft</span>
-          <h1 className={styles.heroTitle}>Starlight<br />Headliner</h1>
-          <p className={styles.heroSub}>
-            Transform your interior into a bespoke night-sky experience.<br />
-            Thousands of hand-laid fibre optic stars — yours to design.
-          </p>
-        </div>
-      </section>
+      {/* ── Your Cabin / Reimagined — reusable premium intro block ── */}
+      <ServiceIntroSection
+        kicker="Your Cabin"
+        statement="Reimagined."
+        description="Our starlight installations transform the headliner into part of the interior design. Layout, density and visual direction are planned around the cabin so the finished installation feels integrated into the vehicle rather than added afterward."
+      />
 
       {/* ── INTERACTIVE PREVIEW ──────────────────────────────────────── */}
       <section className={styles.previewSection} ref={previewRef}>

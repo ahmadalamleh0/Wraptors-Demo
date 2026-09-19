@@ -245,8 +245,8 @@ body::after {
   justify-content: center;
   gap: 10px;
   padding: 15px 40px;
-  background: var(--red);
-  color: #fff;
+  background: #fff;
+  color: #000;
   font-family: var(--font-ui);
   font-size: 12px;
   font-weight: 700;
@@ -286,10 +286,9 @@ body::after {
 .btn-primary:hover::before { left: 150%; }
 
 .btn-primary:hover {
-  background: var(--red-bright);
+  background: rgba(255, 255, 255, 0.85);
   box-shadow:
-    0 0 24px rgba(212, 0, 0, 0.55),
-    0 0 60px rgba(212, 0, 0, 0.2),
+    0 0 24px rgba(255, 255, 255, 0.18),
     inset 0 1px 0 rgba(255,255,255,0.1);
   transform: translateY(-3px);
 }

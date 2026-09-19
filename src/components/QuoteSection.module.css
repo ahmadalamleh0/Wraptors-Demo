@@ -6,6 +6,16 @@
   position: relative;
 }
 
+/* Embedded on a service page (between Related Insights and the FAQ)
+   rather than standing alone between two big homepage chapters — same
+   panel, noticeably less air around it. */
+.sectionCompact {
+  padding: 64px 32px 72px;
+}
+.sectionCompact .head {
+  margin-bottom: 32px;
+}
+
 .head {
   text-align: center;
   max-width: 620px;
@@ -376,6 +386,14 @@
   font-family: var(--font-ui);
   font-size: 0.7rem;
   color: var(--red-bright, #ff6b6b);
+}
+
+/* On service pages (the compact embed) the whole page is strictly
+   black/white/grey — no red anywhere, including validation states. The
+   full-size homepage instance keeps the red above unchanged. */
+.sectionCompact .error,
+.sectionCompact .errorSmall {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* ── Nav — a soft glowing hairline instead of a flat border, so the

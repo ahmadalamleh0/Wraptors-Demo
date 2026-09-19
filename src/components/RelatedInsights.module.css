@@ -21,7 +21,7 @@
   font-size: 0.56rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--red);
+  color: rgba(255, 255, 255, 0.55);
   font-weight: 700;
   margin-bottom: 12px;
 }
@@ -71,7 +71,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--red-bright, #ff3b3b);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .viewAll {

@@ -1,236 +1,416 @@
-/* ══ SERVICE PAGE ══ */
+/* ══ SERVICE PAGE ══
+   Generic template for services without bespoke interactive content
+   (Ceramic Coating, Window Tint, Commercial Wraps). Hero and intro live in
+   the shared ServiceHero / ServiceIntroSection components now — nothing
+   page-specific left to style here yet. */
 
-/* ── Hero ── */
-.hero {
+/* ── Full-bleed image block — sits between the intro section and process
+   timeline. Negative margin-top pulls it tight against the Refined section
+   so there's no dead black void above it. ── */
+.introImageBlock {
   position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-  background: #000;
-}
-
-.heroImg {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: 0;
+  background: #000;
+  line-height: 0;
+  margin-top: -72px; /* pulls the block up into the intro section's bottom padding */
+  overflow: hidden;
 }
 
-.heroOverlay {
+.introImage {
+  display: block;
+  width: 100%;
+  max-height: 82vh;
+  object-fit: cover;
+  object-position: center 30%; /* keep top of image — where the car detail lives */
+  filter: none;
+}
+
+/* ── Gradient overlay — only dark enough to let the text read cleanly ── */
+.introImageOverlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.28) 0%,
-    rgba(0, 0, 0, 0.50) 50%,
-    rgba(0, 0, 0, 0.88) 100%
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.38) 55%,
+    rgba(0, 0, 0, 0.52) 100%
   );
-  z-index: 1;
-  pointer-events: none;
-}
-
-.heroCurtainTop {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 160px;
-  background: linear-gradient(to bottom, #000 0%, transparent 100%);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.heroCurtainBottom {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 120px;
-  background: linear-gradient(to top, #000 0%, transparent 100%);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.heroContent {
-  position: relative;
-  z-index: 3;
-  padding: 0 80px 100px;
-  width: 100%;
-  max-width: 960px;
   display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-/* ── Back button ── */
-.backBtn {
-  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-ui);
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.42);
-  text-decoration: none;
-  margin-bottom: 40px;
-  transition: color 0.25s ease;
-  width: fit-content;
-}
-.backBtn:hover { color: rgba(255, 255, 255, 0.80); }
-
-/* ── Eyebrow ── */
-.eyebrow {
-  display: block;
-  font-family: var(--font-ui);
-  font-size: 0.58rem;
-  letter-spacing: 0.38em;
-  text-transform: uppercase;
-  color: var(--red);
-  font-weight: 700;
-  margin-bottom: 20px;
+  justify-content: center;
 }
 
-/* ── Main headline ── */
-.headline {
-  font-family: var(--font-display);
-  font-size: clamp(3.2rem, 7vw, 8rem);
+/* ── Centered text lockup ── */
+.introImageText {
+  font-family: 'Ethnocentric', 'Cinzel', var(--font-display);
+  font-size: clamp(1.1rem, 2.4vw, 1.8rem);
   font-weight: 400;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: #fff;
-  line-height: 0.95;
-  margin: 0 0 28px;
+  text-align: center;
+  line-height: 1;
+  /* very subtle text-shadow so letters lift off the image */
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
 }
 
-/* ── Tagline ── */
-.tagline {
-  font-family: var(--font-ui);
-  font-size: clamp(0.72rem, 1.1vw, 0.90rem);
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.40);
-  line-height: 1.8;
+@media (max-width: 768px) {
+  .introImageBlock { margin-top: -40px; }
+  .introImage {
+    height: 75vw;
+    min-height: 280px;
+    max-height: 460px;
+    object-position: center 30%;
+  }
+  .introImageText { letter-spacing: 0.16em; }
+}
+
+/* ══ BENEFITS SECTION ══
+   Editorial 2×2 grid. No cards — divider lines carry the structure.
+   Stays in the same black/white premium family as ServiceIntroSection. */
+
+.benefits {
+  background: #000;
+  padding: 80px 32px 88px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.benefitsHeading {
+  font-family: 'Ethnocentric', 'Cinzel', var(--font-display);
+  font-size: clamp(1.02rem, 1.7vw, 1.26rem);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
   margin: 0 0 44px;
-  max-width: 480px;
+  text-align: center;
 }
 
-/* ── Hero CTA ── */
-.heroCta {
-  display: inline-flex;
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.benefitItem {
+  padding: 20px 32px 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.benefitItem:nth-child(even) {
+  padding-left: 32px;
+  padding-right: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.benefitItem:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.benefitHeader {
+  display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--red, #b40000);
-  color: #fff;
-  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+.benefitNum {
+  font-family: 'Ethnocentric', 'Cinzel', var(--font-display);
+  font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.benefitTitle {
   font-family: var(--font-ui);
-  font-size: 0.65rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  font-size: clamp(0.78rem, 0.95vw, 0.88rem);
   font-weight: 700;
-  padding: 16px 32px;
-  transition: background 0.25s ease, opacity 0.25s ease;
-  width: fit-content;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.2;
 }
-.heroCta:hover { background: #cc0000; }
 
-/* ── Coming Soon Section ── */
-.coming {
-  background: #050505;
-  padding: 140px 80px;
+.benefitDesc {
+  font-family: var(--font-ui);
+  font-size: clamp(0.82rem, 0.9vw, 0.88rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .benefits {
+    padding: 60px 20px 68px;
+  }
+
+  .benefitsHeading {
+    font-size: clamp(0.92rem, 3.8vw, 1.15rem);
+    letter-spacing: 0.16em;
+    margin-bottom: 34px;
+  }
+
+  .benefitItem {
+    padding: 16px 16px 16px 0;
+  }
+
+  .benefitItem:nth-child(even) {
+    padding-left: 16px;
+    padding-right: 0;
+  }
+
+  .benefitHeader {
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .benefitNum {
+    font-size: 0.72rem;
+  }
+
+  .benefitTitle {
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+  }
+
+  .benefitDesc {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 420px) {
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .benefitItem,
+  .benefitItem:nth-child(even) {
+    padding: 16px 0;
+    border-left: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .benefitItem:last-child {
+    border-bottom: none;
+  }
+}
+
+/* ══ 3-IMAGE EDITORIAL GALLERY ══
+   Adapts the McLaren gallery system for Ceramic Coating.
+   Photo 1: One large full-width hero image on top
+   Photo 2 + Photo 3: Two side-by-side images underneath
+   Minimalist black/white aesthetic, 8px gap, subtle reveal animation. */
+
+.svcGallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "hero hero"
+    "left right";
+  gap: 8px;
+  background: #000;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.svcTile {
   position: relative;
-}
-.coming::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(255, 255, 255, 0.04) 30%,
-    rgba(212, 0, 0, 0.14) 50%,
-    rgba(255, 255, 255, 0.04) 70%,
-    transparent
-  );
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.comingInner {
-  max-width: 600px;
-  margin: 0 auto;
+.svcGalleryVisible .svcTile {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.svcGalleryVisible .svcTile1 { transition-delay: 0s; }
+.svcGalleryVisible .svcTile2 { transition-delay: 0.14s; }
+.svcGalleryVisible .svcTile3 { transition-delay: 0.28s; }
+
+.svcTile1 {
+  grid-area: hero;
+  aspect-ratio: 16 / 9;
+  min-height: 480px;
+  max-height: 720px;
+}
+
+.svcTile2 {
+  grid-area: left;
+  aspect-ratio: 16 / 10;
+}
+
+.svcTile3 {
+  grid-area: right;
+  aspect-ratio: 16 / 10;
+}
+
+.svcImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.svcTile1 .svcImg { object-position: center 50%; }
+.svcTile2 .svcImg { object-position: center 35%; }
+.svcTile3 .svcImg { object-position: center 35%; }
+
+.svcTile:hover .svcImg {
+  transform: scale(1.025);
+}
+
+.svcOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 45%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+  pointer-events: none;
+}
+
+.svcFooter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 28px 24px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0;
+  gap: 4px;
+  pointer-events: none;
 }
 
-.comingRule {
-  width: 40px;
-  height: 1px;
-  background: rgba(180, 0, 0, 0.60);
-  margin-bottom: 28px;
-}
-
-.comingEyebrow {
-  display: block;
+.svcFooterEyebrow {
   font-family: var(--font-ui);
-  font-size: 0.56rem;
-  letter-spacing: 0.38em;
+  font-size: 0.58rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--red);
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 700;
-  margin-bottom: 18px;
 }
 
-.comingTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2.8rem, 5vw, 5.5rem);
-  font-weight: 400;
-  letter-spacing: 0.05em;
+.svcFooterTitle {
+  font-family: 'Ethnocentric', 'Cinzel', var(--font-display);
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
   text-transform: uppercase;
   color: #fff;
-  line-height: 1;
-  margin: 0 0 32px;
-}
-
-.comingSub {
-  font-family: var(--font-ui);
-  font-size: clamp(0.70rem, 1vw, 0.84rem);
   letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.30);
-  line-height: 1.9;
-  margin: 0 0 48px;
+  line-height: 1.1;
 }
 
-.comingCta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-ui);
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-  text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  padding: 14px 28px;
-  transition: color 0.25s ease, border-color 0.25s ease;
-}
-.comingCta:hover {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.28);
-}
-
-/* ── Mobile ── */
 @media (max-width: 768px) {
-  .heroContent  { padding: 0 28px 80px; }
-  .headline     { font-size: clamp(2.6rem, 12vw, 4rem); }
-  .backBtn      { margin-bottom: 32px; }
-  .coming       { padding: 100px 28px; }
-  .comingTitle  { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+  .svcGallery {
+    gap: 6px;
+    padding: 6px 0;
+  }
+
+  .svcTile1 {
+    aspect-ratio: 4 / 3;
+    min-height: 300px;
+  }
+
+  .svcTile2,
+  .svcTile3 {
+    aspect-ratio: 4 / 3;
+  }
+
+  .svcFooter {
+    padding: 0 18px 16px;
+  }
+
+  .svcFooterEyebrow {
+    font-size: 0.52rem;
+  }
+
+  .svcFooterTitle {
+    font-size: 0.95rem;
+  }
 }
 
-@media (max-width: 480px) {
-  .heroContent  { padding: 0 20px 64px; }
-  .coming       { padding: 80px 20px; }
+/* ══ SPLIT DUAL BANNER (Identical to WrapsPage Built Different spread) ══
+   Simple two-image spread, same visual grammar as the McLaren gallery
+   (8px gap, no cards, no radius, staggered scroll reveal, centered display overlay). */
+
+.splitBanner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: #000;
+}
+
+.splitBannerOverlayText {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.4vw, 3.2rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55), 0 1px 0 rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.splitBannerTile {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.splitBannerVisible .splitBannerTile {
+  opacity: 1;
+  transform: translateY(0);
+}
+.splitBannerVisible .splitBannerTile:nth-child(2) {
+  transition-delay: 0.16s;
+}
+
+.splitBannerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+@media (min-width: 901px) {
+  .splitBanner {
+    gap: 8px;
+    padding: 0 40px;
+    height: clamp(480px, 46vw, 640px);
+  }
+  .splitBannerTile {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splitBannerTile {
+    transition: opacity 0.3s ease;
+    transform: none !important;
+  }
 }

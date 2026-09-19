@@ -2,14 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import styles from './HeroVideo.module.css';
 import { getPresentationMode, MODES } from '../lib/presentationMode';
-import heroSafeModeImage from '../assets/hero-safe-mode.jpg';
+// The one fallback image, used underneath the video in Video Mode and as
+// the whole background in Safe Mode. Previously Video Mode used a separate
+// frame-matched poster (an extreme, dark close-up extracted from the video
+// itself) that read as "the wrong image" whenever it was visible for any
+// length of time — this Lamborghini shot is what should show instead,
+// instantly on mount, for as long as the video hasn't started playing (or
+// forever, if it never does).
+import heroFallbackImage from '../assets/hero-safe-mode.jpg';
 import heroVideoSrc from '../../final_hero(new).mp4';
-// Extracted from final_hero(new).mp4 at t=3.0s — the exact timestamp
-// `applyStartTime()` below always seeks to before playback begins. In Video
-// Mode this is now also rendered as a permanent <img> layer (see below),
-// not just a <video poster> — so it's what's visible the instant this
-// section mounts, and for as long as actual playback hasn't started yet.
-import heroPoster from '../assets/hero-poster.webp';
 
 // TEMPORARY DEBUG — remove once the Safe Mode black-flash fix is confirmed
 // on real devices. Logs image-readiness at the exact moment the intro
@@ -218,7 +219,7 @@ export default function HeroVideo() {
           whole background. */}
       <img
         ref={imageRef}
-        src={isVideoMode ? heroPoster : heroSafeModeImage}
+        src={heroFallbackImage}
         alt=""
         className={`${styles.heroImage} ${!isVideoMode ? styles.heroImageSafe : ''}`}
         loading="eager"

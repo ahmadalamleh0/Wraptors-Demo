@@ -1,0 +1,292 @@
+import { useEffect, useRef, useState } from 'react';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import FloatingWhatsApp from './FloatingWhatsApp';
+import ServiceHero from './ServiceHero';
+import ServiceIntroSection from './ServiceIntroSection';
+import ServiceProcess from './ServiceProcess';
+import AftercareSection from './AftercareSection';
+import RelatedInsights from './RelatedInsights';
+import QuoteSection from './QuoteSection';
+import ServiceFaqSection from './ServiceFaqSection';
+import styles from './WrapsPage.module.css';
+import { useDocumentMeta } from '../lib/useDocumentMeta';
+import { SITE_URL } from '../lib/siteConfig';
+
+// ── Hero media ──────────────────────────────────────────────────────────
+import heroVideoSrc from '../../Wraptors Media/AQMO8KUY36WzJZuIMrrq-tMy8Xp0txB138Wh_HiArRceWtYAEVphuhXgnSVU7qGiEPtzYaEXtv1H6lKthvFzjA-GjN-vpr06TXXbT34.mp4';
+import heroPoster from '../assets/wraps-hero-poster.jpg';
+
+// Brand statement mark — official Wraptors Dubai coin emblem.
+import wraptorsDubaiLogo from '../../Wraptors_dubai.jpg';
+
+// ── Section photography — real Wraptors builds throughout, no stock.
+// Selected Wraps gallery is placeholder-only for now (see below) until
+// real wrap-specific builds are supplied. ────────────────────────────
+import fullWrapImg from '../../Wraptors Media/Wrappin(2new).jpeg';
+
+// McLaren (LBWK widebody, chrome-orange wrap) — one designed spread, not
+// a random four-up. mcLaren1 is the dominant hero shot.
+import mcLaren1 from '../../Wraptors Media/754224310_18413486968146462_6476508524846184428_n.jpg';
+import mcLaren2 from '../../Wraptors Media/753231508_18413487001146462_554714453099635718_n.jpg';
+import mcLaren3 from '../../753255071_18413487040146462_4588834704147054082_n.jpg';
+import mcLaren4 from '../../Wraptors Media/753734160_18413487004146462_3239241587169613004_n.jpg';
+
+// Mercedes-AMG G-Wagon, matte bronze wrap — simple two-image pair.
+import gWagon1 from '../../Wraptors Media/805936464_18421616794146462_1594286468195409667_n (1).jpg';
+import gWagon2 from '../../Wraptors Media/806035800_18421616770146462_851032074252558861_n.jpg';
+
+// Reusable process system (see ServiceProcess.jsx) — this data shape is
+// what later gets swapped per service (PPF, Ceramic, Tint, Starlight,
+// Commercial Wraps): eyebrow/heading live on the WrapsPage call below,
+// steps just carry their own number/title/desc.
+const PROCESS_STEPS = [
+  {
+    n: '01',
+    title: 'Direction',
+    desc: 'We start with the car, the finish and the result you want. Colour, material, coverage and details are planned together before the vehicle enters installation.',
+  },
+  {
+    n: '02',
+    title: 'Preparation',
+    desc: 'The vehicle is inspected, cleaned and prepared panel by panel. Trim or components are removed where required so the film can be installed and finished properly around the vehicle.',
+  },
+  {
+    n: '03',
+    title: 'Installation',
+    desc: 'Film is worked around the actual shape of the car, including edges, recesses, bumpers and complex body lines. This is where the quality of the final result is built.',
+  },
+  {
+    n: '04',
+    title: 'Final Finish',
+    desc: 'Edges, seams and detailed areas are checked, the vehicle is finished and reassembled, then the complete wrap is inspected before handover.',
+  },
+];
+
+export default function WrapsPage() {
+  useDocumentMeta(
+    'Vehicle Wraps in Dubai | Wraptors',
+    'Full colour changes, custom finishes and partial transformations, installed at the Wraptors Dubai studio in Al Quoz and built around the vehicle, not a template.',
+    `${SITE_URL}/services/wraps`
+  );
+
+  const videoRef = useRef(null);
+  const [videoReady, setVideoReady] = useState(false);
+
+  const galleryRef = useRef(null);
+  const [galleryVisible, setGalleryVisible] = useState(false);
+
+  useEffect(() => {
+    const el = galleryRef.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setGalleryVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const wagonRef = useRef(null);
+  const [wagonVisible, setWagonVisible] = useState(false);
+
+  useEffect(() => {
+    const el = wagonRef.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setWagonVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const brandRef = useRef(null);
+  const [brandVisible, setBrandVisible] = useState(false);
+
+  useEffect(() => {
+    const el = brandRef.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setBrandVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return undefined;
+
+    video.muted = true;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+
+    const onPlaying = () => setVideoReady(true);
+    video.addEventListener('playing', onPlaying);
+
+    const tryPlay = () => {
+      if (!video.paused) return;
+      video.play().catch(() => {
+        // Autoplay blocked — the poster underneath stays visible until a
+        // first interaction unlocks it.
+      });
+    };
+    tryPlay();
+
+    const retryOnInteraction = () => tryPlay();
+    document.addEventListener('touchstart', retryOnInteraction, { once: true, passive: true });
+    document.addEventListener('click', retryOnInteraction, { once: true, passive: true });
+
+    return () => {
+      video.removeEventListener('playing', onPlaying);
+      document.removeEventListener('touchstart', retryOnInteraction);
+      document.removeEventListener('click', retryOnInteraction);
+    };
+  }, []);
+
+  return (
+    <>
+      <Navbar alwaysVisible />
+      <main>
+
+        {/* ── Hero — shared ServiceHero, full-bleed video + glass CTA ── */}
+        <ServiceHero
+          eyebrow="Wraptors Dubai · Vehicle Wraps"
+          headline="Bespoke Styling"
+          supportingLine="Full Wraps · Colour Changes · Custom Finishes"
+          media={
+            <>
+              <img src={heroPoster} alt="" loading="eager" fetchPriority="high" />
+              <video
+                ref={videoRef}
+                src={heroVideoSrc}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster={heroPoster}
+                style={{ opacity: videoReady ? 1 : 0, transition: 'opacity 0.6s ease' }}
+              />
+            </>
+          }
+        />
+
+        {/* ── 02 · Choose The Finish — reusable premium intro block ── */}
+        <ServiceIntroSection
+          kicker="Your Car"
+          statement="Reintroduced."
+          description="At Wraptors, we handle complete colour changes, partial wraps and bespoke styling around the vehicle itself. Material, coverage and finish are planned together, then installed with attention to body lines, edges, trim and final presentation. The result is a transformation that looks considered from the first panel to the last."
+        />
+
+        {/* ── Full photo break — overlay footer sits inside the image ── */}
+        <section className={styles.photoBreak}>
+          <img src={fullWrapImg} alt="Wraptors full colour change wrap" className={styles.photoBreakImg} loading="lazy" />
+          <div className={styles.photoBreakOverlay} aria-hidden="true" />
+          <div className={styles.photoBreakFooter}>
+            <span className={styles.photoBreakTitle}>Built To Shift Presence.</span>
+          </div>
+        </section>
+
+        {/* ── Brand statement — quiet credibility moment, logo as a
+             supporting mark beside the copy rather than a centred hero. ── */}
+        <section
+          ref={brandRef}
+          className={`${styles.brandStatement} ${brandVisible ? styles.brandStatementVisible : ''}`}
+        >
+          <div className={styles.brandInner}>
+            <div className={styles.brandLogoWrap}>
+              <img src={wraptorsDubaiLogo} alt="Wraptors Dubai" className={styles.brandLogo} />
+            </div>
+            <div className={styles.brandDivider} aria-hidden="true" />
+            <div className={styles.brandContent}>
+              <p className={styles.brandHeadline}>
+                Crafting some of the world&rsquo;s most iconic wrapped vehicles.
+              </p>
+              <p className={styles.brandDesc}>
+                Wraptors brings together bespoke styling, experienced installation and a global automotive identity built around standout vehicles. From complete colour transformations to one-off visual directions, every build is approached with the same focus on execution, detail and presence.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── McLaren spread — one designed editorial sequence, not four
+             random cards. Dominant hero + three supporting shots. ── */}
+        <section
+          ref={galleryRef}
+          className={`${styles.mcGallery} ${galleryVisible ? styles.mcGalleryVisible : ''}`}
+        >
+          <div className={`${styles.mcTile} ${styles.mcTile1}`}>
+            <img src={mcLaren1} alt="Wraptors McLaren build, LBWK widebody, chrome orange wrap" className={styles.mcImg} loading="lazy" />
+            <div className={styles.mcOverlay} aria-hidden="true" />
+            <div className={styles.mcFooter}>
+              <span className={styles.mcFooterEyebrow}>Wraptors Build</span>
+              <span className={styles.mcFooterTitle}>McLaren</span>
+              <span className={styles.mcFooterDetail}>LBWK Widebody &middot; Chrome Orange</span>
+            </div>
+          </div>
+          <div className={`${styles.mcTile} ${styles.mcTile2}`}>
+            <img src={mcLaren2} alt="Wraptors McLaren build detail" className={styles.mcImg} loading="lazy" />
+          </div>
+          <div className={`${styles.mcTile} ${styles.mcTile3}`}>
+            <img src={mcLaren3} alt="Wraptors McLaren build detail" className={styles.mcImg} loading="lazy" />
+          </div>
+          <div className={`${styles.mcTile} ${styles.mcTile4}`}>
+            <img src={mcLaren4} alt="Wraptors McLaren build, rear" className={styles.mcImg} loading="lazy" />
+          </div>
+        </section>
+
+        {/* ── 04 · The Process — reusable premium vertical timeline ── */}
+        <ServiceProcess
+          eyebrow="The Wraptors Process"
+          heading="From Vision To Finish."
+          steps={PROCESS_STEPS}
+        />
+
+        {/* ── G-Wagon pair — matte bronze AMG build ── */}
+        <section
+          ref={wagonRef}
+          className={`${styles.wagonSpread} ${wagonVisible ? styles.wagonSpreadVisible : ''}`}
+        >
+          <div className={styles.wagonTile}>
+            <img src={gWagon1} alt="Wraptors Mercedes-AMG G-Wagon build, matte bronze wrap" className={styles.wagonImg} loading="lazy" />
+          </div>
+          <div className={styles.wagonTile}>
+            <img src={gWagon2} alt="Wraptors Mercedes-AMG G-Wagon build, side profile" className={styles.wagonImg} loading="lazy" />
+          </div>
+          <span className={styles.wagonOverlayText}>Built Different.</span>
+        </section>
+
+        <QuoteSection
+          id="cta"
+          initialService="wraps"
+          subtitle="Ready to take the next step?"
+          compact
+        />
+        <AftercareSection service="wraps" />
+        <RelatedInsights category="vehicle-wraps" />
+        <ServiceFaqSection service="wraps" />
+
+      </main>
+      <Footer />
+      <FloatingWhatsApp />
+    </>
+  );
+}

@@ -2,7 +2,7 @@
 // (Services.jsx) rather than introducing new asset files. Keyed by the
 // heroImageKey on each article in articles.js.
 import wraps1   from '../../Wrappin(1new).jpeg';
-import wraps2   from '../../Wrappin(2new).jpeg';
+import wraps2   from '../../Wraptors Media/Wrappin(2new).jpeg';
 import wraps3   from '../../Wrapping Last_3.jpeg';
 import ppf1     from '../../PPF(last_1).jpeg';
 import ppf2     from '../../PPF(2New).jpeg';

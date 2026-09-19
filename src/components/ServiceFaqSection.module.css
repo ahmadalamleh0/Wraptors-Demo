@@ -17,7 +17,7 @@
   font-size: 0.58rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--red);
+  color: rgba(255, 255, 255, 0.55);
   font-weight: 700;
   margin-bottom: 14px;
 }

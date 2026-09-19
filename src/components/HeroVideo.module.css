@@ -8,16 +8,19 @@
 }
 
 /* Mobile Safari's 100vh is the LARGEST possible viewport (toolbar hidden),
-   taller than what's actually on screen on first load (toolbar visible) —
-   that's why the scroll cue (anchored to .section's bottom) was rendering
-   below the real fold until the user scrolled once and the toolbar
-   collapsed. 100svh is the SMALLEST guaranteed viewport (toolbar showing),
-   so anchoring to it keeps the cue inside what's actually visible before
-   any scrolling. Kept as a mobile-only override — desktop is unaffected,
-   and the plain 100vh above still serves as the fallback for browsers
-   without svh support. */
+   taller than what's actually on screen while the toolbar is showing.
+   100svh (smallest guaranteed viewport) fixed the scroll cue rendering
+   below the real fold, but it's a *static* worst-case value — when the
+   toolbar then auto-collapses (e.g. on first scroll) the real visible
+   area grows past that fixed height, leaving the section (and the
+   image/video filling it) shorter than the screen: a black gap at the
+   bottom. 100dvh tracks the *current* viewport live as the toolbar shows
+   or hides, so the section always matches what's actually visible —
+   solving both problems at once. Declared after the plain 100vh above so
+   browsers without dvh support simply keep that fallback. */
 @media (max-width: 768px) {
   .section { height: 100svh; }
+  .section { height: 100dvh; }
 }
 
 /* ── Permanent background image (both modes) ──────────────────────────
@@ -100,10 +103,12 @@
 }
 
 /* Keep the rotated video's own sizing in sync with .section's mobile
-   height above, so Video Mode crops consistently with the real viewport
-   too (not just Safe Mode's permanent image). */
+   height above (CSS width becomes the visual height post-rotation), so
+   Video Mode covers the real, live viewport exactly as the image does —
+   same dvh-with-svh-fallback reasoning as .section above. */
 @media (max-width: 768px) {
   .video { width: 100svh; }
+  .video { width: 100dvh; }
 }
 
 /* Top edge fade */

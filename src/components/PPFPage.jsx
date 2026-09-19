@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import FloatingWhatsApp from './FloatingWhatsApp';
+import ServiceHero from './ServiceHero';
+import ServiceIntroSection from './ServiceIntroSection';
 import RelatedInsights from './RelatedInsights';
 import AftercareSection from './AftercareSection';
 import ServiceFaqSection from './ServiceFaqSection';
+import QuoteSection from './QuoteSection';
 import styles from './PPFPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { SITE_URL } from '../lib/siteConfig';
@@ -493,19 +496,20 @@ export default function PPFPage() {
     <>
       <Navbar alwaysVisible />
 
-      {/* ── HERO ─────────────────────────────────────────────────────── */}
-      <section className={styles.hero}>
-        <img src={heroImg} alt="" className={styles.heroBg} draggable={false} />
-        <div className={styles.heroOverlay} />
-        <div className={styles.heroContent}>
-          <Link to="/" className={styles.backBtn}>← All Services</Link>
-          <span className={styles.heroEyebrow}>Invisible Shield</span>
-          <h1 className={styles.heroTitle}>Paint<br />Protection<br />Film</h1>
-          <p className={styles.heroSub}>
-            Invisible protection for the areas that matter most.
-          </p>
-        </div>
-      </section>
+      {/* ── HERO — shared ServiceHero, same family as every service page ── */}
+      <ServiceHero
+        eyebrow="Wraptors Dubai · Paint Protection Film"
+        headline="Preserve The Original."
+        supportingLine="Full Body PPF · High Impact Protection · Colour PPF"
+        media={<img src={heroImg} alt="" loading="eager" fetchPriority="high" draggable={false} />}
+      />
+
+      {/* ── Your Paint / Preserved — reusable premium intro block ── */}
+      <ServiceIntroSection
+        kicker="Your Paint"
+        statement="Preserved."
+        description="Wraptors PPF is built around preserving the finish that came with the car. We plan coverage around how the vehicle is driven, from exposed front-end areas to complete body protection, then install the film with close attention to alignment, edges and complex panels."
+      />
 
       {/* ── 2. COVERAGE EXPLORER ─────────────────────────────────── */}
       <CoverageExplorer />
@@ -557,12 +561,19 @@ export default function PPFPage() {
         </div>
       </section>
 
-      <ServiceFaqSection service="ppf" />
+      <QuoteSection
+        id="cta"
+        initialService="ppf"
+        subtitle="Ready to take the next step?"
+        compact
+      />
 
       {/* ── 8. AFTERCARE ─────────────────────────────────────────── */}
       <AftercareSection service="ppf" />
 
       <RelatedInsights category="paint-protection-film" />
+
+      <ServiceFaqSection service="ppf" />
 
       {/* ── 9. FINAL CTA ─────────────────────────────────────────── */}
       <section className={styles.ctaSection}>
@@ -581,6 +592,7 @@ export default function PPFPage() {
       </section>
 
       <Footer />
+      <FloatingWhatsApp />
     </>
   );
 }

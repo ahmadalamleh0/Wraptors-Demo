@@ -64,9 +64,22 @@ function OptionRow({ label, selected, onSelect }) {
   );
 }
 
-export default function QuoteSection() {
-  const [step, setStep] = useState(1);
-  const [form, setForm] = useState(EMPTY_FORM);
+export default function QuoteSection({
+  id,
+  initialService,
+  eyebrow = 'Quote Request',
+  title = 'Start Your Build',
+  subtitle = 'Tell us what you’re building and we’ll shape the right next step.',
+  compact = false,
+}) {
+  // On a service page, the visitor already told us what they're here for
+  // by being on that page — start them one step in rather than asking
+  // again. Step 1 stays fully intact and reachable via Back, so they can
+  // still change the service if they want to.
+  const [step, setStep] = useState(initialService ? 2 : 1);
+  const [form, setForm] = useState(() => (
+    initialService ? { ...EMPTY_FORM, service: initialService } : EMPTY_FORM
+  ));
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -101,11 +114,11 @@ export default function QuoteSection() {
   const isLastStep = step === QUOTE_STEPS.length;
 
   return (
-    <section className={styles.section}>
+    <section id={id} className={`${styles.section} ${compact ? styles.sectionCompact : ''}`}>
       <div className={styles.head}>
-        <span className={styles.eyebrow}>Quote Request</span>
-        <h2 className={styles.title}>Start Your Build</h2>
-        <p className={styles.sub}>Tell us what you&rsquo;re building and we&rsquo;ll shape the right next step.</p>
+        <span className={styles.eyebrow}>{eyebrow}</span>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.sub}>{subtitle}</p>
       </div>
 
       <div className={styles.panel}>

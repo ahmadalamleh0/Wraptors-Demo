@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Services.module.css';
 
 import imgWrapping1   from '../../Wrappin(1new).jpeg';
-import imgWrapping2   from '../../Wrappin(2new).jpeg';
+import imgWrapping2   from '../../Wraptors Media/Wrappin(2new).jpeg';
 import imgWrapping3   from '../../Wrapping Last_3.jpeg';
 import imgPPF1        from '../../PPF(last_1).jpeg';
 import imgPPF2        from '../../PPF(2New).jpeg';
@@ -71,7 +71,7 @@ const SERVICES = [
   },
   {
     id: 'commercial',
-    slug: null,
+    slug: '/services/commercial',
     ghost: 'COMMERCIAL WRAP',
     name: 'Commercial Wrap',
     tags: ['Fleet Wrapping', 'Brand Identity'],
