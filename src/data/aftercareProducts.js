@@ -16,7 +16,7 @@ export const AFTERCARE_PRODUCTS = {
   waterless: {
     id: 'waterless-wash',
     name: 'Waterless Car Wash',
-    desc: 'Plant-based formula that cleans, shines, and repels UV, dust, and fog — all without a single drop of water. Safe on PPF and coated surfaces.',
+    desc: 'Plant-based formula that cleans, shines and repels UV, dust and fog — no water needed, and safe on PPF and coated surfaces.',
     img: productWaterless,
     link: 'https://wraptorsstore.com',
   },
@@ -30,7 +30,7 @@ export const AFTERCARE_PRODUCTS = {
   vinylProtectant: {
     id: 'vinyl-protectant',
     name: 'Vinyl Protectant',
-    desc: 'Ultimate vinyl elixir with a UV shield and lasting shine. Keeps wrapped and filmed surfaces looking fresh, deep, and protected against the elements.',
+    desc: 'UV-shielding vinyl elixir that keeps wrapped and filmed surfaces looking fresh, deep and protected.',
     img: productVinyl,
     link: 'https://wraptorsstore.com',
   },

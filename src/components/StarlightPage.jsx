@@ -531,7 +531,7 @@ export default function StarlightPage() {
           draggable={false}
         />
         <div className={styles.editorialContent}>
-          <h2 className={styles.editorialTitle}>Crafted<br />After Dark</h2>
+          <h2 className={styles.editorialTitle}>Crafted</h2>
         </div>
       </section>
 
@@ -542,7 +542,7 @@ export default function StarlightPage() {
         compact
       />
 
-      <Footer />
+      <Footer solid />
     </>
   );
 }

@@ -36,6 +36,14 @@ import mcLaren4 from '../../Wraptors Media/753734160_18413487004146462_323924158
 import gWagon1 from '../../Wraptors Media/805936464_18421616794146462_1594286468195409667_n (1).jpg';
 import gWagon2 from '../../Wraptors Media/806035800_18421616770146462_851032074252558861_n.jpg';
 
+// Commercial Wraps spread — real fleet/brand-vehicle installs, folded into
+// the Wraps page instead of living on a separate Commercial Wraps page.
+import cw1 from '../../Wraptors Media/commercial/WhatsApp Image 2026-09-20 at 12.56.19 PM.jpeg';
+import cw2 from '../../Wraptors Media/commercial/commercial_wrapping(2).jpeg';
+import cw3 from '../../Wraptors Media/commercial/Comercial_wrapping(new3).jpeg';
+import cw4 from '../../Wraptors Media/commercial/WhatsApp Image 2026-09-20 at 12.56.20 PM.jpeg';
+import cw5 from '../../Wraptors Media/commercial/695705239_18403186552146462_7052859159874241461_n.jpg';
+
 // Reusable process system (see ServiceProcess.jsx) — this data shape is
 // what later gets swapped per service (PPF, Ceramic, Tint, Starlight,
 // Commercial Wraps): eyebrow/heading live on the WrapsPage call below,
@@ -106,6 +114,25 @@ export default function WrapsPage() {
         }
       },
       { threshold: 0.15 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const commercialRef = useRef(null);
+  const [commercialVisible, setCommercialVisible] = useState(false);
+
+  useEffect(() => {
+    const el = commercialRef.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCommercialVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.12 }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -254,6 +281,36 @@ export default function WrapsPage() {
           </div>
         </section>
 
+        {/* ── Commercial Wraps — folded into the Wraps page as a section
+             rather than its own page. Same intro system as the rest of
+             this page, then a compact, gapless photo grid. ── */}
+        <ServiceIntroSection
+          kicker="Your Brand"
+          statement="On The Road."
+          description="From a single company vehicle to a coordinated fleet, we turn your vehicles into a clear expression of your business. Purposeful design, considered placement and precise installation bring your branding together across every panel."
+        />
+
+        <section
+          ref={commercialRef}
+          className={`${styles.cwGallery} ${commercialVisible ? styles.cwGalleryVisible : ''}`}
+        >
+          <div className={`${styles.cwTile} ${styles.cwTile1}`}>
+            <img src={cw1} alt="Wraptors commercial wrap, KARI branded van" className={styles.cwImg} loading="lazy" />
+          </div>
+          <div className={`${styles.cwTile} ${styles.cwTile2}`}>
+            <img src={cw2} alt="Wraptors commercial wrap — branded van outside the Wraptors Dubai studio" className={styles.cwImg} loading="lazy" />
+          </div>
+          <div className={`${styles.cwTile} ${styles.cwTile3}`}>
+            <img src={cw3} alt="Wraptors commercial wrap, Anton's Towing & Roadside branded truck" className={styles.cwImg} loading="lazy" />
+          </div>
+          <div className={`${styles.cwTile} ${styles.cwTile4}`}>
+            <img src={cw4} alt="Wraptors commercial wrap installation in progress" className={styles.cwImg} loading="lazy" />
+          </div>
+          <div className={`${styles.cwTile} ${styles.cwTile5}`}>
+            <img src={cw5} alt="Wraptors commercial wrap, branded fleet vehicles" className={styles.cwImg} loading="lazy" />
+          </div>
+        </section>
+
         {/* ── 04 · The Process — reusable premium vertical timeline ── */}
         <ServiceProcess
           eyebrow="The Wraptors Process"
@@ -282,11 +339,11 @@ export default function WrapsPage() {
           compact
         />
         <AftercareSection service="wraps" />
-        <RelatedInsights category="vehicle-wraps" />
         <ServiceFaqSection service="wraps" />
+        <RelatedInsights category="vehicle-wraps" />
 
       </main>
-      <Footer />
+      <Footer solid />
       <FloatingWhatsApp />
     </>
   );

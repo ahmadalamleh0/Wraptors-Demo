@@ -36,6 +36,10 @@
   opacity: 1;
   transform: none;
 }
+@media (prefers-reduced-motion: reduce) {
+  .header { transition: opacity 0.3s ease; transform: none !important; }
+  .marqueeTrack { animation: none; }
+}
 
 .label {
   display: block;

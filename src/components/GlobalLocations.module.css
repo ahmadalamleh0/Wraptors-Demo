@@ -90,6 +90,9 @@
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
+@media (prefers-reduced-motion: reduce) {
+  .header, .globeOuter, .statsRow, .region { transition: opacity 0.3s ease; transform: none !important; }
+}
 
 /* ── Header ── */
 .header {

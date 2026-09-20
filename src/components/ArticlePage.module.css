@@ -186,6 +186,23 @@
   max-width: 68ch;
 }
 
+/* Supporting photo between sections — kept short (wide aspect ratio, a
+   height cap) so the page doesn't grow unnecessarily long. */
+.sectionImageWrap {
+  aspect-ratio: 16 / 9;
+  max-height: 380px;
+  overflow: hidden;
+  border-radius: 4px;
+  margin: 8px 0 28px;
+}
+
+.sectionImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .geoMention {
   font-family: var(--font-ui);
   font-size: 0.86rem;
@@ -349,6 +366,7 @@
   .relatedSection   { padding: 48px 24px 64px; }
   .ctaSection       { padding: 64px 24px; }
   .heroImageWrap    { aspect-ratio: 16 / 10; }
+  .sectionImageWrap { aspect-ratio: 4 / 3; max-height: 280px; margin: 4px 0 22px; }
 }
 
 @media (max-width: 480px) {

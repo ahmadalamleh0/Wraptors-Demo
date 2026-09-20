@@ -393,7 +393,7 @@ function CoverageExplorer() {
             </div>
 
             <a
-              href={`mailto:info@wraptorsmafia.com?subject=PPF Quote – ${activeZone.title}&body=I'm interested in: ${activeZone.title}`}
+              href={`mailto:info@wraptors.com?subject=PPF Quote – ${activeZone.title}&body=I'm interested in: ${activeZone.title}`}
               className={styles.explorerCta}
             >
               Request This Coverage
@@ -545,7 +545,6 @@ export default function PPFPage() {
       <section className={styles.gallerySection}>
         <div className={styles.container}>
           <div className={styles.sectionHead}>
-            <span className={styles.eyebrow}>Real Installs</span>
             <h2 className={styles.sectionTitle}>Protection in Detail</h2>
             <p className={styles.sectionSub}>A closer look at the details behind every installation.</p>
           </div>
@@ -559,7 +558,6 @@ export default function PPFPage() {
                   style={{ '--mobileFocus': mobileFocus }}
                   draggable={false}
                 />
-                <figcaption className={styles.galleryLabel}>{label}</figcaption>
               </figure>
             ))}
           </div>
@@ -576,9 +574,9 @@ export default function PPFPage() {
       {/* ── 8. AFTERCARE ─────────────────────────────────────────── */}
       <AftercareSection service="ppf" />
 
-      <RelatedInsights category="paint-protection-film" />
-
       <ServiceFaqSection service="ppf" />
+
+      <RelatedInsights category="paint-protection-film" />
 
       {/* ── 9. FINAL CTA ─────────────────────────────────────────── */}
       <section className={styles.ctaSection}>
@@ -587,7 +585,7 @@ export default function PPFPage() {
           <h2 className={styles.ctaTitle}>Ready to protect your finish?</h2>
           <p className={styles.ctaSub}>Tell us your vehicle and preferred coverage. We handle the rest.</p>
           <a
-            href="mailto:info@wraptorsmafia.com?subject=PPF Coverage Request"
+            href="mailto:info@wraptors.com?subject=PPF Coverage Request"
             className={styles.ctaBtn}
           >
             Request PPF Coverage
@@ -596,7 +594,7 @@ export default function PPFPage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer solid />
       <FloatingWhatsApp />
     </>
   );

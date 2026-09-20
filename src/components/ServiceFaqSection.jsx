@@ -15,7 +15,7 @@ export default function ServiceFaqSection({ service }) {
         <span className={styles.eyebrow}>FAQ</span>
         <h2 className={styles.title}>Common Questions</h2>
       </div>
-      <FaqAccordion faqs={faqs} mono />
+      <FaqAccordion faqs={faqs} light />
     </section>
   );
 }

@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import { fileURLToPath, URL } from 'node:url'
 import { VIDEOS_CACHE_NAME } from './src/lib/pwaCacheNames.js'
 
@@ -71,15 +72,51 @@ const videoFetchDiagnosticsPlugin = {
   },
 }
 
+// Netlify sets CONTEXT to 'production' only for the actual production
+// branch deploy — 'deploy-preview', 'branch-deploy', and (crucially) an
+// unset CONTEXT such as a local build all fall through to the noindex
+// branch below. That direction is deliberate: if this check is ever
+// skipped or misconfigured, the safe failure is "a real deploy accidentally
+// stays out of the index" (annoying, fixable) rather than "a preview
+// accidentally gets indexed" (much harder to undo). This is injected into
+// the same index.html that scripts/prerender.mjs snapshots per route, so
+// it reaches every prerendered page, not just the SPA shell.
+const IS_PRODUCTION_CONTEXT = process.env.CONTEXT === 'production'
+
+const robotsMetaPlugin = {
+  name: 'inject-preview-robots-meta',
+  transformIndexHtml(html) {
+    if (IS_PRODUCTION_CONTEXT) return html
+    return html.replace(
+      '<meta charset="UTF-8" />',
+      '<meta charset="UTF-8" />\n    <meta name="robots" content="noindex, nofollow" />'
+    )
+  },
+}
+
 export default defineConfig({
   plugins: [
     react(),
+    robotsMetaPlugin,
+    // Build-time only — re-encodes every bundled raster asset at a lossy-
+    // but-visually-transparent quality instead of the ~100% source photos
+    // came in at. Same dimensions/crop/design, meaningfully smaller files.
+    ViteImageOptimizer({
+      // SVGs excluded: svgo isn't installed, and the site's SVGs (brand
+      // logos, icons) are already small — raster photos are the real
+      // payload here.
+      test: /\.(jpe?g|png|webp)$/i,
+      jpg: { quality: 78, mozjpeg: true },
+      jpeg: { quality: 78, mozjpeg: true },
+      png: { quality: 78 },
+      webp: { lossless: false, quality: 78 },
+    }),
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       includeAssets: [
-        'favicon.svg',
-        'favicon-mafia.svg',
+        'favicon.ico',
+        'favicon-32x32.png',
         'apple-touch-icon-180x180.png',
       ],
       manifest: {

@@ -2,12 +2,15 @@ import styles from './Footer.module.css';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
 import footerImg from '../../Footer.jpeg';
 
+// Footer renders on every page, so these use an absolute "/#id" path
+// (navigate home, then scroll) rather than a bare "#id" fragment, which
+// would only work while already on the homepage.
 const NAV_LINKS = [
-  { label: 'Services',    href: '#services'  },
-  { label: 'Locations',   href: '#locations' },
-  { label: 'Builds',      href: '#builds'    },
-  { label: 'Culture',     href: '#founder'   },
-  { label: 'Get a Quote', href: '#cta'       },
+  { label: 'Services',    href: '/#services'         },
+  { label: 'Locations',   href: '/#locations'        },
+  { label: 'Builds',      href: '/#signature-builds' },
+  { label: 'Culture',     href: '/about'             },
+  { label: 'Get a Quote', href: '/#cta'               },
 ];
 
 const CONTACT = [
@@ -27,18 +30,25 @@ const SOCIALS = [
   { label: 'YouTube',   href: '#', icon: <YouTubeIcon />   },
 ];
 
-export default function Footer() {
+// `solid` renders a plain black footer with no background photo — used on
+// service pages, where the logo becomes the focal point instead. The
+// homepage (and every other page) keeps the default photo footer.
+export default function Footer({ solid = false }) {
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} ${solid ? styles.footerSolid : ''}`}>
 
-      {/* Full-bleed background — boat is the hero */}
-      <img
-        className={styles.bg}
-        src={footerImg}
-        alt="Wraptors race boat"
-        aria-hidden="true"
-      />
-      <div className={styles.overlay} aria-hidden="true" />
+      {!solid && (
+        <>
+          {/* Full-bleed background — boat is the hero */}
+          <img
+            className={styles.bg}
+            src={footerImg}
+            alt="Wraptors race boat"
+            aria-hidden="true"
+          />
+          <div className={styles.overlay} aria-hidden="true" />
+        </>
+      )}
 
       <div className={styles.content}>
 
@@ -47,7 +57,7 @@ export default function Footer() {
 
           {/* Brand + socials */}
           <div className={styles.brand}>
-            <WraptorsMafiaLogo className={styles.logo} />
+            <WraptorsMafiaLogo className={`${styles.logo} ${solid ? styles.logoSolid : ''}`} />
 
             <p className={styles.tagline}>
               ELEVATING VEHICLES.<br />SETTING STANDARDS.

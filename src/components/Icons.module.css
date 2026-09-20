@@ -92,6 +92,9 @@
   opacity: 1;
   transform: none;
 }
+@media (prefers-reduced-motion: reduce) {
+  .animUp, .card { transition: opacity 0.3s ease; transform: none !important; }
+}
 
 /* ── Card grid ── */
 .grid {

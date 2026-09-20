@@ -201,6 +201,155 @@
   }
 }
 
+/* ══ MID-SECTION TEXT BREAK ══
+   A simple centered heading + short description on black — used to
+   separate a mixed-car gallery from a single-car featured project below
+   it, without needing the full kicker/statement intro system. */
+.midSection {
+  background: #000;
+  padding: 88px 32px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.midSectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+
+.midSectionDesc {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.65;
+  margin: 0 auto;
+  max-width: 480px;
+}
+
+@media (max-width: 768px) {
+  .midSection { padding: 60px 24px; }
+  .midSectionTitle { margin-bottom: 12px; }
+}
+
+/* ══ FEATURED PROJECT ══
+   One single-car showcase: a wide main image with a caption overlay,
+   then a grid of detail shots — paired, side by side, on every
+   breakpoint. Same visual grammar as the galleries below (8px gap, no
+   cards, no radius, staggered reveal). */
+.featuredProject {
+  background: #000;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.featuredMain {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  min-height: 320px;
+  max-height: 560px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.featuredProjectVisible .featuredMain { opacity: 1; transform: translateY(0); }
+
+.featuredMainImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+  display: block;
+}
+
+.featuredOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.2) 45%, transparent 70%);
+  pointer-events: none;
+}
+
+.featuredFooter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 28px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.featuredEyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.featuredTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.featuredGridTile {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.featuredProjectVisible .featuredGridTile { opacity: 1; transform: translateY(0); }
+.featuredProjectVisible .featuredGridTile:nth-child(2) { transition-delay: 0.08s; }
+.featuredProjectVisible .featuredGridTile:nth-child(3) { transition-delay: 0.16s; }
+.featuredProjectVisible .featuredGridTile:nth-child(4) { transition-delay: 0.24s; }
+
+.featuredGridImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.featuredGridTile:hover .featuredGridImg { transform: scale(1.04); }
+
+@media (prefers-reduced-motion: reduce) {
+  .featuredMain, .featuredGridTile {
+    transition: opacity 0.3s ease;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* min-height (320px) exceeds what a 16:9 ratio gives at phone widths,
+     which was forcing the browser to widen the box past the viewport to
+     satisfy the ratio at that height — causing horizontal overflow. */
+  .featuredMain { min-height: 0; }
+}
+
 /* ══ 3-IMAGE EDITORIAL GALLERY ══
    Adapts the McLaren gallery system for Ceramic Coating.
    Photo 1: One large full-width hero image on top

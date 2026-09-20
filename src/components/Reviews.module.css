@@ -328,6 +328,10 @@
   50%       { opacity: 1;   transform: translateY(20px); }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .streak1, .streak2, .streak3, .streak4 { animation: none; opacity: 0.5; }
+}
+
 /* ── Responsive ──
    Mobile keeps all four stats in one dense row instead of a 2x2 grid —
    the 1px grid gap against .statsRow's background still reads as thin

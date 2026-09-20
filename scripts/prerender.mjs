@@ -41,6 +41,7 @@ const SERVICE_PATHS = [
   '/services/tint',
   '/services/starlight',
   '/services/ppf',
+  '/services/custom-builds',
 ];
 
 function buildRouteList() {

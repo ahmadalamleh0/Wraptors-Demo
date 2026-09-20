@@ -18,7 +18,8 @@
   background-size: cover;
   background-position: center;
   background-image: var(--jpeg); /* JPEG — every browser */
-  opacity: 0.90;
+  opacity: 0.95;
+  filter: brightness(1.75) contrast(1.25) saturate(1.1);
   will-change: transform, opacity;
   animation: drift1 3.7s ease-in-out infinite alternate;
 }
@@ -43,6 +44,7 @@
   background-size: cover;
   background-position: center 24%;
   background-image: var(--jpeg); /* JPEG — every browser */
+  filter: brightness(1.9) contrast(1.3);
   will-change: transform, opacity;
   animation: drift2 5.8s ease-in-out infinite alternate;
 }
@@ -161,13 +163,13 @@
   inset: 0;
   background:
     linear-gradient(to bottom,
-      rgba(2,2,8,0.72)  0%,
-      rgba(2,2,8,0.18) 38%,
-      rgba(2,2,8,0.10) 55%,
-      rgba(2,2,8,0.75) 100%
+      rgba(2,2,8,0.48)  0%,
+      rgba(2,2,8,0.08) 38%,
+      rgba(2,2,8,0.04) 55%,
+      rgba(2,2,8,0.58) 100%
     ),
     linear-gradient(to right,
-      rgba(2,2,8,0.52)  0%,
+      rgba(2,2,8,0.36)  0%,
       transparent       55%
     );
 }

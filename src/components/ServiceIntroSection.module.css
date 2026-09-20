@@ -6,14 +6,20 @@
 .section {
   position: relative;
   background: #000;
-  padding: 150px 64px 120px;
+  padding: 150px 64px 88px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   overflow: hidden;
 }
 
+/* No fixed bottom margin here — .inner is the section's last element on
+   every page currently in use (none pass options/gallery), so a margin
+   here stacked on top of .section's own bottom padding, doubling the gap
+   before the next section. The gallery grid below supplies its own
+   margin-top instead, so that spacing only appears when there's actually
+   a gallery to separate from. */
 .inner {
   max-width: 900px;
-  margin: 0 0 64px;
+  margin: 0;
 }
 
 /* Two-line editorial lockup, in the direction of a coachbuilder nameplate
@@ -24,6 +30,8 @@
   margin: 0 0 32px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .kicker {
@@ -75,7 +83,7 @@
 
 .description {
   font-family: var(--font-ui);
-  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  font-size: clamp(1.05rem, 1.2vw, 1.15rem);
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.6);
   max-width: 460px;
@@ -148,6 +156,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   max-width: 1180px;
+  margin-top: 64px;
 }
 
 .galleryImgWrap {
@@ -177,12 +186,12 @@
 
 /* ── Mobile ── */
 @media (max-width: 900px) {
-  .section { padding: 100px 20px 80px; }
-  .inner { margin-bottom: 44px; }
+  .section { padding: 100px 20px 48px; }
+  .inner { margin-bottom: 0; }
   .heading { margin-bottom: 24px; }
   .kicker { font-size: clamp(0.8rem, 3.6vw, 1rem); letter-spacing: 0.18em; margin-bottom: 10px; }
   .statement { font-size: clamp(1.5rem, 8vw, 2.2rem); letter-spacing: -0.005em; }
-  .description { font-size: 0.92rem; max-width: none; margin-top: 24px; }
+  .description { font-size: 1.02rem; max-width: none; margin-top: 24px; }
   .options { margin-top: 32px; gap: 12px 24px; }
   .option { font-size: 0.68rem; }
 
@@ -194,6 +203,7 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     max-width: none;
+    margin-top: 40px;
   }
   .gallery::-webkit-scrollbar { display: none; }
   .galleryImgWrap { flex: 0 0 62vw; scroll-snap-align: start; }

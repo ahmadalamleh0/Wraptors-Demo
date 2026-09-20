@@ -27,14 +27,54 @@
   box-shadow: 0 2px 60px rgba(0, 0, 0, 0.7);
 }
 
-/* ── Logo — absolutely centered in the navbar ── */
+/* ── Logo — absolutely centered in the navbar, with a small "Dubai
+   Edition" label stacked above the mark ── */
 .logo {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 5px;
   text-decoration: none;
+}
+
+/* Secondary to the logo — small, wide-tracked, quiet. Fades in together
+   with the mark rather than appearing on its own. */
+.dubaiEdition {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.68);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+}
+.dubaiEditionVisible { opacity: 1; }
+
+/* Equal-width columns on either side of the flag — "Dubai" and "Edition"
+   are different lengths, so without this the flag (and the whole label)
+   would sit off-centre relative to the logo below it. */
+.dubaiEditionWord {
+  width: 4.6em;
+  flex-shrink: 0;
+}
+.dubaiEditionWordLeft { text-align: right; }
+.dubaiEditionWordRight { text-align: left; }
+
+.dubaiFlag {
+  display: block;
+  width: 13px;
+  height: 9px;
+  object-fit: cover;
+  border-radius: 1px;
+  flex-shrink: 0;
 }
 
 /* SVG logo mark — fades in as the hero logo arrives on scroll */
@@ -53,6 +93,9 @@
 
 @media (max-width: 960px) {
   .navLogoMark { width: 32px; height: 32px; }
+  .logo { gap: 3px; }
+  .dubaiEdition { font-size: 0.42rem; letter-spacing: 0.22em; gap: 4px; }
+  .dubaiFlag { width: 11px; height: 7px; }
 }
 
 /* ── Nav links ── */

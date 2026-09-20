@@ -31,7 +31,7 @@ export const SERVICE_CATALOG = {
   ceramic:   { label: 'Ceramic Coating',       path: '/services/ceramic' },
   tint:      { label: 'Window Tint',           path: '/services/tint' },
   starlight: { label: 'Starlight Headliner',   path: '/services/starlight' },
-  commercial:{ label: 'Commercial Wrap',       path: '/#cta' },
+  commercial:{ label: 'Commercial Wrap',       path: '/services/wraps' },
 };
 
 // Category label shown above each service card — constant across every

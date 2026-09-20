@@ -55,6 +55,9 @@
   opacity: 1;
   transform: translateY(0);
 }
+@media (prefers-reduced-motion: reduce) {
+  .block { transition: opacity 0.3s ease; transform: none !important; }
+}
 
 /* ══ IMAGE FRAME ══ */
 .imgFrame {

@@ -44,7 +44,7 @@ export const ARTICLES = [
     seoTitle: 'Can a Car Wrap Handle Dubai Summer? | Wraptors',
     metaDescription: 'What Dubai heat actually does to a vinyl wrap, which panels show it first, and what to check through the summer months before it becomes a real problem.',
     excerpt: 'A wrap does not fail all at once in Dubai heat. It ages panel by panel, and knowing which ones to watch tells you a lot before you commit to a colour.',
-    heroImageKey: 'wraps2',
+    heroImageKey: 'wraps4',
     publishDate: '2026-09-17',
     updatedDate: '2026-09-17',
     featured: true,
@@ -59,6 +59,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Constant Outdoor Parking Is the Real Variable',
+        image: 'wraps5',
         body: [
           'Most wrap guidance is written with occasional summer sun in mind, not a car that sits uncovered on a villa driveway or in an open lot from May through September. In Dubai, that is the normal case rather than the exception, and it is the accumulated hours of exposure that matter, not any single hot day.',
           'A car with covered parking at home and at work is genuinely doing less damage to itself than an identical car parked in open sun for the same months. If covered parking is not an option, that is worth factoring into the colour and finish decision up front rather than treating it as an afterthought.',
@@ -73,6 +74,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Washing Habits Do More Damage Than People Expect',
+        image: 'wraps6',
         body: [
           'Hard water spots that are left to dry in direct sun can bake onto vinyl and become genuinely difficult to remove without affecting the finish underneath. Rinsing and drying a wrapped car in the shade, rather than letting water sit under a midday sun, avoids most of this.',
           'Dust and sand accumulate quickly here regardless of finish, and matte panels in particular show that buildup differently than gloss does. A car that goes weeks without a wash in Dubai is not just dirty, it is giving dust and grit more time to sit against the film.',
@@ -103,7 +105,7 @@ export const ARTICLES = [
     seoTitle: 'Changing Your Car Colour in Dubai: What to Know | Wraptors',
     metaDescription: 'The approval, inspection and registration steps involved in legally changing your car colour in Dubai, and what to sort out before you book a wrap.',
     excerpt: 'A colour change wrap is a paperwork change as much as a styling one. Here is what actually needs to happen before and after the film goes on.',
-    heroImageKey: 'wraps1',
+    heroImageKey: 'wraps7',
     publishDate: '2026-09-17',
     updatedDate: '2026-09-17',
     featured: false,
@@ -117,6 +119,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Getting Approval Before the Wrap Goes On',
+        image: 'wraps8',
         body: [
           'Before any colour changing film goes on the car, Dubai Police requires a No Objection Certificate for the change, issued by the Criminal Investigation Department. This is now commonly handled through the Dubai Police smart app rather than a station visit, and a modest fee applies, commonly cited at around AED 120 at the time of writing. Confirm the current fee and process directly with Dubai Police, since government fees are reviewed periodically.',
           'The certificate is typically only valid for a limited window after it is issued, commonly cited as around 30 days, so it makes sense to request it once you are ready to book the wrap rather than well in advance.',
@@ -131,6 +134,7 @@ export const ARTICLES = [
       },
       {
         heading: 'After the Wrap Goes On',
+        image: 'wraps9',
         body: [
           'Once installation is complete, the vehicle typically needs a technical inspection at an approved centre, such as Tasjeel, to confirm the colour change was carried out to the expected standard. After that inspection passes, your Mulkiya can be updated at the RTA to reflect the new registered colour, with its own amendment fee, commonly cited at around AED 170.',
           'Skipping this step does not just risk a fine. It leaves your registration out of step with what the car actually looks like, which can cause problems the next time the vehicle is checked or renewed.',
@@ -161,7 +165,7 @@ export const ARTICLES = [
     seoTitle: 'Vinyl Wrap vs Colour PPF: Which One Makes Sense? | Wraptors',
     metaDescription: 'Choosing between a vinyl wrap and colour PPF depends on what you actually want from the change. Here is how to think about it by goal rather than spec sheet.',
     excerpt: 'Both change your colour completely. The right one depends on what you actually want out of it, not which film wins on paper.',
-    heroImageKey: 'wraps3',
+    heroImageKey: 'wraps10',
     publishDate: '2026-09-17',
     updatedDate: '2026-09-17',
     featured: false,
@@ -175,6 +179,7 @@ export const ARTICLES = [
       },
       {
         heading: 'If a Distinct Finish Is the Priority',
+        image: 'wraps11',
         body: [
           'Vinyl has the wider range by a large margin. Matte, satin, chrome, colour shift, textured and metallic finishes are all available, and many of them cannot be replicated with a colour PPF at all. Colour PPF is available in a narrower set of finishes, generally gloss and satin, so if the appeal is a finish that reads as clearly different from paint, vinyl is usually the more direct route.',
         ],
@@ -187,6 +192,7 @@ export const ARTICLES = [
       },
       {
         heading: 'If You Want a Colour Change That Reads as Paint',
+        image: 'wraps12',
         body: [
           'Colour PPF bonds closer to the body and tends to produce a smoother, glass like finish with less visible orange peel than most vinyl. For owners who want a genuinely different colour without it looking like a wrap up close, that finish quality is often the deciding factor.',
         ],
@@ -215,7 +221,7 @@ export const ARTICLES = [
     seoTitle: 'Matte, Satin or Gloss Wrap in Dubai: Which to Choose | Wraptors',
     metaDescription: 'How matte, satin and gloss wraps actually behave day to day in Dubai, from washing and maintenance to how each finish reads once the car is dusty.',
     excerpt: 'The finish you love in a photo and the one you will actually enjoy maintaining outdoors in Dubai are not always the same choice.',
-    heroImageKey: 'wraps1',
+    heroImageKey: 'wraps13',
     publishDate: '2026-09-17',
     updatedDate: '2026-09-17',
     featured: false,
@@ -229,6 +235,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Maintenance Is Where the Real Difference Shows',
+        image: 'wraps14',
         body: [
           'Matte needs its own pH neutral, matte specific products, hand washing rather than automated brush washes, and no wax or standard polish, which can leave blotchy shiny patches on a flat finish. Satin is more forgiving and tolerates a wider range of gentle car care products. Gloss is the most tolerant of the three and comes closest to a normal car wash routine.',
         ],
@@ -241,6 +248,7 @@ export const ARTICLES = [
       },
       {
         heading: 'A Practical Washing Routine by Finish',
+        image: 'wraps5',
         body: [
           'Hand washing or a touchless wash is the safer default for any finish in this climate, since heat makes vinyl more sensitive during washing than it would be in milder conditions. For matte specifically, that means skipping automated brush washes entirely and sticking to matte safe products, while gloss and satin have more flexibility if a quick wash is genuinely the only option available.',
         ],
@@ -271,7 +279,7 @@ export const ARTICLES = [
     seoTitle: 'Is Paint Protection Film Worth It in Dubai? | Wraptors',
     metaDescription: 'A straight look at what PPF actually protects against in Dubai’s climate and driving conditions, and who genuinely benefits most from it.',
     excerpt: 'PPF isn’t necessary for every car or every owner. Here’s what it actually does, and how to know if it’s worth it for yours.',
-    heroImageKey: 'ppf1',
+    heroImageKey: 'ppf4',
     publishDate: '2026-01-20',
     updatedDate: '2026-01-20',
     featured: true,
@@ -285,6 +293,7 @@ export const ARTICLES = [
       },
       {
         heading: 'The Real Cost-Benefit',
+        image: 'ppf5',
         body: [
           "The upfront cost of PPF is meaningful, and it's fair to weigh that against how the car is actually used. A daily driver on busy roads, a new vehicle you want to keep pristine, or a car you plan to sell or trade in later all make a stronger case for PPF than a rarely-driven weekend car kept in a garage.",
         ],
@@ -297,6 +306,7 @@ export const ARTICLES = [
       },
       {
         heading: 'What This Means in Dubai',
+        image: 'ppf6',
         body: [
           "Dubai adds two factors that increase the case for PPF specifically: fine, wind-blown sand that acts almost like a very light abrasive over time, and intense, sustained UV that can dull an unprotected clear coat faster than milder climates. Cars that see regular highway driving pick up stone chips at a noticeably higher rate here too.",
           "For a lot of owners, PPF on the front bumper, bonnet and mirrors — the highest-impact areas — offers a strong practical middle ground between full coverage and no protection at all.",
@@ -332,7 +342,7 @@ export const ARTICLES = [
     seoTitle: 'PPF vs Ceramic Coating: What’s the Real Difference? | Wraptors',
     metaDescription: 'PPF and ceramic coating solve different problems. Here’s the real difference, and why most premium builds actually use both together.',
     excerpt: 'These two get confused constantly, but they protect against different things. Here’s what each one actually does.',
-    heroImageKey: 'ppf2',
+    heroImageKey: 'ppf7',
     publishDate: '2026-01-22',
     updatedDate: '2026-01-22',
     featured: true,
@@ -346,6 +356,7 @@ export const ARTICLES = [
       },
       {
         heading: 'What Ceramic Coating Protects Against',
+        image: 'ppf8',
         body: [
           "Ceramic coating is a liquid-applied chemical layer that bonds to the surface, whether that surface is paint, PPF or a wrap. It doesn't add meaningful physical thickness, so it won't stop a stone chip — what it does is make the surface more resistant to chemical staining, UV-related fading, and general dirt, while making the car noticeably easier to clean thanks to its hydrophobic properties.",
         ],
@@ -358,6 +369,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Which One Fits Your Situation',
+        image: 'ppf9',
         body: [
           "If your priority is preventing stone chips and physical damage, PPF is the more direct answer. If your priority is gloss, easier cleaning and protection against sun fading and contamination, ceramic coating addresses that more directly. If you want both, that's a very common combination — PPF on high-impact areas, ceramic coating over the whole car.",
         ],
@@ -392,7 +404,7 @@ export const ARTICLES = [
     seoTitle: 'Clear PPF vs Colour PPF: What’s the Difference? | Wraptors',
     metaDescription: 'How clear PPF and colour PPF actually differ, and how to decide which one fits your car and what you want from it.',
     excerpt: 'Colour PPF blurs the line between protection and finish change. Here’s how it actually compares to clear film.',
-    heroImageKey: 'ppf3',
+    heroImageKey: 'ppf6',
     publishDate: '2026-01-24',
     updatedDate: '2026-01-24',
     featured: false,
@@ -406,6 +418,7 @@ export const ARTICLES = [
       },
       {
         heading: 'What Colour PPF Does',
+        image: 'ppf5',
         body: [
           "Colour PPF combines the same protective properties with a tinted or satin finish, effectively changing the car's colour or finish the way a wrap would — but with the thicker, more impact-resistant properties of PPF rather than standard vinyl.",
         ],
@@ -418,6 +431,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Which One Fits Your Car',
+        image: 'ppf8',
         body: [
           'Clear PPF is the more common choice for owners protecting a factory finish they want to keep exactly as-is. Colour PPF tends to appeal to owners who want a finish change but also want the toughest possible protection on a vehicle they drive hard or keep for the long term.',
         ],
@@ -452,7 +466,7 @@ export const ARTICLES = [
     seoTitle: 'How Long Does PPF Last in Dubai? | Wraptors',
     metaDescription: 'What actually determines how long paint protection film holds up in Dubai’s heat and sun, and how to help it last.',
     excerpt: 'PPF lifespan depends on the film, the installation, and how the car is used and maintained. Here’s what actually matters.',
-    heroImageKey: 'ppf1',
+    heroImageKey: 'ppf9',
     publishDate: '2026-01-26',
     updatedDate: '2026-01-26',
     featured: false,
@@ -466,12 +480,14 @@ export const ARTICLES = [
       },
       {
         heading: 'Signs PPF Needs Attention',
+        image: 'ppf4',
         body: [
           'Yellowing, edges lifting away from the panel, and a loss of the self-healing effect (light scratches no longer disappearing with heat) are the main signs a film is nearing the end of its useful life.',
         ],
       },
       {
         heading: 'Maintenance That Extends Life',
+        image: 'ppf7',
         body: [
           "Regular washing, avoiding harsh chemical cleaners, and addressing any lifting or damage early rather than leaving it all extend how long PPF performs well. Most maintenance is genuinely simple — consistency matters more than intensity.",
         ],
@@ -521,7 +537,7 @@ export const ARTICLES = [
     seoTitle: 'What Ceramic Coating Actually Protects in Dubai | Wraptors',
     metaDescription: 'An honest breakdown of what ceramic coating protects your paint from in Dubai, and the common misunderstandings around scratches, chips and swirl marks.',
     excerpt: 'Ceramic coating gets sold as a shield in some conversations. It is a real upgrade, but not for the reasons most people assume.',
-    heroImageKey: 'ceramic1',
+    heroImageKey: 'ceramic4',
     publishDate: '2026-09-17',
     updatedDate: '2026-09-17',
     featured: true,
@@ -535,6 +551,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Why It Is Not a Scratch Proof Shield',
+        image: 'ceramic5',
         body: [
           'A coating is thinner than a sheet of paper sitting on top of the paint. A stone kicked up at highway speed does not know or care that the panel underneath is coated, and it will chip the paint the same way it would on an uncoated car. The same is true for a key dragged across a door or a careless wash mitt. Coating adds a small amount of scratch resistance to light surface contact, but it was never designed to absorb impact, and treating it that way is where expectations go wrong before the car even leaves the shop.',
         ],
@@ -547,6 +564,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Where It Genuinely Earns Its Keep',
+        image: 'ceramic6',
         body: [
           'Bird droppings, tree sap and general road grime sit on top of a coated surface rather than bonding into the paint the way they can on bare, unprotected paint, which gives you a real window to clean them off before they cause damage. UV resistance slows the gradual fading and oxidation that unprotected paint experiences over years of sun exposure. Washing genuinely gets easier too, since less grime sticks in the first place.',
         ],
@@ -575,7 +593,7 @@ export const ARTICLES = [
     seoTitle: 'Do You Need Paint Correction Before Ceramic Coating? | Wraptors',
     metaDescription: 'What paint correction actually does, when it is worth doing before ceramic coating, and why a brand new car is not automatically defect free.',
     excerpt: 'Coating locks in whatever condition your paint is already in. Whether that is a problem depends on what is actually there before you book it.',
-    heroImageKey: 'ceramic2',
+    heroImageKey: 'ceramic7',
     publishDate: '2026-09-17',
     updatedDate: '2026-09-17',
     featured: false,
@@ -589,6 +607,7 @@ export const ARTICLES = [
       },
       {
         heading: 'A New Car Arriving With Marks Is Normal',
+        image: 'ceramic6',
         body: [
           'It is easy to assume a car straight from the dealership has flawless paint, but transport, wash bay handling and dealer prep routinely leave behind fine swirl marks, and sometimes light scratches from towel drying or automatic washes before the car ever reaches its first owner. This is common enough that it should be expected and checked for, not treated as a surprise if a brand new car is not perfect underneath the shine.',
         ],
@@ -601,6 +620,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Deciding How Much Correction You Actually Need',
+        image: 'ceramic4',
         body: [
           'The right level of correction depends on the paint in front of you, not a fixed package. A car with visible swirling under direct light or in the sun benefits from proper multi stage correction before coating. A car that already looks clean and even under close inspection may only need a light enhancement pass. Correcting more than the paint needs adds time and cost without adding value, and correcting less than it needs means the coating seals in problems that were fixable.',
         ],
@@ -629,7 +649,7 @@ export const ARTICLES = [
     seoTitle: 'Why Does a Ceramic Coated Car Still Get Water Spots? | Wraptors',
     metaDescription: 'Why water spots still appear on a hydrophobic, ceramic coated car in Dubai, the difference between mineral deposits and real coating failure, and how to wash and dry to avoid it.',
     excerpt: 'A coated car beading water and a coated car staying spot free are two different things. Here is why the second one still needs a bit of help from you.',
-    heroImageKey: 'ceramic3',
+    heroImageKey: 'ceramic8',
     publishDate: '2026-09-17',
     updatedDate: '2026-09-17',
     featured: false,
@@ -643,6 +663,7 @@ export const ARTICLES = [
       },
       {
         heading: 'What Is Actually Left Behind',
+        image: 'ceramic5',
         body: [
           'Tap and irrigation water almost everywhere carries dissolved minerals, mainly calcium and magnesium. The water itself evaporates, the minerals do not, and they crystallise into the small white or cloudy marks known as water spots. This has nothing to do with whether the surface underneath is coated, waxed or bare paint, it is simply what hard water leaves behind when it is allowed to dry in place.',
         ],
@@ -655,6 +676,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Surface Deposits Versus Actual Coating Failure',
+        image: 'ceramic4',
         body: [
           'Fresh mineral deposits sitting on top of the coating usually wipe away with a proper spot remover and a microfiber towel, no polishing required, which is a sign the coating itself is fine and this is just contamination on the surface. Reduced beading, a duller finish overall, or water sheeting unevenly across the whole car are the signs that point to the coating actually wearing down, which is a different problem with a different fix.',
         ],
@@ -683,7 +705,7 @@ export const ARTICLES = [
     seoTitle: 'Dealer vs Specialist Ceramic Coating in Dubai | Wraptors',
     metaDescription: 'What actually differs between a dealer ceramic coating package and a specialist detailer in Dubai, and the questions worth asking before you compare prices.',
     excerpt: 'Two quotes can both say ceramic coating and mean very different things. Here is what to actually compare before choosing between them.',
-    heroImageKey: 'ceramic1',
+    heroImageKey: 'ceramic6',
     publishDate: '2026-09-17',
     updatedDate: '2026-09-17',
     featured: false,
@@ -697,6 +719,7 @@ export const ARTICLES = [
       },
       {
         heading: 'What Product Is Actually Being Applied',
+        image: 'ceramic7',
         body: [
           'It is a fair question to ask directly: what specific coating is being used, and is it a professional grade product installed by a trained applicator, or a lighter consumer style sealant applied quickly as part of a delivery package. Both exist under the same general label, and the difference in how long each one actually performs can be significant.',
         ],
@@ -709,6 +732,7 @@ export const ARTICLES = [
       },
       {
         heading: 'What Surfaces and Aftercare Are Covered',
+        image: 'ceramic5',
         body: [
           'Some packages cover the full exterior paint only. Others extend to wheels, glass or trim, and some include a maintenance kit or a follow up check, while others end the moment the car leaves. None of these are automatically right or wrong, but they change what you are actually paying for and should be part of the comparison rather than assumed.',
         ],
@@ -739,7 +763,7 @@ export const ARTICLES = [
     seoTitle: 'Window Tinting in Dubai: What You Need to Know | Wraptors',
     metaDescription: 'A practical starting guide to window tinting in Dubai — film types, what tint actually improves, and how to choose the right option.',
     excerpt: 'Everything to know before you book a window tint appointment in Dubai, in one place.',
-    heroImageKey: 'tint1',
+    heroImageKey: 'tint2',
     publishDate: '2026-02-05',
     updatedDate: '2026-02-05',
     featured: true,
@@ -753,6 +777,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Film Types, Broadly',
+        image: 'tint3',
         body: [
           "Tint films range from basic dyed films at the entry level to ceramic films at the premium end. Ceramic films generally offer better heat rejection and clarity than dyed film, without the signal interference that some older metallic films could cause with electronics.",
         ],
@@ -765,6 +790,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Choosing the Right Option',
+        image: 'tint4',
         body: [
           'The right film comes down to balancing how much heat rejection you want against how much visibility and light you want to keep, particularly for windscreen and front windows where visibility at night matters most.',
         ],
@@ -800,7 +826,7 @@ export const ARTICLES = [
     seoTitle: 'Ceramic Tint vs Regular Tint: What’s the Difference? | Wraptors',
     metaDescription: 'How ceramic window tint compares to standard dyed tint — heat rejection, clarity, signal interference and long-term performance.',
     excerpt: 'Not all window tint performs the same. Here’s what actually separates ceramic film from standard dyed film.',
-    heroImageKey: 'tint1',
+    heroImageKey: 'tint4',
     publishDate: '2026-02-07',
     updatedDate: '2026-02-07',
     featured: false,
@@ -814,6 +840,7 @@ export const ARTICLES = [
       },
       {
         heading: 'What Ceramic Tint Is',
+        image: 'tint3',
         body: [
           "Ceramic film uses ceramic particles rather than dye to achieve its tint and performance properties. It offers significantly better heat rejection at a similar visible darkness, tends to have better clarity, and — unlike older metallic films — doesn't interfere with phone signal, GPS or radio reception.",
         ],
@@ -826,6 +853,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Which One Fits Your Budget and Priorities',
+        image: 'tint2',
         body: [
           "If budget is the primary driver and you want a darker look with some heat reduction, dyed film covers that. If heat rejection, longevity and clarity are the priority, ceramic is the stronger long-term choice, even at a higher upfront cost.",
         ],
@@ -860,7 +888,7 @@ export const ARTICLES = [
     seoTitle: 'How Long Does Car Window Tint Last in Dubai? | Wraptors',
     metaDescription: 'What determines how long window tint holds up in Dubai’s heat, and the signs it’s time for a refresh.',
     excerpt: 'Tint lifespan depends on film quality, installation, and how much direct sun the car sees. Here’s what actually matters.',
-    heroImageKey: 'tint1',
+    heroImageKey: 'tint3',
     publishDate: '2026-02-09',
     updatedDate: '2026-02-09',
     featured: false,
@@ -874,12 +902,14 @@ export const ARTICLES = [
       },
       {
         heading: 'Signs Tint Is Wearing Out',
+        image: 'tint4',
         body: [
           'Bubbling, peeling at the edges, a purple or faded colour shift (more common with dyed film), and reduced heat rejection are the usual signs that tint has reached the end of its useful life.',
         ],
       },
       {
         heading: 'Maintenance That Helps',
+        image: 'tint2',
         body: [
           'Cleaning tinted windows with ammonia-free glass cleaner and a soft cloth avoids the chemical damage that harsher products can cause to the film over time. This is a small habit that meaningfully extends how good the tint looks.',
         ],
@@ -920,7 +950,7 @@ export const ARTICLES = [
     seoTitle: 'Choosing Window Tint for Dubai Heat | Wraptors',
     metaDescription: 'How to choose the right window tint film specifically for Dubai’s heat and sun — what actually matters versus what’s marketing noise.',
     excerpt: 'Not every tint film performs the same in real heat. Here’s what to actually look for.',
-    heroImageKey: 'tint1',
+    heroImageKey: 'tint2',
     publishDate: '2026-02-11',
     updatedDate: '2026-02-11',
     featured: false,
@@ -934,6 +964,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Ceramic Film Is the Stronger Option for This Climate',
+        image: 'tint3',
         body: [
           "For heat-heavy markets specifically, ceramic film's performance advantage over dyed film is more noticeable day to day than it would be in a milder climate — the difference shows up every time you get into the car after it's been parked in the sun.",
         ],
@@ -946,6 +977,7 @@ export const ARTICLES = [
       },
       {
         heading: 'Balance Darkness With Legal Limits and Night Visibility',
+        image: 'tint4',
         body: [
           "The darkest legally available option isn't automatically the best choice — very dark film can reduce visibility at night, which matters for safety. We'll help you find the balance between heat rejection, privacy and practical visibility.",
         ],

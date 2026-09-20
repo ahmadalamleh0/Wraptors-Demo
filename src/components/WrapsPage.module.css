@@ -330,6 +330,76 @@
   .wagonTile { transition: opacity 0.3s ease; transform: none !important; }
 }
 
+/* ── Commercial Wraps spread — same visual grammar as the McLaren/G-Wagon
+   galleries above (tiny gap, no cards, no radius, staggered reveal), sized
+   for six photos instead of four. Two tiles run full width as the
+   occasional "wide" moment; the rest sit in even rows so nothing reads as
+   a long stack of full-width photos. ── */
+.cwGallery {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "a a"
+    "b c"
+    "d e";
+  background: #000;
+}
+
+.cwTile {
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cwGalleryVisible .cwTile { opacity: 1; transform: translateY(0); }
+.cwGalleryVisible .cwTile1 { transition-delay: 0s; }
+.cwGalleryVisible .cwTile2 { transition-delay: 0.1s; }
+.cwGalleryVisible .cwTile3 { transition-delay: 0.16s; }
+.cwGalleryVisible .cwTile4 { transition-delay: 0.22s; }
+.cwGalleryVisible .cwTile5 { transition-delay: 0.28s; }
+
+.cwTile1 { grid-area: a; aspect-ratio: 3 / 2; }
+.cwTile2 { grid-area: b; aspect-ratio: 4 / 5; }
+.cwTile3 { grid-area: c; aspect-ratio: 4 / 5; }
+.cwTile4 { grid-area: d; aspect-ratio: 4 / 5; }
+.cwTile5 { grid-area: e; aspect-ratio: 4 / 5; }
+
+.cwImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cwTile1 .cwImg { object-position: center 35%; }
+.cwTile2 .cwImg { object-position: center 38%; }
+.cwTile3 .cwImg { object-position: center 55%; }
+.cwTile4 .cwImg { object-position: center 42%; }
+.cwTile5 .cwImg { object-position: center 55%; }
+
+@media (min-width: 901px) {
+  .cwGallery {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "a a b"
+      "c d e";
+    height: clamp(560px, 48vw, 720px);
+    padding: 0 40px;
+  }
+  .cwTile1, .cwTile2, .cwTile3, .cwTile4, .cwTile5 {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cwTile { transition: opacity 0.3s ease; transform: none !important; }
+}
+
 /* ══════════════════════════════════════════════════════════════════════
    Mobile — visual-first, compact, nothing stacked into another full-
    screen chapter. Category/finish rows become horizontal scroll strips

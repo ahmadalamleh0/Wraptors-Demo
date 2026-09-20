@@ -45,3 +45,10 @@
   padding: 0 4px;
   max-width: 640px;
 }
+
+/* ── Light variant — white-background FAQ (service pages) ── */
+.faqListLight .faqItem { border-bottom-color: rgba(0, 0, 0, 0.12); }
+.faqListLight .faqQuestion { color: #0a0a0a; }
+.faqListLight .faqIcon,
+.faqListLight .faqIconMono { color: #0a0a0a; }
+.faqListLight .faqAnswer { color: rgba(0, 0, 0, 0.62); }

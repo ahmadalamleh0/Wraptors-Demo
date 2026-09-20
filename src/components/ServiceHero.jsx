@@ -11,13 +11,21 @@ export default function ServiceHero({
   ctaLabel = 'Start Your Project',
   ctaHref = '#cta',
   media,
+  // Set true for a headline that spans two lines (pass the break as \n in
+  // the string) — sizes it down so a two-line headline doesn't take up
+  // noticeably more of the hero than the usual single-line version.
+  compactHeadline = false,
+  // Set true to push the whole text group down into the lower part of the
+  // hero (e.g. when the shot's main subject sits higher in frame and the
+  // usual position covers it) — same content, just anchored lower.
+  lowerContent = false,
 }) {
   return (
     <section className={styles.hero}>
       <div className={styles.media}>{media}</div>
-      <div className={styles.heroOverlay}>
+      <div className={`${styles.heroOverlay} ${lowerContent ? styles.heroOverlayLower : ''}`}>
         <span className={styles.eyebrow}>{eyebrow}</span>
-        <h1 className={styles.headline}>{headline}</h1>
+        <h1 className={`${styles.headline} ${compactHeadline ? styles.headlineCompact : ''}`}>{headline}</h1>
         <span className={styles.heroSubline}>{supportingLine}</span>
         <a href={ctaHref} className={styles.cta}>
           {ctaLabel} <span aria-hidden="true">→</span>

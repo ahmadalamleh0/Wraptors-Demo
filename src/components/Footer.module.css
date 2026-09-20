@@ -51,6 +51,45 @@
   margin: 0 auto;
 }
 
+/* ── Solid variant — service pages. No photo/overlay; the logo carries
+   the section instead, so it gets real size and breathing room. Brand
+   block centred on its own row, Navigation/Contact as a compact two-column
+   row beneath it — on every breakpoint down to mobile. ── */
+.footerSolid {
+  min-height: 0;
+  justify-content: flex-start;
+}
+.footerSolid .content {
+  padding-top: 64px;
+}
+.footerSolid .grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 32px;
+}
+.footerSolid .brand {
+  grid-column: 1 / -1;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.footerSolid .col { text-align: left; }
+.footerSolid .colHeading {
+  color: #fff;
+}
+.footerSolid .colLink {
+  color: rgba(255, 255, 255, 0.68);
+}
+.footerSolid .brandSub {
+  color: rgba(255, 255, 255, 0.62);
+}
+.footerSolid .socialLink {
+  color: rgba(255, 255, 255, 0.62);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+.footerSolid .sep { margin-bottom: 20px; }
+
 /* ── Three-column grid ── */
 .grid {
   display: grid;
@@ -71,6 +110,10 @@
   height: auto;
   fill: #fff;
   opacity: 0.92;
+}
+
+.logoSolid {
+  width: 92px;
 }
 
 .tagline {
@@ -248,6 +291,10 @@
   .content   { padding: 0 40px 40px; }
   .grid      { grid-template-columns: 1fr 1fr; gap: 40px; }
   .brand     { grid-column: 1 / -1; }
+
+  .footerSolid .content { padding-top: 56px; }
+  .footerSolid .grid { gap: 24px; padding-bottom: 24px; }
+  .logoSolid { width: 76px; }
 }
 
 @media (max-width: 640px) {
@@ -255,4 +302,9 @@
   .content { padding: 0 24px 32px; }
   .grid    { grid-template-columns: 1fr; gap: 32px; }
   .bar     { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+  .footerSolid .content { padding-top: 44px; }
+  .footerSolid .grid { grid-template-columns: 1fr 1fr; gap: 20px; padding-bottom: 20px; }
+  .footerSolid .brand { grid-column: 1 / -1; margin-bottom: 4px; }
+  .logoSolid { width: 64px; }
 }

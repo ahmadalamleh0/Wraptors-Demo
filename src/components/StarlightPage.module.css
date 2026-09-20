@@ -415,9 +415,10 @@
   position: absolute;
   top: 88px;
   left: 0;
+  right: 0;
   z-index: 2;
   padding: 0 64px;
-  max-width: 560px;
+  text-align: center;
 }
 
 .editorialTitle {

@@ -15,9 +15,9 @@ import imgStarlight3  from '../../Starlight(3).jpeg';
 import imgCeramic1    from '../../Ceramic Coating(new1).jpeg';
 import imgCeramic2    from '../../Ceramic Coating(new2).jpeg';
 import imgCeramic3    from '../../Ceramic Coating(new3).jpeg';
-import imgCommercial1 from '../../commercial_wrapping(1).jpeg';
-import imgCommercial2 from '../../commercial_wrapping(2).jpeg';
-import imgCommercial3 from '../../Comercial_wrapping(new3).jpeg';
+import imgCustomBuild1 from '../../Wraptors Media/Custom Builds/621837139_18385536877146462_5187708123866638297_n - Copy.jpg';
+import imgCustomBuild2 from '../../Wraptors Media/Custom Builds/531390763_18364031848146462_3978469811072555494_n.jpg';
+import imgCustomBuild3 from '../../Wraptors Media/Custom Builds/600288082_18380751250146462_3960198007605295301_n.jpg';
 import imgTint        from '../../tint.jpeg';
 
 const SERVICES = [
@@ -49,6 +49,15 @@ const SERVICES = [
     imgs: [imgStarlight2, imgStarlight, imgStarlight3],
   },
   {
+    id: 'custom-builds',
+    slug: '/services/custom-builds',
+    ghost: 'CUSTOM BUILDS',
+    name: 'Custom Builds & Body Kits',
+    tags: ['Body Kits', 'Exterior Styling'],
+    desc: 'Shape your vehicle around your vision, with body kits, exterior upgrades and carefully considered finishing details.',
+    imgs: [imgCustomBuild1, imgCustomBuild2, imgCustomBuild3],
+  },
+  {
     id: 'ceramic',
     slug: '/services/ceramic',
     ghost: 'CERAMIC COATING',
@@ -68,15 +77,6 @@ const SERVICES = [
     tags: ['Ceramic Film', 'UV Protection'],
     desc: 'Premium ceramic film that blocks UV and heat, installed to the millimetre for flawless clarity.',
     imgs: [imgTint],
-  },
-  {
-    id: 'commercial',
-    slug: '/services/commercial',
-    ghost: 'COMMERCIAL WRAP',
-    name: 'Commercial Wrap',
-    tags: ['Fleet Wrapping', 'Brand Identity'],
-    desc: 'Turn every vehicle into a moving billboard — full fleet wraps with precision-cut brand identity.',
-    imgs: [imgCommercial1, imgCommercial2, imgCommercial3],
   },
 ];
 

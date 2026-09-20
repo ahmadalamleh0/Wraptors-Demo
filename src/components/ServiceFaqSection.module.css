@@ -1,8 +1,9 @@
-/* ══ SERVICE PAGE FAQ — compact, uses the shared FaqAccordion ══ */
+/* ══ SERVICE PAGE FAQ — compact, uses the shared FaqAccordion ══
+   White background — a deliberate break from the black sections around
+   it, so no border/gradient transition is needed, just a clean cut. */
 .section {
-  background: #050505;
+  background: #fff;
   padding: 90px 64px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .head {
@@ -17,7 +18,7 @@
   font-size: 0.58rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(0, 0, 0, 0.5);
   font-weight: 700;
   margin-bottom: 14px;
 }
@@ -28,7 +29,7 @@
   font-weight: 400;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: #fff;
+  color: #0a0a0a;
   margin: 0;
   line-height: 1.1;
 }

@@ -5,11 +5,11 @@ import Footer from './Footer';
 import styles from './BookingPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { useStructuredData } from '../lib/useStructuredData';
-import { submitBookingRequest } from '../lib/submitBookingRequest';
 import { SITE_URL } from '../lib/siteConfig';
 import { BOOKING_SERVICES } from '../data/bookingOptions';
+import { buildBookingWhatsAppMessage, buildWhatsAppUrl } from '../lib/whatsappEnquiry';
 
-const WHATSAPP_URL = 'https://wa.me/971502532392';
+const WHATSAPP_URL = buildWhatsAppUrl("Hi Wraptors, I'd like to book a consultation.");
 
 const SEO_TITLE = 'Book A Consultation — Wraptors Dubai';
 const SEO_DESCRIPTION = 'Book a consultation or visit with Wraptors Dubai. Tell us about your vehicle, what you’re interested in, and when you’d like to come by — no account required.';
@@ -43,8 +43,9 @@ export default function BookingPage() {
   });
 
   const [form, setForm] = useState(EMPTY_FORM);
-  const [status, setStatus] = useState('idle'); // idle | submitting | done
+  const [status, setStatus] = useState('idle'); // idle | done
   const [error, setError] = useState('');
+  const [waUrl, setWaUrl] = useState(WHATSAPP_URL);
 
   // The confirmation view is much shorter than the filled-out form — without
   // this, whatever scroll position the user was at while filling the form
@@ -64,15 +65,24 @@ export default function BookingPage() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.year || !form.make || !form.model || !form.name || !form.phone) {
       setError('Please fill in your vehicle and contact details so we can follow up.');
       return;
     }
     setError('');
-    setStatus('submitting');
-    await submitBookingRequest(form);
+
+    // No lead-delivery backend exists yet, so this hands the booking off
+    // to WhatsApp — a real, verifiable action — instead of faking a
+    // "request received" screen for a submission that went nowhere.
+    const serviceLabels = BOOKING_SERVICES
+      .filter((s) => form.services.includes(s.id))
+      .map((s) => s.label);
+    const message = buildBookingWhatsAppMessage(form, serviceLabels);
+    const url = buildWhatsAppUrl(message);
+    setWaUrl(url);
+    window.open(url, '_blank', 'noopener,noreferrer');
     setStatus('done');
   };
 
@@ -82,16 +92,17 @@ export default function BookingPage() {
         <Navbar alwaysVisible />
         <main>
           <section className={styles.confirmSection}>
-            <span className={styles.eyebrow}>Request Received</span>
-            <h1 className={styles.confirmTitle}>We&rsquo;ll Be In Touch Shortly.</h1>
+            <span className={styles.eyebrow}>Almost There</span>
+            <h1 className={styles.confirmTitle}>Continue On WhatsApp.</h1>
             <p className={styles.confirmBody}>
-              Thanks, {form.name.split(' ')[0] || 'there'} — we&rsquo;ve got your details and
-              will reach out to confirm your visit.
+              Thanks, {form.name.split(' ')[0] || 'there'} — we&rsquo;ve opened WhatsApp with your
+              booking details ready to go. Hit send there to reach our team directly. If it
+              didn&rsquo;t open, use the button below.
             </p>
             <div className={styles.confirmActions}>
               <Link to="/" className={styles.ctaPrimary}>Back To Home</Link>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.ctaSecondary}>
-                Message Us On WhatsApp
+              <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.ctaSecondary}>
+                Open WhatsApp
               </a>
             </div>
           </section>
@@ -235,8 +246,8 @@ export default function BookingPage() {
             {error && <p className={styles.error}>{error}</p>}
 
             <div className={styles.submitRow}>
-              <button type="submit" className={styles.submitBtn} disabled={status === 'submitting'}>
-                {status === 'submitting' ? 'Sending…' : 'Confirm Booking Request'}
+              <button type="submit" className={styles.submitBtn}>
+                Send Via WhatsApp
               </button>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.whatsappLink}>
                 Prefer WhatsApp? Message Us <span aria-hidden="true">→</span>

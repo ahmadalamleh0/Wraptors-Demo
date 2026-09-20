@@ -7,6 +7,7 @@ import flagUS from '../../USA(FLAG).svg';
 import flagZA from '../../SA(FLAG).svg';
 
 const IS_MOBILE = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
+const PREFERS_REDUCED_MOTION = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ── Sphere math — mirrors TacticalGlobe internals for the lines overlay ── */
 const D2R = Math.PI / 180;
@@ -284,8 +285,8 @@ const GLOBE_LAYOUT = {
 };
 
 const GLOBE_INTERACTION = {
-  autoRotate:      !IS_MOBILE,
-  autoRotateSpeed: IS_MOBILE ? 0 : 4.5,
+  autoRotate:      !IS_MOBILE && !PREFERS_REDUCED_MOTION,
+  autoRotateSpeed: IS_MOBILE || PREFERS_REDUCED_MOTION ? 0 : 4.5,
   rotateX:         0,
   rotateY:         20,
   rotateZ:         -50,

@@ -202,7 +202,7 @@ import srt5 from '../../Signture Section/SRT(5).jpeg';
 // stay in place (category: "japanese-icons") so the row can come back
 // later just by re-adding it here; nothing else needs to change.
 const CATEGORIES = [
-  { id: 'german-precision', label: 'German Precision' },
+  { id: 'german-precision', label: 'German Performance' },
   { id: 'italian-exotics',  label: 'Italian Exotics'  },
   { id: 'british-luxury',   label: 'British Luxury'   },
   { id: 'american-muscle',  label: 'American Muscle'  },

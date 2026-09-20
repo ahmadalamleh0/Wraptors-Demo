@@ -42,6 +42,19 @@
   align-items: flex-start;
 }
 
+/* Pushes the whole text group down into the lower part of the hero — the
+   overlay box grows taller than its content via min-height, and
+   justify-content anchors the content to the bottom of that taller box,
+   clearing whatever sits higher in the shot (e.g. a grille/bumper). */
+.heroOverlayLower {
+  padding-top: 64px;
+  min-height: 46vh;
+  justify-content: flex-end;
+}
+.heroOverlayLower .eyebrow { margin-bottom: 12px; }
+.heroOverlayLower .heroSubline { margin-top: 12px; }
+.heroOverlayLower .cta { margin-top: 20px; }
+
 .eyebrow {
   display: block;
   font-family: var(--font-ui);
@@ -62,6 +75,13 @@
   color: #fff;
   line-height: 1.02;
   margin: 0;
+}
+
+/* Two-line headline (break passed as \n in the string) — sized down so it
+   occupies roughly the same footprint as the usual single-line headline. */
+.headlineCompact {
+  white-space: pre-line;
+  font-size: clamp(2rem, 3.7vw, 3.6rem);
 }
 
 .heroSubline {
@@ -114,8 +134,14 @@
   }
   .heroOverlay { padding: 0 20px 48px; padding-top: 100px; }
   .headline { font-size: clamp(2.2rem, 9vw, 3rem); }
+  .headlineCompact { font-size: clamp(1.6rem, 7.2vw, 2.2rem); }
   .heroSubline { font-size: 0.6rem; letter-spacing: 0.16em; margin-top: 14px; }
   .cta { margin-top: 22px; padding: 12px 22px; font-size: 0.62rem; }
+
+  .heroOverlayLower { padding-top: 48px; min-height: 40vh; }
+  .heroOverlayLower .eyebrow { margin-bottom: 8px; }
+  .heroOverlayLower .heroSubline { margin-top: 8px; }
+  .heroOverlayLower .cta { margin-top: 16px; }
 }
 
 @media (max-width: 480px) {

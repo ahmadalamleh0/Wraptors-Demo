@@ -13,12 +13,13 @@ export const QUOTE_STEPS = [
 ];
 
 export const QUOTE_SERVICES = [
-  { id: 'wraps',     label: 'Vehicle Wraps' },
-  { id: 'ppf',       label: 'Paint Protection Film' },
-  { id: 'ceramic',   label: 'Ceramic Coating' },
-  { id: 'tint',      label: 'Window Tint' },
-  { id: 'starlight', label: 'Starlight Headliner' },
-  { id: 'multiple',  label: 'Multiple Services' },
+  { id: 'wraps',         label: 'Vehicle Wraps' },
+  { id: 'ppf',           label: 'Paint Protection Film' },
+  { id: 'ceramic',       label: 'Ceramic Coating' },
+  { id: 'tint',          label: 'Window Tint' },
+  { id: 'starlight',     label: 'Starlight Headliner' },
+  { id: 'custom-builds', label: 'Custom Builds & Body Kits' },
+  { id: 'multiple',      label: 'Multiple Services' },
 ];
 
 // No entry for "multiple" on purpose — that path skips straight to the
@@ -58,6 +59,12 @@ export const QUOTE_PROJECT_OPTIONS = {
     { id: 'dual-tone',     label: 'Dual-Tone / Gradient' },
     { id: 'shooting-star', label: 'Shooting Star Effect' },
     { id: 'not-sure',      label: 'Not Sure Yet' },
+  ],
+  'custom-builds': [
+    { id: 'body-kit-install',  label: 'Body Kit Installation' },
+    { id: 'exterior-styling',  label: 'Exterior Styling Upgrade' },
+    { id: 'full-custom-build', label: 'Full Custom Build' },
+    { id: 'not-sure',          label: 'Not Sure Yet' },
   ],
 };
 

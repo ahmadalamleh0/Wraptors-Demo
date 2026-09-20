@@ -1,8 +1,38 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import styles from './NotFoundPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
+
+// A 404 has no real canonical URL of its own — the static index.html
+// template's homepage canonical would otherwise leak through unchanged
+// (useDocumentMeta only touches the canonical tag when it's given one).
+// Also marks the page noindex, since it's served with a genuine HTTP 404
+// via public/_redirects and shouldn't be indexed either way, but crawlers
+// that don't honor the status code should still see this explicitly.
+function useNotFoundMeta() {
+  useEffect(() => {
+    const canonicalEl = document.querySelector('link[rel="canonical"]');
+    const prevHref = canonicalEl?.getAttribute('href') ?? null;
+    if (canonicalEl) canonicalEl.remove();
+
+    const robots = document.createElement('meta');
+    robots.setAttribute('name', 'robots');
+    robots.setAttribute('content', 'noindex, follow');
+    document.head.appendChild(robots);
+
+    return () => {
+      robots.remove();
+      if (prevHref) {
+        const restored = document.createElement('link');
+        restored.setAttribute('rel', 'canonical');
+        restored.setAttribute('href', prevHref);
+        document.head.appendChild(restored);
+      }
+    };
+  }, []);
+}
 
 // Client-side catch-all for any unmatched route (bad /learn/:slug,
 // /areas/:slug, or a stray path). The server-side counterpart is
@@ -12,6 +42,7 @@ import { useDocumentMeta } from '../lib/useDocumentMeta';
 // side navigation to a bad in-app link).
 export default function NotFoundPage() {
   useDocumentMeta('Page Not Found | Wraptors Dubai', "The page you're looking for doesn't exist — here's where to go instead.");
+  useNotFoundMeta();
 
   return (
     <>

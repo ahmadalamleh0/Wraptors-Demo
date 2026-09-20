@@ -8,10 +8,10 @@ import {
   QUOTE_YEARS,
   QUOTE_CAR_BRANDS,
 } from '../data/quoteFormData';
-import { submitQuoteRequest } from '../lib/submitQuoteRequest';
+import { buildQuoteWhatsAppMessage, buildWhatsAppUrl } from '../lib/whatsappEnquiry';
 import styles from './QuoteSection.module.css';
 
-const WHATSAPP_URL = 'https://wa.me/971502532392';
+const labelFor = (list, id) => list.find((o) => o.id === id)?.label || '';
 
 const EMPTY_FORM = {
   service: '',
@@ -151,8 +151,8 @@ export default function QuoteSection({
     initialService ? { ...EMPTY_FORM, service: initialService } : EMPTY_FORM
   ));
   const [errors, setErrors] = useState({});
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [handedOff, setHandedOff] = useState(false);
+  const [waUrl, setWaUrl] = useState('');
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
@@ -165,7 +165,7 @@ export default function QuoteSection({
   };
   const selectOption = (field, id) => setForm((f) => ({ ...f, [field]: id }));
 
-  const goNext = async () => {
+  const goNext = () => {
     const err = validateStep(step, form);
     setErrors(err);
     if (Object.keys(err).length > 0) return;
@@ -175,10 +175,19 @@ export default function QuoteSection({
       return;
     }
 
-    setSubmitting(true);
-    await submitQuoteRequest(form);
-    setSubmitting(false);
-    setSubmitted(true);
+    // No lead-delivery backend exists yet, so this hands the enquiry to
+    // WhatsApp — a real, verifiable action — instead of faking a "request
+    // received" screen for a submission that went nowhere.
+    const message = buildQuoteWhatsAppMessage(form, {
+      service: labelFor(QUOTE_SERVICES, form.service),
+      projectDetail: projectOptions ? labelFor(projectOptions, form.projectDetail) : '',
+      timing: labelFor(QUOTE_TIMING_OPTIONS, form.timing),
+      preferredContact: labelFor(QUOTE_CONTACT_METHODS, form.preferredContact),
+    });
+    const url = buildWhatsAppUrl(message);
+    setWaUrl(url);
+    window.open(url, '_blank', 'noopener,noreferrer');
+    setHandedOff(true);
   };
 
   const goBack = () => {
@@ -198,15 +207,15 @@ export default function QuoteSection({
       </div>
 
       <div className={styles.panel}>
-        {submitted ? (
+        {handedOff ? (
           <div className={styles.success}>
-            <span className={styles.successEyebrow}>Request Received</span>
-            <h3 className={styles.successTitle}>Request Received.</h3>
+            <span className={styles.successEyebrow}>Almost There</span>
+            <h3 className={styles.successTitle}>Continue On WhatsApp.</h3>
             <p className={styles.successBody}>
-              The Wraptors team will review your build and get back to you shortly.
+              We&rsquo;ve opened WhatsApp with your enquiry ready to go — hit send there to reach our team directly. If it didn&rsquo;t open, use the button below.
             </p>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.successCta}>
-              WhatsApp Us <span aria-hidden="true">→</span>
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.successCta}>
+              Open WhatsApp <span aria-hidden="true">→</span>
             </a>
           </div>
         ) : (
@@ -370,9 +379,9 @@ export default function QuoteSection({
                   <span aria-hidden="true">←</span> Back
                 </button>
               ) : <span />}
-              <button type="button" onClick={goNext} className={styles.nextBtn} disabled={submitting}>
-                {submitting ? 'Sending…' : isLastStep ? 'Submit Request' : 'Next'}
-                {!submitting && <span aria-hidden="true">→</span>}
+              <button type="button" onClick={goNext} className={styles.nextBtn}>
+                {isLastStep ? 'Send Via WhatsApp' : 'Next'}
+                <span aria-hidden="true">→</span>
               </button>
             </div>
           </>

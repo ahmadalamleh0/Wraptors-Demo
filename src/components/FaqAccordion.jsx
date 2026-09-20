@@ -27,9 +27,11 @@ function FaqItem({ q, a, mono }) {
 // `mono` swaps the expand icon from the site's red accent to white — used
 // on service pages, which are strictly black/white/grey. Everywhere else
 // (Learn articles, GEO pages) keeps the default red icon.
-export default function FaqAccordion({ faqs, mono = false }) {
+// `light` swaps the whole accordion to a white-background variant (black
+// text, black icon, light-grey dividers) — service pages only.
+export default function FaqAccordion({ faqs, mono = false, light = false }) {
   return (
-    <div className={styles.faqList}>
+    <div className={`${styles.faqList} ${light ? styles.faqListLight : ''}`}>
       {faqs.map((faq) => (
         <FaqItem key={faq.q} q={faq.q} a={faq.a} mono={mono} />
       ))}

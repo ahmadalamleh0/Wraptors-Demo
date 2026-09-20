@@ -19,6 +19,8 @@ export default function ServicePage({
   title,
   heroEyebrow,
   heroHeadline,
+  heroHeadlineCompact,
+  heroLowerContent,
   heroSupportingLine,
   heroImg,
   introKicker,
@@ -27,6 +29,12 @@ export default function ServicePage({
   introImage,
   benefits,
   galleryImages,
+  galleryCaption,
+  midSectionTitle,
+  midSectionDescription,
+  featuredProject,
+  secondaryGalleryImages,
+  secondaryGalleryCaption,
   processEyebrow,
   processHeading,
   processSteps,
@@ -48,6 +56,35 @@ export default function ServicePage({
     if (!el) return undefined;
     const io = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setGalleryVisible(true); io.disconnect(); } },
+      { threshold: 0.12 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Optional second 3-image gallery (e.g. a dedicated collection for one
+  // specific build) — same reveal pattern as the main gallery above.
+  const secondaryGalleryRef = useRef(null);
+  const [secondaryGalleryVisible, setSecondaryGalleryVisible] = useState(false);
+  useEffect(() => {
+    const el = secondaryGalleryRef.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setSecondaryGalleryVisible(true); io.disconnect(); } },
+      { threshold: 0.12 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Featured-project reveal (single-car showcase — main image + detail grid)
+  const featuredRef = useRef(null);
+  const [featuredVisible, setFeaturedVisible] = useState(false);
+  useEffect(() => {
+    const el = featuredRef.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setFeaturedVisible(true); io.disconnect(); } },
       { threshold: 0.12 }
     );
     io.observe(el);
@@ -83,6 +120,8 @@ export default function ServicePage({
         <ServiceHero
           eyebrow={heroEyebrow}
           headline={heroHeadline}
+          compactHeadline={heroHeadlineCompact}
+          lowerContent={heroLowerContent}
           supportingLine={heroSupportingLine}
           media={heroImg ? <img src={heroImg} alt="" loading="eager" fetchPriority="high" /> : null}
         />
@@ -137,7 +176,7 @@ export default function ServicePage({
               <div className={styles.svcOverlay} aria-hidden="true" />
               <div className={styles.svcFooter}>
                 <span className={styles.svcFooterEyebrow}>Wraptors Build</span>
-                <span className={styles.svcFooterTitle}>Ceramic Coating</span>
+                <span className={styles.svcFooterTitle}>{galleryCaption || title}</span>
               </div>
             </div>
             {/* Photos 2 + 3 — side by side */}
@@ -146,6 +185,68 @@ export default function ServicePage({
             </div>
             <div className={`${styles.svcTile} ${styles.svcTile3}`}>
               <img src={galleryImages[2]} alt="" className={styles.svcImg} loading="lazy" />
+            </div>
+          </section>
+        )}
+
+        {/* ── Optional centered text break — separates a mixed-car gallery
+             above from a single-car featured project below ── */}
+        {midSectionTitle && (
+          <section className={styles.midSection}>
+            <h2 className={styles.midSectionTitle}>{midSectionTitle}</h2>
+            {midSectionDescription && (
+              <p className={styles.midSectionDesc}>{midSectionDescription}</p>
+            )}
+          </section>
+        )}
+
+        {/* ── Optional featured single-car project — one main image with a
+             caption overlay, then a grid of detail shots (paired, side by
+             side on every breakpoint). ── */}
+        {featuredProject && featuredProject.mainImage && featuredProject.detailImages?.length > 0 && (
+          <section
+            ref={featuredRef}
+            className={`${styles.featuredProject} ${featuredVisible ? styles.featuredProjectVisible : ''}`}
+          >
+            <div className={styles.featuredMain}>
+              <img src={featuredProject.mainImage} alt="" className={styles.featuredMainImg} loading="lazy" />
+              <div className={styles.featuredOverlay} aria-hidden="true" />
+              <div className={styles.featuredFooter}>
+                <span className={styles.featuredEyebrow}>{featuredProject.label || 'Featured Project'}</span>
+                <span className={styles.featuredTitle}>{featuredProject.title}</span>
+              </div>
+            </div>
+            <div className={styles.featuredGrid}>
+              {featuredProject.detailImages.map((img, i) => (
+                <div key={i} className={styles.featuredGridTile}>
+                  <img src={img} alt="" className={styles.featuredGridImg} loading="lazy" />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── Optional second 3-image gallery — a dedicated collection for
+             one specific build, additional to (not replacing) the gallery
+             above ── */}
+        {secondaryGalleryImages && secondaryGalleryImages.length === 3 && (
+          <section
+            ref={secondaryGalleryRef}
+            className={`${styles.svcGallery} ${secondaryGalleryVisible ? styles.svcGalleryVisible : ''}`}
+          >
+            <div className={`${styles.svcTile} ${styles.svcTile1}`}>
+              <img src={secondaryGalleryImages[0]} alt="" className={styles.svcImg} loading="lazy" />
+              <div className={styles.svcOverlay} aria-hidden="true" />
+              <div className={styles.svcFooter}>
+                <span className={styles.svcFooterEyebrow}>Wraptors Build</span>
+                <span className={styles.svcFooterTitle}>{secondaryGalleryCaption || title}</span>
+              </div>
+            </div>
+            <div className={`${styles.svcTile} ${styles.svcTile2}`}>
+              <img src={secondaryGalleryImages[1]} alt="" className={styles.svcImg} loading="lazy" />
+            </div>
+            <div className={`${styles.svcTile} ${styles.svcTile3}`}>
+              <img src={secondaryGalleryImages[2]} alt="" className={styles.svcImg} loading="lazy" />
             </div>
           </section>
         )}
@@ -182,11 +283,11 @@ export default function ServicePage({
           compact
         />
         <AftercareSection service={serviceId} />
-        {learnCategory && <RelatedInsights category={learnCategory} />}
         <ServiceFaqSection service={serviceId} />
+        {learnCategory && <RelatedInsights category={learnCategory} />}
 
       </main>
-      <Footer />
+      <Footer solid />
       <FloatingWhatsApp />
     </>
   );

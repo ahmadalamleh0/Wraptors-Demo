@@ -123,6 +123,9 @@
   opacity: 1;
   transform: translateY(0);
 }
+@media (prefers-reduced-motion: reduce) {
+  .phrase, .body { transition: opacity 0.3s ease; transform: none !important; }
+}
 
 /* ── Cinematic wrap frame ── */
 .frame {

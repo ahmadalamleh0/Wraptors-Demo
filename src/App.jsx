@@ -64,6 +64,7 @@ import AboutPage from './components/AboutPage';
 import BookingCTA from './components/BookingCTA';
 import BookingPage from './components/BookingPage';
 import WrapsPage from './components/WrapsPage';
+import TintPage from './components/TintPage';
 
 // Hero images for each generic service page (Vehicle Wraps, PPF and
 // Starlight have their own dedicated page components with bespoke
@@ -75,8 +76,17 @@ import ceramicNew3    from '../Ceramic Coating(new3).jpeg';
 import lambo1         from '../Wraptors Media/572658115_18375844528146462_7044016670246006823_n.jpg';
 import lambo2         from '../Wraptors Media/573643633_18375844501146462_1338566802707597600_n.jpg';
 import lambo3         from '../Wraptors Media/574454404_18375844462146462_4088331334435453680_n.jpg';
-import heroTint       from '../Wraptors Media/632236695_18389471176146462_2559334672996249216_n.jpg';
-import heroCommercial from '../commercial_wrapping(1).jpeg';
+import heroCustomBuilds from '../Wraptors Media/Custom Builds/531390763_18364031848146462_3978469811072555494_n.jpg';
+import customBuild1     from '../Wraptors Media/Custom Builds/673155098_18356001145208168_5151499152980611431_n.jpg';
+import customBuild2     from '../Wraptors Media/Custom Builds/561637580_18371224492146462_3850630907551928576_n.jpg';
+import customBuild3     from '../Wraptors Media/Custom Builds/773757448_18417489721146462_1403236065123085975_n.jpg';
+// A second, dedicated collection just for the Bentley — front 3/4 plus two
+// detail shots of the same car.
+import bentley1         from '../Wraptors Media/Custom Builds/621837139_18385536877146462_5187708123866638297_n - Copy.jpg';
+import bentley2         from '../Wraptors Media/Custom Builds/621830079_18385536943146462_3092230599324494560_n.jpg';
+import bentley3         from '../Wraptors Media/Custom Builds/621972300_18385536895146462_9042249166876917996_n.jpg';
+import bentley4         from '../Wraptors Media/Custom Builds/621825480_18385536931146462_7726450832093630152_n.jpg';
+import bentley5         from '../Wraptors Media/Custom Builds/621855805_18385536934146462_1336625565261466261_n.jpg';
 
 // Every service page follows the same hero + intro system (see
 // ServiceHero / ServiceIntroSection) — only media and wording change here.
@@ -85,7 +95,8 @@ const SERVICE_PAGES = [
     path:     '/services/ceramic',
     title:    'Ceramic Coating',
     heroEyebrow: 'Wraptors Dubai · Ceramic Coating',
-    heroHeadline: 'Finish, Locked In.',
+    heroHeadline: 'Exceptional Finish.\nLasting Protection.',
+    heroHeadlineCompact: true,
     heroSupportingLine: 'Paint Enhancement · Ceramic Protection · Deep Gloss',
     heroImg:  heroCeramic,
     introImage: ceramicNew2,
@@ -132,30 +143,29 @@ const SERVICE_PAGES = [
     learnCategory: 'ceramic-coating',
   },
   {
-    path:     '/services/tint',
-    title:    'Window Tint',
-    heroEyebrow: 'Wraptors Dubai · Window Tint',
-    heroHeadline: 'Control The Cabin.',
-    heroSupportingLine: 'Ceramic Tint · Heat Rejection · Privacy',
-    heroImg:  heroTint,
-    tagline:  'Premium ceramic window film that blocks UV, reduces heat, and delivers flawless clarity — installed to the millimetre.',
-    introKicker: 'Your Cabin',
-    introStatement: 'Controlled.',
-    introDescription: 'Window film is selected around more than darkness. At Wraptors, tint is approached around heat performance, privacy, visibility and the appearance of the vehicle, then installed cleanly across the glass for a finish that belongs with the car.',
-    showTintCompare: true,
-    learnCategory: 'window-tint',
-  },
-  {
-    path:     '/services/commercial',
-    title:    'Commercial Wraps',
-    heroEyebrow: 'Wraptors Dubai · Commercial Wraps',
-    heroHeadline: 'Brand In Motion.',
-    heroSupportingLine: 'Fleet Wraps · Commercial Graphics · Brand Application',
-    heroImg:  heroCommercial,
-    tagline:  'Turn every vehicle into a moving billboard — full fleet wraps with precision-cut brand identity.',
-    introKicker: 'Your Brand',
-    introStatement: 'In Motion.',
-    introDescription: 'From a single commercial vehicle to a growing fleet, Wraptors turns the vehicle itself into brand real estate. Artwork, placement, colour and coverage are planned around the body so the identity stays clear, consistent and recognizable on the road.',
+    path:     '/services/custom-builds',
+    title:    'Custom Builds & Body Kits',
+    heroEyebrow: 'Wraptors Dubai · Custom Builds & Body Kits',
+    heroHeadline: 'Custom Builds &\nBody Kits',
+    heroHeadlineCompact: true,
+    heroLowerContent: true,
+    heroSupportingLine: 'A more individual expression of your vehicle, through considered styling, precise fitment and attention to the complete build.',
+    heroImg:  heroCustomBuilds,
+    tagline:  'Custom builds and body kits at Wraptors Dubai — styling upgrades and exterior transformations fitted with precision at our Al Quoz studio.',
+    introKicker: 'Your Vision',
+    introStatement: 'Realized.',
+    introDescription: 'Custom builds and body kits are approached around the individual vehicle — fitment, proportions and finish are planned together before any panel is touched. From considered styling upgrades to complete exterior transformations, every build is carried out with attention to how each piece integrates with the car.',
+    galleryImages: [customBuild1, customBuild2, customBuild3],
+    galleryCaption: 'Custom Builds & Body Kits',
+    midSectionTitle: 'Every Detail. One Vision.',
+    midSectionDescription: 'A distinctive build comes from how the details work together. Body lines, materials and finishing touches are considered as a whole, creating a vehicle that feels individual from every angle.',
+    featuredProject: {
+      label: 'Featured Project',
+      title: 'Bentley Bentayga',
+      mainImage: bentley1,
+      detailImages: [bentley4, bentley2, bentley5, bentley3],
+    },
+    learnCategory: 'custom-builds',
   },
 ];
 
@@ -172,7 +182,7 @@ function HomePage() {
         <SignatureBuilds />
         <TrustedBrands />
         <GlobalLocations />
-        <QuoteSection />
+        <QuoteSection id="cta" />
         <ClientReviews />
         <ServiceAreas />
         <Icons />
@@ -196,6 +206,7 @@ export default function App() {
       <Route path="/services/wraps"    element={<WrapsPage />} />
       <Route path="/services/starlight" element={<StarlightPage />} />
       <Route path="/services/ppf"      element={<PPFPage />} />
+      <Route path="/services/tint"     element={<TintPage />} />
       {SERVICE_PAGES.map(svc => (
         <Route
           key={svc.path}

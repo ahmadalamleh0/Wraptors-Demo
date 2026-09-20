@@ -92,7 +92,7 @@ export default function Hero() {
     tl.to(img,   { filter: 'brightness(1.14)', duration: 0.08, ease: 'none' }, 0.66);
     tl.to(img,   { filter: 'brightness(1.0)',  duration: 0.32, ease: 'power2.out' }, 0.74);
 
-    // "WRAPTORS MAFIA" — etched downward, same cut technique
+    // "WRAPTORS DUBAI" — etched downward, same cut technique
     tl.to(topTxt, {
       opacity: 1,
       clipPath: 'inset(0 0 0% 0)',
@@ -183,7 +183,7 @@ export default function Hero() {
           <span ref={yearRef} className={styles.sideText}>2016</span>
         </div>
 
-        <p ref={topTextRef} className={styles.topText}>WRAPTORS MAFIA</p>
+        <p ref={topTextRef} className={styles.topText}>WRAPTORS DUBAI</p>
         <div ref={brandRuleRef} className={styles.brandRule} aria-hidden="true" />
         <p ref={bottomTextRef} className={styles.bottomText}>LOYALTY&nbsp;OVER&nbsp;ROYALTY</p>
 

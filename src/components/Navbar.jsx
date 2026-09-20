@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
+import uaeFlag from '../../UAE(FLAG).svg';
 
 const NAV_LINKS = [
   { label: 'Services',  href: '/#services'  },
@@ -182,8 +183,13 @@ export default function Navbar({ alwaysVisible = false }) {
     <>
     <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''} ${!linksRevealed ? styles.navHeroMode : ''}`}>
 
-      {/* Logo mark */}
+      {/* Logo mark, with a small "Dubai Edition" label above it */}
       <a href="/" className={styles.logo} aria-label="Wraptors — back to home">
+        <span className={`${styles.dubaiEdition} ${logoReady ? styles.dubaiEditionVisible : ''}`}>
+          <span className={`${styles.dubaiEditionWord} ${styles.dubaiEditionWordLeft}`}>Dubai</span>
+          <img src={uaeFlag} alt="" className={styles.dubaiFlag} />
+          <span className={`${styles.dubaiEditionWord} ${styles.dubaiEditionWordRight}`}>Edition</span>
+        </span>
         <WraptorsMafiaLogo
           className={`${styles.navLogoMark} ${logoReady ? styles.navLogoVisible : ''}`}
         />

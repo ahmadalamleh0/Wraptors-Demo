@@ -30,8 +30,9 @@ export default function ArticlePage() {
   const relatedService = article ? SERVICE_CATALOG[article.relatedService] : null;
   const relatedGeo = article?.relatedGeo ? getLocationBySlug(article.relatedGeo) : null;
   const canonicalUrl = article ? `${SITE_URL}/learn/${article.slug}` : undefined;
+  const ogImageUrl = article?.heroImageKey ? `${SITE_URL}${ARTICLE_IMAGES[article.heroImageKey]}` : undefined;
 
-  useDocumentMeta(article?.seoTitle, article?.metaDescription, canonicalUrl);
+  useDocumentMeta(article?.seoTitle, article?.metaDescription, canonicalUrl, ogImageUrl);
 
   useStructuredData(
     article && {
@@ -144,6 +145,16 @@ export default function ArticlePage() {
                 {section.body.map((paragraph, i) => (
                   <p key={i} className={styles.paragraph}>{paragraph}</p>
                 ))}
+                {section.image && (
+                  <figure className={styles.sectionImageWrap}>
+                    <img
+                      src={ARTICLE_IMAGES[section.image]}
+                      alt=""
+                      className={styles.sectionImage}
+                      loading="lazy"
+                    />
+                  </figure>
+                )}
               </section>
             ))}
 

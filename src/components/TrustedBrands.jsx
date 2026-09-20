@@ -44,7 +44,7 @@ export default function TrustedBrands() {
         <span className={styles.label}>Trusted Brands</span>
         <h2 className={styles.title}>BUILT WITH THE WORLD'S MOST ICONIC NAMES</h2>
         <p className={styles.sub}>
-          From German precision to Italian exotics, every badge becomes a statement.
+          From German performance to Italian exotics, every badge becomes a statement.
         </p>
       </div>
 

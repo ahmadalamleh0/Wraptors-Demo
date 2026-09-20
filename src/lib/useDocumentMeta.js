@@ -25,7 +25,7 @@ function upsertMeta(selector, attr, value, createAttrs) {
 // prerendered) visit these tags only ever reach a crawler that executes
 // JavaScript; the build-time prerender step (scripts/prerender.mjs) is
 // what makes the *static* HTML carry the right values too.
-export function useDocumentMeta(title, description, canonicalUrl) {
+export function useDocumentMeta(title, description, canonicalUrl, imageUrl) {
   useEffect(() => {
     const prevTitle = document.title;
     if (title) document.title = title;
@@ -62,6 +62,11 @@ export function useDocumentMeta(title, description, canonicalUrl) {
     if (canonicalUrl) {
       ogRestores.push(upsertMeta('meta[property="og:url"]', 'content', canonicalUrl, { property: 'og:url' }));
     }
+    if (imageUrl) {
+      ogRestores.push(upsertMeta('meta[property="og:image"]', 'content', imageUrl, { property: 'og:image' }));
+      ogRestores.push(upsertMeta('meta[name="twitter:image"]', 'content', imageUrl, { name: 'twitter:image' }));
+      ogRestores.push(upsertMeta('meta[name="twitter:card"]', 'content', 'summary_large_image', { name: 'twitter:card' }));
+    }
 
     return () => {
       document.title = prevTitle || DEFAULT_TITLE;
@@ -75,5 +80,5 @@ export function useDocumentMeta(title, description, canonicalUrl) {
         else if (prev !== null) el.setAttribute('content', prev);
       });
     };
-  }, [title, description, canonicalUrl]);
+  }, [title, description, canonicalUrl, imageUrl]);
 }
