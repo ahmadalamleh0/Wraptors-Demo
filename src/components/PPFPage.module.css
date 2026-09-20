@@ -65,6 +65,16 @@
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 
+/* Eyebrow + title now sit centred above the whole explorer (image
+   included) instead of beside the controls panel. */
+.explorerHead {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px;
+  padding: 0 32px;
+}
+.explorerHead .eyebrow { margin: 0 0 14px; }
+
 .explorerLayout {
   display: grid;
   grid-template-columns: 1fr 380px;
@@ -215,34 +225,6 @@
 }
 
 .photoDescMobile { display: none; }
-
-/* Mobile zone info panel — hidden on desktop, revealed in mobile block below */
-.mobileZoneInfo { display: none; }
-.mobileZoneEye {
-  display: block;
-  font-family: var(--font-ui, sans-serif);
-  font-size: 0.56rem;
-  font-weight: 700;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255,0.78);
-  margin-bottom: 6px;
-}
-.mobileZoneTitle {
-  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  color: #fff;
-  letter-spacing: 0.04em;
-  margin: 0 0 8px;
-  line-height: 1.25;
-}
-.mobileZoneDesc {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.50);
-  line-height: 1.62;
-  margin: 0;
-}
 
 .calloutSvg {
   position: absolute;
@@ -697,62 +679,39 @@
 .galleryGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  gap: 40px 28px;
 }
 
 .galleryCard {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  aspect-ratio: 16/10;
-  border: 1px solid rgba(200,30,30,0.08);
-  box-shadow:
-    0 2px 0 rgba(255,255,255,0.04) inset,
-    0 24px 56px rgba(0,0,0,0.52);
-  transition:
-    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.42s ease,
-    border-color 0.42s ease;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.galleryCard:nth-child(-n+2) { aspect-ratio: 4/3; }
-.galleryCard:hover {
-  transform: translateY(-7px) scale(1.012);
-  border-color: rgba(200,30,30,0.22);
-  box-shadow:
-    0 2px 0 rgba(255,255,255,0.06) inset,
-    0 36px 80px rgba(0,0,0,0.62),
-    0 0 48px rgba(200,30,30,0.07);
-}
+.galleryCard:hover { transform: translateY(-5px); }
 
 .galleryImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.45);
   pointer-events: none;
   user-select: none;
-  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: box-shadow 0.42s ease;
 }
-.galleryCard:hover .galleryImg { transform: scale(1.05); }
-
-.galleryOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(2,2,12,0.76) 0%, rgba(2,2,12,0.20) 36%, transparent 60%);
-  pointer-events: none;
-}
+.galleryCard:hover .galleryImg { box-shadow: 0 26px 60px rgba(0,0,0,0.58); }
 
 .galleryLabel {
-  position: absolute;
-  bottom: 20px;
-  left: 22px;
+  margin: 0;
   font-family: var(--font-ui, sans-serif);
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.66);
-  pointer-events: none;
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
 }
 
 /* ── CTA ─────────────────────────────────────────────────────────────────── */
@@ -846,11 +805,64 @@
   }
 
   .zoneGrid     { grid-template-columns: 1fr 1fr; }
-  .benefitsGrid { grid-template-columns: 1fr 1fr; }
-  .galleryGrid  { grid-template-columns: 1fr; gap: 14px; }
-  .galleryCard:nth-child(-n+2) { aspect-ratio: 16/10; }
+
+  /* ── Real Installs gallery: compact 4:3 frames, caption over the photo ── */
+  .galleryGrid { grid-template-columns: 1fr; gap: 20px; }
+  .galleryCard {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.42);
+  }
+  .galleryImg {
+    aspect-ratio: 4 / 3;
+    height: auto;
+    object-fit: cover;
+    object-position: var(--mobileFocus, center);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .galleryLabel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 30px 16px 14px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.32) 60%, transparent 100%);
+    color: rgba(255,255,255,0.94);
+    font-size: 0.92rem;
+    text-align: left;
+  }
+
+  /* ── What The Film Does: compact 2×2 grid ── */
+  .benefitsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .benefitCard {
+    padding: 18px 14px 16px;
+    border-radius: 14px;
+  }
+  .benefitIcon {
+    width: 26px;
+    height: 26px;
+    margin-bottom: 12px;
+  }
+  .benefitTitle {
+    font-size: 0.72rem;
+    margin-bottom: 8px;
+  }
+  .benefitDesc {
+    font-size: 0.72rem;
+    line-height: 1.5;
+  }
 
   /* ── Coverage Explorer: mobile ── */
+  /* Heading has its own padding since the container's is stripped below */
+  .explorerHead { padding: 0 20px; margin-bottom: 32px; }
   /* Remove container side-padding so the photo goes full-bleed */
   .explorerSection > .container { padding-left: 0; padding-right: 0; }
   /* Collapse gap so photo & controls sit flush */
@@ -864,18 +876,15 @@
   .photoDesc { display: none !important; }
   /* Remove tap-dot hotspots — zone buttons below replace them */
   .hotspotLayer { display: none; }
-  /* Section title — shown on mobile above the zone buttons */
-  .ctrlHead { display: block; margin-bottom: 20px; }
+  /* Description is desktop-only copy; nothing to show above the buttons on mobile */
+  .ctrlHead { display: none; }
   .explorerSub { display: none; }
-  /* Restore padding for zone buttons and CTA */
-  .ctrlPanel { padding: 24px 20px 0; }
-  /* Zone info panel appears below the photo */
-  .mobileZoneInfo { display: block; padding: 18px 20px 4px; }
+  /* Buttons sit directly below the image with a small gap */
+  .ctrlPanel { padding: 14px 20px 0; }
 }
 
 @media (max-width: 480px) {
-  .benefitsGrid { grid-template-columns: 1fr; }
-  .ctaTitle     { font-size: clamp(1.5rem, 8vw, 2rem); }
+  .ctaTitle { font-size: clamp(1.5rem, 8vw, 2rem); }
 }
 
 /* ══ LAYER BREAKDOWN ══════════════════════════════════════════════════════════ */
@@ -1142,27 +1151,28 @@
 .f_liner .lTopRim { background: rgba(255,255,255,0.80); }
 .f_liner .lBtmRim { background: rgba(175,175,175,0.36); }
 
-/* ── Mobile ── */
+/* ── Mobile — same 3-column composition as desktop (label / connector /
+   film), just narrower proportions and a more compact diagram. ── */
 @media (max-width: 767px) {
-  .layerHeader { margin-bottom: 44px; }
-  .lGrid  { gap: 26px; }
-  .lRow   { grid-template-columns: 156px 38px 1fr; }
+  .layerHeader { margin-bottom: 32px; }
+  .lGrid  { gap: 12px; }
+  .lRow   { grid-template-columns: 40% 20px 1fr; gap: 8px; }
+  .lLabel { padding-right: 0; }
   .lFilm  { clip-path: polygon(0% 12%, 100% 0%, 100% 88%, 0% 100%); }
-  .f_topcoat  { height: 22px; }
-  .f_tpu      { height: 62px; }
-  .f_adhesive { height: 20px; }
-  .f_liner    { height: 44px; }
-  .lName       { font-size: 0.80rem; }
-  .lMicrons    { font-size: 0.66rem; }
-  .lBullets li { font-size: 0.70rem; }
+  .f_topcoat  { height: 16px; }
+  .f_tpu      { height: 46px; }
+  .f_adhesive { height: 14px; }
+  .f_liner    { height: 30px; }
+  .lNum        { font-size: 0.46rem; }
+  .lName       { font-size: 0.72rem; line-height: 1.3; }
+  .lMicrons    { font-size: 0.58rem; }
+  .lBullets    { gap: 2px; margin-top: 3px; }
+  .lBullets li { font-size: 0.62rem; line-height: 1.35; padding-left: 8px; }
+  .lDot { width: 4px; height: 4px; }
 }
 
-@media (max-width: 480px) {
-  .lRow   { grid-template-columns: 1fr; gap: 0; }
-  .lPtr   { display: none; }
-  .lLabel { align-items: center; padding-right: 0; padding-bottom: 12px; }
-  .lNum   { text-align: center; }
-  .lName  { font-size: 0.88rem; text-align: center; }
-  .lMicrons { text-align: center; font-size: 0.68rem; }
-  .lBullets li { font-size: 0.72rem; }
+@media (max-width: 380px) {
+  .lRow   { grid-template-columns: 38% 16px 1fr; gap: 6px; }
+  .lName       { font-size: 0.66rem; }
+  .lBullets li { font-size: 0.56rem; }
 }

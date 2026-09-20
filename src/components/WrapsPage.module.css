@@ -23,18 +23,18 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
-  height: 42%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+  top: 0;
+  height: 46%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
   pointer-events: none;
 }
 
-.photoBreakFooter {
+.photoBreakTop {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
-  padding: 0 48px 34px;
+  top: 0;
+  padding: 56px 48px 0;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -42,54 +42,58 @@
 
 .photoBreakTitle {
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 700;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   color: #fff;
-  line-height: 1.1;
+  line-height: 1.05;
 }
 
-/* ── Brand statement — quiet credibility moment. The emblem is a small
-   supporting mark beside the copy now, not a centred hero graphic. ── */
+/* ── Brand statement — quiet credibility moment. Logo mark sits centred
+   above the copy, the whole block centred as one composition. ── */
 .brandStatement {
   background: #000;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 56px 24px;
+  padding: 64px 24px;
 }
 
 .brandInner {
-  max-width: 900px;
+  max-width: 720px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
 }
 
 .brandLogoWrap {
   flex-shrink: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
   opacity: 0;
-  transform: translateX(-12px);
+  transform: translateY(-10px);
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.brandStatementVisible .brandLogoWrap { opacity: 1; transform: translateX(0); }
+.brandStatementVisible .brandLogoWrap { opacity: 1; transform: translateY(0); }
 
+/* Source file is a wide 1200×630 frame with the coin centred in it —
+   a square box + cover crops away the dead space on either side without
+   touching the coin itself, so the visible mark reads edge-to-edge. */
 .brandLogo {
-  width: 34px;
-  height: 34px;
+  width: 108px;
+  height: 108px;
   object-fit: cover;
+  object-position: center center;
   border-radius: 50%;
   display: block;
 }
 
 .brandDivider {
   flex-shrink: 0;
-  width: 32px;
+  width: 40px;
   height: 1px;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.18);
   opacity: 0;
   transition: opacity 1s ease 0.15s;
 }
@@ -98,16 +102,17 @@
 .brandContent {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
 }
 
 .brandHeadline {
   font-family: var(--font-ui);
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: #fff;
-  line-height: 1.4;
+  line-height: 1.18;
   margin: 0;
   opacity: 0;
   transform: translateY(10px);
@@ -115,12 +120,21 @@
 }
 .brandStatementVisible .brandHeadline { opacity: 1; transform: translateY(0); }
 
+/* Manual line break only holds at wider widths — on mobile the natural
+   wrap already reads cleanly, and forcing it produces an awkward
+   third orphan line. */
+@media (max-width: 767px) {
+  .brandBreak { display: none; }
+}
+
 .brandDesc {
   font-family: var(--font-ui);
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 1.6;
-  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.62;
+  margin: 0 auto;
+  max-width: 560px;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
@@ -128,25 +142,21 @@
 .brandStatementVisible .brandDesc { opacity: 1; transform: translateY(0); }
 
 @media (min-width: 768px) {
-  .brandStatement { padding: 80px 64px; }
+  .brandStatement { padding: 84px 64px; }
 
-  .brandInner {
-    flex-direction: row;
-    align-items: center;
-    gap: 36px;
-  }
+  .brandInner { gap: 22px; }
 
-  .brandLogo { width: 44px; height: 44px; }
+  .brandLogo { width: 160px; height: 160px; }
 
   .brandDivider {
-    width: 1px;
-    height: 56px;
+    width: 48px;
+    margin-bottom: 2px;
   }
 
-  .brandContent { max-width: 600px; gap: 14px; }
+  .brandContent { gap: 18px; }
 
-  .brandHeadline { font-size: clamp(1.15rem, 1.7vw, 1.4rem); }
-  .brandDesc { font-size: 0.84rem; }
+  .brandHeadline { font-size: clamp(1.9rem, 2.7vw, 2.4rem); line-height: 1.12; }
+  .brandDesc { font-size: 1rem; }
 }
 
 /* ── McLaren spread — one designed editorial sequence, not four random
@@ -327,9 +337,7 @@
    ══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
   .photoBreakImg { aspect-ratio: 4 / 5; object-position: center 30%; }
-  .photoBreakFooter { padding: 0 20px 24px; }
-  .photoBreakTitle { font-size: clamp(1.2rem, 5.2vw, 1.6rem); }
+  .photoBreakTop { padding: 28px 20px 0; }
+  .photoBreakTitle { font-size: clamp(1.7rem, 8.4vw, 2.4rem); }
 
-  .brandStatement { padding: 96px 24px; gap: 32px; }
-  .brandLogo { width: clamp(110px, 34vw, 160px); }
 }

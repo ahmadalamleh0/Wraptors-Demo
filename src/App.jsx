@@ -43,6 +43,7 @@ import Reviews from './components/Reviews';
 // off the live site — component untouched at src/components/Academy.jsx,
 // restore by re-adding this import and <Academy /> below Reviews.
 import Footer from './components/Footer';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 // Service page template
 import ServicePage from './components/ServicePage';
@@ -67,10 +68,10 @@ import WrapsPage from './components/WrapsPage';
 // Hero images for each generic service page (Vehicle Wraps, PPF and
 // Starlight have their own dedicated page components with bespoke
 // content; these three share the ServicePage template).
-import heroCeramic    from '../Wraptors Media/779201054_18418163902146462_3362369227410745315_n.jpg';
+import heroCeramic    from '../47325374-c1b0-4233-8a29-5edee0bf07b4.png';
+import ceramicNew1    from '../Ceramic Coating(new1).jpeg';
 import ceramicNew2    from '../Ceramic Coating(new2).jpeg';
 import ceramicNew3    from '../Ceramic Coating(new3).jpeg';
-import ceramicBanner1 from '../Wraptors Media/730941504_18409686289146462_8126761517611540665_n.jpg';
 import lambo1         from '../Wraptors Media/572658115_18375844528146462_7044016670246006823_n.jpg';
 import lambo2         from '../Wraptors Media/573643633_18375844501146462_1338566802707597600_n.jpg';
 import lambo3         from '../Wraptors Media/574454404_18375844462146462_4088331334435453680_n.jpg';
@@ -124,9 +125,9 @@ const SERVICE_PAGES = [
       },
     ],
     splitBanner: {
-      img1: ceramicBanner1,
+      img1: ceramicNew1,
       img2: ceramicNew3,
-      text: 'GLOSS THAT LASTS.',
+      text: 'PRESERVE THE FINISH.',
     },
     learnCategory: 'ceramic-coating',
   },
@@ -141,6 +142,7 @@ const SERVICE_PAGES = [
     introKicker: 'Your Cabin',
     introStatement: 'Controlled.',
     introDescription: 'Window film is selected around more than darkness. At Wraptors, tint is approached around heat performance, privacy, visibility and the appearance of the vehicle, then installed cleanly across the glass for a finish that belongs with the car.',
+    showTintCompare: true,
     learnCategory: 'window-tint',
   },
   {
@@ -179,6 +181,7 @@ function HomePage() {
         <BookingCTA />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </>
   );
 }

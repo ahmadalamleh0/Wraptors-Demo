@@ -44,22 +44,22 @@ const PROCESS_STEPS = [
   {
     n: '01',
     title: 'Direction',
-    desc: 'We start with the car, the finish and the result you want. Colour, material, coverage and details are planned together before the vehicle enters installation.',
+    desc: 'We plan the colour, finish and coverage around your car and the result you want.',
   },
   {
     n: '02',
     title: 'Preparation',
-    desc: 'The vehicle is inspected, cleaned and prepared panel by panel. Trim or components are removed where required so the film can be installed and finished properly around the vehicle.',
+    desc: 'Each panel is cleaned and prepared, with trim removed where needed for a precise fit.',
   },
   {
     n: '03',
     title: 'Installation',
-    desc: 'Film is worked around the actual shape of the car, including edges, recesses, bumpers and complex body lines. This is where the quality of the final result is built.',
+    desc: 'Film is carefully fitted around curves, edges and recesses, with close attention to every detail.',
   },
   {
     n: '04',
     title: 'Final Finish',
-    desc: 'Edges, seams and detailed areas are checked, the vehicle is finished and reassembled, then the complete wrap is inspected before handover.',
+    desc: 'Edges and seams are checked, trim is refitted, and the vehicle is inspected before handover.',
   },
 ];
 
@@ -196,12 +196,13 @@ export default function WrapsPage() {
           description="At Wraptors, we handle complete colour changes, partial wraps and bespoke styling around the vehicle itself. Material, coverage and finish are planned together, then installed with attention to body lines, edges, trim and final presentation. The result is a transformation that looks considered from the first panel to the last."
         />
 
-        {/* ── Full photo break — overlay footer sits inside the image ── */}
+        {/* ── Full photo break — statement sits in the dark space above
+             the roofline, inside the image ── */}
         <section className={styles.photoBreak}>
           <img src={fullWrapImg} alt="Wraptors full colour change wrap" className={styles.photoBreakImg} loading="lazy" />
           <div className={styles.photoBreakOverlay} aria-hidden="true" />
-          <div className={styles.photoBreakFooter}>
-            <span className={styles.photoBreakTitle}>Built To Shift Presence.</span>
+          <div className={styles.photoBreakTop}>
+            <span className={styles.photoBreakTitle}>Built To<br />Shift Presence.</span>
           </div>
         </section>
 
@@ -218,7 +219,7 @@ export default function WrapsPage() {
             <div className={styles.brandDivider} aria-hidden="true" />
             <div className={styles.brandContent}>
               <p className={styles.brandHeadline}>
-                Crafting some of the world&rsquo;s most iconic wrapped vehicles.
+                Crafting some of the world&rsquo;s most iconic<br className={styles.brandBreak} />{' '}wrapped vehicles.
               </p>
               <p className={styles.brandDesc}>
                 Wraptors brings together bespoke styling, experienced installation and a global automotive identity built around standout vehicles. From complete colour transformations to one-off visual directions, every build is approached with the same focus on execution, detail and presence.

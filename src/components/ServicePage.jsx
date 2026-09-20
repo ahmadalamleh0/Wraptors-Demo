@@ -5,6 +5,7 @@ import FloatingWhatsApp from './FloatingWhatsApp';
 import ServiceHero from './ServiceHero';
 import ServiceIntroSection from './ServiceIntroSection';
 import ServiceProcess from './ServiceProcess';
+import TintCompareSection from './TintCompareSection';
 import RelatedInsights from './RelatedInsights';
 import AftercareSection from './AftercareSection';
 import ServiceFaqSection from './ServiceFaqSection';
@@ -30,6 +31,7 @@ export default function ServicePage({
   processHeading,
   processSteps,
   splitBanner,
+  showTintCompare,
   tagline,
   learnCategory,
   path,
@@ -91,6 +93,9 @@ export default function ServicePage({
           statement={introStatement}
           description={introDescription}
         />
+
+        {/* ── Optional interactive tint VLT comparison — Window Tint only ── */}
+        {showTintCompare && <TintCompareSection />}
 
         {/* ── Optional full-bleed image between intro and process ── */}
         {introImage && (

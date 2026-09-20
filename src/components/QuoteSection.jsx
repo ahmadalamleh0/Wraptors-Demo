@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   QUOTE_STEPS,
   QUOTE_SERVICES,
   QUOTE_PROJECT_OPTIONS,
   QUOTE_TIMING_OPTIONS,
   QUOTE_CONTACT_METHODS,
+  QUOTE_YEARS,
+  QUOTE_CAR_BRANDS,
 } from '../data/quoteFormData';
 import { submitQuoteRequest } from '../lib/submitQuoteRequest';
 import styles from './QuoteSection.module.css';
@@ -64,6 +66,74 @@ function OptionRow({ label, selected, onSelect }) {
   );
 }
 
+// Searchable brand dropdown — a text input that filters QUOTE_CAR_BRANDS as
+// you type, with selection only possible from the list (typing alone never
+// sets the value), so submissions always carry a clean brand name.
+function BrandSelect({ value, onChange, error }) {
+  // query only holds what's being typed while the list is open; closed, the
+  // input just displays `value` directly — no state needs syncing from it.
+  const [query, setQuery] = useState('');
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef(null);
+
+  useEffect(() => {
+    function onDocClick(e) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', onDocClick);
+    return () => document.removeEventListener('mousedown', onDocClick);
+  }, []);
+
+  const filtered = query.trim()
+    ? QUOTE_CAR_BRANDS.filter((b) => b.toLowerCase().includes(query.trim().toLowerCase()))
+    : QUOTE_CAR_BRANDS;
+
+  const select = (brand) => {
+    onChange(brand);
+    setQuery('');
+    setOpen(false);
+  };
+
+  return (
+    <div className={styles.combo} ref={wrapRef}>
+      <input
+        type="text"
+        placeholder={value || 'Search brand…'}
+        value={open ? query : (value || '')}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          setOpen(true);
+          if (value) onChange('');
+        }}
+        onFocus={() => { setQuery(''); setOpen(true); }}
+        className={styles.input}
+        autoComplete="off"
+        role="combobox"
+        aria-expanded={open}
+        aria-autocomplete="list"
+      />
+      {open && (
+        filtered.length > 0 ? (
+          <ul className={styles.comboList} role="listbox">
+            {filtered.map((b) => (
+              <li key={b} role="option" aria-selected={value === b}>
+                <button type="button" className={styles.comboOption} onMouseDown={(e) => e.preventDefault()} onClick={() => select(b)}>
+                  {b}
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className={styles.comboEmpty}>No matching brand</div>
+        )
+      )}
+      {error && <span className={styles.errorSmall}>{error}</span>}
+    </div>
+  );
+}
+
 export default function QuoteSection({
   id,
   initialService,
@@ -86,7 +156,13 @@ export default function QuoteSection({
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
-  const selectService = (id) => setForm((f) => ({ ...f, service: id, projectDetail: '' }));
+  // Picking a service is unambiguous — jump straight to Vehicle instead of
+  // making them click Next. Back still returns here to change it.
+  const selectService = (id) => {
+    setForm((f) => ({ ...f, service: id, projectDetail: '' }));
+    setErrors({});
+    setStep(2);
+  };
   const selectOption = (field, id) => setForm((f) => ({ ...f, [field]: id }));
 
   const goNext = async () => {
@@ -182,13 +258,15 @@ export default function QuoteSection({
                   <div className={styles.row3}>
                     <label className={styles.field}>
                       <span className={styles.fieldLabel}>Year</span>
-                      <input type="text" inputMode="numeric" placeholder="2024" value={form.year} onChange={update('year')} className={styles.input} />
+                      <select value={form.year} onChange={update('year')} className={styles.input}>
+                        <option value="" disabled>Select year</option>
+                        {QUOTE_YEARS.map((y) => <option key={y} value={y}>{y}</option>)}
+                      </select>
                       {errors.year && <span className={styles.errorSmall}>{errors.year}</span>}
                     </label>
                     <label className={styles.field}>
                       <span className={styles.fieldLabel}>Make</span>
-                      <input type="text" placeholder="e.g. BMW" value={form.make} onChange={update('make')} className={styles.input} />
-                      {errors.make && <span className={styles.errorSmall}>{errors.make}</span>}
+                      <BrandSelect value={form.make} onChange={(v) => setForm((f) => ({ ...f, make: v }))} error={errors.make} />
                     </label>
                     <label className={styles.field}>
                       <span className={styles.fieldLabel}>Model</span>

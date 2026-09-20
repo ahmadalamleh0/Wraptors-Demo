@@ -13,11 +13,12 @@ export const QUOTE_STEPS = [
 ];
 
 export const QUOTE_SERVICES = [
-  { id: 'wraps',    label: 'Vehicle Wraps' },
-  { id: 'ppf',      label: 'Paint Protection Film' },
-  { id: 'ceramic',  label: 'Ceramic Coating' },
-  { id: 'tint',     label: 'Window Tint' },
-  { id: 'multiple', label: 'Multiple Services' },
+  { id: 'wraps',     label: 'Vehicle Wraps' },
+  { id: 'ppf',       label: 'Paint Protection Film' },
+  { id: 'ceramic',   label: 'Ceramic Coating' },
+  { id: 'tint',      label: 'Window Tint' },
+  { id: 'starlight', label: 'Starlight Headliner' },
+  { id: 'multiple',  label: 'Multiple Services' },
 ];
 
 // No entry for "multiple" on purpose — that path skips straight to the
@@ -52,6 +53,12 @@ export const QUOTE_PROJECT_OPTIONS = {
     { id: 'privacy-heat',     label: 'Privacy / Heat Reduction' },
     { id: 'not-sure',         label: 'Not Sure Yet' },
   ],
+  starlight: [
+    { id: 'single-colour', label: 'Single Colour Starlight' },
+    { id: 'dual-tone',     label: 'Dual-Tone / Gradient' },
+    { id: 'shooting-star', label: 'Shooting Star Effect' },
+    { id: 'not-sure',      label: 'Not Sure Yet' },
+  ],
 };
 
 export const QUOTE_TIMING_OPTIONS = [
@@ -66,3 +73,24 @@ export const QUOTE_CONTACT_METHODS = [
   { id: 'whatsapp', label: 'WhatsApp' },
   { id: 'email',    label: 'Email' },
 ];
+
+// Newest first, down to 1980 — covers next year's model-year cars through
+// anything old enough to still be a realistic customisation candidate.
+const CURRENT_YEAR = new Date().getFullYear();
+export const QUOTE_YEARS = Array.from(
+  { length: CURRENT_YEAR + 1 - 1980 + 1 },
+  (_, i) => String(CURRENT_YEAR + 1 - i)
+);
+
+// Alphabetical; the brand field is a searchable dropdown built from this
+// list rather than free text, so submissions stay clean and consistent.
+export const QUOTE_CAR_BRANDS = [
+  'Acura', 'Alfa Romeo', 'Aston Martin', 'Audi', 'Bentley',
+  'BMW', 'Bugatti', 'Cadillac', 'Chevrolet', 'Chrysler', 'Dodge', 'Ferrari',
+  'Fiat', 'Ford', 'Genesis', 'GMC', 'Honda', 'Hyundai', 'Infiniti', 'Jaguar',
+  'Jeep', 'Kia', 'Koenigsegg', 'Lamborghini', 'Land Rover', 'Lexus', 'Lotus',
+  'Lucid', 'Maserati', 'Maybach', 'Mazda', 'McLaren', 'Mercedes-Benz',
+  'MINI', 'Mitsubishi', 'Nissan', 'Pagani', 'Polestar', 'Porsche',
+  'Range Rover', 'Rimac', 'Rolls-Royce', 'Subaru', 'Suzuki', 'Tesla',
+  'Toyota', 'Volkswagen', 'Volvo',
+].sort((a, b) => a.localeCompare(b));

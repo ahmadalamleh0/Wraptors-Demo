@@ -163,11 +163,14 @@ const BENEFITS = [
   },
 ];
 
+// mobileFocus only applies on mobile, where the gallery crops to a fixed
+// 4:3 frame — it keeps each photo's key detail in view under that crop.
+// Desktop shows the photos at their natural aspect ratio, uncropped.
 const GALLERY = [
-  { img: gallery1, label: 'Full Front Coverage' },
-  { img: gallery2, label: 'Hood & Bumper Detail' },
-  { img: gallery3, label: 'Complete Paint Shield' },
-  { img: astonMartin4, label: 'Full Body Protection' },
+  { img: gallery1, label: 'Precision Seam Alignment', mobileFocus: 'center 22%' },
+  { img: gallery2, label: 'Custom Livery Protection', mobileFocus: 'center 30%' },
+  { img: gallery3, label: 'Full Front-End Coverage', mobileFocus: 'center 42%' },
+  { img: astonMartin4, label: 'Front Clip Installation', mobileFocus: 'center 38%' },
 ];
 
 const LAYERS = [
@@ -220,6 +223,12 @@ function CoverageExplorer() {
   return (
     <section className={styles.explorerSection}>
       <div className={styles.container}>
+
+        <div className={styles.explorerHead}>
+          <span className={styles.eyebrow}>Coverage Explorer</span>
+          <h2 className={styles.explorerTitle}>PPF Coverage Explorer</h2>
+        </div>
+
         <div className={styles.explorerLayout}>
 
           {/* ── Photo stage (left on desktop, top on mobile) ── */}
@@ -360,21 +369,12 @@ function CoverageExplorer() {
               ))}
             </div>
 
-            {/* Mobile: overview instruction only — zone images already carry their own text */}
-            {activeId === 'full-car' && (
-              <div className={styles.mobileZoneInfo}>
-                <p className={styles.mobileZoneDesc}>Select a panel below to see the coverage.</p>
-              </div>
-            )}
-
           </div>
 
           {/* ── Controls panel (right on desktop, below on mobile) ── */}
           <div className={styles.ctrlPanel}>
 
             <div className={styles.ctrlHead}>
-              <span className={styles.eyebrow}>Coverage Explorer</span>
-              <h2 className={styles.explorerTitle}>PPF Coverage Explorer</h2>
               <p className={styles.explorerSub}>
                 Explore how Paint Protection Film protects each high-impact zone of the vehicle.
               </p>
@@ -546,16 +546,21 @@ export default function PPFPage() {
         <div className={styles.container}>
           <div className={styles.sectionHead}>
             <span className={styles.eyebrow}>Real Installs</span>
-            <h2 className={styles.sectionTitle}>PPF in the Wild</h2>
-            <p className={styles.sectionSub}>A closer look at completed PPF installs across our portfolio.</p>
+            <h2 className={styles.sectionTitle}>Protection in Detail</h2>
+            <p className={styles.sectionSub}>A closer look at the details behind every installation.</p>
           </div>
           <div className={styles.galleryGrid}>
-            {GALLERY.map(({ img, label }) => (
-              <div key={label} className={styles.galleryCard}>
-                <img src={img} alt={label} className={styles.galleryImg} draggable={false} />
-                <div className={styles.galleryOverlay} />
-                <span className={styles.galleryLabel}>{label}</span>
-              </div>
+            {GALLERY.map(({ img, label, mobileFocus }) => (
+              <figure key={label} className={styles.galleryCard}>
+                <img
+                  src={img}
+                  alt={label}
+                  className={styles.galleryImg}
+                  style={{ '--mobileFocus': mobileFocus }}
+                  draggable={false}
+                />
+                <figcaption className={styles.galleryLabel}>{label}</figcaption>
+              </figure>
             ))}
           </div>
         </div>

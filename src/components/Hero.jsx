@@ -3,7 +3,29 @@ import { gsap } from 'gsap';
 import styles from './Hero.module.css';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
 
+const INTRO_SEEN_KEY = 'wraptorsHeroIntroSeen';
+
+function hasSeenIntro() {
+  try {
+    return sessionStorage.getItem(INTRO_SEEN_KEY) === '1';
+  } catch {
+    return false; // storage blocked (private mode, etc.) — just replay it
+  }
+}
+
+function markIntroSeen() {
+  try {
+    sessionStorage.setItem(INTRO_SEEN_KEY, '1');
+  } catch {
+    // ignore — nothing to persist to, no harm done
+  }
+}
+
 export default function Hero() {
+  // Once per browser tab session, not once per mount — so navigating to a
+  // service page and back doesn't replay the reveal/wipe every time.
+  const skipIntro = hasSeenIntro();
+
   const sectionRef    = useRef(null);
   const lockupRef     = useRef(null);
   const logoWrapRef   = useRef(null);
@@ -18,6 +40,14 @@ export default function Hero() {
   const scrollRef     = useRef(null);
 
   useEffect(() => {
+    if (skipIntro) {
+      // Already played this session — jump straight to "exited" so the
+      // navbar reveals immediately. Nothing to render (see below), so
+      // there's nothing to animate out either.
+      window.dispatchEvent(new CustomEvent('hero:exit'));
+      return undefined;
+    }
+
     const lockup    = lockupRef.current;
     const logoClip  = logoClipRef.current;
     const img       = logoImgRef.current;
@@ -101,6 +131,7 @@ export default function Hero() {
     function runExit() {
       if (exitFired || !section) return;
       exitFired = true;
+      markIntroSeen();
       window.removeEventListener('scroll',     onUserInput);
       window.removeEventListener('touchstart', onUserInput);
       exitTween = gsap.to(section, {
@@ -127,7 +158,11 @@ export default function Hero() {
       window.removeEventListener('scroll',     onUserInput);
       window.removeEventListener('touchstart', onUserInput);
     };
-  }, []);
+  }, [skipIntro]);
+
+  // Nothing to show or animate on a repeat visit this session — the page
+  // just opens straight into the next section instead.
+  if (skipIntro) return null;
 
   return (
     <section id="hero" ref={sectionRef} className={styles.hero}>

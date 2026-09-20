@@ -238,21 +238,31 @@
 .svcGalleryVisible .svcTile2 { transition-delay: 0.14s; }
 .svcGalleryVisible .svcTile3 { transition-delay: 0.28s; }
 
+/* Source photos are all portrait (phone shots) — the ratios below stay
+   close to that instead of forcing a wide landscape crop, which was
+   cutting the detail shot down to a sliver and clipping the roof/wheels
+   off the two full-car shots. */
 .svcTile1 {
   grid-area: hero;
-  aspect-ratio: 16 / 9;
-  min-height: 480px;
-  max-height: 720px;
+  aspect-ratio: 4 / 3;
+  min-height: 420px;
+  max-height: 640px;
 }
 
+/* Square-ish by default (desktop): the source is portrait, but at a
+   ~790px column width a full 3/4 crop makes the tile over 1000px tall.
+   1/1 keeps the whole car in frame (tuned via object-position below)
+   without the section turning into a vertical slab. Mobile overrides
+   this back to the fuller portrait crop, where columns are narrow
+   enough that 3/4 stays a sane height. */
 .svcTile2 {
   grid-area: left;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
 }
 
 .svcTile3 {
   grid-area: right;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
 }
 
 .svcImg {
@@ -263,9 +273,13 @@
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.svcTile1 .svcImg { object-position: center 50%; }
-.svcTile2 .svcImg { object-position: center 35%; }
-.svcTile3 .svcImg { object-position: center 35%; }
+/* Tile 1: close-up detail shot — centred on the panel, not the dark glass. */
+.svcTile1 .svcImg { object-position: center 62%; }
+/* Tiles 2/3: full-car shots, cropped to a square on desktop — biased
+   strongly toward the bottom of the source so the crop eats into the
+   ceiling rig above the car rather than the roofline or wheels. */
+.svcTile2 .svcImg { object-position: center 88%; }
+.svcTile3 .svcImg { object-position: center 88%; }
 
 .svcTile:hover .svcImg {
   transform: scale(1.025);
@@ -319,13 +333,14 @@
   }
 
   .svcTile1 {
-    aspect-ratio: 4 / 3;
-    min-height: 300px;
+    aspect-ratio: 5 / 4;
+    min-height: 260px;
+    max-height: 420px;
   }
 
   .svcTile2,
   .svcTile3 {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 4;
   }
 
   .svcFooter {
@@ -356,8 +371,8 @@
 .splitBannerOverlayText {
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 28px;
+  transform: translateX(-50%);
   z-index: 2;
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 4.4vw, 3.2rem);

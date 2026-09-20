@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import ServiceHero from './ServiceHero';
 import ServiceIntroSection from './ServiceIntroSection';
+import QuoteSection from './QuoteSection';
 import StarfieldBg from './StarfieldBg';
 import styles from './StarlightPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -51,13 +52,6 @@ const TWINKLE = {
   'Soft':     { amt: 0.12, speed: 0.35 },
   'Balanced': { amt: 0.30, speed: 0.75 },
   'Dynamic':  { amt: 0.58, speed: 1.40 },
-};
-
-const PRESETS = {
-  Executive:     { count: 1000, color: 'Pure White', shooting: false, desc: 'Clean, minimal night-sky. Quiet luxury for every commute.' },
-  Luxury:        { count: 1500, color: 'Ice Blue',   shooting: true,  desc: 'Cool-toned star field with occasional shooting stars.' },
-  'Show Car':    { count: 2000, color: 'Purple',     shooting: true,  desc: 'Maximum impact. Every star alive, every glance unforgettable.' },
-  'Night Drive': { count: 1500, color: 'Warm Gold',  shooting: false, desc: 'Warm golden stars for those late-night drives.' },
 };
 
 const DEFAULT = { count: 1500, color: 'Pure White', shooting: true };
@@ -396,7 +390,6 @@ function BeforeAfter() {
 export default function StarlightPage() {
   const [count,    setCount]    = useState(DEFAULT.count);
   const [color,    setColor]    = useState(DEFAULT.color);
-  const [activePreset, setActivePreset] = useState(null);
   const previewRef = useRef(null);
 
   useDocumentMeta(
@@ -404,16 +397,6 @@ export default function StarlightPage() {
     'Bespoke fibre-optic starlight headliners installed in Dubai — thousands of hand-laid stars, custom colour and density, built to order at the Wraptors Al Quoz studio.',
     `${SITE_URL}/services/starlight`
   );
-
-  const applyPreset = (name) => {
-    const p = PRESETS[name];
-    setCount(p.count);
-    setColor(p.color);
-    setActivePreset(name);
-    previewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
-
-  const clearPreset = () => setActivePreset(null);
 
   return (
     <>
@@ -472,7 +455,7 @@ export default function StarlightPage() {
                     <button
                       key={n}
                       className={`${styles.optBtn} ${count === n ? styles.optActive : ''}`}
-                      onClick={() => { setCount(n); clearPreset(); }}
+                      onClick={() => setCount(n)}
                     >
                       {n.toLocaleString()}
                     </button>
@@ -490,7 +473,7 @@ export default function StarlightPage() {
                       title={name}
                       className={`${styles.colorBtn} ${color === name ? styles.colorActive : ''}`}
                       style={{ '--swatch': COLOR_HEX[name] }}
-                      onClick={() => { setColor(name); clearPreset(); }}
+                      onClick={() => setColor(name)}
                     >
                       <span className={styles.swatch} />
                       <span className={styles.swatchName}>{name}</span>
@@ -547,71 +530,17 @@ export default function StarlightPage() {
           className={styles.editorialImg}
           draggable={false}
         />
-        <div className={styles.editorialOverlay} />
         <div className={styles.editorialContent}>
-          <span className={styles.editorialEyebrow}>The Craft</span>
           <h2 className={styles.editorialTitle}>Crafted<br />After Dark</h2>
-          <a href="mailto:info@wraptorsmafia.com?subject=Starlight Headliner Request" className={styles.editorialCta}>
-            Start Your Build <span className={styles.editorialArrow}>→</span>
-          </a>
         </div>
       </section>
 
-      {/* ── PRESETS ──────────────────────────────────────────────────── */}
-      <section className={styles.presetsSection}>
-        <div className={styles.container}>
-          <div className={styles.presetsGrid}>
-            {Object.entries(PRESETS).map(([name, preset]) => (
-              <button
-                key={name}
-                className={`${styles.presetCard} ${activePreset === name ? styles.presetActive : ''}`}
-                onClick={() => applyPreset(name)}
-              >
-                {/* Mini star preview */}
-                <div className={styles.presetGlow} style={{ '--pc': COLOR_HEX[preset.color] }} />
-                <span className={styles.presetName}>{name}</span>
-                <ul className={styles.presetMeta}>
-                  <li>{preset.count.toLocaleString()} stars</li>
-                  <li style={{ color: COLOR_HEX[preset.color] }}>{preset.color}</li>
-                  {preset.shooting && <li>Shooting stars</li>}
-                </ul>
-                <p className={styles.presetDesc}>{preset.desc}</p>
-                <span className={styles.presetApply}>{activePreset === name ? 'Applied ✓' : 'Apply Preset'}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ──────────────────────────────────────────────────────── */}
-      <section className={styles.ctaSection}>
-        <div className={styles.container}>
-          <span className={styles.eyebrow}>Your Configuration</span>
-          <h2 className={styles.ctaTitle}>Ready to Order?</h2>
-          <p className={styles.ctaSub}>Your selected setup will be shared with our team when you submit.</p>
-
-          <div className={styles.configSummary}>
-            {[
-              { label: 'Stars', value: count.toLocaleString() },
-              { label: 'Color', value: color },
-              ...(activePreset ? [{ label: 'Preset', value: activePreset }] : []),
-            ].map(({ label, value }) => (
-              <div key={label} className={styles.configPill}>
-                <span className={styles.configPillLabel}>{label}</span>
-                <span className={styles.configPillValue}>{value}</span>
-              </div>
-            ))}
-          </div>
-
-          <a
-            href={`mailto:info@wraptorsmafia.com?subject=Starlight Headliner Request&body=Stars: ${count}%0AColor: ${color}${activePreset ? `%0APreset: ${activePreset}` : ''}`}
-            className={styles.requestBtn}
-          >
-            Request This Setup
-            <span className={styles.requestArrow}>→</span>
-          </a>
-        </div>
-      </section>
+      <QuoteSection
+        id="cta"
+        initialService="starlight"
+        subtitle="Ready to take the next step?"
+        compact
+      />
 
       <Footer />
     </>

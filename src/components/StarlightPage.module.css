@@ -314,193 +314,6 @@
   justify-content: center;
 }
 
-/* ── PRESETS ─────────────────────────────────────────────────────────────── */
-.presetsSection {
-  background: #05050c;
-  padding: 96px 0 80px;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.presetsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
-.presetCard {
-  position: relative;
-  padding: 28px 22px 24px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.03);
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.22s ease;
-  overflow: hidden;
-}
-
-.presetCard:hover {
-  border-color: rgba(184,212,255,0.22);
-  background: rgba(184,212,255,0.04);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(0,0,0,0.35);
-}
-
-.presetActive {
-  border-color: rgba(184,212,255,0.45) !important;
-  background: rgba(184,212,255,0.07) !important;
-  box-shadow: 0 0 0 1px rgba(184,212,255,0.15), 0 12px 36px rgba(0,0,0,0.35);
-}
-
-.presetGlow {
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--pc) 30%, transparent) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.presetName {
-  display: block;
-  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.05em;
-  margin-bottom: 12px;
-}
-
-.presetMeta {
-  list-style: none;
-  margin: 0 0 14px;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.presetMeta li {
-  font-size: 0.73rem;
-  color: rgba(255,255,255,0.45);
-  letter-spacing: 0.06em;
-}
-
-.presetDesc {
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.36);
-  line-height: 1.55;
-  margin: 0 0 18px;
-}
-
-.presetApply {
-  font-family: var(--font-ui, sans-serif);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: rgba(184,212,255,0.60);
-  transition: color 0.18s;
-}
-
-.presetCard:hover .presetApply,
-.presetActive .presetApply {
-  color: rgba(184,212,255,0.95);
-}
-
-/* ── CTA ─────────────────────────────────────────────────────────────────── */
-.ctaSection {
-  background: #040408;
-  padding: 96px 0 120px;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  text-align: center;
-}
-
-.ctaTitle {
-  font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
-  font-size: clamp(2rem, 4.5vw, 3.8rem);
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.05em;
-  margin: 0 0 16px;
-}
-
-.ctaSub {
-  color: rgba(255,255,255,0.42);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin: 0 0 44px;
-}
-
-.configSummary {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  margin-bottom: 48px;
-}
-
-.configPill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 40px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.04);
-}
-
-.configPillLabel {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.32);
-}
-
-.configPillValue {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: rgba(255,255,255,0.82);
-}
-
-.requestBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 40px;
-  border-radius: 14px;
-  border: 1px solid rgba(184,212,255,0.35);
-  background: linear-gradient(135deg, rgba(184,212,255,0.10) 0%, rgba(192,132,252,0.08) 100%);
-  color: #fff;
-  font-family: var(--font-ui, sans-serif);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.22s ease;
-  box-shadow: 0 0 0 0 rgba(184,212,255,0);
-}
-
-.requestBtn:hover {
-  border-color: rgba(184,212,255,0.65);
-  background: linear-gradient(135deg, rgba(184,212,255,0.16) 0%, rgba(192,132,252,0.14) 100%);
-  box-shadow: 0 0 32px rgba(184,212,255,0.14);
-  transform: translateY(-1px);
-}
-
-.requestArrow {
-  font-size: 1.1rem;
-  transition: transform 0.2s ease;
-}
-.requestBtn:hover .requestArrow {
-  transform: translateX(3px);
-}
-
 /* ── REAL INSTALLATIONS GALLERY ──────────────────────────────────────────── */
 .gallerySection {
   background: #040408;
@@ -598,25 +411,6 @@
   user-select: none;
 }
 
-.editorialOverlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to right,
-      rgba(2, 2, 14, 0.88) 0%,
-      rgba(2, 2, 14, 0.62) 38%,
-      rgba(2, 2, 14, 0.18) 65%,
-      transparent 100%
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(2, 2, 14, 0.72) 0%,
-      transparent 45%
-    );
-  pointer-events: none;
-}
-
 .editorialContent {
   position: absolute;
   top: 88px;
@@ -626,17 +420,6 @@
   max-width: 560px;
 }
 
-.editorialEyebrow {
-  display: block;
-  font-family: var(--font-ui, sans-serif);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.44em;
-  text-transform: uppercase;
-  color: rgba(184, 212, 255, 0.60);
-  margin-bottom: 18px;
-}
-
 .editorialTitle {
   font-family: 'Ethnocentric', 'Cinzel', Georgia, serif;
   font-size: clamp(2.8rem, 7vw, 6rem);
@@ -644,54 +427,10 @@
   letter-spacing: 0.04em;
   line-height: 1.0;
   color: #fff;
-  margin: 0 0 24px;
+  margin: 0;
   text-shadow:
     0 0 80px rgba(184, 212, 255, 0.18),
     0 2px 0 rgba(0, 0, 0, 0.9);
-}
-
-.editorialSub {
-  font-size: clamp(0.85rem, 1.3vw, 1rem);
-  color: rgba(255, 255, 255, 0.48);
-  line-height: 1.7;
-  margin: 0 0 36px;
-  max-width: 400px;
-}
-
-.editorialCta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 36px;
-  padding: 14px 32px;
-  border-radius: 10px;
-  border: 1px solid rgba(184, 212, 255, 0.30);
-  background: rgba(184, 212, 255, 0.07);
-  color: rgba(255, 255, 255, 0.88);
-  font-family: var(--font-ui, sans-serif);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.22s ease;
-  backdrop-filter: blur(6px);
-}
-
-.editorialCta:hover {
-  border-color: rgba(184, 212, 255, 0.60);
-  background: rgba(184, 212, 255, 0.14);
-  color: #fff;
-  box-shadow: 0 0 28px rgba(184, 212, 255, 0.12);
-  transform: translateY(-2px);
-}
-
-.editorialArrow {
-  font-size: 1rem;
-  transition: transform 0.2s ease;
-}
-.editorialCta:hover .editorialArrow {
-  transform: translateX(4px);
 }
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
@@ -713,30 +452,15 @@
 @media (max-width: 768px) {
   .container { padding: 0 20px; }
 
-  .editorialOverlay {
-    background:
-      linear-gradient(
-        to top,
-        rgba(2, 2, 14, 0.92) 0%,
-        rgba(2, 2, 14, 0.55) 45%,
-        rgba(2, 2, 14, 0.12) 75%,
-        transparent 100%
-      );
-  }
   .editorialContent {
     top: 48px;
     padding: 0 24px;
     max-width: 100%;
   }
-  .editorialSub {
-    max-width: 100%;
-  }
 
   .previewSection,
   .baSection,
-  .gallerySection,
-  .presetsSection,
-  .ctaSection {
+  .gallerySection {
     padding: 64px 0 52px;
   }
 
@@ -756,16 +480,11 @@
 
   .colorRow { grid-template-columns: repeat(3, 1fr); }
 
-  .presetsGrid { grid-template-columns: 1fr 1fr; }
-
   .baContainer { aspect-ratio: 4/3; }
 }
 
 @media (max-width: 540px) {
-  .presetsGrid { grid-template-columns: 1fr; }
   .colorRow { grid-template-columns: repeat(3, 1fr); }
-  .configSummary { gap: 8px; }
-  .configPill { padding: 6px 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

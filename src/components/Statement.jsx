@@ -97,7 +97,7 @@ export default function Statement() {
         </p>
         <div data-ruler className={styles.ruler} aria-hidden="true" />
         <p data-line className={styles.mainLine}>
-          YOU SET THE TONE.
+          YOU SET<br />THE TONE.
         </p>
       </div>
 

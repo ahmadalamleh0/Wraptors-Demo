@@ -55,7 +55,8 @@
 .mainLine {
   font-family: var(--font-display);
   font-size: clamp(3.2rem, 7.5vw, 10rem);
-  font-weight: 400;
+  font-weight: 700;
+  -webkit-text-stroke: 0.5px currentColor;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: #000;
@@ -69,7 +70,7 @@
      asymmetric (tighter above than below) rather than centered, so the
      divider reads as closer to the first line while the whole block
      still tightens overall. */
-  .section      { padding: 40px 36px 34px; min-height: auto; }
+  .section      { padding: 68px 36px 60px; min-height: auto; }
   .contextLine  { font-size: clamp(1.1rem, 5.5vw, 2.4rem); letter-spacing: 0.06em; will-change: opacity, transform; }
   .ruler        { margin: 14px auto 22px; will-change: opacity, transform; }
   .mainLine     { font-size: clamp(2.6rem, 11vw, 6rem); will-change: opacity, transform; }
@@ -103,7 +104,7 @@
 }
 
 @media (max-width: 480px) {
-  .section      { padding: 36px 28px 30px; }
+  .section      { padding: 52px 28px 46px; }
   .contextLine  { font-size: 6vw; }
   .mainLine     { font-size: 12.5vw; }
 }
