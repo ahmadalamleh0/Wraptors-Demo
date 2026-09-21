@@ -11,6 +11,12 @@ import { getPresentationMode, MODES } from '../lib/presentationMode';
 // forever, if it never does).
 import heroFallbackImage from '../assets/hero-safe-mode.jpg';
 import heroVideoSrc from '../../final_hero(new).mp4';
+// Lightweight rendition for mobile — same footage, 720x1280 instead of
+// 1080x1920, ~800kbps instead of ~1.8Mbps, and no audio track at all
+// (transcoded via ffmpeg; the source is muted in playback either way, but
+// stripping the audio stream itself avoids downloading bytes nobody
+// hears). Cuts the file from ~5.0MB to ~2.0MB.
+import heroVideoMobileSrc from '../../final_hero-mobile.mp4';
 
 // TEMPORARY DEBUG — remove once the Safe Mode black-flash fix is confirmed
 // on real devices. Logs image-readiness at the exact moment the intro
@@ -25,6 +31,9 @@ export default function HeroVideo() {
   // wrong thing and then flips.
   const [mode] = useState(() => getPresentationMode());
   const isVideoMode = mode === MODES.VIDEO;
+  // Same viewport check used to decide the mobile-vs-desktop video source
+  // below — read once, synchronously, same as `mode`.
+  const [isMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches);
 
   const sectionRef    = useRef(null);
   const imageRef      = useRef(null); // permanent background image — always mounted, both modes, opacity 1 from first paint
@@ -163,8 +172,28 @@ export default function HeroVideo() {
         });
       };
 
-      // First attempt — works when browser allows muted autoplay immediately
-      tryPlay();
+      // ── Deferred source assignment ─────────────────────────────────────
+      // No `src` in the initial markup (see JSX below) — assigning it is
+      // what actually starts the network fetch, and doing that immediately
+      // on mount competes with the curtain intro and first paint for
+      // bandwidth/CPU right when they matter most. requestIdleCallback lets
+      // the browser finish its current work first; the timeout is a cap so
+      // this still starts promptly on a busy main thread rather than
+      // waiting indefinitely. First attempt fires the instant the source is
+      // assigned, so "start the fetch" and "first play() attempt" happen
+      // together.
+      const startVideo = () => {
+        video.src = isMobile ? heroVideoMobileSrc : heroVideoSrc;
+        video.load();
+        tryPlay();
+      };
+      let idleHandle = null;
+      let idleTimer = null;
+      if (typeof window.requestIdleCallback === 'function') {
+        idleHandle = window.requestIdleCallback(startVideo, { timeout: 1200 });
+      } else {
+        idleTimer = setTimeout(startVideo, 50);
+      }
 
       // iOS sometimes requires the first user gesture to unlock muted autoplay.
       // Attach to all common first-interaction events; {once} auto-removes them.
@@ -188,6 +217,8 @@ export default function HeroVideo() {
       playIo.observe(section);
 
       cleanupVideo = () => {
+        if (idleHandle !== null && typeof window.cancelIdleCallback === 'function') window.cancelIdleCallback(idleHandle);
+        if (idleTimer !== null) clearTimeout(idleTimer);
         playIo.disconnect();
         video.removeEventListener('loadedmetadata', applyStartTime);
         video.removeEventListener('timeupdate',     skipIntro);
@@ -206,7 +237,7 @@ export default function HeroVideo() {
       clearTimeout(entranceFallback);
       entranceTl.kill();
     };
-  }, [isVideoMode, mode]);
+  }, [isVideoMode, mode, isMobile]);
 
   return (
     <section ref={sectionRef} className={styles.section}>
@@ -229,15 +260,20 @@ export default function HeroVideo() {
       {!isVideoMode && <div className={styles.heroImageGradient} aria-hidden="true" />}
 
       {isVideoMode && (
+        // No `src`/`autoPlay`/`preload` here on purpose — both are assigned
+        // imperatively once the browser is idle after first paint (see the
+        // effect above), so this element does nothing and costs nothing
+        // until then. `autoPlay` is deliberately omitted too: playback is
+        // fully driven by tryPlay() below instead, so there's exactly one
+        // thing deciding when it starts, not two.
         <video
           ref={videoRef}
           className={styles.video}
-          src={heroVideoSrc}
-          autoPlay
           muted
           playsInline
           loop
-          preload="auto"
+          preload="none"
+          fetchPriority="high"
         />
       )}
 
@@ -251,8 +287,12 @@ export default function HeroVideo() {
         className={`${styles.textOverlay} ${!isVideoMode ? styles.textOverlaySafeMobile : ''}`}
         aria-hidden="false"
       >
-        <p ref={line1Ref} className={styles.mainLine}>Crafted with purpose.</p>
-        <p ref={line2Ref} className={styles.mainLine}>Built for legacy.</p>
+        {/* The homepage's only H1 — previously two <p> lines, which left the
+            page (and its most important heading) with no H1 at all. */}
+        <h1 className={styles.mainHeadline}>
+          <span ref={line1Ref} className={styles.mainLine}>Crafted with purpose.</span>
+          <span ref={line2Ref} className={styles.mainLine}>Built for legacy.</span>
+        </h1>
         <div ref={rulerRef} className={styles.ruler} aria-hidden="true" />
         <p ref={subLineRef} className={styles.subLine}>
           Luxury wraps&nbsp;&nbsp;·&nbsp;&nbsp;Paint protection&nbsp;&nbsp;·&nbsp;&nbsp;Vehicle transformation

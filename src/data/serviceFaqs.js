@@ -80,6 +80,24 @@ export const SERVICE_FAQS = {
       a: 'Ask our team about the manufacturer and installation warranty available with your selected film.',
     },
   ],
+  starlight: [
+    {
+      q: 'How many stars and what colours can I choose?',
+      a: 'Density runs from 500 stars for a subtle effect up to 2,500 for a fuller night sky, and colour is fully customisable — from Pure White and Ice Blue through Warm Gold, Purple, Emerald and more. You can preview combinations before committing to a layout.',
+    },
+    {
+      q: 'Can I add a shooting star effect?',
+      a: 'Yes, it is an optional addition on top of the standard fixed layout, giving the ceiling occasional movement rather than a completely static field.',
+    },
+    {
+      q: 'Will the installation fit my vehicle’s headliner?',
+      a: 'Layout, density and visual direction are planned around your specific cabin so the finished installation feels integrated into the vehicle rather than added afterward. We assess the headliner before confirming a design.',
+    },
+    {
+      q: 'How long does a starlight installation take?',
+      a: 'Timelines vary depending on star count, headliner complexity and whether the shooting star effect is included. We can give you a clearer timeframe once we have reviewed your vehicle.',
+    },
+  ],
   'custom-builds': [
     {
       q: 'Will a body kit fit my vehicle?',

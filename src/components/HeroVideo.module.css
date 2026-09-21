@@ -150,8 +150,16 @@
   );
 }
 
+/* Wraps the two .mainLine spans below — a plain h1, no styling of its own
+   beyond block display (the global *{margin:0} reset already keeps it from
+   adding any default browser spacing). */
+.mainHeadline {
+  display: block;
+}
+
 /* ── Main headline — two lines, light & editorial ── */
 .mainLine {
+  display: block;
   font-family: var(--font-display);
   font-size: clamp(2rem, 4.2vw, 5.6rem);
   font-weight: 300;

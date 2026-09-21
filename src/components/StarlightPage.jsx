@@ -4,6 +4,7 @@ import Footer from './Footer';
 import ServiceHero from './ServiceHero';
 import ServiceIntroSection from './ServiceIntroSection';
 import QuoteSection from './QuoteSection';
+import ServiceFaqSection from './ServiceFaqSection';
 import StarfieldBg from './StarfieldBg';
 import styles from './StarlightPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -410,13 +411,6 @@ export default function StarlightPage() {
         media={<StarfieldBg />}
       />
 
-      {/* ── Your Cabin / Reimagined — reusable premium intro block ── */}
-      <ServiceIntroSection
-        kicker="Your Cabin"
-        statement="Reimagined."
-        description="Our starlight installations transform the headliner into part of the interior design. Layout, density and visual direction are planned around the cabin so the finished installation feels integrated into the vehicle rather than added afterward."
-      />
-
       {/* ── INTERACTIVE PREVIEW ──────────────────────────────────────── */}
       <section className={styles.previewSection} ref={previewRef}>
         <div className={styles.container}>
@@ -490,6 +484,13 @@ export default function StarlightPage() {
         </div>
       </section>
 
+      {/* ── Your Cabin / Reimagined — reusable premium intro block ── */}
+      <ServiceIntroSection
+        kicker="Your Cabin"
+        statement="Reimagined."
+        description="Our starlight installations transform the headliner into part of the interior design. Layout, density and visual direction are planned around the cabin so the finished installation feels integrated into the vehicle rather than added afterward."
+      />
+
       {/* ── BEFORE / AFTER ───────────────────────────────────────────── */}
       <section className={styles.baSection}>
         <div className={styles.container}>
@@ -541,6 +542,8 @@ export default function StarlightPage() {
         subtitle="Ready to take the next step?"
         compact
       />
+
+      <ServiceFaqSection service="starlight" />
 
       <Footer solid />
     </>

@@ -81,7 +81,7 @@ export default function TintPage() {
       <TintCompareSection />
 
       {/* ── What is ceramic tint? — educational, same centered system ── */}
-      <section className={`${styles.introCentered} ${styles.introCenteredTight}`}>
+      <section className={styles.introCentered}>
         <div className={styles.container}>
           <h2 className={styles.introTitle}>What Is Ceramic Tint?</h2>
           <p className={styles.introSub}>

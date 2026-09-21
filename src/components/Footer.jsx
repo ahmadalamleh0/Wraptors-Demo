@@ -47,6 +47,7 @@ export default function Footer({ solid = false }) {
             aria-hidden="true"
           />
           <div className={styles.overlay} aria-hidden="true" />
+          <div className={styles.contentScrim} aria-hidden="true" />
         </>
       )}
 

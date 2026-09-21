@@ -47,8 +47,12 @@ function greatCircle(lng1, lat1, lng2, lat2, N = 48) {
   return pts;
 }
 
+// Indices into GLOBE_MARKERS above: 0=Mississauga, 2=Ottawa, 5=Calgary,
+// 6=Miami, 7=Orlando, 8=Cape Town. (Vancouver's old pair was removed along
+// with its marker; Dubai/Scottsdale — appended after Cape Town — were
+// never connected by a line, same as before.)
 const LINE_PAIRS = [
-  [0, 2], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9],
+  [0, 2], [0, 5], [0, 6], [0, 7], [0, 8],
 ];
 
 /* ── Count-up animation ── */
@@ -197,28 +201,30 @@ const REGIONS = [
   {
     code: 'CA',
     name: 'Canada',
-    count: '11',
+    count: '9',
     locations: [
       { name: 'Mississauga', isHQ: true, instagram: 'wraptors.toronto' },
       { name: 'Vaughan',               instagram: 'wraptors.vaughan'   },
       { name: 'Ottawa',                instagram: 'wraptors.ottawa'    },
-      { name: 'Whitby',                instagram: 'wraptors.east'      },
-      { name: 'Oakville',              instagram: 'wraptorsoakville'   },
-      { name: 'Hamilton',              instagram: 'wraptors.hamilton'  },
-      { name: 'Waterloo',              instagram: 'wraptors.tricity'   },
+      // One studio serving Ajax, Whitby, Oshawa and Pickering — shown as
+      // a single branch, not four, since it's one physical location.
+      { name: 'Wraptors East',         instagram: 'wraptors.east'      },
       { name: 'Barrie',                instagram: 'wraptors.north'     },
-      { name: 'Kingston',              instagram: 'wraptors.kingston'  },
+      { name: 'Hamilton',              instagram: 'wraptors.hamilton'  },
       { name: 'Calgary',               instagram: 'wraptors.calgary'   },
-      { name: 'Vancouver',             instagram: 'wraptors.vancity'   },
+      { name: 'Waterloo',              instagram: 'wraptors.tricity'   },
+      { name: 'Kingston',              instagram: 'wraptors.kingston'  },
     ],
   },
   {
     code: 'US',
     name: 'United States',
-    count: '2',
+    count: '4',
     locations: [
-      { name: 'Fort Lauderdale', instagram: 'wraptors.usa'    },
+      { name: 'Miami',           instagram: 'wraptors.usa'     },
       { name: 'Orlando',         instagram: 'wraptors.orlando' },
+      { name: 'Fort Lauderdale' },
+      { name: 'Scottsdale' },
     ],
   },
   {
@@ -246,13 +252,14 @@ const GLOBE_MARKERS = [
   { label: 'Hamilton · ON',        description: 'Ontario',                  latitude: 43.256,  longitude: -79.871,  color: '#cc2200' },
   { label: 'Barrie · ON',          description: 'Ontario',                  latitude: 44.389,  longitude: -79.690,  color: '#cc2200' },
   { label: 'Calgary · AB',         description: 'Alberta',                  latitude: 51.045,  longitude: -114.072, color: '#cc2200' },
-  { label: 'Vancouver · BC',       description: 'British Columbia',         latitude: 49.283,  longitude: -123.121, color: '#cc2200' },
-  { label: 'Fort Lauderdale · FL', description: 'Florida, USA',             latitude: 26.122,  longitude: -80.137,  color: '#cc2200' },
+  { label: 'Miami · FL',           description: 'Florida, USA',             latitude: 25.821,  longitude: -80.356,  color: '#cc2200' },
   { label: 'Orlando · FL',         description: 'Florida, USA',             latitude: 28.538,  longitude: -81.379,  color: '#cc2200' },
   { label: 'Cape Town · ZA',       description: 'South Africa',             latitude: -33.925, longitude: 18.424,   color: '#cc2200' },
-  // Appended (not inserted at index 0) so LINE_PAIRS below — which
-  // hardcodes marker indices — doesn't need renumbering.
+  // Appended (not inserted earlier in the array) so LINE_PAIRS below —
+  // which hardcodes marker indices — doesn't need renumbering for these.
   { label: 'Dubai · UAE',          description: 'United Arab Emirates',     latitude: 25.2048, longitude: 55.2708, color: '#cc2200' },
+  { label: 'Scottsdale · AZ',      description: 'Arizona, USA',             latitude: 33.494,  longitude: -111.926, color: '#cc2200' },
+  { label: 'Fort Lauderdale · FL', description: 'Florida, USA',             latitude: 26.122,  longitude: -80.137, color: '#cc2200' },
 ];
 
 const GLOBE_MAP_STYLE = {

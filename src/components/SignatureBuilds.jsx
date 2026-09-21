@@ -355,10 +355,19 @@ export default function SignatureBuilds() {
     // Older iOS Safari needs this set imperatively
     video?.setAttribute('webkit-playsinline', '');
 
-    // Retry on first user gesture — covers iOS autoplay gate
-    const retryPlay = () => { if (video?.paused) video.play().catch(() => {}); };
-    document.addEventListener('touchstart', retryPlay, { once: true, passive: true });
-    document.addEventListener('scroll',     retryPlay, { once: true, passive: true });
+    // Retry on user gesture — covers iOS autoplay gate. Gated on the
+    // section's current visibility: with preload="none" (see the video
+    // element below), calling .play() is what triggers the actual network
+    // fetch, not just playback — an ungated retry here would eagerly load
+    // this off-screen video on literally the first scroll/touch anywhere
+    // on the page, regardless of position, undoing the deferred load.
+    // Not `{ once: true }` — it needs to still work if autoplay is blocked
+    // the first time the section becomes visible, then the user scrolls
+    // away and back.
+    let isVisible = false;
+    const retryPlay = () => { if (isVisible && video?.paused) video.play().catch(() => {}); };
+    document.addEventListener('touchstart', retryPlay, { passive: true });
+    document.addEventListener('scroll',     retryPlay, { passive: true });
 
     // Text reveal observer
     const textObserver = new IntersectionObserver(
@@ -382,6 +391,7 @@ export default function SignatureBuilds() {
     // Video autoplay observer
     const videoObserver = new IntersectionObserver(
       ([entry]) => {
+        isVisible = entry.isIntersecting;
         if (entry.isIntersecting) video?.play().catch(() => {});
         else video?.pause();
       },
@@ -404,15 +414,22 @@ export default function SignatureBuilds() {
       <div className={styles.header} ref={headerRef}>
 
         {/* Background video */}
+        {/* No autoPlay/eager preload — this section sits several screens
+            below the fold, and eagerly fetching+decoding this ~5MB video
+            on mount (regardless of scroll position) was measured causing a
+            ~800ms main-thread stall shortly after page load, while the
+            visitor is still scrolling through Hero/Services. The
+            IntersectionObserver below already calls video.play() once this
+            section is actually visible, which triggers loading on its own
+            right when it's needed — poster covers the gap until then. */}
         <video
           ref={videoRef}
           className={styles.headerVideo}
           src={masterVideoSrc}
-          autoPlay
           muted
           playsInline
           loop
-          preload="auto"
+          preload="none"
           poster={rolls1}
         />
 

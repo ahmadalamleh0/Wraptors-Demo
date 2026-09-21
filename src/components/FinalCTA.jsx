@@ -37,7 +37,7 @@ export default function FinalCTA() {
         <div className={styles.brandMark}>
           <span className={styles.brandMarkText}>WRAPTORS</span>
           <div className={styles.brandMarkLine} />
-          <span className={styles.brandMarkSub}>13 LOCATIONS WORLDWIDE</span>
+          <span className={styles.brandMarkSub}>15 LOCATIONS WORLDWIDE</span>
         </div>
       </div>
 

@@ -14,11 +14,6 @@
   text-align: center;
 }
 
-/* Used when the showcase section follows immediately after, so there's no
-   lingering gap between the two black sections. */
-.introCenteredTight {
-  padding-bottom: 0;
-}
 
 .introTitle {
   font-family: var(--font-display);
@@ -140,7 +135,6 @@
 @media (max-width: 768px) {
   .container { padding: 0 20px; }
   .introCentered { padding: 64px 0 48px; }
-  .introCenteredTight { padding-bottom: 0; }
   .introTitle { margin-bottom: 14px; }
   .showcaseOverlayText { font-size: clamp(1.2rem, 6.5vw, 1.8rem); bottom: 16px; }
 }

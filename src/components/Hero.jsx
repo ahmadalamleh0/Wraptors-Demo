@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import styles from './Hero.module.css';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
+import uaeFlag from '../../UAE(FLAG).svg';
 
 const INTRO_SEEN_KEY = 'wraptorsHeroIntroSeen';
 
@@ -32,6 +33,7 @@ export default function Hero() {
   const logoClipRef   = useRef(null);  // clips the SVG; blade is sibling, not clipped
   const logoImgRef    = useRef(null);
   const bladeRef      = useRef(null);
+  const dubaiEditionRef = useRef(null);
   const topTextRef    = useRef(null);
   const brandRuleRef  = useRef(null);
   const bottomTextRef = useRef(null);
@@ -52,6 +54,7 @@ export default function Hero() {
     const logoClip  = logoClipRef.current;
     const img       = logoImgRef.current;
     const blade     = bladeRef.current;
+    const dubaiEdition = dubaiEditionRef.current;
     const topTxt    = topTextRef.current;
     const brandRule = brandRuleRef.current;
     const botTxt    = bottomTextRef.current;
@@ -68,6 +71,7 @@ export default function Hero() {
     gsap.set(logoClip, { clipPath: 'inset(0 0 100% 0)' }); // hidden; reveals top-to-bottom
     gsap.set(img,      { filter: 'brightness(1.0)' });
     gsap.set(blade,    { top: '0%', opacity: 0 });
+    gsap.set(dubaiEdition, { clipPath: 'inset(0 0 100% 0)', opacity: 0 });
     gsap.set(topTxt,   { clipPath: 'inset(0 0 100% 0)', opacity: 0 });
     gsap.set(botTxt,   { clipPath: 'inset(0 0 100% 0)', opacity: 0 });
     gsap.set(brandRule,    { scaleX: 0, opacity: 0 });
@@ -91,6 +95,16 @@ export default function Hero() {
     tl.to(blade, { opacity: 0, duration: 0.05, ease: 'none' }, 0.67);
     tl.to(img,   { filter: 'brightness(1.14)', duration: 0.08, ease: 'none' }, 0.66);
     tl.to(img,   { filter: 'brightness(1.0)',  duration: 0.32, ease: 'power2.out' }, 0.74);
+
+    // "DUBAI [flag] EDITION" — same engraved-cut reveal as the logo/wordmark
+    // below it, timed just after the logo settles so it reads as the next
+    // beat in the same carve, not a separate fade tacked on afterward.
+    tl.to(dubaiEdition, {
+      opacity: 1,
+      clipPath: 'inset(0 0 0% 0)',
+      duration: 0.22,
+      ease: 'power2.inOut',
+    }, 0.80);
 
     // "WRAPTORS DUBAI" — etched downward, same cut technique
     tl.to(topTxt, {
@@ -172,12 +186,24 @@ export default function Hero() {
         <div className={styles.logoRow}>
           <span ref={estRef} className={styles.sideText}>EST.</span>
 
-          <div ref={logoWrapRef} className={styles.logoWrap}>
-            {/* logoClip is clipped; blade is a sibling so it stays visible */}
-            <div ref={logoClipRef} className={styles.logoClip}>
-              <WraptorsMafiaLogo ref={logoImgRef} className={styles.badgeImg} />
+          <div className={styles.logoCol}>
+            {/* Centered precisely over the logo mark below it — equal-width
+                word columns either side of the flag, same trick the
+                service-page navbar uses, so "Dubai"/"Edition" being
+                different lengths doesn't pull the flag off-center. */}
+            <span ref={dubaiEditionRef} className={styles.dubaiEdition}>
+              <span className={`${styles.dubaiEditionWord} ${styles.dubaiEditionWordLeft}`}>Dubai</span>
+              <img src={uaeFlag} alt="" className={styles.dubaiFlag} />
+              <span className={`${styles.dubaiEditionWord} ${styles.dubaiEditionWordRight}`}>Edition</span>
+            </span>
+
+            <div ref={logoWrapRef} className={styles.logoWrap}>
+              {/* logoClip is clipped; blade is a sibling so it stays visible */}
+              <div ref={logoClipRef} className={styles.logoClip}>
+                <WraptorsMafiaLogo ref={logoImgRef} className={styles.badgeImg} />
+              </div>
+              <div ref={bladeRef} className={styles.engraveBlade} aria-hidden="true" />
             </div>
-            <div ref={bladeRef} className={styles.engraveBlade} aria-hidden="true" />
           </div>
 
           <span ref={yearRef} className={styles.sideText}>2016</span>

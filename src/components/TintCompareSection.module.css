@@ -1,7 +1,7 @@
 /* ══ COMPARE TINT OPTIONS — interactive VLT preview ══
-   Black / white / grey, no red. Image + SVG overlay share the same
-   viewBox-to-cover mapping so the window masks stay pinned to the glass
-   regardless of container size. */
+   Black / white / grey, no red. Single image swapped directly between five
+   real photos (no masks, no synthetic overlays) — every photo shares the
+   same crop/pose, so the swap never shifts or stretches the frame. */
 
 .section {
   background: #000;
@@ -50,15 +50,16 @@
 .layout {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  max-width: 1180px;
+  gap: 20px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
-/* ── Image + SVG overlay ──
+/* ── Image ──
    Full-bleed to the viewport edge on mobile (section/layout carry no side
    padding), with a tight cinematic crop so the car fills the frame instead
-   of sitting in a sea of sky/grass. */
+   of sitting in a sea of sky/grass. Fixed aspect-ratio so the box itself
+   never resizes when the photo underneath is swapped. */
 .imageWrap {
   position: relative;
   width: 100%;
@@ -67,106 +68,70 @@
   background: #050505;
 }
 
-.img,
-.overlaySvg {
+.img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
-.img { object-fit: cover; object-position: center; }
-
-.maskShape {
-  transition: opacity 0.35s ease;
-  pointer-events: none;
-}
-
-/* ── Controls ── */
-.controls {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  padding: 0 20px;
-}
-
-.controlGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.controlLabel {
-  font-family: var(--font-ui);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.pillRow {
+/* ── Five-option row, directly under the image ── */
+.optionRow {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 8px;
+  padding: 0 20px;
 }
 
-.pill {
+.optionBtn {
   appearance: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 54px;
+  min-height: 48px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.20);
-  color: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: rgba(255, 255, 255, 0.75);
   font-family: var(--font-ui);
-  font-size: 0.95rem;
+  font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.01em;
   padding: 8px 4px;
   border-radius: 10px;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
-.pill:hover { border-color: rgba(255, 255, 255, 0.45); color: #fff; }
-.pillActive {
+.optionBtn:hover { border-color: rgba(255, 255, 255, 0.5); color: #fff; }
+.optionBtnActive {
   background: #fff;
   border-color: #fff;
   color: #000;
 }
-.pillActive:hover { background: rgba(255, 255, 255, 0.9); color: #000; }
+.optionBtnActive:hover { background: rgba(255, 255, 255, 0.92); color: #000; }
 
 .note {
   font-family: var(--font-ui);
   font-size: 0.72rem;
   color: rgba(255, 255, 255, 0.38);
   letter-spacing: 0.02em;
-  margin: 2px 0 0;
+  text-align: center;
+  margin: 2px 20px 0;
 }
 
-/* ── Desktop — image and controls side by side ── */
+/* ── Desktop — same stacked layout, just wider breathing room ── */
 @media (min-width: 901px) {
   .section { padding: 110px 64px; }
 
   .head { padding: 0; }
 
-  .layout {
-    flex-direction: row;
-    align-items: stretch;
-    gap: 48px;
-  }
+  .imageWrap { aspect-ratio: 16 / 9; }
 
-  .imageWrap {
-    flex: 1.5;
-    aspect-ratio: 16 / 9;
-  }
+  .optionRow { padding: 0; max-width: 620px; margin: 0 auto; }
 
-  .controls {
-    flex: 1;
-    justify-content: center;
-    gap: 32px;
-    padding: 0;
-  }
+  .optionBtn { min-height: 54px; font-size: 0.92rem; }
+
+  .note { padding: 0; }
 }

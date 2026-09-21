@@ -27,6 +27,21 @@
   box-shadow: 0 2px 60px rgba(0, 0, 0, 0.7);
 }
 
+/* backdrop-filter forces the browser to continuously resample whatever's
+   behind this fixed bar on every compositor frame — measured (via A/B frame
+   timing during scroll) as the single largest contributor to dropped frames
+   while scrolling past the hero on mobile. The background here is already
+   88% opaque, so dropping the blur/saturate and nudging opacity up a touch
+   to compensate reads almost identically while costing near-nothing to
+   composite. Desktop keeps the full frosted-glass effect unchanged. */
+@media (max-width: 768px) {
+  .navScrolled {
+    background: rgba(3, 3, 3, 0.96);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
 /* ── Logo — absolutely centered in the navbar, with a small "Dubai
    Edition" label stacked above the mark ── */
 .logo {

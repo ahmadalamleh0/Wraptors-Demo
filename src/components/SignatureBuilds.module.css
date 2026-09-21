@@ -156,6 +156,23 @@
   filter: blur(0px);
 }
 
+/* Animating `filter: blur()` forces a repaint of the blurred region on every
+   transition frame — expensive to composite on mobile GPUs, right in the
+   section the page scrolls into immediately after Services/Statement. Drop
+   the blur step on mobile and keep the opacity/transform reveal, which is
+   compositor-only and effectively free; desktop keeps the full effect. */
+@media (max-width: 768px) {
+  .animScript {
+    filter: none;
+    transition:
+      opacity    1.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform  1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .animScript.visible {
+    filter: none;
+  }
+}
+
 /* Category titles — clean upward drift */
 .animCategory {
   opacity: 0;

@@ -65,6 +65,49 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Column pairing the Dubai Edition label with the logo below it, so the
+   label centers on the logo's own width rather than the full EST/2016 row ── */
+.logoCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.4vw, 14px);
+}
+
+/* ── "Dubai [flag] Edition" — same shape as the service-page navbar's
+   label, scaled up for the hero. Equal-width word columns either side of
+   the flag keep it centered regardless of "Dubai" vs "Edition" length. ── */
+.dubaiEdition {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.9vw, 10px);
+  font-family: var(--font-ui);
+  font-size: clamp(0.6rem, 1vw, 0.82rem);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);
+  will-change: opacity, clip-path;
+}
+
+.dubaiEditionWord {
+  width: 4.6em;
+  flex-shrink: 0;
+}
+.dubaiEditionWordLeft  { text-align: right; }
+.dubaiEditionWordRight { text-align: left; }
+
+.dubaiFlag {
+  display: block;
+  width: clamp(16px, 2vw, 24px);
+  height: clamp(11px, 1.4vw, 16px);
+  object-fit: cover;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
 /* ── Logo wrapper ── */
 .logoWrap {
   position: relative;
@@ -216,6 +259,9 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .logoWrap   { width: clamp(150px, 46vw, 230px); }
+  .logoCol    { gap: 8px; }
+  .dubaiEdition { font-size: clamp(0.44rem, 2.4vw, 0.58rem); letter-spacing: 0.22em; gap: 5px; }
+  .dubaiFlag  { width: clamp(13px, 3.2vw, 16px); height: clamp(9px, 2.2vw, 11px); }
   .sideText   { width: clamp(36px, 10vw, 56px); font-size: clamp(0.38rem, 2vw, 0.5rem); }
   .topText    { font-size: clamp(1rem, 6.2vw, 1.65rem); letter-spacing: 0.14em; margin-top: 10px; }
   .brandRule  { width: clamp(36px, 8vw, 72px); margin: 8px auto 8px; }

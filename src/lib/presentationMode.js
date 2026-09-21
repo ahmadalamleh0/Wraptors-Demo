@@ -7,10 +7,6 @@
 export const PRESENTATION_MODE_KEY = 'wraptors:presentationMode';
 export const MODES = { VIDEO: 'video', SAFE: 'safe' };
 
-export function isMobileViewport() {
-  return typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
-}
-
 function readStoredMode() {
   try {
     const stored = localStorage.getItem(PRESENTATION_MODE_KEY);
@@ -20,12 +16,32 @@ function readStoredMode() {
   }
 }
 
-// No explicit preference yet: phones default to Safe Mode (the most
-// reliable presentation experience — no autoplay/buffering/offline-caching
-// dependency at all, just a local image), desktop keeps the original
-// default of Video Mode. Either is switchable from the admin control.
+function prefersReducedMotion() {
+  return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+// NetworkInformation isn't available in every browser (notably Safari) —
+// treated as "no signal either way" rather than assumed fast or slow.
+function isDataSaverOrSlowConnection() {
+  if (typeof navigator === 'undefined') return false;
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (!conn) return false;
+  return !!conn.saveData || ['slow-2g', '2g'].includes(conn.effectiveType);
+}
+
+// No explicit preference yet: attempt Video Mode by default, but land on
+// Safe Mode (static photo only, no autoplay/fetch at all) when the visitor
+// has asked for reduced motion or is on a metered/slow connection — an
+// autoplaying video is actively unwelcome in either case, not just
+// expensive. This is re-evaluated per visit (not persisted), since a
+// connection or OS-level motion setting can change between sessions.
+// Either mode is still switchable from the admin control, which always
+// wins over this auto-detection once set.
 export function getPresentationMode() {
-  return readStoredMode() ?? (isMobileViewport() ? MODES.SAFE : MODES.VIDEO);
+  const stored = readStoredMode();
+  if (stored) return stored;
+  if (prefersReducedMotion() || isDataSaverOrSlowConnection()) return MODES.SAFE;
+  return MODES.VIDEO;
 }
 
 export function setPresentationMode(mode) {
