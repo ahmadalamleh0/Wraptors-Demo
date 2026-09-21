@@ -57,7 +57,10 @@ const LINE_PAIRS = [
 
 /* ── Count-up animation ── */
 function CountUp({ to, suffix = '', duration = 1400 }) {
-  const [display, setDisplay] = useState(0);
+  // Starts at the real final value, not 0, so a crawler or a visit where
+  // the IntersectionObserver never fires still sees the correct number —
+  // the animation resets to 0 and counts up only once it's actually seen.
+  const [display, setDisplay] = useState(to);
   const ref = useRef(null);
   const started = useRef(false);
 
@@ -68,6 +71,7 @@ function CountUp({ to, suffix = '', duration = 1400 }) {
       ([entry]) => {
         if (!entry.isIntersecting || started.current) return;
         started.current = true;
+        setDisplay(0);
         const t0 = performance.now();
         const tick = now => {
           const p = Math.min((now - t0) / duration, 1);

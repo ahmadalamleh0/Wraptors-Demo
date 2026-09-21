@@ -9,7 +9,6 @@ const NAV_LINKS = [
   { label: 'Services',    href: '/#services'         },
   { label: 'Locations',   href: '/#locations'        },
   { label: 'Builds',      href: '/#signature-builds' },
-  { label: 'Culture',     href: '/about'             },
   { label: 'Get a Quote', href: '/#cta'               },
 ];
 

@@ -4,6 +4,7 @@
 
   <url><loc>https://wraptorsdubai.com/about</loc><priority>0.7</priority></url>
   <url><loc>https://wraptorsdubai.com/book</loc><priority>0.7</priority></url>
+  <url><loc>https://wraptorsdubai.com/franchise</loc><priority>0.7</priority></url>
 
   <!-- Services -->
   <url><loc>https://wraptorsdubai.com/services/wraps</loc><priority>0.9</priority></url>

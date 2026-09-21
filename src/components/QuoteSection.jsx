@@ -9,6 +9,7 @@ import {
   QUOTE_CAR_BRANDS,
 } from '../data/quoteFormData';
 import { buildQuoteWhatsAppMessage, buildWhatsAppUrl } from '../lib/whatsappEnquiry';
+import { submitToWeb3Forms } from '../lib/web3forms';
 import styles from './QuoteSection.module.css';
 
 const labelFor = (list, id) => list.find((o) => o.id === id)?.label || '';
@@ -151,7 +152,7 @@ export default function QuoteSection({
     initialService ? { ...EMPTY_FORM, service: initialService } : EMPTY_FORM
   ));
   const [errors, setErrors] = useState({});
-  const [handedOff, setHandedOff] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | submitting | done | error
   const [waUrl, setWaUrl] = useState('');
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
@@ -165,7 +166,7 @@ export default function QuoteSection({
   };
   const selectOption = (field, id) => setForm((f) => ({ ...f, [field]: id }));
 
-  const goNext = () => {
+  const goNext = async () => {
     const err = validateStep(step, form);
     setErrors(err);
     if (Object.keys(err).length > 0) return;
@@ -175,19 +176,38 @@ export default function QuoteSection({
       return;
     }
 
-    // No lead-delivery backend exists yet, so this hands the enquiry to
-    // WhatsApp — a real, verifiable action — instead of faking a "request
-    // received" screen for a submission that went nowhere.
-    const message = buildQuoteWhatsAppMessage(form, {
+    const labels = {
       service: labelFor(QUOTE_SERVICES, form.service),
       projectDetail: projectOptions ? labelFor(projectOptions, form.projectDetail) : '',
       timing: labelFor(QUOTE_TIMING_OPTIONS, form.timing),
       preferredContact: labelFor(QUOTE_CONTACT_METHODS, form.preferredContact),
-    });
-    const url = buildWhatsAppUrl(message);
-    setWaUrl(url);
-    window.open(url, '_blank', 'noopener,noreferrer');
-    setHandedOff(true);
+    };
+
+    setStatus('submitting');
+    try {
+      await submitToWeb3Forms({
+        subject: 'New Quote Request — Wraptors Dubai',
+        from_name: 'Wraptors Dubai Quote Form',
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        service: labels.service,
+        vehicle: [form.year, form.make, form.model].filter(Boolean).join(' '),
+        build_details: labels.projectDetail,
+        notes: form.notes,
+        timing: labels.timing,
+        preferred_date: form.preferredDate,
+        preferred_contact: labels.preferredContact,
+      });
+      setStatus('done');
+    } catch (err2) {
+      // Web3Forms is the primary path; WhatsApp is only offered as a
+      // fallback if that submission actually fails.
+      console.error('[Quote] Web3Forms submission failed:', err2);
+      const message = buildQuoteWhatsAppMessage(form, labels);
+      setWaUrl(buildWhatsAppUrl(message));
+      setStatus('error');
+    }
   };
 
   const goBack = () => {
@@ -207,12 +227,20 @@ export default function QuoteSection({
       </div>
 
       <div className={styles.panel}>
-        {handedOff ? (
+        {status === 'done' ? (
           <div className={styles.success}>
-            <span className={styles.successEyebrow}>Almost There</span>
-            <h3 className={styles.successTitle}>Continue On WhatsApp.</h3>
+            <span className={styles.successEyebrow}>Thank You</span>
+            <h3 className={styles.successTitle}>Request Received.</h3>
             <p className={styles.successBody}>
-              We&rsquo;ve opened WhatsApp with your enquiry ready to go — hit send there to reach our team directly. If it didn&rsquo;t open, use the button below.
+              We&rsquo;ve received your build details and will follow up shortly to confirm next steps.
+            </p>
+          </div>
+        ) : status === 'error' ? (
+          <div className={styles.success}>
+            <span className={styles.successEyebrow}>Something Went Wrong</span>
+            <h3 className={styles.successTitle}>Try WhatsApp Instead.</h3>
+            <p className={styles.successBody}>
+              We couldn&rsquo;t send your request just now — message us directly on WhatsApp instead and we&rsquo;ll pick it up from there.
             </p>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className={styles.successCta}>
               Open WhatsApp <span aria-hidden="true">→</span>
@@ -379,8 +407,8 @@ export default function QuoteSection({
                   <span aria-hidden="true">←</span> Back
                 </button>
               ) : <span />}
-              <button type="button" onClick={goNext} className={styles.nextBtn}>
-                {isLastStep ? 'Send Via WhatsApp' : 'Next'}
+              <button type="button" onClick={goNext} className={styles.nextBtn} disabled={status === 'submitting'}>
+                {isLastStep ? (status === 'submitting' ? 'Sending…' : 'Submit Request') : 'Next'}
                 <span aria-hidden="true">→</span>
               </button>
             </div>

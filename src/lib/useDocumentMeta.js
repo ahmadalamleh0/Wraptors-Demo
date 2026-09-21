@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-const DEFAULT_TITLE = "WRAPTORS — Dubai's Destination for Premium Wraps, Tint & Styling";
-const DEFAULT_DESCRIPTION = 'Premium vehicle wraps, ceramic coating, PPF, and window tint — precision automotive customization in Dubai.';
+const DEFAULT_TITLE = 'Wraptors Dubai | Luxury Car Wraps, PPF & Automotive Styling';
+const DEFAULT_DESCRIPTION = 'Wraptors Dubai delivers premium vehicle wraps, PPF, ceramic coating, tint and automotive styling in Dubai.';
 
 function upsertMeta(selector, attr, value, createAttrs) {
   let el = document.querySelector(selector);

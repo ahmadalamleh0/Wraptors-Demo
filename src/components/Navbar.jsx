@@ -8,22 +8,19 @@ import uaeFlag from '../../UAE(FLAG).svg';
 const NAV_LINKS = [
   { label: 'Services',  href: '/#services'  },
   { label: 'Locations', href: '/#locations' },
-  { label: 'Franchise', href: '/#timeline'  },
-  { label: 'Culture',   href: '/#founder'   },
 ];
 
 // Full-screen mobile menu — a deliberately separate, simplified list from
 // the desktop nav above rather than the same items reflowed. `match`
 // determines the "active" (bright white + underline) item from the
-// current pathname; anchor-only items (Services, Locations, Franchise,
-// Culture, Contact) live on the homepage but aren't a distinct route, so
-// they never light up as active — only Home/About/Learn can.
+// current pathname; anchor-only items (Services, Locations, Contact) live
+// on the homepage but aren't a distinct route, so they never light up as
+// active — only Home/Franchise/About/Learn can.
 const MOBILE_NAV_LINKS = [
   { label: 'Home',      href: '/',          match: (p) => p === '/' },
   { label: 'Services',  href: '/#services'  },
   { label: 'Locations', href: '/#locations' },
-  { label: 'Franchise', href: '/#timeline'  },
-  { label: 'Culture',   href: '/#founder'   },
+  { label: 'Franchise', to:   '/franchise', match: (p) => p === '/franchise' },
   { label: 'About',     to:   '/about',     match: (p) => p === '/about' },
   { label: 'Learn',     to:   '/learn',     match: (p) => p.startsWith('/learn') },
   { label: 'Contact',   href: '/#contact'   },
@@ -204,6 +201,11 @@ export default function Navbar({ alwaysVisible = false }) {
             </a>
           </li>
         ))}
+        <li>
+          <Link to="/franchise" className={styles.link}>
+            Franchise
+          </Link>
+        </li>
         <li>
           <Link to="/about" className={styles.link}>
             About

@@ -63,6 +63,7 @@ import NotFoundPage from './components/NotFoundPage';
 import AboutPage from './components/AboutPage';
 import BookingCTA from './components/BookingCTA';
 import BookingPage from './components/BookingPage';
+import FranchisePage from './components/FranchisePage';
 import WrapsPage from './components/WrapsPage';
 import TintPage from './components/TintPage';
 
@@ -226,6 +227,7 @@ export default function App() {
       <Route path="/learn/:articleSlug" element={<ArticlePage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/book" element={<BookingPage />} />
+      <Route path="/franchise" element={<FranchisePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
     </>

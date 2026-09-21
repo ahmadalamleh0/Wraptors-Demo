@@ -37,6 +37,22 @@ export function buildQuoteWhatsAppMessage(form, labels) {
   return lines.join('\n');
 }
 
+// Franchise enquiry form (/franchise).
+export function buildFranchiseWhatsAppMessage(form) {
+  const lines = [
+    'New franchise enquiry from wraptorsdubai.com',
+    '',
+    line('Name', form.name),
+    line('Email', form.email),
+    line('Phone', form.phone),
+    line('City / Country', form.location),
+    line('Business / automotive experience', form.experience),
+    line('Franchise interest', form.interest),
+    line('Message', form.message),
+  ].filter(Boolean);
+  return lines.join('\n');
+}
+
 // Booking form (/book) — services is an array of ids, resolved to labels
 // by the caller before this is called (kept consistent with the quote
 // builder's "pass labels in" approach).

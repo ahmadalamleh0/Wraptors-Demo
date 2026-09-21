@@ -45,7 +45,7 @@ const SERVICE_PATHS = [
 ];
 
 function buildRouteList() {
-  const routes = ['/', '/about', '/book', ...SERVICE_PATHS];
+  const routes = ['/', '/about', '/book', '/franchise', ...SERVICE_PATHS];
   for (const loc of LOCATIONS) routes.push(`/areas/${loc.slug}`);
   routes.push('/learn');
   for (const cat of CATEGORIES) routes.push(`/learn/category/${cat.slug}`);
