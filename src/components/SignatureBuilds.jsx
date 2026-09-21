@@ -201,13 +201,6 @@ import srt5 from '../../Signture Section/SRT(5).jpeg';
 // to Italian/German/British/American for now. Its BUILDS entries below
 // stay in place (category: "japanese-icons") so the row can come back
 // later just by re-adding it here; nothing else needs to change.
-const CATEGORIES = [
-  { id: 'german-precision', label: 'German Performance' },
-  { id: 'italian-exotics',  label: 'Italian Exotics'  },
-  { id: 'british-luxury',   label: 'British Luxury'   },
-  { id: 'american-muscle',  label: 'American Muscle'  },
-];
-
 const BUILDS = [
   // German Precision
   { brandName: "BRABUS 800 S-Class", logo: amgLogo,       mainImage: amg2,       media: [amg2, amg1, amg3, amg4, amg5, amg6],                                 serviceTags: ["RASPBERRY BLUE", "BRABUS CONVERSION", "STARLIGHT"],            category: "german-precision" },
@@ -242,6 +235,25 @@ const BUILDS = [
   { brandName: "Range Rover", logo: rangeLogo,   mainImage: range1,   media: [range1, range2, range3, range5],                                              serviceTags: ["MATTE DEAD BLACK", "GLOSS BLACK RIMS", "FRONT WINDOW TINT", "CERAMIC COATING"],  category: "british-luxury" },
   { brandName: "McLaren",     logo: mclarenLogo, mainImage: mclaren1, media: [mclaren1, mclaren2, mclaren3, mclaren4, mclaren5, mclaren6, mclaren7, mclaren8, mclaren9], serviceTags: ["FULL SATIN BLACK WRAP", "CARBON FIBER ACCENTS"], category: "british-luxury" },
 ];
+
+// Combined collection — the four German/Italian/British/American rows above
+// are merged into two mixed rows with no category labels. Row 1 leads with
+// the LBWK Lamborghini, row 2 with the Rolls-Royce (both required to stay
+// first); everything else is interleaved across brands/categories on
+// purpose so neither row reads as "all Ferraris" or "all British luxury."
+// Every car/image/tag is untouched — this only reorders which row each one
+// renders in, by brandName lookup against BUILDS above.
+const MASTERPIECE_ROW_1 = [
+  'Lamborghini LBWK', 'Bentley', 'Ferrari F8', 'BMW G80 M3', 'Corvette',
+  'Aston Martin', 'Lamborghini', 'Porsche 911 GTS', 'Mustang', 'Ferrari',
+];
+const MASTERPIECE_ROW_2 = [
+  'Rolls-Royce', 'BRABUS 800 S-Class', 'Ferrari 488 Spider', 'Range Rover',
+  'Dodge', 'Audi RS6', 'Lamborghini Urus', 'Cadillac', 'McLaren', 'Mercedes S580',
+];
+const MASTERPIECE_ROWS = [MASTERPIECE_ROW_1, MASTERPIECE_ROW_2].map(
+  (names) => names.map((name) => BUILDS.find((b) => b.brandName === name))
+);
 
 // ── Card Component ──────────────────────────────────────────────────────────
 function BuildCard({ build }) {
@@ -449,22 +461,17 @@ export default function SignatureBuilds() {
 
       </div>
 
-      {/* Category rows */}
-      {CATEGORIES.map(cat => {
-        const builds = BUILDS.filter(b => b.category === cat.id);
-        return (
-          <div key={cat.id} className={styles.categoryRow}>
-            <div className={styles.categoryHeader}>
-              <h3 className={`${styles.categoryTitle} ${styles.animCategory}`}>{cat.label}</h3>
-            </div>
-            <div className={styles.cardTrack}>
-              {builds.map((build, i) => (
-                <BuildCard key={`${cat.id}-${build.brandName}-${i}`} build={build} />
-              ))}
-            </div>
+      {/* Two mixed rows — no category labels; the video/heading above already
+          introduces the whole collection. */}
+      {MASTERPIECE_ROWS.map((builds, rowIndex) => (
+        <div key={rowIndex} className={styles.categoryRow}>
+          <div className={styles.cardTrack}>
+            {builds.map((build, i) => (
+              <BuildCard key={`row${rowIndex}-${build.brandName}-${i}`} build={build} />
+            ))}
           </div>
-        );
-      })}
+        </div>
+      ))}
 
     </section>
   );

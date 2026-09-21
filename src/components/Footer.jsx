@@ -18,7 +18,7 @@ const CONTACT = [
     text: 'Al Quoz Industrial Area 4, Dubai — Studio',
     href: 'https://maps.google.com/?q=Wraptors+Dubai+32+9B+St+Al+Quoz+Industrial+Area+4+Dubai+UAE',
   },
-  { icon: <MailIcon />,  text: 'info@wraptors.com',   href: 'mailto:info@wraptors.com' },
+  { icon: <MailIcon />,  text: 'Wrap@wraptorsdubai.com',   href: 'mailto:Wrap@wraptorsdubai.com' },
   { icon: <PhoneIcon />, text: '+971 50 253 2392',    href: 'tel:+971502532392'        },
 ];
 

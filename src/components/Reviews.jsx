@@ -38,7 +38,7 @@ function CountUp({ to, suffix = '', duration = 1400 }) {
 
 const STATS = [
   { to: 9000, suffix: '+', label: 'Vehicles Transformed' },
-  { to: 15,   suffix: '',  label: 'Global Locations' },
+  { to: 16,   suffix: '',  label: 'Global Locations' },
   { to: 10,   suffix: '+', label: 'Years Experience' },
   { to: 573,  suffix: '+', label: 'Verified Reviews' },
 ];

@@ -5,6 +5,7 @@ import logoHexis  from '../../hexis_logo.svg';
 import logoAvery  from '../../graphics-rev-logo-290x45.avif';
 import logoStek   from '../../jIsdVIhisFg6BDDsoZ6StvyW840.avif';
 import logoSuntek from '../../suntek-logo.svg';
+import logoFse    from '../../fse-ppf-logo.png';
 
 const BRANDS = [
   { name: '3M',             src: logo3m,     style: { filter: 'none' } },
@@ -12,6 +13,7 @@ const BRANDS = [
   { name: 'Avery Dennison', src: logoAvery  },
   { name: 'STEK',           src: logoStek   },
   { name: 'SunTek',         src: logoSuntek, style: { filter: 'none' } },
+  { name: 'FSE PPF',        src: logoFse    },
 ];
 
 // Four copies so the strip always feels full regardless of screen width.

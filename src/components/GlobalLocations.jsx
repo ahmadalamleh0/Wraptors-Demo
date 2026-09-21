@@ -244,7 +244,7 @@ const REGIONS = [
 const instagramUrl = (handle) => `https://instagram.com/${handle}`;
 
 const STATS = [
-  { to: 15, suffix: '', label: 'Locations' },
+  { to: 16, suffix: '', label: 'Locations' },
   { to: 4,  suffix: '', label: 'Countries' },
 ];
 

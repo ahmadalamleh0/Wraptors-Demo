@@ -393,7 +393,7 @@ function CoverageExplorer() {
             </div>
 
             <a
-              href={`mailto:info@wraptors.com?subject=PPF Quote – ${activeZone.title}&body=I'm interested in: ${activeZone.title}`}
+              href={`mailto:Wrap@wraptorsdubai.com?subject=PPF Quote – ${activeZone.title}&body=I'm interested in: ${activeZone.title}`}
               className={styles.explorerCta}
             >
               Request This Coverage
@@ -585,7 +585,7 @@ export default function PPFPage() {
           <h2 className={styles.ctaTitle}>Ready to protect your finish?</h2>
           <p className={styles.ctaSub}>Tell us your vehicle and preferred coverage. We handle the rest.</p>
           <a
-            href="mailto:info@wraptors.com?subject=PPF Coverage Request"
+            href="mailto:Wrap@wraptorsdubai.com?subject=PPF Coverage Request"
             className={styles.ctaBtn}
           >
             Request PPF Coverage
