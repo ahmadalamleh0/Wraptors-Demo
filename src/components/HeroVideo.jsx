@@ -42,6 +42,7 @@ export default function HeroVideo() {
   const line2Ref       = useRef(null);
   const rulerRef        = useRef(null);
   const subLineRef     = useRef(null);
+  const ctaRef         = useRef(null);
   const scrollCueRef   = useRef(null);
 
   useEffect(() => {
@@ -69,6 +70,7 @@ export default function HeroVideo() {
     gsap.set([line1Ref.current, line2Ref.current], { opacity: 0, y: 36 });
     gsap.set(rulerRef.current, { scaleX: 0, transformOrigin: 'center center' });
     gsap.set(subLineRef.current, { opacity: 0, y: 20 });
+    gsap.set(ctaRef.current, { opacity: 0, y: 16 });
     gsap.set(scrollCueRef.current, { opacity: 0, y: 8 });
 
     const entranceTl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
@@ -77,6 +79,7 @@ export default function HeroVideo() {
       .to(line2Ref.current,   { opacity: 1, y: 0, duration: 0.9 }, 0.17)
       .to(rulerRef.current,   { scaleX: 1,  duration: 0.8 },       0.40)
       .to(subLineRef.current, { opacity: 1, y: 0, duration: 0.9 }, 0.57)
+      .to(ctaRef.current,     { opacity: 1, y: 0, duration: 0.8 }, 0.70)
       .to(scrollCueRef.current, { opacity: 1, y: 0, duration: 0.8 }, 0.80);
 
     let entrancePlayed = false;
@@ -280,13 +283,11 @@ export default function HeroVideo() {
       <div className={styles.fadeTop}    aria-hidden="true" />
       <div className={styles.fadeBottom} aria-hidden="true" />
 
-      {/* Cinematic text block — Safe Mode gets a mobile-only modifier that
-          anchors it above the car instead of centering it (see .heroImageSafe
-          and .textOverlaySafeMobile). Video Mode's layout is untouched. */}
-      <div
-        className={`${styles.textOverlay} ${!isVideoMode ? styles.textOverlaySafeMobile : ''}`}
-        aria-hidden="false"
-      >
+      {/* Cinematic text block — anchored near the top in both Video and Safe
+          Mode (see .textOverlay), rather than vertically centered, so the
+          same position works whether the video or the fallback image is
+          showing. */}
+      <div className={styles.textOverlay} aria-hidden="false">
         {/* The homepage's only H1 — previously two <p> lines, which left the
             page (and its most important heading) with no H1 at all. */}
         <h1 className={styles.mainHeadline}>
@@ -297,6 +298,12 @@ export default function HeroVideo() {
         <p ref={subLineRef} className={styles.subLine}>
           Luxury wraps&nbsp;&nbsp;·&nbsp;&nbsp;Paint protection&nbsp;&nbsp;·&nbsp;&nbsp;Vehicle transformation
         </p>
+        <a ref={ctaRef} href="/#cta" className={styles.heroCta}>
+          <span className={styles.heroCtaLabel}>
+            Start Your Project
+            <span className={styles.heroCtaArrow} aria-hidden="true">↗</span>
+          </span>
+        </a>
       </div>
 
       {/* Scroll indicator — present in both modes, fades out once the user

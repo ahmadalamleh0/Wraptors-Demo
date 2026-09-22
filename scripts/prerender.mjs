@@ -152,6 +152,15 @@ async function main() {
     const browser = await chromium.launch();
     const page = await browser.newPage();
 
+    // Freezes the homepage curtain intro (Hero.jsx) at its very first,
+    // fully-covering frame for every snapshot below — otherwise whatever
+    // animation frame happens to be on screen when the networkidle wait
+    // resolves gets baked into the static HTML a real visitor's browser
+    // paints before React ever boots, which can be well past the intro
+    // already having finished and exited. See the matching check in
+    // Hero.jsx.
+    await page.addInitScript(() => { window.__WRAPTORS_PRERENDER__ = true; });
+
     let successCount = 0;
     const failures = [];
 

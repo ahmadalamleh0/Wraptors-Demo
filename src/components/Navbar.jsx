@@ -72,19 +72,21 @@ export default function Navbar({ alwaysVisible = false }) {
 
   useEffect(() => {
     if (alwaysVisible) return;
-    // Show logo immediately when hero exits (no scroll required)
-    const onHeroExit = () => setLogoReady(true);
-    window.addEventListener('hero:exit', onHeroExit, { once: true });
+    // Logo + "Dubai Edition" stay hidden through the whole initial hero
+    // view (curtain intro, then the video/image hero itself) and only
+    // reveal once the user has scrolled essentially a full viewport height,
+    // into the next section — same threshold as `scrolled`, which already
+    // marks that point for the navbar's solid background.
     const onScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > window.innerHeight * 0.88);
+      const pastHero = y > window.innerHeight * 0.88;
+      setScrolled(pastHero);
       setLinksRevealed(y > 40);
-      if (y > 40) setLogoReady(true);
+      if (pastHero) setLogoReady(true);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('hero:exit', onHeroExit);
     };
   }, [alwaysVisible]);
 

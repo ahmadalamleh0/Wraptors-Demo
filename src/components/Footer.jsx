@@ -34,6 +34,7 @@ const SOCIALS = [
 // homepage (and every other page) keeps the default photo footer.
 export default function Footer({ solid = false }) {
   return (
+    <>
     <footer className={`${styles.footer} ${solid ? styles.footerSolid : ''}`}>
 
       {!solid && (
@@ -131,6 +132,14 @@ export default function Footer({ solid = false }) {
 
       </div>
     </footer>
+
+    {/* ── Powered-by credit — its own full-width solid-black section below
+        the footer, deliberately bold/bright rather than a quiet aside. ── */}
+    <div className={styles.poweredSection}>
+      <span className={styles.poweredLabel}>Powered By</span>
+      <span className={styles.poweredBrand}>DIABLO</span>
+    </div>
+    </>
   );
 }
 

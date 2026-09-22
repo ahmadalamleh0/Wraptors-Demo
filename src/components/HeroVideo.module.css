@@ -131,7 +131,11 @@
   pointer-events: none;
 }
 
-/* ── Cinematic text overlay ── */
+/* ── Cinematic text overlay ──
+   Anchored near the top rather than vertically centered — centering used
+   to put the headline directly over the car's bodywork in the fallback
+   photo (Safe Mode), so this same top-anchored position is now used for
+   both the video and the image instead of switching between the two. */
 .textOverlay {
   position: absolute;
   inset: 0;
@@ -139,12 +143,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 0 48px 5vh;
+  justify-content: flex-start;
+  padding: 17vh 48px 5vh;
   pointer-events: none;
   /* Subtle vignette centred on the text block — keeps type legible over any frame */
   background: radial-gradient(
-    ellipse 70% 55% at 50% 55%,
+    ellipse 70% 55% at 50% 24%,
     rgba(0, 0, 0, 0.28) 0%,
     transparent 100%
   );
@@ -197,6 +201,49 @@
   margin: 0;
   will-change: transform, opacity;
 }
+
+/* ── Hero CTA — plain white text link, not a bordered button: no fill, no
+   rectangle, just a thin underline hugging the label and a small diagonal
+   arrow. The <a> itself carries generous padding for a comfortable mobile
+   tap target while staying visually just text; the underline lives on the
+   inner .heroCtaLabel span so it doesn't stretch across that invisible tap
+   area. .textOverlay above is pointer-events:none, so this needs its own
+   pointer-events:auto to stay clickable. ── */
+.heroCta {
+  display: inline-flex;
+  margin-top: 28px;
+  padding: 16px 20px;
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.heroCtaLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: border-color 0.3s ease, opacity 0.3s ease;
+}
+
+.heroCta:hover .heroCtaLabel {
+  border-color: #fff;
+  opacity: 0.82;
+}
+
+.heroCtaArrow {
+  display: inline-block;
+  font-size: 0.9em;
+  transition: transform 0.3s ease;
+}
+
+.heroCta:hover .heroCtaArrow { transform: translate(3px, -3px); }
 
 /* ── Scroll indicator — bottom-center, sits inside the .fadeBottom dark
    zone (28% of viewport height) so it never lands on a bright part of the
@@ -255,7 +302,7 @@
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
-  .textOverlay { padding: 0 28px 4vh; }
+  .textOverlay { padding: 9vh 28px 4vh; }
   .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 28px); gap: 7px; }
   .mainLine    {
     font-size: clamp(2.6rem, 11vw, 4rem);
@@ -271,20 +318,10 @@
     white-space: normal;
     will-change: auto;
   }
+  .heroCta      { margin-top: 20px; padding: 16px 22px; }
+  .heroCtaLabel { font-size: 0.82rem; }
 }
 
 @media (max-width: 480px) {
   .subLine  { letter-spacing: 0.20em; }
-}
-
-/* Safe Mode mobile only: the car (see .heroImageSafe above) starts around
-   ~38-42% down the viewport, so anchor the text block to the top instead
-   of vertically centering it — centering is what put it on top of the
-   bodywork/wing in the first place. Video Mode's mobile layout (still
-   plain .textOverlay, centered) is completely unaffected. */
-@media (max-width: 768px) {
-  .textOverlaySafeMobile {
-    justify-content: flex-start;
-    padding-top: 9vh;
-  }
 }

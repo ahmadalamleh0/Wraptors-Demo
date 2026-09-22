@@ -46,7 +46,16 @@ export default function Hero() {
       // Already played this session — jump straight to "exited" so the
       // navbar reveals immediately. Nothing to render (see below), so
       // there's nothing to animate out either.
-      window.dispatchEvent(new CustomEvent('hero:exit'));
+      //
+      // Deferred to a microtask rather than dispatched synchronously: this
+      // effect runs before HeroVideo's sibling effect (mount order), which
+      // is where the 'hero:exit' listener that reveals the headline gets
+      // attached — dispatching immediately here fired before that listener
+      // existed, silently dropping the event and leaving the headline
+      // invisible until HeroVideo's 6s fallback timer caught it. A
+      // microtask runs after all of this commit's effects have finished,
+      // so the listener is already attached by the time this fires.
+      queueMicrotask(() => window.dispatchEvent(new CustomEvent('hero:exit')));
       return undefined;
     }
 
@@ -77,6 +86,19 @@ export default function Hero() {
     gsap.set(brandRule,    { scaleX: 0, opacity: 0 });
     gsap.set([est, year],  { opacity: 0 });
     gsap.set(scrollRef.current, { opacity: 0 });
+
+    // Build-time prerendering (scripts/prerender.mjs) sets this flag before
+    // navigating so the static snapshot it captures is frozen right here —
+    // fully black, nothing revealed yet — instead of whatever frame the
+    // reveal/exit timeline happened to be on when its networkidle wait
+    // fired. Without this, a real visitor's browser paints that prerendered
+    // HTML first (already showing the finished, revealed hero), then React
+    // boots and replays the whole intro from scratch — the flash this
+    // fixes. A real visit never sets this flag, so nothing changes for
+    // anyone who isn't the prerender script itself.
+    if (typeof window !== 'undefined' && window.__WRAPTORS_PRERENDER__) {
+      return undefined;
+    }
 
     // ── 2. Reveal timeline ────────────────────────────────────────────
     const tl = gsap.timeline();

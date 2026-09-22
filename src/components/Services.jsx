@@ -134,12 +134,12 @@ function ServiceBlock({ svc, blockRef }) {
 
         {svc.slug ? (
           <Link to={svc.slug} className={styles.cta}>
-            Experience It
+            Explore Service
             <span className={styles.ctaArrow} aria-hidden="true">→</span>
           </Link>
         ) : (
           <a href="/#cta" className={styles.cta}>
-            Experience It
+            Explore Service
             <span className={styles.ctaArrow} aria-hidden="true">→</span>
           </a>
         )}

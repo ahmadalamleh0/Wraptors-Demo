@@ -13,13 +13,15 @@
   padding-bottom: 56px;
 }
 
+/* Faded back in, dimmer than the original (0.065 -> 0.04) per request —
+   present but not "crazy obvious." */
 .ghostText {
   text-align: center;
   font-family: var(--font-display);
   font-size: clamp(4.5rem, 12vw, 10.5rem);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.065);
+  color: rgba(255, 255, 255, 0.04);
   white-space: nowrap;
   overflow: hidden;
   line-height: 1;
@@ -261,9 +263,9 @@
   .ghostText {
     font-size: clamp(3.2rem, 18vw, 8rem);
     padding-top: 10px;
-    /* Slightly brighter on mobile — same rgba(255,255,255,x) grey, just a
-       touch more contrast so it doesn't disappear behind small screens. */
-    color: rgba(255, 255, 255, 0.11);
+    /* Slightly brighter than desktop — same rgba(255,255,255,x) grey, just
+       a touch more contrast so it doesn't disappear on small screens. */
+    color: rgba(255, 255, 255, 0.065);
   }
 
   .block {
