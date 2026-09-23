@@ -137,7 +137,14 @@ export default function Footer({ solid = false }) {
         the footer, deliberately bold/bright rather than a quiet aside. ── */}
     <div className={styles.poweredSection}>
       <span className={styles.poweredLabel}>Powered By</span>
-      <span className={styles.poweredBrand}>DIABLO</span>
+      <a
+        href="https://thediablo.co/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.poweredBrand}
+      >
+        Diablo
+      </a>
     </div>
     </>
   );

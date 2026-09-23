@@ -130,6 +130,17 @@
   font-display: swap;
 }
 
+/* Self-hosted (originally Google Fonts — latin subset only, same as the
+   other Google fonts above). Used only for the "DIABLO" wordmark in the
+   footer's Powered By credit. */
+@font-face {
+  font-family: 'Jim Nightshade';
+  src: url('./assets/fonts/google/jimnightshade-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
