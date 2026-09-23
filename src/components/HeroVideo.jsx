@@ -10,13 +10,9 @@ import { getPresentationMode, MODES } from '../lib/presentationMode';
 // instantly on mount, for as long as the video hasn't started playing (or
 // forever, if it never does).
 import heroFallbackImage from '../assets/hero-safe-mode.jpg';
-import heroVideoSrc from '../../final_hero(new).mp4';
-// Lightweight rendition for mobile — same footage, 720x1280 instead of
-// 1080x1920, ~800kbps instead of ~1.8Mbps, and no audio track at all
-// (transcoded via ffmpeg; the source is muted in playback either way, but
-// stripping the audio stream itself avoids downloading bytes nobody
-// hears). Cuts the file from ~5.0MB to ~2.0MB.
-import heroVideoMobileSrc from '../../final_hero-mobile.mp4';
+// Trial swap — natively portrait footage, same file used for both mobile
+// and desktop for now (no separate lightweight mobile rendition yet).
+import heroVideoSrc from '../../hero-video.mp4';
 
 // TEMPORARY DEBUG — remove once the Safe Mode black-flash fix is confirmed
 // on real devices. Logs image-readiness at the exact moment the intro
@@ -31,9 +27,6 @@ export default function HeroVideo() {
   // wrong thing and then flips.
   const [mode] = useState(() => getPresentationMode());
   const isVideoMode = mode === MODES.VIDEO;
-  // Same viewport check used to decide the mobile-vs-desktop video source
-  // below — read once, synchronously, same as `mode`.
-  const [isMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches);
 
   const sectionRef    = useRef(null);
   const imageRef      = useRef(null); // permanent background image — always mounted, both modes, opacity 1 from first paint
@@ -186,7 +179,7 @@ export default function HeroVideo() {
       // assigned, so "start the fetch" and "first play() attempt" happen
       // together.
       const startVideo = () => {
-        video.src = isMobile ? heroVideoMobileSrc : heroVideoSrc;
+        video.src = heroVideoSrc;
         video.load();
         tryPlay();
       };
@@ -240,7 +233,7 @@ export default function HeroVideo() {
       clearTimeout(entranceFallback);
       entranceTl.kill();
     };
-  }, [isVideoMode, mode, isMobile]);
+  }, [isVideoMode, mode]);
 
   return (
     <section ref={sectionRef} className={styles.section}>
@@ -286,7 +279,10 @@ export default function HeroVideo() {
       {/* Cinematic text block — anchored near the top in both Video and Safe
           Mode (see .textOverlay), rather than vertically centered, so the
           same position works whether the video or the fallback image is
-          showing. */}
+          showing. Only the headline lives here now — the ruler/subline/CTA
+          moved into .heroLowerGroup below so the vertical middle of the
+          hero (where hero-video.mp4's own "DUBAI" lettering sits) stays
+          clear. */}
       <div className={styles.textOverlay} aria-hidden="false">
         {/* The homepage's only H1 — previously two <p> lines, which left the
             page (and its most important heading) with no H1 at all. */}
@@ -294,6 +290,11 @@ export default function HeroVideo() {
           <span ref={line1Ref} className={styles.mainLine}>Crafted with purpose.</span>
           <span ref={line2Ref} className={styles.mainLine}>Built for legacy.</span>
         </h1>
+      </div>
+
+      {/* Lower group — ruler, subline and CTA, positioned above the scroll
+          cue rather than immediately under the headline. */}
+      <div className={styles.heroLowerGroup}>
         <div ref={rulerRef} className={styles.ruler} aria-hidden="true" />
         <p ref={subLineRef} className={styles.subLine}>
           Luxury wraps&nbsp;&nbsp;·&nbsp;&nbsp;Paint protection&nbsp;&nbsp;·&nbsp;&nbsp;Vehicle transformation
@@ -301,7 +302,22 @@ export default function HeroVideo() {
         <a ref={ctaRef} href="/#cta" className={styles.heroCta}>
           <span className={styles.heroCtaLabel}>
             Start Your Project
-            <span className={styles.heroCtaArrow} aria-hidden="true">↗</span>
+            {/* Real SVG, not a Unicode arrow glyph — the latter renders as a
+                coloured emoji on iOS Safari instead of following the thin
+                white text styling. */}
+            <svg
+              className={styles.heroCtaArrow}
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M7 7h10v10" />
+              <path d="M7 17 17 7" />
+            </svg>
           </span>
         </a>
       </div>

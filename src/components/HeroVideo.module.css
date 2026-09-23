@@ -87,28 +87,19 @@
   100% { transform: scale(1.34) translate3d(-1.1%, 0, 0); }
 }
 
-/* Video is stored rotated 90° — swap dimensions so after rotation the
-   landscape frame fills the full viewport correctly. Sits above the
-   permanent image (z-index:0/1) and starts at opacity:0 via GSAP, only
-   revealed once real playback begins — see HeroVideo.jsx. */
+/* hero-video.mp4 is natively portrait (no baked-in rotation, unlike the
+   previous footage), so this is a plain full-bleed cover fill — same
+   treatment as .heroImage — rather than the old swapped-dimensions +
+   rotate(-90deg) hack that landscape-stored-as-portrait footage needed.
+   Sits above the permanent image (z-index:0/1) and starts at opacity:0 via
+   GSAP, only revealed once real playback begins — see HeroVideo.jsx. */
 .video {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100vh;
-  height: 100vw;
-  transform: translate(-50%, -50%) rotate(-90deg);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   z-index: 1;
-}
-
-/* Keep the rotated video's own sizing in sync with .section's mobile
-   height above (CSS width becomes the visual height post-rotation), so
-   Video Mode covers the real, live viewport exactly as the image does —
-   same dvh-with-svh-fallback reasoning as .section above. */
-@media (max-width: 768px) {
-  .video { width: 100svh; }
-  .video { width: 100dvh; }
 }
 
 /* Top edge fade */
@@ -159,6 +150,27 @@
    adding any default browser spacing). */
 .mainHeadline {
   display: block;
+}
+
+/* ── Lower group — ruler, subline and CTA ──
+   Sits low in the hero, above .scrollCue, leaving the vertical middle of
+   the frame clear (hero-video.mp4 has its own "DUBAI" lettering there).
+   Already inside the bottom 28% darkened by .fadeBottom, so it stays
+   legible without its own vignette. bottom is tuned against .scrollCue's
+   own position (28px + its own ~60-64px height) plus a 40-50px gap. */
+.heroLowerGroup {
+  position: absolute;
+  left: 50%;
+  bottom: 148px;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 640px;
+  padding: 0 48px;
+  pointer-events: none;
 }
 
 /* ── Main headline — two lines, light & editorial ── */
@@ -239,7 +251,10 @@
 
 .heroCtaArrow {
   display: inline-block;
-  font-size: 0.9em;
+  width: 0.8em;
+  height: 0.8em;
+  flex-shrink: 0;
+  color: #fff;
   transition: transform 0.3s ease;
 }
 
@@ -318,8 +333,9 @@
     white-space: normal;
     will-change: auto;
   }
-  .heroCta      { margin-top: 20px; padding: 16px 22px; }
-  .heroCtaLabel { font-size: 0.82rem; }
+  .heroCta        { margin-top: 0; padding: 16px 22px; }
+  .heroCtaLabel   { font-size: 0.82rem; }
+  .heroLowerGroup { bottom: 104px; padding: 0 28px; }
 }
 
 @media (max-width: 480px) {
