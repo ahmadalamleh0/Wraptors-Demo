@@ -258,8 +258,10 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .logoWrap   { width: clamp(150px, 46vw, 230px); }
-  .logoCol    { gap: 8px; }
+  /* Smaller/more compact than the old 46vw-up-to-230px sizing — reads as
+     premium restraint on a phone screen instead of dominating it. */
+  .logoWrap   { width: clamp(120px, 34vw, 180px); }
+  .logoCol    { gap: 6px; }
   .dubaiEdition { font-size: clamp(0.44rem, 2.4vw, 0.58rem); letter-spacing: 0.22em; gap: 5px; }
   .dubaiFlag  { width: clamp(13px, 3.2vw, 16px); height: clamp(9px, 2.2vw, 11px); }
   .sideText   { width: clamp(36px, 10vw, 56px); font-size: clamp(0.38rem, 2vw, 0.5rem); }
@@ -270,7 +272,9 @@
 }
 
 @media (max-width: 480px) {
-  .logoWrap   { width: 60vw; }
+  /* Was 60vw — grew past the 768px tier's own cap on wider small phones.
+     A clamp keeps it consistently smaller than that tier instead. */
+  .logoWrap   { width: clamp(100px, 30vw, 150px); }
   .topText    { font-size: 7.8vw; letter-spacing: 0.11em; }
   .brandRule  { width: clamp(28px, 7vw, 56px); margin: 7px auto 7px; }
   .bottomText { font-size: clamp(0.60rem, 2.6vw, 0.70rem); letter-spacing: 0.28em; }

@@ -10,9 +10,12 @@ import { getPresentationMode, MODES } from '../lib/presentationMode';
 // instantly on mount, for as long as the video hasn't started playing (or
 // forever, if it never does).
 import heroFallbackImage from '../assets/hero-safe-mode.jpg';
-// Trial swap — natively portrait footage, same file used for both mobile
-// and desktop for now (no separate lightweight mobile rendition yet).
-import heroVideoSrc from '../../hero-video.mp4';
+// Mobile: natively portrait footage. Desktop: separate, natively landscape
+// footage. Neither is stored pre-rotated, so both use the same plain
+// full-bleed cover CSS treatment (see .video in HeroVideo.module.css) —
+// only which file loads differs by viewport.
+import heroVideoMobileSrc from '../../hero-video.mp4';
+import heroVideoDesktopSrc from '../../hero-video-desktop.mp4';
 
 // TEMPORARY DEBUG — remove once the Safe Mode black-flash fix is confirmed
 // on real devices. Logs image-readiness at the exact moment the intro
@@ -27,6 +30,9 @@ export default function HeroVideo() {
   // wrong thing and then flips.
   const [mode] = useState(() => getPresentationMode());
   const isVideoMode = mode === MODES.VIDEO;
+  // Same viewport check used to decide the mobile-vs-desktop video source
+  // below — read once, synchronously, same as `mode`.
+  const [isMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches);
 
   const sectionRef    = useRef(null);
   const imageRef      = useRef(null); // permanent background image — always mounted, both modes, opacity 1 from first paint
@@ -179,7 +185,7 @@ export default function HeroVideo() {
       // assigned, so "start the fetch" and "first play() attempt" happen
       // together.
       const startVideo = () => {
-        video.src = heroVideoSrc;
+        video.src = isMobile ? heroVideoMobileSrc : heroVideoDesktopSrc;
         video.load();
         tryPlay();
       };
@@ -233,7 +239,7 @@ export default function HeroVideo() {
       clearTimeout(entranceFallback);
       entranceTl.kill();
     };
-  }, [isVideoMode, mode]);
+  }, [isVideoMode, mode, isMobile]);
 
   return (
     <section ref={sectionRef} className={styles.section}>
