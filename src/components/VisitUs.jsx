@@ -3,10 +3,7 @@ import styles from './VisitUs.module.css';
 import satellite from '../assets/dubai-satellite.webp';
 
 const ADDRESS_LINE = '32 9B St, Al Quoz Industrial Area 4, Dubai — Unit B05';
-// Google doesn't resolve the business name or "32 9B St" yet; the street
-// query does, and drops the pin on 9B St in Al Quoz Industrial Area 4.
-// Swap in exact coordinates ("lat,lng") once the studio pin is confirmed.
-const MAPS_QUERY = '9B Street, Al Quoz Industrial Area 4, Dubai';
+const MAPS_QUERY = 'Unit B05, 32 9B St, Al Quoz Industrial Area 4, Dubai';
 const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(MAPS_QUERY)}`;
 // Keyless Google Maps embed, satellite layer (t=k), zoomed to street level.
 const EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&t=k&z=18&ie=UTF8&output=embed`;
