@@ -345,7 +345,6 @@ export default function GlobalLocations() {
 
         {/* ── Header ── */}
         <div className={`${styles.header} ${revealed ? styles.in : ''}`}>
-          <span className="section-label">Global Reach</span>
           <h2 className={styles.title}>
             ONE BRAND.<br />
             <span className="chrome-text">GLOBAL REACH.</span><br />

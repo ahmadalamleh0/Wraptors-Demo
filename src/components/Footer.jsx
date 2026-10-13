@@ -15,7 +15,7 @@ const NAV_LINKS = [
 const CONTACT = [
   {
     icon: <LocIcon />,
-    text: 'Al Quoz Industrial Area 4, Dubai — Studio',
+    text: '32 9B St, Al Quoz Industrial Area 4, Dubai — Unit B05',
     href: 'https://maps.google.com/?q=Wraptors+Dubai+32+9B+St+Al+Quoz+Industrial+Area+4+Dubai+UAE',
   },
   { icon: <MailIcon />,  text: 'Wrap@wraptorsdubai.com',   href: 'mailto:Wrap@wraptorsdubai.com' },

@@ -96,7 +96,7 @@ export const LOCATIONS = [
     h1: 'Premium Car Wrapping & Automotive Customization in Dubai',
     eyebrow: 'Wraptors Dubai',
     heroCopy: [
-      "Wraptors brings its automotive transformation experience to Dubai. From full colour-change wraps and custom vinyl work to paint protection film, ceramic coating and window tinting, every vehicle is handled inside our Dubai studio at Dubai Creative Park, Warehouse B05, Al Quoz Industrial Area 4.",
+      "Wraptors brings its automotive transformation experience to Dubai. From full colour-change wraps and custom vinyl work to paint protection film, ceramic coating and window tinting, every vehicle is handled inside our Dubai studio at 32 9B St, Al Quoz Industrial Area 4 — Unit B05.",
       "Whether you're protecting factory paint, changing the entire character of the car or building something that shouldn't look like anything else on the road, this is where the work happens.",
     ],
     localAngleHeading: 'One studio. Every district.',
@@ -116,7 +116,7 @@ export const LOCATIONS = [
       description: 'Every service — wrap, PPF, coating and tint — comes from the same Al Quoz workshop, serving clients across the whole city.',
     },
     faqs: [
-      { q: 'Where is Wraptors located in Dubai?', a: 'Our studio is in Al Quoz Industrial Area 4 — Dubai Creative Park, Warehouse B05. Every Dubai-wide booking is handled from this one location.' },
+      { q: 'Where is Wraptors located in Dubai?', a: 'Our studio is at 32 9B St, Al Quoz Industrial Area 4, Dubai — Unit B05. Every Dubai-wide booking is handled from this one location.' },
       { q: 'Do you serve areas outside Al Quoz?', a: 'Yes — we work with clients across Dubai, including Palm Jumeirah, Downtown, the Marina, Jumeirah, Business Bay, DIFC and beyond. Pickup and drop-off can be arranged for eligible builds.' },
       { q: 'Is PPF worth it for cars in Dubai?', a: "For most owners, yes — Dubai's combination of intense UV, blown sand and long parking hours in direct sun accelerates paint wear more than milder climates. PPF is one of the most requested services across every area we serve." },
       { q: 'Do you wrap luxury cars, SUVs and performance cars in Dubai?', a: "Yes — our client base across Dubai spans daily-driven SUVs, luxury sedans, exotics and performance builds. Every vehicle gets the same installation standard regardless of type." },
@@ -135,11 +135,11 @@ export const LOCATIONS = [
     primaryKeyword: 'car wrapping Al Quoz',
     secondaryKeywords: ['PPF Al Quoz', 'ceramic coating Al Quoz', 'window tinting Al Quoz', 'car wrap Dubai'],
     seoTitle: 'Premium Car Wrapping & PPF in Al Quoz, Dubai | Wraptors',
-    metaDescription: 'Wraptors Dubai studio in Al Quoz — full colour-change wraps, PPF, ceramic coating and window tinting, all installed in-house at Dubai Creative Park, Warehouse B05.',
+    metaDescription: 'Wraptors Dubai studio in Al Quoz — full colour-change wraps, PPF, ceramic coating and window tinting, all installed in-house at 32 9B St, Al Quoz Industrial Area 4 — Unit B05.',
     h1: 'Premium Car Wrapping & PPF in Al Quoz, Dubai',
     eyebrow: 'Wraptors Dubai · Al Quoz',
     heroCopy: [
-      'Wraptors brings its automotive transformation experience to the heart of Al Quoz, Dubai. From full colour-change wraps and custom vinyl work to paint protection film, ceramic coating and window tinting, every vehicle is handled inside our Dubai studio at Dubai Creative Park, Warehouse B05, Al Quoz Industrial Area 4.',
+      'Wraptors brings its automotive transformation experience to the heart of Al Quoz, Dubai. From full colour-change wraps and custom vinyl work to paint protection film, ceramic coating and window tinting, every vehicle is handled inside our Dubai studio at 32 9B St, Al Quoz Industrial Area 4 — Unit B05.',
       "Whether you're protecting factory paint, changing the entire character of the car or building something that shouldn't look like anything else on the road, this is where the work happens.",
     ],
     localAngleHeading: 'Built in Al Quoz. Made for Dubai.',
@@ -160,7 +160,7 @@ export const LOCATIONS = [
       description: "The Dubai workshop is located directly inside one of the city's major automotive areas.",
     },
     faqs: [
-      { q: 'Where can I get premium car wrapping in Al Quoz?', a: 'Directly at our Dubai studio — Dubai Creative Park, Warehouse B05, 32 9B St, Al Quoz Industrial Area 4. Every wrap is installed on-site, not subcontracted out.' },
+      { q: 'Where can I get premium car wrapping in Al Quoz?', a: 'Directly at our Dubai studio — 32 9B St, Al Quoz Industrial Area 4, Dubai — Unit B05. Every wrap is installed on-site, not subcontracted out.' },
       { q: 'Can I visit the Wraptors Dubai studio in Al Quoz?', a: 'Yes — walk-ins are welcome for a quick consultation, and booking ahead guarantees a specific time with the team. There is space to drop your vehicle off directly for the duration of the job.' },
       { q: 'Is PPF worth it for cars kept in Al Quoz workshops or garages?', a: "Yes — even garage-kept cars pick up dust, road debris and fine scratches from daily driving in an industrial district. PPF on high-impact panels keeps the factory finish intact underneath." },
       { q: 'Do you wrap luxury cars, SUVs and performance cars in Al Quoz?', a: 'Yes — the Al Quoz studio handles the full range, from daily-driven SUVs to exotics brought in specifically for a full transformation.' },

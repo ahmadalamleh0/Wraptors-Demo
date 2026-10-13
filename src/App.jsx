@@ -28,6 +28,7 @@ import SignatureBuilds from './components/SignatureBuilds';
 // Vehicle selector and quote form preserved but disabled for this deploy —
 // see src/features/vehicle-selector/README.md and
 // src/features/quote-form-draft/README.md to restore either one.
+import VisitUs from './components/VisitUs';
 import TrustedBrands from './components/TrustedBrands';
 import GlobalLocations from './components/GlobalLocations';
 import QuoteSection from './components/QuoteSection';
@@ -181,6 +182,7 @@ function HomePage() {
         <Services />
         <Statement />
         <SignatureBuilds />
+        <VisitUs />
         <TrustedBrands />
         <GlobalLocations />
         <QuoteSection id="cta" />

@@ -23,7 +23,7 @@ export default function GeoPage({ location }) {
       telephone: '+971502532392',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: '32 9B St, Al Quoz Industrial Area 4',
+        streetAddress: '32 9B St, Unit B05, Al Quoz Industrial Area 4',
         addressLocality: 'Dubai',
         addressCountry: 'AE',
       },
