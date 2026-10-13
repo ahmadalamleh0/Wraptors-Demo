@@ -2,11 +2,17 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './VisitUs.module.css';
 import satellite from '../assets/dubai-satellite.webp';
 
-const ADDRESS_LINE = '32 9B St, Al Quoz Industrial Area 4, Dubai — Unit B05';
+const ADDRESS_LINE = '32 9B St, Al Quoz Industrial Area 4, Dubai — Unit B05';
 const MAPS_QUERY = 'Unit B05, 32 9B St, Al Quoz Industrial Area 4, Dubai';
+// Where Google places Unit B05 — used for the embed so the pin is exact.
+const STUDIO_COORDS = '25.1225728,55.2354906';
+const OPEN_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAPS_QUERY)}`;
 const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(MAPS_QUERY)}`;
 // Keyless Google Maps embed, satellite layer (t=k), zoomed to street level.
-const EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&t=k&z=18&ie=UTF8&output=embed`;
+// Embedded by coordinates, not address: an address query makes Google show
+// its own "Open in Maps" card, and that link opens Maps with an empty search.
+// Our own card below replaces it with a link that pre-fills the address.
+const EMBED_URL = `https://maps.google.com/maps?q=${STUDIO_COORDS}&t=k&z=18&ie=UTF8&output=embed`;
 
 // How long the satellite image zooms toward the pin before the live map
 // fades in over it. Matches the transform transition in the CSS.
@@ -85,6 +91,20 @@ export default function VisitUs() {
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
           />
+        )}
+        {stage === 'live' && (
+          <div className={styles.card}>
+            <p className={styles.cardName}>Wraptors Dubai</p>
+            <p className={styles.cardAddress}>{ADDRESS_LINE}</p>
+            <a
+              className={styles.cardLink}
+              href={OPEN_MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open in Google Maps
+            </a>
+          </div>
         )}
       </div>
     </section>

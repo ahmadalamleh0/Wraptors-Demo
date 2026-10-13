@@ -16,7 +16,7 @@ const CONTACT = [
   {
     icon: <LocIcon />,
     text: '32 9B St, Al Quoz Industrial Area 4, Dubai — Unit B05',
-    href: 'https://maps.google.com/?q=Wraptors+Dubai+32+9B+St+Al+Quoz+Industrial+Area+4+Dubai+UAE',
+    href: 'https://www.google.com/maps/search/?api=1&query=Unit+B05%2C+32+9B+St%2C+Al+Quoz+Industrial+Area+4%2C+Dubai',
   },
   { icon: <MailIcon />,  text: 'Wrap@wraptorsdubai.com',   href: 'mailto:Wrap@wraptorsdubai.com' },
   { icon: <PhoneIcon />, text: '+971 50 253 2392',    href: 'tel:+971502532392'        },
