@@ -210,7 +210,7 @@ const BUILDS = [
   { brandName: "Audi RS6",           logo: audiLogo,      mainImage: audi1,      media: [audi1, audi2, audi3, audi4, audi5, audi6, audi7],                     serviceTags: ["PAINT PROTECTION FILM"],                                                         category: "german-precision" },
 
   // Italian Exotics — LBWK first, then Lamborghini / Ferrari alternating
-  { brandName: "Lamborghini LBWK",  logo: lamborghiniLogo, mainImage: lamboLBWK1,    media: [lamboLBWK1, lamboLBWK2, lamboLBWK3, lamboLBWK4, lamboLBWK5],                                                              buildLabel: "WRAPTORS BUILD · LBWK", badge: "1 OF 1", serviceTags: ["CELESTIAL UNICORN FINISH"],                                                   category: "italian-exotics" },
+  { brandName: "Lamborghini LBWK",  logo: lamborghiniLogo, mainImage: lamboLBWK1,    media: [lamboLBWK1, lamboLBWK2, lamboLBWK3, lamboLBWK4, lamboLBWK5],                                                              badge: "1 OF 1", serviceTags: ["CELESTIAL UNICORN FINISH"],                                                   category: "italian-exotics" },
   { brandName: "Ferrari F8",         logo: ferrariGesLogo,  mainImage: ferrari1,      media: [ferrari1, ferrari2, ferrari3, ferrari4, ferrari5, ferrari6],                                                                serviceTags: ["FULL-BODY PAINT PROTECTION FILM", "DEEP BLUE INTERIOR ACCENTS"],                                              category: "italian-exotics" },
   { brandName: "Lamborghini",        logo: lamborghiniLogo, mainImage: lamboPurple1,  media: [lamboPurple1, lamboPurple2, lamboPurple3, lamboPurple4, lamboPurple5],                                                     serviceTags: ["TWO-TONE FINISH", "SATIN BLACK UPPER", "MATTE ICED TITANIUM PINK LOWER"],                                     category: "italian-exotics" },
   { brandName: "Ferrari 488 Spider", logo: ferrariGesLogo,  mainImage: ferrariRed1,   media: [ferrariRed1, ferrariRed2, ferrariRed3, ferrariRed4, ferrariRed5],                                                          serviceTags: ["GLOSS CARMEN RED", "DOOR TRIMS", "GLOSS BLACK ACCENTS"],                                                      category: "italian-exotics" },
@@ -336,7 +336,6 @@ function BuildCard({ build }) {
         )}
 
         <div className={styles.cardContent}>
-          <span className={styles.buildLabel}>{build.buildLabel || 'WRAPTORS BUILD'}</span>
           <div className={styles.tags}>
             {build.serviceTags.map(tag => (
               <span key={tag} className={styles.tag}>{tag}</span>
