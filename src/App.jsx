@@ -39,7 +39,10 @@ import ServiceAreas from './components/ServiceAreas';
 // this import and <ContactSection /> below ClientReviews.
 import Icons from './components/Icons';
 import YoutubeReel from './components/YoutubeReel';
-import Reviews from './components/Reviews';
+// Reviews ("Proof in every finish") and BookingCTA ("Ready when you are.
+// Book your Wraptors visit.") temporarily taken off the home page —
+// components untouched, restore by re-adding these imports and
+// <Reviews /> <BookingCTA /> below <YoutubeReel />.
 // Academy ("Learn the craft behind the transformation") temporarily taken
 // off the live site — component untouched at src/components/Academy.jsx,
 // restore by re-adding this import and <Academy /> below Reviews.
@@ -62,7 +65,6 @@ import LearnHub from './components/LearnHub';
 import ArticlePage from './components/ArticlePage';
 import NotFoundPage from './components/NotFoundPage';
 import AboutPage from './components/AboutPage';
-import BookingCTA from './components/BookingCTA';
 import BookingPage from './components/BookingPage';
 import FranchisePage from './components/FranchisePage';
 import WrapsPage from './components/WrapsPage';
@@ -190,8 +192,6 @@ function HomePage() {
         <ServiceAreas />
         <Icons />
         <YoutubeReel />
-        <Reviews />
-        <BookingCTA />
       </main>
       <Footer />
       <FloatingWhatsApp />
