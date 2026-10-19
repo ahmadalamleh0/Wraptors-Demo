@@ -3,7 +3,7 @@
 .section {
   position: relative;
   background: #f5f3ef;
-  padding: 130px 64px;
+  padding: 72px 48px;
   overflow: hidden;
 }
 
@@ -31,7 +31,7 @@
 .header {
   text-align: center;
   max-width: 640px;
-  margin: 0 auto 48px;
+  margin: 0 auto 28px;
 }
 
 .label {
@@ -42,26 +42,26 @@
   letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--red);
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  font-size: clamp(2rem, 3.4vw, 3rem);
   font-weight: 400;
   font-style: italic;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   color: #111;
   line-height: 1.0;
-  margin: 0 0 18px;
+  margin: 0 0 10px;
 }
 
 .sub {
   font-family: var(--font-ui);
   font-size: clamp(0.82rem, 1.1vw, 0.95rem);
   color: rgba(20, 20, 20, 0.55);
-  line-height: 1.7;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -73,10 +73,10 @@
   gap: 24px;
   background: #0d0d0d;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 22px 28px;
-  margin-bottom: 36px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
 .summaryLeft {
@@ -90,7 +90,7 @@
 .summaryText {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
 }
 
 .summarySource {
@@ -116,6 +116,7 @@
   font-family: var(--font-ui);
   font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
 }
 
 .writeReviewButton {
@@ -129,7 +130,7 @@
   background: transparent;
   border: 1px solid rgba(212, 0, 0, 0.6);
   border-radius: 8px;
-  padding: 13px 22px;
+  padding: 9px 16px;
   white-space: nowrap;
   text-decoration: none;
   transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
@@ -145,8 +146,10 @@
 .stars {
   display: inline-flex;
   gap: 2px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
+
+.summaryRatingRow .stars { margin-bottom: 0; }
 
 .starFilled { fill: #f5b400; }
 .starEmpty  { fill: rgba(255, 255, 255, 0.15); }
@@ -154,8 +157,8 @@
 /* ── Review cards — desktop grid, black cards on the white section ── */
 .track {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
 }
 
 .card {
@@ -163,27 +166,27 @@
   flex-direction: column;
   background: #0d0d0d;
   border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 14px;
-  padding: 22px 20px;
+  border-radius: 12px;
+  padding: 16px;
 }
 
 .cardTop {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 8px;
 }
 
 .avatar {
   flex-shrink: 0;
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--red);
   color: #fff;
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,9 +208,9 @@
 
 .reviewText {
   font-family: var(--font-ui);
-  font-size: 0.86rem;
+  font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.68);
-  line-height: 1.6;
+  line-height: 1.5;
   margin: 0 0 6px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -229,7 +232,7 @@
   background: none;
   border: none;
   padding: 0;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   cursor: pointer;
 }
 
@@ -237,54 +240,65 @@
 
 .cardFooter {
   margin-top: auto;
-  padding-top: 14px;
+  padding-top: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .reviewTag {
   font-family: var(--font-ui);
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* ── Tablet ── */
-@media (max-width: 1024px) {
-  .track { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* ── Mobile — swipeable one-card carousel instead of a squeezed grid ── */
-@media (max-width: 768px) {
-  .section { padding: 90px 20px; }
-
-  .summaryBar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-    padding: 20px;
-  }
-  .writeReviewButton { text-align: center; }
+/* ── Below desktop — one swipeable row instead of stacking cards ── */
+@media (max-width: 1199px) {
+  .section { padding: 64px 32px; }
 
   .track {
     display: flex;
-    gap: 14px;
+    gap: 12px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-padding-left: 20px;
+    scroll-padding-left: 32px;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-x;
     overscroll-behavior-x: contain;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    margin: 0 -20px;
-    padding: 4px 20px 8px;
+    margin: 0 -32px;
+    padding: 2px 32px 6px;
   }
   .track::-webkit-scrollbar { display: none; }
 
   .card {
-    flex: 0 0 86%;
+    flex: 0 0 calc((100% - 24px) / 3);
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 900px) {
+  .card { flex-basis: calc((100% - 12px) / 2); }
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .section { padding: 52px 20px; }
+
+  .track {
+    scroll-padding-left: 20px;
+    margin: 0 -20px;
+    padding: 2px 20px 6px;
+  }
+  .card {
+    flex-basis: 84%;
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
+
+  .summaryBar { gap: 12px; padding: 12px 14px; }
+  .writeReviewButton { padding: 8px 12px; font-size: 0.66rem; letter-spacing: 0.1em; }
+  .summaryRatingRow { gap: 6px; }
+  .summaryCount { font-size: 0.7rem; }
 }
