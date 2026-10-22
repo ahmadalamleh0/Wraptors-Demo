@@ -24,6 +24,11 @@ import HeroVideo from './components/HeroVideo';
 import Statement from './components/Statement';
 import ServicesIntro from './components/ServicesIntro';
 import Services from './components/Services';
+// Restored services section from the Dubai coming-soon landing page
+// (see components/original-services). Switch HOME_SERVICES back to
+// 'tiles' to return to the image-tile Services section above.
+import OriginalServicesSection from './components/original-services/ServicesSection';
+const HOME_SERVICES = 'original'; // 'original' | 'tiles'
 import SignatureBuilds from './components/SignatureBuilds';
 // Vehicle selector and quote form preserved but disabled for this deploy —
 // see src/features/vehicle-selector/README.md and
@@ -181,7 +186,12 @@ function HomePage() {
         <Hero />
         <HeroVideo />
         <ServicesIntro />
-        <Services />
+        {HOME_SERVICES === 'original' ? (
+          // id keeps the /#services links working; the wrapper has no styling.
+          <div id="services"><OriginalServicesSection /></div>
+        ) : (
+          <Services />
+        )}
         <Statement />
         <SignatureBuilds />
         <VisitUs />

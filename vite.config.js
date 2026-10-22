@@ -4,6 +4,36 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import { fileURLToPath, URL } from 'node:url'
 import { VIDEOS_CACHE_NAME } from './src/lib/pwaCacheNames.js'
+import { createReadStream, existsSync } from 'node:fs'
+import { resolve } from 'node:path'
+
+// LOCAL DEV ONLY — Neuropol X for the restored original services section
+// (components/original-services). The font is licensed under a Typodermic
+// *Desktop* EULA, which does not cover web embedding, so it is never copied
+// into this repo or a build: this plugin only runs on the dev server
+// (apply: 'serve') and streams the file read-only from the landing page
+// folder if it exists. Production falls back to the original stack's next
+// font (Cinzel, self-hosted).
+const NEUROPOL_DEV_FONT = resolve('../../Wraptors landing page/src/assets/fonts/NeuropolX-Regular.otf')
+const devOnlyNeuropolFont = {
+  name: 'dev-only-neuropol-font',
+  apply: 'serve',
+  configureServer(server) {
+    server.middlewares.use('/__dev-fonts/NeuropolX-Regular.otf', (req, res, next) => {
+      if (!existsSync(NEUROPOL_DEV_FONT)) return next()
+      res.setHeader('Content-Type', 'font/otf')
+      createReadStream(NEUROPOL_DEV_FONT).pipe(res)
+    })
+  },
+  transformIndexHtml() {
+    if (!existsSync(NEUROPOL_DEV_FONT)) return []
+    return [{
+      tag: 'style',
+      injectTo: 'head',
+      children: "@font-face{font-family:'Neuropol X';src:url('/__dev-fonts/NeuropolX-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}",
+    }]
+  },
+}
 
 // workbox-core (a transitive dep of workbox-range-requests) assumes a
 // browser/service-worker global `self` exists — true once this plugin runs
@@ -98,6 +128,7 @@ export default defineConfig({
   plugins: [
     react(),
     robotsMetaPlugin,
+    devOnlyNeuropolFont,
     // Build-time only — re-encodes every bundled raster asset at a lossy-
     // but-visually-transparent quality instead of the ~100% source photos
     // came in at. Same dimensions/crop/design, meaningfully smaller files.
