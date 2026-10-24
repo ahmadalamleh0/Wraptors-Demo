@@ -6,6 +6,7 @@ import styles from './ServicesSection.module.css';
 // photo each previous service card showed (Services.jsx imgs[0]). Sizes
 // reuse the original grid's own classes so the three original row heights
 // are kept: wide + standard + standard / wide + wide / featured (full width).
+// Descriptions are the landing page's original copy for each service.
 import imgWraps from '../../../Wrappin(1new).jpeg';
 import imgPPF from '../../../Signture Section/Aston_Martin(4).jpeg';
 import imgStarlight from '../../../Starlight(2).jpeg';
@@ -17,30 +18,35 @@ const SERVICES = [
   {
     name: 'Vehicle Wraps',
     to: '/services/wraps',
+    description: 'Premium color changes and custom finishes designed for a standout presence.',
     image: imgWraps,
     size: 'wide',
   },
   {
     name: 'Paint Protection Film',
     to: '/services/ppf',
+    description: 'Invisible protection built to preserve paint against road wear, chips, and daily driving.',
     image: imgPPF,
     size: 'standard',
   },
   {
     name: 'Starlight Headliner',
     to: '/services/starlight',
+    description: 'A luxury interior upgrade with a custom illuminated ceiling finish.',
     image: imgStarlight,
     size: 'standard',
   },
   {
     name: 'Custom Builds & Body Kits',
     to: '/services/custom-builds',
+    description: 'Aggressive styling upgrades built for a stronger road presence.',
     image: imgCustomBuilds,
     size: 'wide',
   },
   {
     name: 'Ceramic Coating',
     to: '/services/ceramic',
+    description: 'Long-lasting gloss and hydrophobic protection for easier maintenance.',
     image: imgCeramic,
     size: 'wide',
     imgPos: 'center 25%',
@@ -48,6 +54,7 @@ const SERVICES = [
   {
     name: 'Window Tint',
     to: '/services/tint',
+    description: 'Refined privacy, heat rejection, and a sharper exterior profile.',
     image: imgTint,
     size: 'featured',
   },
@@ -59,7 +66,7 @@ export default function ServicesSection() {
       <Reveal as="h2" className={styles.kicker}>Our Services</Reveal>
 
       <div className={styles.grid}>
-        {SERVICES.map(({ name, to, image, size, imgPos }, i) => (
+        {SERVICES.map(({ name, to, image, size, description, imgPos }, i) => (
           <Reveal
             key={name}
             as={Link}
@@ -70,6 +77,7 @@ export default function ServicesSection() {
             <img src={image} alt={name} className={styles.cardImage} loading="lazy" style={imgPos ? { objectPosition: imgPos } : undefined} />
             <div className={styles.cardOverlay} aria-hidden="true" />
             <div className={styles.cardContent}>
+              <p className={styles.cardDesc}>{description}</p>
               <span className={styles.cardName}>
                 {name}
                 <span className={styles.cardArrow} aria-hidden="true">→</span>
