@@ -18,7 +18,6 @@ import heroVideoSrc from '../../Wraptors Media/AQMO8KUY36WzJZuIMrrq-tMy8Xp0txB13
 import heroPoster from '../assets/wraps-hero-poster.jpg';
 
 // Brand statement mark — official Wraptors Dubai coin emblem.
-import wraptorsDubaiLogo from '../../Wraptors_dubai.jpg';
 
 // ── Section photography — real Wraptors builds throughout, no stock.
 // Selected Wraps gallery is placeholder-only for now (see below) until
@@ -240,10 +239,6 @@ export default function WrapsPage() {
           className={`${styles.brandStatement} ${brandVisible ? styles.brandStatementVisible : ''}`}
         >
           <div className={styles.brandInner}>
-            <div className={styles.brandLogoWrap}>
-              <img src={wraptorsDubaiLogo} alt="Wraptors Dubai" className={styles.brandLogo} />
-            </div>
-            <div className={styles.brandDivider} aria-hidden="true" />
             <div className={styles.brandContent}>
               <p className={styles.brandHeadline}>
                 Crafting some of the world&rsquo;s most iconic<br className={styles.brandBreak} />{' '}wrapped vehicles.
