@@ -3,7 +3,7 @@ import styles from './ClientReviews.module.css';
 
 // Real Google reviews from Wraptors clients in Canada (Toronto and
 // Mississauga), lightly cleaned up for spacing/punctuation only. They are
-// labelled as Canadian on the page — they are not Dubai reviews. No star
+// presented as reviews from those locations, not as Dubai reviews. No star
 // ratings or totals are shown: none were captured with these reviews.
 const REVIEWS = [
   {
@@ -96,10 +96,10 @@ export default function ClientReviews() {
     <section className={styles.section}>
       <div className={styles.inner}>
         <div ref={headerRef} className={`${styles.header} ${styles.animUp}`}>
-          <span className={styles.label}>Client Experiences</span>
+          <span className={styles.label}>Client Experiences Across Wraptors</span>
           <h2 className={styles.title}>OUR REVIEWS.</h2>
           <p className={styles.sub}>
-            Real experiences from Wraptors clients in Toronto and Mississauga, Canada.
+            Reviews from our Toronto and Mississauga locations.
           </p>
         </div>
 
@@ -108,7 +108,6 @@ export default function ClientReviews() {
             <GoogleG className={styles.summaryGoogleG} />
             <div className={styles.summaryText}>
               <span className={styles.summarySource}>Google Reviews</span>
-              <span className={styles.summaryOrigin}>Wraptors clients in Canada — not Dubai reviews</span>
             </div>
           </div>
         </div>

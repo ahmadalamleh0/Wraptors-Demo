@@ -100,12 +100,6 @@
   color: #fff;
 }
 
-.summaryOrigin {
-  font-family: var(--font-ui);
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.55);
-}
-
 /* ── Review cards — desktop grid, black cards on the white section ── */
 .track {
   display: grid;
@@ -250,5 +244,4 @@
   }
 
   .summaryBar { gap: 12px; padding: 12px 14px; }
-  .summaryOrigin { font-size: 0.7rem; }
 }
