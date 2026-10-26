@@ -100,59 +100,11 @@
   color: #fff;
 }
 
-.summaryRatingRow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.summaryScore {
-  font-family: var(--font-display);
-  color: #fff;
-  font-size: 1rem;
-}
-
-.summaryCount {
+.summaryOrigin {
   font-family: var(--font-ui);
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.4);
-  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.55);
 }
-
-.writeReviewButton {
-  flex-shrink: 0;
-  font-family: var(--font-ui);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #fff;
-  background: transparent;
-  border: 1px solid rgba(212, 0, 0, 0.6);
-  border-radius: 8px;
-  padding: 9px 16px;
-  white-space: nowrap;
-  text-decoration: none;
-  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
-}
-
-.writeReviewButton:hover {
-  background: rgba(212, 0, 0, 0.14);
-  border-color: var(--red-bright);
-  transform: translateY(-1px);
-}
-
-/* ── Stars ── */
-.stars {
-  display: inline-flex;
-  gap: 2px;
-  margin-bottom: 8px;
-}
-
-.summaryRatingRow .stars { margin-bottom: 0; }
-
-.starFilled { fill: #f5b400; }
-.starEmpty  { fill: rgba(255, 255, 255, 0.15); }
 
 /* ── Review cards — desktop grid, black cards on the white section ── */
 .track {
@@ -298,7 +250,5 @@
   }
 
   .summaryBar { gap: 12px; padding: 12px 14px; }
-  .writeReviewButton { padding: 8px 12px; font-size: 0.66rem; letter-spacing: 0.1em; }
-  .summaryRatingRow { gap: 6px; }
-  .summaryCount { font-size: 0.7rem; }
+  .summaryOrigin { font-size: 0.7rem; }
 }
