@@ -145,12 +145,17 @@
   pointer-events: none;
 }
 
+/* Card titles: Rajdhani (the site's own semi-condensed sans) in place of
+   the landing page's serif display fallback. */
 .cardName {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(0.92rem, 1.6vw, 1.1rem);
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  font-family: 'Rajdhani', 'Arial Narrow', sans-serif;
+  font-size: clamp(1rem, 1.45vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-wrap: balance;
   color: var(--white);
   text-align: center;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
