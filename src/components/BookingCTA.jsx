@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './BookingCTA.module.css';
 
-const WHATSAPP_URL = 'https://wa.me/971502532392';
+const WHATSAPP_URL = 'https://wa.me/971567279727';
 
 // Compact conversion strip — deliberately not another full-height section.
 // "Get a Quote" (pricing-first) and this booking CTA (ready to speak/visit)

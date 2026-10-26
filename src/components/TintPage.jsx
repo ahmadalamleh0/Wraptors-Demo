@@ -27,8 +27,8 @@ import carPairRear  from '../../Wraptors Media/637197397_18390307717146462_68039
 
 export default function TintPage() {
   useDocumentMeta(
-    'Window Tint in Dubai | Wraptors',
-    'Premium ceramic window film installed at the Wraptors Dubai studio in Al Quoz — heat rejection, UV protection and privacy, fitted cleanly to the millimetre.',
+    'Window Tint Dubai | Ceramic Car Window Tinting | Wraptors',
+    'Car window tinting in Dubai at the Wraptors studio in Al Quoz: ceramic window film chosen for heat rejection, UV protection and privacy, fitted cleanly.',
     `${SITE_URL}/services/tint`
   );
 
@@ -74,7 +74,7 @@ export default function TintPage() {
       <ServiceIntroSection
         kicker="Your Cabin"
         statement="Controlled."
-        description="Window film is selected around more than darkness. At Wraptors, tint is approached around heat performance, privacy, visibility and the appearance of the vehicle, then installed cleanly across the glass for a finish that belongs with the car."
+        description="Window film is selected around more than darkness. At Wraptors Dubai, car window tint is approached around heat performance, privacy, visibility and the appearance of the vehicle, then installed cleanly across the glass for a finish that belongs with the car."
       />
 
       {/* ── Interactive VLT comparison ── */}

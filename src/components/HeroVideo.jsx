@@ -293,6 +293,7 @@ export default function HeroVideo() {
         {/* The homepage's only H1 — previously two <p> lines, which left the
             page (and its most important heading) with no H1 at all. */}
         <h1 className={styles.mainHeadline}>
+          <span className={styles.srOnly}>Wraptors Dubai — </span>
           <span ref={line1Ref} className={styles.mainLine}>Crafted with purpose.</span>
           <span ref={line2Ref} className={styles.mainLine}>Built for legacy.</span>
         </h1>

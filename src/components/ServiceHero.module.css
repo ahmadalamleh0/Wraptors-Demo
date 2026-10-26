@@ -55,6 +55,10 @@
 .heroOverlayLower .heroSubline { margin-top: 12px; }
 .heroOverlayLower .cta { margin-top: 20px; }
 
+.heading {
+  display: contents;
+}
+
 .eyebrow {
   display: block;
   font-family: var(--font-ui);
@@ -67,6 +71,7 @@
 }
 
 .headline {
+  display: block;
   font-family: var(--font-display);
   font-size: clamp(2.6rem, 5.2vw, 4.6rem);
   font-weight: 400;

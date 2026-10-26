@@ -121,7 +121,7 @@ export default function ServicesIntro() {
         </h2>
         <div ref={ruleRef} className={styles.rule} aria-hidden="true" />
         <p ref={subRef} className={styles.subline}>
-          Luxury wraps, protection, tint, and customization built around presence.
+          Car wrapping, paint protection, tint and customization in Dubai, built around presence.
         </p>
       </div>
 

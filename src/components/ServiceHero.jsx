@@ -24,8 +24,14 @@ export default function ServiceHero({
     <section className={styles.hero}>
       <div className={styles.media}>{media}</div>
       <div className={`${styles.heroOverlay} ${lowerContent ? styles.heroOverlayLower : ''}`}>
-        <span className={styles.eyebrow}>{eyebrow}</span>
-        <h1 className={`${styles.headline} ${compactHeadline ? styles.headlineCompact : ''}`}>{headline}</h1>
+        {/* The eyebrow sits inside the H1 so the page heading carries the
+            service + city ("Wraptors Dubai · Ceramic Coating") as well as
+            the cinematic line. .heading is display: contents — the layout
+            is identical to the eyebrow and headline as separate siblings. */}
+        <h1 className={styles.heading}>
+          <span className={styles.eyebrow}>{eyebrow}</span>{' '}
+          <span className={`${styles.headline} ${compactHeadline ? styles.headlineCompact : ''}`}>{headline}</span>
+        </h1>
         <span className={styles.heroSubline}>{supportingLine}</span>
         <a href={ctaHref} className={styles.cta}>
           {ctaLabel} <span aria-hidden="true">→</span>

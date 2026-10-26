@@ -1,6 +1,6 @@
 import styles from './FloatingWhatsApp.module.css';
 
-const WHATSAPP_URL = 'https://wa.me/971502532392';
+const WHATSAPP_URL = 'https://wa.me/971567279727';
 
 // Shared floating WhatsApp button for the main service pages (Vehicle
 // Wraps, PPF, Ceramic Coating, Window Tint). One component, one place to

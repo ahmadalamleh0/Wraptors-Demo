@@ -116,10 +116,11 @@ const SERVICE_PAGES = [
       { num: '04', title: 'Easier Maintenance',        desc: 'Dirt and contamination are easier to remove, reducing the effort needed to keep the car looking clean.' },
     ],
     galleryImages: [lambo1, lambo2, lambo3],
-    tagline:  'Glass-hard protection with a permanent shine. 9H-rated ceramic formula that bonds to your paint for years of effortless gloss.',
+    seoTitle: 'Ceramic Coating Dubai | Gloss & Paint Protection | Wraptors',
+    tagline:  'Ceramic coating in Dubai at Wraptors, Al Quoz: paint inspected, prepared and corrected where needed, then coated for deeper gloss and easier maintenance.',
     introKicker: 'Your Finish',
     introStatement: 'Refined.',
-    introDescription: 'Ceramic coating at Wraptors starts with the condition of the paint. We inspect and prepare the surface first, correct or enhance it where required, then apply the coating to preserve the finish, improve gloss and make ongoing maintenance easier.',
+    introDescription: 'Ceramic coating at Wraptors Dubai starts with the condition of the paint. We inspect and prepare the surface first, correct or enhance it where required, then apply the coating to preserve the finish, improve gloss and make ongoing maintenance easier.',
     processEyebrow: 'The Process',
     processHeading: 'From Prep To Protection.',
     processSteps: [

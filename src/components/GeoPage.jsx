@@ -20,7 +20,7 @@ export default function GeoPage({ location }) {
     provider: {
       '@type': 'AutomotiveBusiness',
       name: 'Wraptors Dubai',
-      telephone: '+971502532392',
+      telephone: '+971567279727',
       address: {
         '@type': 'PostalAddress',
         streetAddress: '32 9B St, Unit B05, Al Quoz Industrial Area 4',
@@ -154,7 +154,7 @@ export default function GeoPage({ location }) {
             <a href="/#cta" className={styles.ctaPrimary}>
               Request a Quote <span aria-hidden="true">→</span>
             </a>
-            <a href="tel:+971502532392" className={styles.ctaSecondary}>Call +971 50 253 2392</a>
+            <a href="tel:+971567279727" className={styles.ctaSecondary}>Call +971 56 727 9727</a>
           </div>
         </section>
 

@@ -487,8 +487,8 @@ function LayerBreakdown() {
 
 export default function PPFPage() {
   useDocumentMeta(
-    'Paint Protection Film (PPF) in Dubai | Wraptors',
-    'Clear and colour paint protection film installed at the Wraptors Dubai studio in Al Quoz — precision-cut coverage that protects your finish from road debris, sun and daily wear.',
+    'PPF Dubai | Paint Protection Film in Al Quoz | Wraptors',
+    'PPF in Dubai at the Wraptors studio in Al Quoz: clear and colour paint protection film, from front-end coverage to full-body protection against road debris and sun.',
     `${SITE_URL}/services/ppf`
   );
 
@@ -508,7 +508,7 @@ export default function PPFPage() {
       <ServiceIntroSection
         kicker="Your Paint"
         statement="Preserved."
-        description="Wraptors PPF is built around preserving the finish that came with the car. We plan coverage around how the vehicle is driven, from exposed front-end areas to complete body protection, then install the film with close attention to alignment, edges and complex panels."
+        description="At Wraptors in Dubai, paint protection film (PPF) is built around preserving the finish that came with the car. We plan coverage around how the vehicle is driven, from exposed front-end areas to complete body protection, then install the film with close attention to alignment, edges and complex panels."
       />
 
       {/* ── 2. COVERAGE EXPLORER ─────────────────────────────────── */}

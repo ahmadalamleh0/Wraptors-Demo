@@ -19,15 +19,18 @@ const CONTACT = [
     href: 'https://www.google.com/maps/search/?api=1&query=Unit+B05%2C+32+9B+St%2C+Al+Quoz+Industrial+Area+4%2C+Dubai',
   },
   { icon: <MailIcon />,  text: 'Wrap@wraptorsdubai.com',   href: 'mailto:Wrap@wraptorsdubai.com' },
-  { icon: <PhoneIcon />, text: '+971 50 253 2392',    href: 'tel:+971502532392'        },
+  { icon: <PhoneIcon />, text: '+971 56 727 9727',    href: 'tel:+971567279727'        },
 ];
 
+// href: null hides an icon until its real profile URL is confirmed —
+// better than a dead '#' link. Instagram uses the Dubai handle listed in
+// GlobalLocations; YouTube is the brand channel the site already embeds.
 const SOCIALS = [
-  { label: 'Instagram', href: '#', icon: <InstagramIcon /> },
-  { label: 'TikTok',    href: '#', icon: <TikTokIcon />    },
-  { label: 'Facebook',  href: '#', icon: <FacebookIcon />  },
-  { label: 'YouTube',   href: '#', icon: <YouTubeIcon />   },
-];
+  { label: 'Instagram', href: 'https://www.instagram.com/wraptors.dubai/', icon: <InstagramIcon /> },
+  { label: 'TikTok',    href: null, icon: <TikTokIcon />    },
+  { label: 'Facebook',  href: null, icon: <FacebookIcon />  },
+  { label: 'YouTube',   href: 'https://www.youtube.com/@TorontoWraptors', icon: <YouTubeIcon />   },
+].filter(s => s.href);
 
 // `solid` renders a plain black footer with no background photo — used on
 // service pages, where the logo becomes the focal point instead. The
@@ -70,6 +73,8 @@ export default function Footer({ solid = false }) {
                 <a
                   key={s.label}
                   href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={styles.socialLink}
                   aria-label={s.label}
                   title={s.label}
@@ -123,11 +128,8 @@ export default function Footer({ solid = false }) {
           <span className={styles.copy}>
             © {new Date().getFullYear()} Wraptors. All rights reserved.
           </span>
-          <div className={styles.legal}>
-            <a href="#" className={styles.legalLink}>Privacy</a>
-            <span className={styles.legalDot} aria-hidden="true" />
-            <a href="#" className={styles.legalLink}>Terms</a>
-          </div>
+          {/* Privacy / Terms links hidden until real policy pages exist
+              (styles.legal / legalLink / legalDot kept for that). */}
         </div>
 
       </div>

@@ -72,8 +72,8 @@ const PROCESS_STEPS = [
 
 export default function WrapsPage() {
   useDocumentMeta(
-    'Vehicle Wraps in Dubai | Wraptors',
-    'Full colour changes, custom finishes and partial transformations, installed at the Wraptors Dubai studio in Al Quoz and built around the vehicle, not a template.',
+    'Car Wrapping Dubai | Colour Change & Custom Wraps | Wraptors',
+    'Car wrapping in Dubai at the Wraptors studio in Al Quoz: full colour changes, partial wraps and custom finishes, planned and installed around the vehicle.',
     `${SITE_URL}/services/wraps`
   );
 
@@ -194,7 +194,7 @@ export default function WrapsPage() {
 
         {/* ── Hero — shared ServiceHero, full-bleed video + glass CTA ── */}
         <ServiceHero
-          eyebrow="Wraptors Dubai · Vehicle Wraps"
+          eyebrow="Wraptors Dubai · Car Wrapping"
           headline="Bespoke Styling"
           supportingLine="Full Wraps · Colour Changes · Custom Finishes"
           media={
@@ -219,7 +219,7 @@ export default function WrapsPage() {
         <ServiceIntroSection
           kicker="Your Car"
           statement="Reintroduced."
-          description="At Wraptors, we handle complete colour changes, partial wraps and bespoke styling around the vehicle itself. Material, coverage and finish are planned together, then installed with attention to body lines, edges, trim and final presentation. The result is a transformation that looks considered from the first panel to the last."
+          description="At our Al Quoz studio, Wraptors handles car wrapping in Dubai, from complete colour changes and partial wraps to bespoke styling built around the vehicle itself. Material, coverage and finish are planned together, then installed with attention to body lines, edges, trim and final presentation. The result is a transformation that looks considered from the first panel to the last."
         />
 
         {/* ── Full photo break — statement sits in the dark space above

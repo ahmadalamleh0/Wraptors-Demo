@@ -4,7 +4,7 @@
 // visitor's answers off to WhatsApp as a prefilled message. This is a real,
 // verifiable action (a WhatsApp chat actually opens with the enquiry text
 // ready to send) rather than a claim we can't back up.
-export const WHATSAPP_NUMBER = '971502532392';
+export const WHATSAPP_NUMBER = '971567279727';
 
 function line(label, value) {
   return value ? `${label}: ${value}` : null;

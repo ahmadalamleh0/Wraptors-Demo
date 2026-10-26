@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-const DEFAULT_TITLE = 'Wraptors Dubai | Luxury Car Wraps, PPF & Automotive Styling';
-const DEFAULT_DESCRIPTION = 'Wraptors Dubai delivers premium vehicle wraps, PPF, ceramic coating, tint and automotive styling in Dubai.';
+const DEFAULT_TITLE = 'Wraptors Dubai | Car Wrapping, PPF & Ceramic Coating Studio';
+const DEFAULT_DESCRIPTION = 'Car wrapping, PPF, ceramic coating and window tint at the Wraptors Dubai studio in Al Quoz — colour changes, paint protection and custom builds.';
 
 function upsertMeta(selector, attr, value, createAttrs) {
   let el = document.querySelector(selector);
@@ -25,7 +25,20 @@ function upsertMeta(selector, attr, value, createAttrs) {
 // prerendered) visit these tags only ever reach a crawler that executes
 // JavaScript; the build-time prerender step (scripts/prerender.mjs) is
 // what makes the *static* HTML carry the right values too.
-export function useDocumentMeta(title, description, canonicalUrl, imageUrl) {
+// Netlify serves each prerendered route from <route>/index.html and
+// 301-redirects the slashless URL to the trailing-slash one, so canonical
+// and og:url get the trailing slash — otherwise they point at a redirect.
+function withTrailingSlash(url) {
+  if (!url) return url;
+  const [base, hash = ''] = url.split('#');
+  const [path, query] = base.split('?');
+  const last = path.split('/').pop();
+  if (path.endsWith('/') || last.includes('.')) return url;
+  return `${path}/${query !== undefined ? `?${query}` : ''}${hash ? `#${hash}` : ''}`;
+}
+
+export function useDocumentMeta(title, description, rawCanonicalUrl, imageUrl) {
+  const canonicalUrl = withTrailingSlash(rawCanonicalUrl);
   useEffect(() => {
     const prevTitle = document.title;
     if (title) document.title = title;

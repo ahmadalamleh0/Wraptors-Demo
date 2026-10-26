@@ -41,6 +41,7 @@ export default function ServicePage({
   splitBanner,
   showTintCompare,
   tagline,
+  seoTitle,
   learnCategory,
   path,
 }) {
@@ -106,7 +107,7 @@ export default function ServicePage({
   }, []);
 
   useDocumentMeta(
-    `${title} in Dubai | Wraptors`,
+    seoTitle || `${title} in Dubai | Wraptors`,
     tagline || `${title} from Wraptors Dubai — premium automotive customization at our Al Quoz studio.`,
     path ? `${SITE_URL}${path}` : undefined
   );

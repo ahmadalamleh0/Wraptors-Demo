@@ -29,8 +29,10 @@ const MOBILE_NAV_LINKS = [
 const MOBILE_SOCIALS = [
   { label: 'Instagram', href: 'https://instagram.com/wraptors', icon: <InstagramGlyph /> },
   { label: 'YouTube',   href: 'https://www.youtube.com/@TorontoWraptors', icon: <YouTubeGlyph /> },
-  { label: 'LinkedIn',  href: 'https://linkedin.com', icon: <LinkedInGlyph /> },
-];
+  // href: null hides it until the company page URL is confirmed (was the
+  // generic linkedin.com homepage).
+  { label: 'LinkedIn',  href: null, icon: <LinkedInGlyph /> },
+].filter(s => s.href);
 
 function InstagramGlyph() {
   return (
@@ -168,11 +170,8 @@ export default function Navbar({ alwaysVisible = false }) {
               </a>
             ))}
           </div>
-          <div className={styles.mobileMenuLegal}>
-            <a href="#" tabIndex={menuOpen ? 0 : -1}>Terms and Conditions</a>
-            <span aria-hidden="true">&middot;</span>
-            <a href="#" tabIndex={menuOpen ? 0 : -1}>Privacy Policy</a>
-          </div>
+          {/* Terms / Privacy links hidden until real policy pages exist
+              (styles.mobileMenuLegal kept for that). */}
         </div>
       </div>
     </div>
