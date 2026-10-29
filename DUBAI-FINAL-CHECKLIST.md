@@ -1,6 +1,6 @@
 # Wraptors Dubai: Final Checklist
 
-**Date:** 2026-10-29. **Live site:** <https://wraptorsdubai.com> (Netlify; `www` 301 → bare domain).
+**Date:** 2026-10-29 (updated after the final release check). **Live site:** <https://wraptorsdubai.com> (Netlify; `www` 301 → bare domain).
 
 **Sources:**
 - The client's two "SEO Proposal & Audit" slides (WhatsApp, 26 Oct): *On-Page SEO Priorities* and *Content Gap & Keyword Architecture*
@@ -63,7 +63,8 @@ Checked with a production-context build (`CONTEXT=production npm run build`, 49/
 | **Colour PPF imagery** | A photo from a confirmed Dubai colour-PPF job. The blue McLaren set used in a colour-PPF article can't be confirmed as colour PPF, and its setting isn't Dubai. |
 | **Homepage H1 keyword** | "Crafted with purpose. Built for legacy." has no search term. A hidden prefix was removed on purpose (`001e9ef`). A visible wording change needs design and copy approval. |
 | **Wraps title wording** | The client asked for "Car Wrapping Dubai \| Luxury Colour Change Wraps". Live: "Car Wrapping Dubai \| Colour Change & Custom Wraps \| Wraptors". The primary keyword is already first; change it if the client wants their exact wording. |
-| **Social accounts** | The mobile menu links Instagram `@wraptors` (brand), the footer `@wraptors.dubai`; confirm which to use. YouTube is the brand channel (`@TorontoWraptors`). Supply Dubai TikTok and Facebook URLs to re-enable them. |
+| **Instagram account** (not changed) | Footer and Global Locations link `instagram.com/wraptors.dubai` (with a dot, added 17 Sep). The mobile menu links the brand account `instagram.com/wraptors`. The earlier Dubai landing page config says "update to Dubai when **@wraptorsdubai** is live" (no dot), implying the Dubai account didn't exist in July. Instagram shows the same login wall for every handle, so the account can't be verified without logging in. **The shop must confirm the exact Dubai handle**; then all three links can point to it. YouTube is the brand channel (`@TorontoWraptors`). Supply Dubai TikTok and Facebook URLs to re-enable them. |
+| **Global Locations count** (not changed) | The stat says **16 Locations**, but the section lists **15**: UAE 1 (Dubai), Canada 9 (Mississauga HQ, Vaughan, Ottawa, Wraptors East, Barrie, Hamilton, Calgary, Waterloo, Kingston), USA 4 (Miami, Orlando, Fort Lauderdale, Scottsdale), South Africa 1 (Cape Town). `fb523fd` (21 Sep, "bump locations count") changed the stat from 15 to 16 without adding a location. **The client must name the 16th location, or approve showing 15.** The globe also has no markers for Wraptors East, Waterloo and Kingston (12 markers vs 15 listed). |
 | **Brabus / body kit naming** | `/services/custom-builds/` covers body kits. Using "Brabus" in titles or headings implies a brand relationship, so that needs the client's confirmation that it's permitted and accurate. |
 | **Location page count** | The slide says "existing 19"; the site has 18 area pages. Confirm whether one is missing. |
 | **Colour PPF / finishes copy** | New visible copy on PPF and Wraps (and the Chrome Delete FAQ) needs sign-off. Chrome Delete is confirmed offered (29 Oct); matte, satin and gloss are described as finish options without brand or durability claims. |
@@ -78,3 +79,20 @@ Checked with a production-context build (`CONTEXT=production npm run build`, 49/
 | Meta descriptions over 160 characters | 12 pages at 163–181 characters (8 area pages, PPF, Starlight, `/book/` and one article) may be truncated in search results. A cosmetic trim. |
 | Wraps "Reintroduced." statement breaks as "REINTRODUCE / D." at 1440 px | Pre-existing on live (same measurements). A design tweak if wanted. |
 | Search Console | Submit the sitemap after the next deploy and monitor the Coverage and Performance reports. No GSC access was available for this audit. |
+
+---
+
+## 5. Final release check (2026-10-29, local production build of `f5feb7b`)
+
+| Check | Result |
+|---|---|
+| Lint | Clean |
+| Production build | `CONTEXT=production npm run build`: 49/49 routes prerendered |
+| Sitemap | 49 URLs, all `https://wraptorsdubai.com/…/` (bare domain, trailing slash) |
+| robots.txt | `Allow: /`, own sitemap only |
+| Indexing | 0 pages with a robots `noindex`; 49/49 canonicals equal their sitemap URL |
+| Internal links | No slash-less, `#`, empty or broken internal links |
+| Phone | Only +971 56 727 9727: display text, `tel:+971567279727`, schema `+971567279727`. No other UAE numbers in source or build. |
+| WhatsApp | Only `wa.me/971567279727`, on all 8 pages that link it, including the quote, booking and franchise hand-offs |
+
+**To publish:** push `f5feb7b` and this checklist update to `origin/main` (Netlify deploys from it), then re-run the live comparison. Waiting on the owner's approval.
