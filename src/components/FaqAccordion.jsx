@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styles from './FaqAccordion.module.css';
 
+// The answer is always in the DOM and only `hidden` while closed, so the
+// prerendered HTML carries every answer for crawlers.
 function FaqItem({ q, a, mono }) {
   const [open, setOpen] = useState(false);
   return (
@@ -19,7 +21,7 @@ function FaqItem({ q, a, mono }) {
           +
         </span>
       </button>
-      {open && <p className={styles.faqAnswer}>{a}</p>}
+      <p className={styles.faqAnswer} hidden={!open}>{a}</p>
     </div>
   );
 }

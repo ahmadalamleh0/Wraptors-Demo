@@ -15,7 +15,11 @@ function slugifyHeading(text) {
 
 function formatDate(dateStr) {
   if (!dateStr) return null;
-  return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  // Build the date in local time — new Date('YYYY-MM-DD') parses as UTC
+  // midnight, which shows as the previous day west of UTC (and made the
+  // prerendered date depend on the build machine's time zone).
+  const [y, m, d] = dateStr.split('-').map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
 // One reusable template rendered entirely from an article object in
@@ -29,7 +33,7 @@ export default function ArticlePage() {
   const relatedArticles = article ? getRelatedArticleObjects(article) : [];
   const relatedService = article ? SERVICE_CATALOG[article.relatedService] : null;
   const relatedGeo = article?.relatedGeo ? getLocationBySlug(article.relatedGeo) : null;
-  const canonicalUrl = article ? `${SITE_URL}/learn/${article.slug}` : undefined;
+  const canonicalUrl = article ? `${SITE_URL}/learn/${article.slug}/` : undefined;
   const ogImageUrl = article?.heroImageKey ? `${SITE_URL}${ARTICLE_IMAGES[article.heroImageKey]}` : undefined;
 
   useDocumentMeta(article?.seoTitle, article?.metaDescription, canonicalUrl, ogImageUrl);
@@ -55,8 +59,8 @@ export default function ArticlePage() {
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Learn', item: `${SITE_URL}/learn` },
-        { '@type': 'ListItem', position: 3, name: category?.label, item: `${SITE_URL}/learn/category/${article.category}` },
+        { '@type': 'ListItem', position: 2, name: 'Learn', item: `${SITE_URL}/learn/` },
+        { '@type': 'ListItem', position: 3, name: category?.label, item: `${SITE_URL}/learn/category/${article.category}/` },
         { '@type': 'ListItem', position: 4, name: article.title, item: canonicalUrl },
       ],
     }
@@ -80,7 +84,7 @@ export default function ArticlePage() {
         <Navbar alwaysVisible />
         <main className={styles.notFound}>
           <p>This guide couldn&rsquo;t be found.</p>
-          <Link to="/learn">Back to Learn</Link>
+          <Link to="/learn/">Back to Learn</Link>
         </main>
         <Footer />
       </>
@@ -98,9 +102,9 @@ export default function ArticlePage() {
         <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
           <Link to="/">Home</Link>
           <span aria-hidden="true">/</span>
-          <Link to="/learn">Learn</Link>
+          <Link to="/learn/">Learn</Link>
           <span aria-hidden="true">/</span>
-          <Link to={`/learn/category/${article.category}`}>{category?.label}</Link>
+          <Link to={`/learn/category/${article.category}/`}>{category?.label}</Link>
           <span aria-hidden="true">/</span>
           <span className={styles.breadcrumbCurrent}>{article.title}</span>
         </nav>
@@ -161,7 +165,7 @@ export default function ArticlePage() {
             {relatedGeo && (
               <p className={styles.geoMention}>
                 Based in or around {relatedGeo.locationName}? See how Wraptors serves{' '}
-                <Link to={`/areas/${relatedGeo.slug}`}>{relatedGeo.locationName}</Link> directly.
+                <Link to={`/areas/${relatedGeo.slug}/`}>{relatedGeo.locationName}</Link> directly.
               </p>
             )}
 
@@ -179,13 +183,13 @@ export default function ArticlePage() {
             <span className={styles.relatedLabel}>Keep Reading</span>
             <div className={styles.relatedGrid}>
               {relatedArticles.map((rel) => (
-                <Link key={rel.slug} to={`/learn/${rel.slug}`} className={styles.relatedCard}>
+                <Link key={rel.slug} to={`/learn/${rel.slug}/`} className={styles.relatedCard}>
                   <span className={styles.relatedCardTitle}>{rel.title}</span>
                   <span className={styles.relatedCardLink}>Read the Guide <span aria-hidden="true">→</span></span>
                 </Link>
               ))}
             </div>
-            <Link to="/learn" className={styles.viewAllLink}>View All Insights <span aria-hidden="true">→</span></Link>
+            <Link to="/learn/" className={styles.viewAllLink}>View All Insights <span aria-hidden="true">→</span></Link>
           </section>
         )}
 

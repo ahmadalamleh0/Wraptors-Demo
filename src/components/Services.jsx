@@ -23,7 +23,7 @@ import imgTint        from '../../tint.jpeg';
 const SERVICES = [
   {
     id: 'wraps',
-    slug: '/services/wraps',
+    slug: '/services/wraps/',
     ghost: 'VEHICLE WRAPS',
     name: 'Vehicle Wraps',
     tags: ['Full Wrap', 'Color Change'],
@@ -32,7 +32,7 @@ const SERVICES = [
   },
   {
     id: 'ppf',
-    slug: '/services/ppf',
+    slug: '/services/ppf/',
     ghost: 'PAINT PROTECTION FILM',
     name: 'Paint Protection Film',
     tags: ['Invisible Shield', 'Self-Healing'],
@@ -41,7 +41,7 @@ const SERVICES = [
   },
   {
     id: 'starlight',
-    slug: '/services/starlight',
+    slug: '/services/starlight/',
     ghost: 'STARLIGHT HEADLINER',
     name: 'Starlight Headliner',
     tags: ['Fiber Optic', 'Custom Layouts'],
@@ -50,7 +50,7 @@ const SERVICES = [
   },
   {
     id: 'custom-builds',
-    slug: '/services/custom-builds',
+    slug: '/services/custom-builds/',
     ghost: 'CUSTOM BUILDS',
     name: 'Custom Builds & Body Kits',
     tags: ['Body Kits', 'Exterior Styling'],
@@ -59,7 +59,7 @@ const SERVICES = [
   },
   {
     id: 'ceramic',
-    slug: '/services/ceramic',
+    slug: '/services/ceramic/',
     ghost: 'CERAMIC COATING',
     name: 'Ceramic Coating',
     tags: ['9H Hardness', 'Hydrophobic'],
@@ -71,7 +71,7 @@ const SERVICES = [
   },
   {
     id: 'tint',
-    slug: '/services/tint',
+    slug: '/services/tint/',
     ghost: 'WINDOW TINT',
     name: 'Window Tint',
     tags: ['Ceramic Film', 'UV Protection'],

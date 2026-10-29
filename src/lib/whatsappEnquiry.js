@@ -33,7 +33,7 @@ export function buildQuoteWhatsAppMessage(form, labels) {
     line('Phone', form.phone),
     line('Email', form.email),
     line('Preferred contact', labels.preferredContact),
-  ].filter(Boolean);
+  ].filter((l) => l !== null); // keep the blank separator lines
   return lines.join('\n');
 }
 
@@ -49,7 +49,7 @@ export function buildFranchiseWhatsAppMessage(form) {
     line('Business / automotive experience', form.experience),
     line('Franchise interest', form.interest),
     line('Message', form.message),
-  ].filter(Boolean);
+  ].filter((l) => l !== null); // keep the blank separator lines
   return lines.join('\n');
 }
 
@@ -68,6 +68,6 @@ export function buildBookingWhatsAppMessage(form, serviceLabels) {
     line('Name', form.name),
     line('Phone', form.phone),
     line('Message', form.message),
-  ].filter(Boolean);
+  ].filter((l) => l !== null); // keep the blank separator lines
   return lines.join('\n');
 }

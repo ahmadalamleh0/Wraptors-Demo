@@ -17,6 +17,10 @@ export const SERVICE_FAQS = {
       q: 'Can a wrap look as clean as paint up close?',
       a: 'Yes, when the installation is done properly. The difference shows around edges, corners, handles, trim and complicated body lines. A premium wrap should feel integrated into the vehicle, not like vinyl was simply laid over it.',
     },
+    {
+      q: 'What is chrome delete?',
+      a: 'Chrome delete covers the chrome and bright trim on a car, such as window surrounds, grille trim, badges and mirror caps, in wrap film. Most owners choose gloss or satin black for a blacked-out look, but the trim can also be done in a colour that matches or contrasts with the car. Because it is film, the original trim stays underneath.',
+    },
   ],
   ppf: [
     {

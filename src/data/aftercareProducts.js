@@ -12,27 +12,33 @@ import productWaterless   from '../../Products/Carwaterless.webp';
 import productVinyl       from '../../Products/Vinalprotectionwebp.webp';
 import productFullPackage from '../../Products/full package.webp';
 
+// Store the "Shop Product" buttons point to. wraptorsstore.com currently
+// answers with Shopify's "Store unavailable" page (HTTP 402, checked
+// 2026-10-29), so the buttons are hidden until a working store URL is set
+// here — the products themselves still show as aftercare recommendations.
+export const STORE_URL = null;
+
 export const AFTERCARE_PRODUCTS = {
   waterless: {
     id: 'waterless-wash',
     name: 'Waterless Car Wash',
     desc: 'Plant-based formula that cleans, shines and repels UV, dust and fog — no water needed, and safe on PPF and coated surfaces.',
     img: productWaterless,
-    link: 'https://wraptorsstore.com',
+    link: STORE_URL,
   },
   fullPackage: {
     id: 'full-package',
     name: 'Full Detailing Package',
     desc: 'Everything you need in one premium kit — interior shiner, car shampoo, waterless wash, anti-fog glass cleaner, tire shine, and more.',
     img: productFullPackage,
-    link: 'https://wraptorsstore.com',
+    link: STORE_URL,
   },
   vinylProtectant: {
     id: 'vinyl-protectant',
     name: 'Vinyl Protectant',
     desc: 'UV-shielding vinyl elixir that keeps wrapped and filmed surfaces looking fresh, deep and protected.',
     img: productVinyl,
-    link: 'https://wraptorsstore.com',
+    link: STORE_URL,
   },
 };
 

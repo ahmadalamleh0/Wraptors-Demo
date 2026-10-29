@@ -10,7 +10,7 @@ import { ARTICLE_IMAGES } from '../data/articleImages';
 function ArticleCard({ article }) {
   const category = getCategoryBySlug(article.category);
   return (
-    <Link to={`/learn/${article.slug}`} className={styles.card}>
+    <Link to={`/learn/${article.slug}/`} className={styles.card}>
       <div className={styles.cardImageWrap}>
         <img src={ARTICLE_IMAGES[article.heroImageKey]} alt={article.title} className={styles.cardImage} loading="lazy" />
       </div>
@@ -30,7 +30,7 @@ export default function LearnHub() {
   const { categorySlug } = useParams();
   const activeCategory = categorySlug ? getCategoryBySlug(categorySlug) : null;
   const articles = activeCategory ? ARTICLES.filter((a) => a.category === activeCategory.slug) : ARTICLES;
-  const canonicalUrl = activeCategory ? `${SITE_URL}/learn/category/${activeCategory.slug}` : `${SITE_URL}/learn`;
+  const canonicalUrl = activeCategory ? `${SITE_URL}/learn/category/${activeCategory.slug}/` : `${SITE_URL}/learn/`;
 
   useDocumentMeta(
     activeCategory ? `${activeCategory.label} Guides | Wraptors Learn` : 'Wraptors Learn — Vehicle Wrap, PPF, Ceramic & Tint Guides',
@@ -45,7 +45,7 @@ export default function LearnHub() {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Learn', item: `${SITE_URL}/learn` },
+      { '@type': 'ListItem', position: 2, name: 'Learn', item: `${SITE_URL}/learn/` },
       ...(activeCategory
         ? [{ '@type': 'ListItem', position: 3, name: activeCategory.label, item: canonicalUrl }]
         : []),
@@ -71,13 +71,13 @@ export default function LearnHub() {
         </section>
 
         <nav className={styles.filterRow} aria-label="Filter by category">
-          <Link to="/learn" className={`${styles.filterPill} ${!activeCategory ? styles.filterActive : ''}`}>
+          <Link to="/learn/" className={`${styles.filterPill} ${!activeCategory ? styles.filterActive : ''}`}>
             All Insights
           </Link>
           {CATEGORIES.map((cat) => (
             <Link
               key={cat.slug}
-              to={`/learn/category/${cat.slug}`}
+              to={`/learn/category/${cat.slug}/`}
               className={`${styles.filterPill} ${activeCategory?.slug === cat.slug ? styles.filterActive : ''}`}
             >
               {cat.label}

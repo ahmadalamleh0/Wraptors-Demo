@@ -29,7 +29,7 @@ export default function TintPage() {
   useDocumentMeta(
     'Window Tint Dubai | Ceramic Car Window Tinting | Wraptors',
     'Car window tinting in Dubai at the Wraptors studio in Al Quoz: ceramic window film chosen for heat rejection, UV protection and privacy, fitted cleanly.',
-    `${SITE_URL}/services/tint`
+    `${SITE_URL}/services/tint/`
   );
 
   const showcaseRef = useRef(null);

@@ -55,7 +55,7 @@ export default function NotFoundPage() {
         </p>
         <div className={styles.actions}>
           <Link to="/" className={styles.primary}>Back to Home</Link>
-          <Link to="/learn" className={styles.secondary}>Browse Insights</Link>
+          <Link to="/learn/" className={styles.secondary}>Browse Insights</Link>
           <Link to="/#services" className={styles.secondary}>View Services</Link>
         </div>
       </main>

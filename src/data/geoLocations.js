@@ -26,12 +26,12 @@
 export { SITE_URL } from '../lib/siteConfig.js';
 
 export const SERVICE_CATALOG = {
-  wraps:     { label: 'Vehicle Wraps',        path: '/services/wraps' },
-  ppf:       { label: 'Paint Protection Film', path: '/services/ppf' },
-  ceramic:   { label: 'Ceramic Coating',       path: '/services/ceramic' },
-  tint:      { label: 'Window Tint',           path: '/services/tint' },
-  starlight: { label: 'Starlight Headliner',   path: '/services/starlight' },
-  commercial:{ label: 'Commercial Wrap',       path: '/services/wraps' },
+  wraps:     { label: 'Vehicle Wraps',        path: '/services/wraps/' },
+  ppf:       { label: 'Paint Protection Film', path: '/services/ppf/' },
+  ceramic:   { label: 'Ceramic Coating',       path: '/services/ceramic/' },
+  tint:      { label: 'Window Tint',           path: '/services/tint/' },
+  starlight: { label: 'Starlight Headliner',   path: '/services/starlight/' },
+  commercial:{ label: 'Commercial Wrap',       path: '/services/wraps/' },
 };
 
 // Category label shown above each service card — constant across every

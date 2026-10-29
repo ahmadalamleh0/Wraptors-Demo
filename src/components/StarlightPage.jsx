@@ -396,7 +396,7 @@ export default function StarlightPage() {
   useDocumentMeta(
     'Starlight Headliner Dubai | Custom Fibre-Optic Ceiling | Wraptors',
     'Bespoke fibre-optic starlight headliners installed in Dubai — thousands of hand-laid stars, custom colour and density, built to order at the Wraptors Al Quoz studio.',
-    `${SITE_URL}/services/starlight`
+    `${SITE_URL}/services/starlight/`
   );
 
   return (

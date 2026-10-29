@@ -43,7 +43,7 @@ export default function ArticleCarousel({ articles }) {
 
       <div className={styles.track} ref={trackRef}>
         {articles.map((article) => (
-          <Link key={article.slug} to={`/learn/${article.slug}`} className={styles.card} data-card>
+          <Link key={article.slug} to={`/learn/${article.slug}/`} className={styles.card} data-card>
             <div className={styles.cardImageWrap}>
               <img
                 src={ARTICLE_IMAGES[article.heroImageKey]}

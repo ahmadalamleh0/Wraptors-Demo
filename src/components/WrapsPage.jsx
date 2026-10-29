@@ -73,8 +73,8 @@ const PROCESS_STEPS = [
 export default function WrapsPage() {
   useDocumentMeta(
     'Car Wrapping Dubai | Colour Change & Custom Wraps | Wraptors',
-    'Car wrapping in Dubai at the Wraptors studio in Al Quoz: full colour changes, partial wraps and custom finishes, planned and installed around the vehicle.',
-    `${SITE_URL}/services/wraps`
+    'Car wrapping in Dubai at the Wraptors studio in Al Quoz: colour changes in gloss, satin or matte, partial wraps and chrome delete, installed around the vehicle.',
+    `${SITE_URL}/services/wraps/`
   );
 
   const videoRef = useRef(null);
@@ -219,7 +219,8 @@ export default function WrapsPage() {
         <ServiceIntroSection
           kicker="Your Car"
           statement="Reintroduced."
-          description="At our Al Quoz studio, Wraptors handles car wrapping in Dubai, from complete colour changes and partial wraps to bespoke styling built around the vehicle itself. Material, coverage and finish are planned together, then installed with attention to body lines, edges, trim and final presentation. The result is a transformation that looks considered from the first panel to the last."
+          description="At our Al Quoz studio, Wraptors handles car wrapping in Dubai, from complete colour changes and partial wraps to bespoke styling built around the vehicle itself. Finishes run from deep gloss to soft satin and flat matte, and chrome delete covers the window surrounds, badges and brightwork in black or a custom colour for a cleaner, blacked-out look. Material, coverage and finish are planned together, then installed with attention to body lines, edges, trim and final presentation. The result is a transformation that looks considered from the first panel to the last."
+          options={['Gloss', 'Satin', 'Matte', 'Chrome Delete']}
         />
 
         {/* ── Full photo break — statement sits in the dark space above

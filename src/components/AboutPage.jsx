@@ -34,7 +34,7 @@ const SEO_DESCRIPTION = 'How Wraptors grew from a single automotive customizatio
 // is data-driven (src/data/team.js) so real photography/bios can be dropped
 // in later without touching this file.
 export default function AboutPage() {
-  const canonicalUrl = `${SITE_URL}/about`;
+  const canonicalUrl = `${SITE_URL}/about/`;
   useDocumentMeta(SEO_TITLE, SEO_DESCRIPTION, canonicalUrl);
 
   useStructuredData({
@@ -188,7 +188,7 @@ export default function AboutPage() {
             <a href="/#cta" className={styles.ctaPrimary}>
               Get a Quote <span aria-hidden="true">→</span>
             </a>
-            <Link to="/areas/al-quoz" className={styles.ctaSecondary}>
+            <Link to="/areas/al-quoz/" className={styles.ctaSecondary}>
               Visit Wraptors Dubai <span aria-hidden="true">→</span>
             </Link>
           </div>

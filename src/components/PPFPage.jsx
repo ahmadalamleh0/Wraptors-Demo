@@ -489,7 +489,7 @@ export default function PPFPage() {
   useDocumentMeta(
     'PPF Dubai | Paint Protection Film in Al Quoz | Wraptors',
     'PPF in Dubai at the Wraptors studio in Al Quoz: clear and colour paint protection film, from front-end coverage to full-body protection against road debris and sun.',
-    `${SITE_URL}/services/ppf`
+    `${SITE_URL}/services/ppf/`
   );
 
   return (
@@ -540,6 +540,15 @@ export default function PPFPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Colour PPF — the same premium intro block as "Your Paint",
+           so it reads as part of the page rather than a new section ── */}
+      <ServiceIntroSection
+        id="colour-ppf"
+        kicker="Colour PPF"
+        statement="Colour, Protected."
+        description="Colour PPF combines a colour change with paint protection. Instead of vinyl, the new colour comes from the same kind of thick, flexible urethane film as clear PPF, so the car gets a completely new look while the original paint underneath stays shielded from stone chips, light scratches and the Dubai sun. Like clear film, it is planned panel by panel and installed with close attention to edges and alignment, and it can be removed later to reveal the factory finish."
+      />
 
       {/* ── 7. PPF IN THE WILD ───────────────────────────────────── */}
       <section className={styles.gallerySection}>

@@ -19,7 +19,7 @@ export default function RelatedInsights({ category }) {
           <h2 className={styles.title}>Explore the Details Before You Build</h2>
         </div>
         <ArticleCarousel articles={articles} />
-        <Link to="/learn" className={styles.viewAll}>View All Insights <span aria-hidden="true">→</span></Link>
+        <Link to="/learn/" className={styles.viewAll}>View All Insights <span aria-hidden="true">→</span></Link>
       </div>
     </section>
   );

@@ -7,11 +7,14 @@ import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { useStructuredData } from '../lib/useStructuredData';
 import { SERVICE_CATALOG, SERVICE_CATEGORY_LABEL, TRUST_COPY, WHY_WRAPTORS_SHARED, SITE_URL, getLocationBySlug } from '../data/geoLocations';
 
+// Same address the Visit Us map uses (VisitUs.jsx).
+const STUDIO_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Unit B05, 32 9B St, Al Quoz Industrial Area 4, Dubai')}`;
+
 // One reusable template rendered entirely from a location object — see
 // src/data/geoLocations.js for the field reference and how to add/edit
 // service areas without touching this file.
 export default function GeoPage({ location }) {
-  const canonicalUrl = `${SITE_URL}/areas/${location.slug}`;
+  const canonicalUrl = `${SITE_URL}/areas/${location.slug}/`;
   useDocumentMeta(location.seoTitle, location.metaDescription, canonicalUrl);
   useStructuredData({
     '@context': 'https://schema.org',
@@ -138,7 +141,7 @@ export default function GeoPage({ location }) {
             </div>
             <div className={styles.relatedRow}>
               {relatedLocations.map((loc) => (
-                <Link key={loc.slug} to={`/areas/${loc.slug}`} className={styles.relatedPill}>
+                <Link key={loc.slug} to={`/areas/${loc.slug}/`} className={styles.relatedPill}>
                   {loc.locationName}
                 </Link>
               ))}
@@ -155,6 +158,15 @@ export default function GeoPage({ location }) {
               Request a Quote <span aria-hidden="true">→</span>
             </a>
             <a href="tel:+971567279727" className={styles.ctaSecondary}>Call +971 56 727 9727</a>
+            {/* Every area page points to the studio: the Al Quoz page (the
+                physical studio) links to directions, the rest to it. */}
+            {location.isPhysicalStudio ? (
+              <a href={STUDIO_DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className={styles.ctaSecondary}>
+                Get Directions To The Studio
+              </a>
+            ) : (
+              <Link to="/areas/al-quoz/" className={styles.ctaSecondary}>Visit The Al Quoz Studio</Link>
+            )}
           </div>
         </section>
 

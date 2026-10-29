@@ -22,7 +22,7 @@ export default function ServiceAreas() {
 
         <div className={styles.pillRow}>
           {visible.map((loc) => (
-            <Link key={loc.slug} to={`/areas/${loc.slug}`} className={styles.pill}>
+            <Link key={loc.slug} to={`/areas/${loc.slug}/`} className={styles.pill}>
               {loc.locationName}
             </Link>
           ))}

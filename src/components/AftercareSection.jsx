@@ -37,15 +37,17 @@ export default function AftercareSection({ service }) {
               <div className={styles.body}>
                 <h3 className={styles.name}>{product.name}</h3>
                 <p className={styles.desc}>{product.desc}</p>
-                <a
-                  href={product.link}
-                  className={styles.btn}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Shop Product
-                  <span className={styles.btnArrow}>→</span>
-                </a>
+                {product.link && (
+                  <a
+                    href={product.link}
+                    className={styles.btn}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Shop Product
+                    <span className={styles.btnArrow}>→</span>
+                  </a>
+                )}
               </div>
             </div>
           ))}

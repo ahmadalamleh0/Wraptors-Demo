@@ -30,7 +30,7 @@ const EMPTY_FORM = {
 // for pricing. Kept intentionally minimal — no account, no login, just
 // the fields needed to follow up.
 export default function BookingPage() {
-  const canonicalUrl = `${SITE_URL}/book`;
+  const canonicalUrl = `${SITE_URL}/book/`;
   useDocumentMeta(SEO_TITLE, SEO_DESCRIPTION, canonicalUrl);
 
   useStructuredData({

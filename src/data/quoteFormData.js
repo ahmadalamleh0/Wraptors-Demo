@@ -31,6 +31,7 @@ export const QUOTE_PROJECT_OPTIONS = {
     { id: 'partial-wrap',  label: 'Partial Wrap' },
     { id: 'colour-change', label: 'Colour Change' },
     { id: 'custom-design', label: 'Custom Design' },
+    { id: 'chrome-delete', label: 'Chrome Delete' },
     { id: 'not-sure',      label: 'Not Sure Yet' },
   ],
   ppf: [

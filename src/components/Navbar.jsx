@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
 import uaeFlag from '../../UAE(FLAG).svg';
+import { pagePath } from '../lib/siteConfig';
 
 const NAV_LINKS = [
   { label: 'Services',  href: '/#services'  },
@@ -20,9 +21,9 @@ const MOBILE_NAV_LINKS = [
   { label: 'Home',      href: '/',          match: (p) => p === '/' },
   { label: 'Services',  href: '/#services'  },
   { label: 'Locations', href: '/#locations' },
-  { label: 'Franchise', to:   '/franchise', match: (p) => p === '/franchise' },
-  { label: 'About',     to:   '/about',     match: (p) => p === '/about' },
-  { label: 'Learn',     to:   '/learn',     match: (p) => p.startsWith('/learn') },
+  { label: 'Franchise', to:   '/franchise/', match: (p) => p === '/franchise/' },
+  { label: 'About',     to:   '/about/',     match: (p) => p === '/about/' },
+  { label: 'Learn',     to:   '/learn/',     match: (p) => p.startsWith('/learn/') },
   { label: 'Contact',   href: '/#contact'   },
 ];
 
@@ -132,7 +133,7 @@ export default function Navbar({ alwaysVisible = false }) {
       <div className={styles.mobileMenuScroll}>
         <ul className={styles.mobileMenuList}>
           {MOBILE_NAV_LINKS.map(({ label, href, to, match }, i) => {
-            const active = match ? match(location.pathname) : false;
+            const active = match ? match(pagePath(location.pathname)) : false;
             const linkClass = `${styles.mobileMenuLink} ${active ? styles.mobileMenuLinkActive : ''}`;
             return (
               <li
@@ -203,17 +204,17 @@ export default function Navbar({ alwaysVisible = false }) {
           </li>
         ))}
         <li>
-          <Link to="/franchise" className={styles.link}>
+          <Link to="/franchise/" className={styles.link}>
             Franchise
           </Link>
         </li>
         <li>
-          <Link to="/about" className={styles.link}>
+          <Link to="/about/" className={styles.link}>
             About
           </Link>
         </li>
         <li>
-          <Link to="/learn" className={styles.link}>
+          <Link to="/learn/" className={styles.link}>
             Learn
           </Link>
         </li>

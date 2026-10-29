@@ -27,7 +27,7 @@ const EMPTY_FORM = {
 // Reuses BookingPage's form layout/styling exactly (see BookingPage.module.css)
 // so this stays visually identical to the rest of the site's contact flows.
 export default function FranchisePage() {
-  const canonicalUrl = `${SITE_URL}/franchise`;
+  const canonicalUrl = `${SITE_URL}/franchise/`;
   useDocumentMeta(SEO_TITLE, SEO_DESCRIPTION, canonicalUrl);
 
   useStructuredData({
