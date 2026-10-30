@@ -197,7 +197,6 @@ const REGIONS = [
   {
     code: 'AE',
     name: 'United Arab Emirates',
-    count: '1',
     locations: [
       { name: 'Dubai', instagram: 'wraptors.dubai' },
     ],
@@ -205,7 +204,6 @@ const REGIONS = [
   {
     code: 'CA',
     name: 'Canada',
-    count: '9',
     locations: [
       { name: 'Mississauga', isHQ: true, instagram: 'wraptors.toronto' },
       { name: 'Vaughan',               instagram: 'wraptors.vaughan'   },
@@ -223,7 +221,6 @@ const REGIONS = [
   {
     code: 'US',
     name: 'United States',
-    count: '4',
     locations: [
       { name: 'Miami',           instagram: 'wraptors.usa'     },
       { name: 'Orlando',         instagram: 'wraptors.orlando' },
@@ -234,7 +231,6 @@ const REGIONS = [
   {
     code: 'ZA',
     name: 'South Africa',
-    count: '1',
     locations: [
       { name: 'Cape Town', instagram: 'wraptors.capetown' },
     ],
@@ -243,9 +239,11 @@ const REGIONS = [
 
 const instagramUrl = (handle) => `https://instagram.com/${handle}`;
 
+// Counts are derived from the listing above, never typed in. A network
+// total ("16 locations") is left out until the client confirms one: the
+// old figure didn't match the studios listed here.
 const STATS = [
-  { to: 16, suffix: '', label: 'Locations' },
-  { to: 4,  suffix: '', label: 'Countries' },
+  { to: REGIONS.length, suffix: '', label: 'Countries' },
 ];
 
 /* ── TacticalGlobe configuration ─────────────────────────── */
@@ -382,7 +380,7 @@ export default function GlobalLocations() {
 
         {/* ── Stats ── */}
         <div
-          className={`${styles.statsRow} ${revealed ? styles.in : ''}`}
+          className={`${styles.statsRow} ${STATS.length === 1 ? styles.statsRowSingle : ''} ${revealed ? styles.in : ''}`}
           style={{ transitionDelay: revealed ? '0.34s' : '0s' }}
         >
           {STATS.map(s => (
@@ -406,7 +404,7 @@ export default function GlobalLocations() {
               <div className={styles.regionHeader}>
                 <img src={FLAG_MAP[region.code]} alt={region.name} className={styles.regionFlag} />
                 <span className={styles.regionName}>{region.name}</span>
-                <span className={styles.regionCount}>{region.count}</span>
+                <span className={styles.regionCount}>{region.locations.length}</span>
               </div>
 
               {/* Any region with more than a handful of locations switches
