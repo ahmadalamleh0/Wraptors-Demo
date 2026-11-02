@@ -646,6 +646,10 @@
   .region       { padding: 24px 24px 30px; }
   .regionCompact { padding: 16px 24px 18px; }
   .statsRow     { max-width: 100%; }
+  .locName      { letter-spacing: 0.08em; overflow-wrap: normal; }
+  /* A long name + HQ badge: the badge wraps beneath the name instead of
+     the name breaking mid-word. */
+  .locLeft      { flex-wrap: wrap; row-gap: 4px; }
 }
 
 /* Only truly tiny/legacy screens (well below any current phone — iPhone SE
