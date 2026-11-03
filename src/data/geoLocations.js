@@ -31,6 +31,7 @@ export const SERVICE_CATALOG = {
   ceramic:   { label: 'Ceramic Coating',       path: '/services/ceramic/' },
   tint:      { label: 'Window Tint',           path: '/services/tint/' },
   starlight: { label: 'Starlight Headliner',   path: '/services/starlight/' },
+  'chrome-delete': { label: 'Chrome Delete',     path: '/services/chrome-delete/' },
   commercial:{ label: 'Commercial Wrap',       path: '/services/wraps/' },
 };
 
@@ -42,6 +43,8 @@ export const SERVICE_CATEGORY_LABEL = {
   ppf:     'Paint Protection Film',
   ceramic: 'Ceramic Coating',
   tint:    'Window Tint',
+  starlight: 'Starlight Headliner',
+  commercial: 'Commercial Wraps',
 };
 
 // Brand-philosophy copy, not local content — reused across every page.
@@ -84,6 +87,31 @@ export const COMMON_FAQS = [
   },
 ];
 
+// Per-area onward links, shown as a short "before you book" row on each
+// area page: two guides that fit the area's profile, plus specialist
+// services (Chrome Delete, Starlight) where they suit the local market.
+// Kept apart from LOCATIONS so the main entries stay readable.
+export const AREA_LINKS = {
+  'dubai':              { guides: ['ppf-vs-ceramic-coating', 'window-tint-laws-dubai'], services: ['chrome-delete'] },
+  'al-quoz':            { guides: ['changing-car-colour-dubai', 'ppf-vs-ceramic-coating'], services: ['chrome-delete', 'starlight'] },
+  'palm-jumeirah':      { guides: ['how-long-does-ppf-last-dubai', 'ceramic-coating-water-spots-dubai'], services: ['starlight'] },
+  'jumeirah':           { guides: ['window-tint-laws-dubai', 'window-tint-dubai-heat'], services: [] },
+  'dubai-marina':       { guides: ['car-wrap-dubai-summer-heat', 'matte-satin-gloss-wrap-dubai'], services: ['chrome-delete'] },
+  'jbr':                { guides: ['how-long-does-ppf-last-dubai', 'car-wrap-dubai-summer-heat'], services: [] },
+  'downtown-dubai':     { guides: ['changing-car-colour-dubai', 'matte-satin-gloss-wrap-dubai'], services: ['chrome-delete'] },
+  'business-bay':       { guides: ['is-ppf-worth-it-dubai', 'window-tint-laws-dubai'], services: [] },
+  'difc':               { guides: ['clear-ppf-vs-colour-ppf', 'ceramic-tint-vs-regular-tint'], services: ['chrome-delete'] },
+  'dubai-hills-estate': { guides: ['ppf-vs-ceramic-coating', 'how-long-does-window-tint-last-dubai'], services: [] },
+  'emirates-hills':     { guides: ['what-ceramic-coating-protects-dubai', 'clear-ppf-vs-colour-ppf'], services: ['chrome-delete'] },
+  'arabian-ranches':    { guides: ['how-long-does-ppf-last-dubai', 'window-tint-dubai-heat'], services: [] },
+  'jlt':                { guides: ['is-ppf-worth-it-dubai', 'ceramic-tint-vs-regular-tint'], services: [] },
+  'motor-city':         { guides: ['vinyl-wrap-vs-colour-ppf', 'paint-correction-before-ceramic-coating'], services: ['chrome-delete'] },
+  'al-barsha':          { guides: ['dealer-vs-detailer-ceramic-coating-dubai', 'window-tinting-dubai-guide'], services: [] },
+  'jvc':                { guides: ['is-ppf-worth-it-dubai', 'how-long-does-window-tint-last-dubai'], services: [] },
+  'meydan':             { guides: ['matte-satin-gloss-wrap-dubai', 'clear-ppf-vs-colour-ppf'], services: ['chrome-delete', 'starlight'] },
+  'nad-al-sheba':       { guides: ['what-ceramic-coating-protects-dubai', 'ppf-vs-ceramic-coating'], services: ['starlight'] },
+};
+
 export const LOCATIONS = [
   {
     locationName: 'Dubai',
@@ -92,7 +120,7 @@ export const LOCATIONS = [
     primaryKeyword: 'car wrapping Dubai',
     secondaryKeywords: ['car wrap Dubai', 'vinyl wrap Dubai', 'PPF Dubai', 'ceramic coating Dubai', 'automotive customization Dubai'],
     seoTitle: 'Car Wrapping, PPF & Ceramic Coating in Dubai | Wraptors',
-    metaDescription: "Wraptors is Dubai's studio for premium car wrapping, PPF, ceramic coating and window tinting — built and installed at our Al Quoz workshop, serving every district across the city.",
+    metaDescription: "Car wrapping, PPF, ceramic coating and window tinting in Dubai, installed at the Wraptors studio in Al Quoz for drivers from every district of the city.",
     h1: 'Premium Car Wrapping & Automotive Customization in Dubai',
     eyebrow: 'Wraptors Dubai',
     heroCopy: [
@@ -135,7 +163,7 @@ export const LOCATIONS = [
     primaryKeyword: 'car wrapping Al Quoz',
     secondaryKeywords: ['PPF Al Quoz', 'ceramic coating Al Quoz', 'window tinting Al Quoz', 'car wrap Dubai'],
     seoTitle: 'Premium Car Wrapping & PPF in Al Quoz, Dubai | Wraptors',
-    metaDescription: 'Wraptors Dubai studio in Al Quoz — full colour-change wraps, PPF, ceramic coating and window tinting, all installed in-house at 32 9B St, Al Quoz Industrial Area 4 — Unit B05.',
+    metaDescription: 'The Wraptors Dubai studio in Al Quoz: colour-change wraps, PPF, ceramic coating and window tinting, installed in-house at 32 9B St, Al Quoz Industrial Area 4.',
     h1: 'Premium Car Wrapping & PPF in Al Quoz, Dubai',
     eyebrow: 'Wraptors Dubai · Al Quoz',
     heroCopy: [
@@ -395,7 +423,7 @@ export const LOCATIONS = [
     primaryKeyword: 'car wrapping Business Bay',
     secondaryKeywords: ['PPF Business Bay', 'ceramic coating Business Bay', 'car wrap Dubai'],
     seoTitle: 'Car Wrapping & PPF in Business Bay, Dubai | Wraptors',
-    metaDescription: 'Wraptors serves Business Bay with discreet vehicle wraps, PPF and ceramic coating for professionals commuting through one of Dubai’s busiest canal-front business districts.',
+    metaDescription: 'Discreet vehicle wraps, PPF and ceramic coating for Business Bay professionals, installed at the Wraptors Dubai studio in Al Quoz.',
     h1: 'Car Wrapping & PPF in Business Bay',
     eyebrow: 'Wraptors Dubai · Business Bay',
     heroCopy: [
@@ -567,7 +595,7 @@ export const LOCATIONS = [
     primaryKeyword: 'car wrapping Arabian Ranches',
     secondaryKeywords: ['PPF Arabian Ranches', '4x4 wrap Dubai', 'ceramic coating Arabian Ranches'],
     seoTitle: 'Car Wrapping & PPF in Arabian Ranches | Wraptors',
-    metaDescription: "Wraptors serves Arabian Ranches' family SUVs and 4x4s with car wrapping, PPF and ceramic coating built for heat and desert-adjacent driving, from our Dubai studio in Al Quoz.",
+    metaDescription: "Car wrapping, PPF and ceramic coating for Arabian Ranches family SUVs and 4x4s, built for heat and desert-edge driving, at our Dubai studio in Al Quoz.",
     h1: 'Car Wrapping & PPF in Arabian Ranches',
     eyebrow: 'Wraptors Dubai · Arabian Ranches',
     heroCopy: [
@@ -610,7 +638,7 @@ export const LOCATIONS = [
     primaryKeyword: 'car wrapping JLT Dubai',
     secondaryKeywords: ['PPF Jumeirah Lake Towers', 'ceramic coating JLT', 'car wrap Dubai'],
     seoTitle: 'Car Wrapping & PPF in JLT (Jumeirah Lake Towers) | Wraptors',
-    metaDescription: "Wraptors serves JLT's high-rise towers with car wrapping, PPF, ceramic coating and window tinting for daily-driven and weekend vehicles, from our Dubai studio in Al Quoz.",
+    metaDescription: "Car wrapping, PPF, ceramic coating and window tinting for JLT residents' daily and weekend cars, installed at the Wraptors Dubai studio in Al Quoz.",
     h1: 'Car Wrapping & PPF in JLT',
     eyebrow: 'Wraptors Dubai · JLT',
     heroCopy: [

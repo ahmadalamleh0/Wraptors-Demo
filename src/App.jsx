@@ -74,6 +74,8 @@ import BookingPage from './components/BookingPage';
 import FranchisePage from './components/FranchisePage';
 import WrapsPage from './components/WrapsPage';
 import TintPage from './components/TintPage';
+import FocusServicePage from './components/FocusServicePage';
+import { FOCUS_PAGES } from './data/serviceSeo';
 
 // Hero images for each generic service page (Vehicle Wraps, PPF and
 // Starlight have their own dedicated page components with bespoke
@@ -223,6 +225,9 @@ export default function App() {
       <Route path="/services/starlight" element={<StarlightPage />} />
       <Route path="/services/ppf"      element={<PPFPage />} />
       <Route path="/services/tint"     element={<TintPage />} />
+      {FOCUS_PAGES.map((page) => (
+        <Route key={page.slug} path={`/services/${page.slug}`} element={<FocusServicePage page={page} />} />
+      ))}
       {SERVICE_PAGES.map(svc => (
         <Route
           key={svc.path}

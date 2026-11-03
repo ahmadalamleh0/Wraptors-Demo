@@ -28,7 +28,7 @@ const MOBILE_NAV_LINKS = [
 ];
 
 const MOBILE_SOCIALS = [
-  { label: 'Instagram', href: 'https://instagram.com/wraptors', icon: <InstagramGlyph /> },
+  { label: 'Instagram', href: 'https://www.instagram.com/wraptors.dubai/', icon: <InstagramGlyph /> },
   { label: 'YouTube',   href: 'https://www.youtube.com/@TorontoWraptors', icon: <YouTubeGlyph /> },
   // href: null hides it until the company page URL is confirmed (was the
   // generic linkedin.com homepage).

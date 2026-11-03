@@ -5,7 +5,8 @@ import FaqAccordion from './FaqAccordion';
 import styles from './GeoPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { useStructuredData } from '../lib/useStructuredData';
-import { SERVICE_CATALOG, SERVICE_CATEGORY_LABEL, TRUST_COPY, WHY_WRAPTORS_SHARED, SITE_URL, getLocationBySlug } from '../data/geoLocations';
+import { SERVICE_CATALOG, SERVICE_CATEGORY_LABEL, TRUST_COPY, WHY_WRAPTORS_SHARED, SITE_URL, AREA_LINKS, getLocationBySlug } from '../data/geoLocations';
+import { ARTICLES } from '../data/articles';
 
 // Same address the Visit Us map uses (VisitUs.jsx).
 const STUDIO_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Unit B05, 32 9B St, Al Quoz Industrial Area 4, Dubai')}`;
@@ -39,6 +40,13 @@ export default function GeoPage({ location }) {
   });
 
   const whyWraptors = [...WHY_WRAPTORS_SHARED, location.whyWraptorsLocal];
+  const areaLinks = AREA_LINKS[location.slug] || { guides: [], services: [] };
+  const guides = areaLinks.guides
+    .map((slug) => ARTICLES.find((a) => a.slug === slug))
+    .filter(Boolean);
+  const extraServices = areaLinks.services
+    .map((id) => SERVICE_CATALOG[id])
+    .filter(Boolean);
   const relatedLocations = (location.relatedAreas || [])
     .map((slug) => getLocationBySlug(slug))
     .filter(Boolean);
@@ -107,6 +115,25 @@ export default function GeoPage({ location }) {
             })}
           </div>
         </section>
+
+        {/* ── Before you book — two guides that fit this area, plus any
+             specialist services offered at the studio. ── */}
+        {(guides.length > 0 || extraServices.length > 0) && (
+          <section className={styles.relatedSection}>
+            <div className={styles.sectionHead}>
+              <span className={styles.eyebrowSmall}>Before You Book</span>
+              <h2 className={styles.sectionTitle}>Guides &amp; Specialist Work</h2>
+            </div>
+            <div className={styles.relatedRow}>
+              {guides.map((a) => (
+                <Link key={a.slug} to={`/learn/${a.slug}/`} className={styles.relatedPill}>{a.title}</Link>
+              ))}
+              {extraServices.map((svc) => (
+                <Link key={svc.path} to={svc.path} className={styles.relatedPill}>{svc.label}</Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* ── Why Wraptors ── */}
         <section className={styles.whySection}>

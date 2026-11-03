@@ -237,7 +237,7 @@ const REGIONS = [
   },
 ];
 
-const instagramUrl = (handle) => `https://instagram.com/${handle}`;
+const instagramUrl = (handle) => `https://www.instagram.com/${handle}/`;
 
 // "Countries" is derived from the listing above. "16 Locations" is the
 // brand's stated network total; the listing has 15 entries, so the

@@ -329,8 +329,13 @@
   .scrollCueChevron { animation: none; }
 }
 
+/* Services line: one line on desktop, two balanced lines on mobile. */
+.subLineBreak { display: none; }
+
 /* ── Mobile ── */
 @media (max-width: 768px) {
+  .subLineSep   { display: none; }
+  .subLineBreak { display: inline; }
   .textOverlay { padding: 9vh 28px 4vh; }
   .scrollCue   { bottom: calc(env(safe-area-inset-bottom, 0px) + 28px); gap: 7px; }
   .mainLine    {

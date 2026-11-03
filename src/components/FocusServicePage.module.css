@@ -1,0 +1,207 @@
+/* Focus service pages (Chrome Delete, vehicle pages): same dark editorial
+   system as the area pages and service intros. */
+
+/* Photo-free hero backdrop: a low chrome sheen and a faint red glow, so the
+   page reads as finished while real photography is pending. */
+.heroGradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 70% at 50% 115%, rgba(212, 0, 0, 0.22) 0%, rgba(212, 0, 0, 0) 60%),
+    linear-gradient(115deg, rgba(255, 255, 255, 0) 30%, rgba(196, 201, 208, 0.07) 48%, rgba(255, 255, 255, 0) 62%),
+    radial-gradient(80% 60% at 50% 40%, #121212 0%, #050505 70%, #000 100%);
+}
+
+.breadcrumbs {
+  background: #000;
+  padding: 22px 64px 0;
+}
+.breadcrumbs ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+.breadcrumbs li + li::before {
+  content: '/';
+  margin-right: 8px;
+  color: rgba(255, 255, 255, 0.25);
+}
+.breadcrumbs a { color: rgba(255, 255, 255, 0.6); text-decoration: none; }
+.breadcrumbs a:hover { color: #fff; }
+.breadcrumbs [aria-current] { color: rgba(255, 255, 255, 0.85); }
+
+.body {
+  background: #050505;
+  padding: 90px 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.block {
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.blockHeading {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.paragraph {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+.points li {
+  position: relative;
+  padding-left: 22px;
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+}
+.points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 10px;
+  height: 1px;
+  background: var(--red);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+}
+.link {
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red-bright, #ff3b3b);
+  text-decoration: none;
+}
+.link:hover { color: #fff; }
+
+.faqSection {
+  background: #050505;
+  padding: 90px 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.faqHead {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 48px;
+}
+
+.eyebrowSmall {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  line-height: 1.05;
+}
+
+.onward {
+  background: #000;
+  padding: 90px 80px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.onwardText {
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 560px;
+  margin: 18px auto 30px;
+}
+.onwardRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.pill {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  padding: 9px 20px;
+  transition: border-color 0.22s ease, color 0.22s ease, background 0.22s ease;
+}
+.pill:hover {
+  color: #fff;
+  border-color: rgba(212, 0, 0, 0.55);
+  background: rgba(212, 0, 0, 0.08);
+}
+.pillPrimary { color: #fff; border-color: rgba(212, 0, 0, 0.55); }
+
+.disclaimer {
+  max-width: 620px;
+  margin: 40px auto 0;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+@media (max-width: 900px) {
+  .breadcrumbs { padding: 18px 24px 0; }
+  .body, .faqSection, .onward { padding: 64px 24px; }
+  .body { gap: 44px; }
+}

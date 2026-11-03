@@ -5,6 +5,7 @@ import FaqAccordion from './FaqAccordion';
 import styles from './ArticlePage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { useStructuredData } from '../lib/useStructuredData';
+import { publishedLinks } from '../data/serviceSeo';
 import { SITE_URL, getArticleBySlug, getCategoryBySlug, getRelatedArticleObjects } from '../data/articles';
 import { ARTICLE_IMAGES } from '../data/articleImages';
 import { SERVICE_CATALOG, getLocationBySlug } from '../data/geoLocations';
@@ -166,6 +167,19 @@ export default function ArticlePage() {
               <p className={styles.geoMention}>
                 Based in or around {relatedGeo.locationName}? See how Wraptors serves{' '}
                 <Link to={`/areas/${relatedGeo.slug}/`}>{relatedGeo.locationName}</Link> directly.
+              </p>
+            )}
+
+            {publishedLinks(article.alsoSee).length > 0 && (
+              <p className={styles.geoMention}>
+                Related at Wraptors Dubai:{' '}
+                {publishedLinks(article.alsoSee).map((l, i) => (
+                  <span key={l.to}>
+                    {i > 0 && ', '}
+                    <Link to={l.to}>{l.label}</Link>
+                  </span>
+                ))}
+                .
               </p>
             )}
 

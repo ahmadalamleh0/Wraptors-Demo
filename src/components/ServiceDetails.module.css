@@ -1,0 +1,132 @@
+/* Core-service detail block: same dark editorial system as the area pages
+   (Bebas display headings, Rajdhani labels, muted body copy). */
+
+.section {
+  background: #050505;
+  padding: 96px 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.head {
+  max-width: 760px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.05;
+  margin: 0 0 20px;
+}
+
+.lead {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.item {
+  background: #050505;
+  padding: 34px 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.itemHeading {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+}
+
+.itemBody {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+.itemLink {
+  align-self: flex-start;
+  margin-top: 2px;
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red-bright, #ff3b3b);
+  text-decoration: none;
+}
+.itemLink:hover { color: #fff; }
+
+.related {
+  max-width: 1100px;
+  margin: 44px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pill {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  padding: 9px 20px;
+  transition: border-color 0.22s ease, color 0.22s ease, background 0.22s ease;
+}
+.pill:hover {
+  color: #fff;
+  border-color: rgba(212, 0, 0, 0.55);
+  background: rgba(212, 0, 0, 0.08);
+}
+.pillPrimary {
+  color: #fff;
+  border-color: rgba(212, 0, 0, 0.55);
+}
+
+@media (max-width: 900px) {
+  .section { padding: 72px 28px; }
+  .grid { grid-template-columns: 1fr; }
+  .item { padding: 28px 24px; }
+}

@@ -96,3 +96,43 @@ Checked with a production-context build (`CONTEXT=production npm run build`, 49/
 | WhatsApp | Only `wa.me/971567279727`, on all 8 pages that link it, including the quote, booking and franchise hand-offs |
 
 **To publish:** push `f5feb7b` and this checklist update to `origin/main` (Netlify deploys from it), then re-run the live comparison. Waiting on the owner's approval.
+
+---
+
+## 6. SEO pass, 2026-11-03 (local, not deployed)
+
+### Done
+
+| Area | Change |
+|---|---|
+| Core service pages | Each of Wraps, PPF, Ceramic and Tint gets a visible "in Dubai" section before the quote form: a keyword H2 (e.g. "Car Wrapping in Dubai, From Our Al Quoz Studio"), four to six H3 topics with links to the matching guides, then links to related services, the Al Quoz studio and the quote form. Each page also gets Service and BreadcrumbList JSON-LD. Content: `src/data/serviceSeo.js`. |
+| Titles and H1s | Wraps title now uses the client's wording, "Car Wrapping Dubai \| Luxury Colour Change Wraps \| Wraptors". PPF H1 eyebrow reads "Wraptors Dubai · PPF Paint Protection Film". "Bespoke Styling" kept. Hero designs unchanged. |
+| Chrome Delete page | `/services/chrome-delete/`: own title, description, canonical, H1, process, FAQs, Service, BreadcrumbList and FAQPage schema, a quote form (Vehicle Wraps) and links to Wraps, Tint, guides and the studio. Published and in the sitemap. Linked from Wraps, Tint, 8 area pages and 2 wrap guides. The hero uses a dark gradient; no photo is shown. |
+| Colour PPF, matte and satin | Kept on the PPF and Wraps pages: no separate pages, because the content would duplicate them. |
+| Model pages (unpublished) | `/services/g-class-wrap/`, `/services/lamborghini-urus-ppf/`, `/services/rolls-royce-starlight-headliner/` and `/services/porsche-ppf/`, with vehicle-specific content, FAQs, schema and a manufacturer disclaimer. They build and can be previewed, but are `noindex, follow`, left out of the sitemap and not linked from any page until they're published. No photos, projects or results are claimed. |
+| Area pages | All 18 get a "Before You Book" row with two guides suited to the area, plus Chrome Delete and/or Starlight where relevant. They already linked to the services and the studio. Fixed: the Starlight card on Emirates Hills had no category label. |
+| Guides | The PPF vs ceramic, PPF lifespan and summer wrap care guides already existed and link to their services and the quote form; they now also link to related services. New guide: **Window Tint Laws in Dubai** (`/learn/window-tint-laws-dubai/`). The tint guide's vague legal section now gives the reported limits and links to the new guide. |
+| Homepage | Headline unchanged. The label above it reads "Dubai Studio · Al Quoz, UAE"; the services line reads "Car wrapping · PPF · Ceramic coating · Window tint" (two lines on mobile). Both lines were already visible on the page; nothing hidden. |
+| Social | Every Dubai Instagram link is `https://www.instagram.com/wraptors.dubai/` (footer, mobile menu, Global Locations), and the site-wide business schema has it as `sameAs`. |
+| Meta descriptions | Six over 165 characters trimmed: area pages Dubai, Al Quoz, Business Bay, Arabian Ranches and JLT, and one article. |
+
+Not changed, as instructed: reviews, the "16 Locations" stat, the aftercare store and prices.
+
+### Needs photos or client approval before publishing
+
+| Page | What's needed |
+|---|---|
+| G-Class Wrap, Urus PPF, Rolls-Royce Starlight, Porsche PPF | Real Dubai project photos for each. To publish: add a gallery, set `published: true` in `src/data/serviceSeo.js` and add the URL to `public/sitemap.xml`. Links from the PPF and Wraps pages and the PPF guides appear automatically. Also needs the client to approve the copy and the use of the brand names. |
+| Chrome Delete | Live without photos. Add real chrome delete photos when available. |
+| Window Tint Laws in Dubai | Legal figures (50% side and rear, windscreen strip about 15 cm, AED 1,500 fine) are as publicly reported by Dubai Police and Gulf News. Each is attributed and readers are told to confirm. The client should check and approve this guide before deploying. |
+| Prices | Still pending approved prices. |
+
+### Checks
+
+- `CONTEXT=production npm run build`: 55/55 routes. That's 49 plus Chrome Delete, the tint-laws guide and the four unpublished pages.
+- Sitemap: 51 URLs. Every published page has a self-canonical, one H1, a unique title and a description of 160 characters or fewer, with no `noindex`. All JSON-LD blocks parse.
+- No broken, slash-less, `#` or localhost links. Every `#cta` link has a quote form on the same page.
+- The four unpublished pages: `noindex`, not in the sitemap, linked from 0 pages.
+- One existing issue, not changed: `/book/` has no internal links pointing to it.
+- Browser at 1440, 834 and 390 px: no console errors, no horizontal overflow, one H1 per page.
+- Existing, not changed: on inner pages at 1440 px, the centred navbar logo overlaps the "Services" link.

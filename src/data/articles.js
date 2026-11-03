@@ -96,6 +96,7 @@ export const ARTICLES = [
     ],
     relatedArticles: ['changing-car-colour-dubai', 'matte-satin-gloss-wrap-dubai'],
     relatedGeo: 'dubai',
+    alsoSee: [{ label: 'Paint Protection Film', to: '/services/ppf/' }, { label: 'Ceramic Coating', to: '/services/ceramic/' }],
   },
   {
     title: 'Changing Your Car Colour in Dubai: What to Know Before You Wrap',
@@ -156,6 +157,7 @@ export const ARTICLES = [
     ],
     relatedArticles: ['vinyl-wrap-vs-colour-ppf', 'matte-satin-gloss-wrap-dubai'],
     relatedGeo: 'al-quoz',
+    alsoSee: [{ label: 'Chrome Delete', to: '/services/chrome-delete/' }],
   },
   {
     title: 'Vinyl Wrap vs Colour PPF: Which One Makes Sense for Your Build?',
@@ -268,6 +270,7 @@ export const ARTICLES = [
     ],
     relatedArticles: ['car-wrap-dubai-summer-heat', 'vinyl-wrap-vs-colour-ppf'],
     relatedGeo: 'motor-city',
+    alsoSee: [{ label: 'Chrome Delete', to: '/services/chrome-delete/' }],
   },
 
   // ══ PAINT PROTECTION FILM ═══════════════════════════════════════════
@@ -395,6 +398,7 @@ export const ARTICLES = [
     ],
     relatedArticles: ['is-ppf-worth-it-dubai', 'what-ceramic-coating-protects-dubai'],
     relatedGeo: 'dubai',
+    alsoSee: [{ label: 'Ceramic Coating', to: '/services/ceramic/' }, { label: 'Porsche PPF', to: '/services/porsche-ppf/' }, { label: 'Lamborghini Urus PPF', to: '/services/lamborghini-urus-ppf/' }],
   },
   {
     title: 'Clear PPF vs Colour PPF: What’s the Difference?',
@@ -519,6 +523,7 @@ export const ARTICLES = [
     ],
     relatedArticles: ['is-ppf-worth-it-dubai', 'clear-ppf-vs-colour-ppf'],
     relatedGeo: 'dubai',
+    alsoSee: [{ label: 'Ceramic Coating', to: '/services/ceramic/' }, { label: 'Porsche PPF', to: '/services/porsche-ppf/' }, { label: 'Lamborghini Urus PPF', to: '/services/lamborghini-urus-ppf/' }],
   },
 
   // ══ CERAMIC COATING ═════════════════════════════════════════════════
@@ -647,7 +652,7 @@ export const ARTICLES = [
     category: 'ceramic-coating',
     relatedService: 'ceramic',
     seoTitle: 'Why Does a Ceramic Coated Car Still Get Water Spots? | Wraptors',
-    metaDescription: 'Why water spots still appear on a hydrophobic, ceramic coated car in Dubai, the difference between mineral deposits and real coating failure, and how to wash and dry to avoid it.',
+    metaDescription: 'Why water spots still appear on a ceramic coated car in Dubai, how to tell mineral deposits from coating failure, and how to wash and dry to avoid them.',
     excerpt: 'A coated car beading water and a coated car staying spot free are two different things. Here is why the second one still needs a bit of help from you.',
     heroImageKey: 'ceramic8',
     publishDate: '2026-09-17',
@@ -785,7 +790,7 @@ export const ARTICLES = [
       {
         heading: 'Legal Considerations',
         body: [
-          "The UAE has regulations governing how dark window tint can legally be on different windows of a vehicle, and these can be checked with local authorities or confirmed with us directly, since specifics can be updated. We only install to compliant specifications and can talk you through legal options for your vehicle.",
+          "UAE traffic rules limit how dark the side and rear windows can be (publicly reported as up to 50% tint) and do not allow the whole windscreen to be tinted. Rules can be updated, so confirm the current limits with Dubai Police or the RTA. We only install compliant shades and can talk you through the legal options for your vehicle; our guide to window tint laws in Dubai covers the detail.",
         ],
       },
       {
@@ -815,8 +820,72 @@ export const ARTICLES = [
       { q: 'How long does tint installation take?', a: 'It depends on the vehicle and film selected — we’ll confirm a specific timeline when you book.' },
       { q: 'Can tint be removed or replaced later?', a: 'Yes — tint can be professionally removed and replaced if you want to change the shade or upgrade to a different film later.' },
     ],
-    relatedArticles: ['ceramic-tint-vs-regular-tint', 'window-tint-dubai-heat'],
+    relatedArticles: ['window-tint-laws-dubai', 'ceramic-tint-vs-regular-tint', 'window-tint-dubai-heat'],
     relatedGeo: 'jumeirah',
+    alsoSee: [{ label: 'Window Tint Laws in Dubai', to: '/learn/window-tint-laws-dubai/' }],
+  },
+  {
+    // Legal figures below are as publicly reported by Dubai Police and the
+    // national press (Gulf News, 2017 onwards) at the time of writing. They
+    // are attributed and readers are told to confirm them; the client should
+    // approve this article before it is published.
+    title: 'Window Tint Laws in Dubai: How Dark Can You Go?',
+    slug: 'window-tint-laws-dubai',
+    category: 'window-tint',
+    relatedService: 'tint',
+    seoTitle: 'Window Tint Laws in Dubai: Legal Tint Limits | Wraptors',
+    metaDescription: 'What UAE traffic rules allow for car window tint in Dubai: the 50% limit on side and rear windows, the windscreen, fines, and how to stay cool and legal.',
+    excerpt: 'How dark your windows can legally be in Dubai, what the windscreen rule means and how to get real heat rejection without going too dark.',
+    heroImageKey: 'tint1',
+    publishDate: '2026-11-03',
+    updatedDate: '2026-11-03',
+    featured: false,
+    intro: 'Tint is one of the most useful upgrades for a car in Dubai, and also one of the easiest to get wrong legally. Here is what the rules say, as publicly reported, and how to choose a film that keeps the cabin cool without breaking them.',
+    sections: [
+      {
+        heading: 'The Short Answer',
+        body: [
+          'Under the UAE traffic rules introduced in 2017, side and rear windows can be tinted up to 50%, replacing the earlier 30% limit. The front windscreen is treated differently: tinting the whole windscreen is not allowed.',
+          'These are federal rules, enforced in Dubai by Dubai Police. Rules can change, so check the current requirement with Dubai Police or the RTA before booking.',
+        ],
+      },
+      {
+        heading: 'What “50%” Actually Means',
+        body: [
+          'The percentage describes how much light the tint blocks. A 50% tint lets roughly half of the visible light through the glass. Film is usually sold by its visible light transmission (VLT), the share of light it lets through, so the two numbers are easy to mix up.',
+          'What gets measured at a check is the window as it is: the film and the glass together. Most factory glass already has a slight tint, so a film on its own and the same film on the car will not read the same. A reputable installer accounts for this when choosing the shade.',
+        ],
+      },
+      {
+        heading: 'The Windscreen',
+        body: [
+          'Full windscreen tint is not permitted. Dubai Police officials have described a narrow strip along the top of the windscreen as allowed, reported at around 15 cm. Because reports differ on the exact allowance, confirm it before fitting anything to the windscreen.',
+        ],
+      },
+      {
+        heading: 'Fines and Enforcement',
+        body: [
+          'Tint darker than the permitted level is a traffic violation, with a fine publicly reported as AED 1,500 under the federal traffic law. In some cases the vehicle can also be impounded. Police can measure tint at the roadside, so how dark a film looks is not a reliable guide.',
+        ],
+      },
+      {
+        heading: 'Staying Cool Within the Limit',
+        image: 'tint4',
+        body: [
+          'Darkness and heat rejection are not the same thing. A good ceramic film at a legal shade can reject more heat than a darker, cheaper dyed film, because it blocks infrared heat rather than relying on darkness. That is why film quality matters more than shade for Dubai summers.',
+          'At Wraptors Dubai we only install shades within the current legal limits, and we confirm the right film and shade for your car before fitting.',
+        ],
+      },
+    ],
+    faqs: [
+      { q: 'Is 50% window tint legal in Dubai?', a: 'Under current UAE traffic rules, side and rear windows can be tinted up to 50%. Confirm the current limit with Dubai Police or the RTA, as rules can be updated.' },
+      { q: 'Can I tint my windscreen in Dubai?', a: 'Full windscreen tint is not allowed. A narrow strip along the top has been described as permitted, but check the exact allowance before fitting.' },
+      { q: 'What is the fine for dark tint in Dubai?', a: 'It is publicly reported as AED 1,500 under the federal traffic law, and the vehicle can be impounded in some cases.' },
+      { q: 'Does factory glass tint count towards the limit?', a: 'Yes. What is measured is the window as fitted, film and glass together, so the shade is chosen with the factory glass in mind.' },
+      { q: 'Will Wraptors fit tint darker than the legal limit?', a: 'No. We only install shades within the current legal limits and can show you compliant options that still reject a lot of heat.' },
+    ],
+    relatedArticles: ['window-tinting-dubai-guide', 'ceramic-tint-vs-regular-tint', 'window-tint-dubai-heat'],
+    relatedGeo: 'dubai',
   },
   {
     title: 'Ceramic Tint vs Regular Tint: What’s the Difference?',

@@ -8,6 +8,7 @@ import TintCompareSection from './TintCompareSection';
 import RelatedInsights from './RelatedInsights';
 import AftercareSection from './AftercareSection';
 import ServiceFaqSection from './ServiceFaqSection';
+import ServiceDetails from './ServiceDetails';
 import QuoteSection from './QuoteSection';
 import styles from './TintPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -105,6 +106,8 @@ export default function TintPage() {
       </section>
 
       {/* ── 3. Shared quote section ── */}
+      <ServiceDetails service="tint" />
+
       <QuoteSection
         id="cta"
         initialService="tint"

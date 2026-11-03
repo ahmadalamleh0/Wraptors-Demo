@@ -7,6 +7,7 @@ import ServiceIntroSection from './ServiceIntroSection';
 import RelatedInsights from './RelatedInsights';
 import AftercareSection from './AftercareSection';
 import ServiceFaqSection from './ServiceFaqSection';
+import ServiceDetails from './ServiceDetails';
 import QuoteSection from './QuoteSection';
 import styles from './PPFPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -498,7 +499,7 @@ export default function PPFPage() {
 
       {/* ── HERO — shared ServiceHero, same family as every service page ── */}
       <ServiceHero
-        eyebrow="Wraptors Dubai · Paint Protection Film"
+        eyebrow="Wraptors Dubai · PPF Paint Protection Film"
         headline="Preserve The Original."
         supportingLine="Full Body PPF · High Impact Protection · Colour PPF"
         media={<img src={heroImg} alt="" loading="eager" fetchPriority="high" draggable={false} />}
@@ -572,6 +573,8 @@ export default function PPFPage() {
           </div>
         </div>
       </section>
+
+      <ServiceDetails service="ppf" />
 
       <QuoteSection
         id="cta"

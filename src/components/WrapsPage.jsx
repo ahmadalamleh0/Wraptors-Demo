@@ -9,6 +9,7 @@ import AftercareSection from './AftercareSection';
 import RelatedInsights from './RelatedInsights';
 import QuoteSection from './QuoteSection';
 import ServiceFaqSection from './ServiceFaqSection';
+import ServiceDetails from './ServiceDetails';
 import styles from './WrapsPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { SITE_URL } from '../lib/siteConfig';
@@ -72,7 +73,7 @@ const PROCESS_STEPS = [
 
 export default function WrapsPage() {
   useDocumentMeta(
-    'Car Wrapping Dubai | Colour Change & Custom Wraps | Wraptors',
+    'Car Wrapping Dubai | Luxury Colour Change Wraps | Wraptors',
     'Car wrapping in Dubai at the Wraptors studio in Al Quoz: colour changes in gloss, satin or matte, partial wraps and chrome delete, installed around the vehicle.',
     `${SITE_URL}/services/wraps/`
   );
@@ -327,6 +328,8 @@ export default function WrapsPage() {
           </div>
           <span className={styles.wagonOverlayText}>Built Different.</span>
         </section>
+
+        <ServiceDetails service="wraps" />
 
         <QuoteSection
           id="cta"

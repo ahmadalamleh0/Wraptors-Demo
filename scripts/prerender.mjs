@@ -28,6 +28,7 @@ import { chromium } from 'playwright';
 
 import { LOCATIONS } from '../src/data/geoLocations.js';
 import { ARTICLES, CATEGORIES } from '../src/data/articles.js';
+import { FOCUS_PAGES } from '../src/data/serviceSeo.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -42,6 +43,9 @@ const SERVICE_PATHS = [
   '/services/starlight',
   '/services/ppf',
   '/services/custom-builds',
+  // Chrome Delete + vehicle pages. Unpublished ones are still prerendered
+  // (noindex) so they can be previewed; they're kept out of the sitemap.
+  ...FOCUS_PAGES.map((p) => `/services/${p.slug}`),
 ];
 
 function buildRouteList() {

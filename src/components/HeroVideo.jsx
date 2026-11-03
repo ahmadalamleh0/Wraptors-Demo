@@ -20,7 +20,7 @@ import heroVideoDesktopSrc from '../../hero-video-desktop.mp4';
 // Small location label above the homepage H1. No ratings, review counts or
 // rankings here.
 const HERO = {
-  label: 'Dubai Studio · United Arab Emirates',
+  label: 'Dubai Studio · Al Quoz, UAE',
 };
 
 // TEMPORARY DEBUG — remove once the Safe Mode black-flash fix is confirmed
@@ -313,7 +313,7 @@ export default function HeroVideo() {
       <div className={styles.heroLowerGroup}>
         <div ref={rulerRef} className={styles.ruler} aria-hidden="true" />
         <p ref={subLineRef} className={styles.subLine}>
-          Luxury wraps&nbsp;&nbsp;·&nbsp;&nbsp;Paint protection&nbsp;&nbsp;·&nbsp;&nbsp;Vehicle transformation
+          Car&nbsp;wrapping&nbsp;&nbsp;·&nbsp;&nbsp;PPF<span className={styles.subLineSep}>&nbsp;&nbsp;·&nbsp;&nbsp;</span><br className={styles.subLineBreak} />Ceramic&nbsp;coating&nbsp;&nbsp;·&nbsp;&nbsp;Window&nbsp;tint
         </p>
         <a ref={ctaRef} href="/#cta" className={styles.heroCta}>
           <span className={styles.heroCtaLabel}>

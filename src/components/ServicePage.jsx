@@ -9,6 +9,7 @@ import TintCompareSection from './TintCompareSection';
 import RelatedInsights from './RelatedInsights';
 import AftercareSection from './AftercareSection';
 import ServiceFaqSection from './ServiceFaqSection';
+import ServiceDetails from './ServiceDetails';
 import QuoteSection from './QuoteSection';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { SITE_URL } from '../lib/siteConfig';
@@ -276,6 +277,8 @@ export default function ServicePage({
             <span className={styles.splitBannerOverlayText}>{splitBanner.text || 'GLOSS THAT LASTS.'}</span>
           </section>
         )}
+
+        <ServiceDetails service={serviceId} />
 
         <QuoteSection
           id="cta"
