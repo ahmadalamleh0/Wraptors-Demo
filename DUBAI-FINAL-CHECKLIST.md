@@ -136,3 +136,14 @@ Not changed, as instructed: reviews, the "16 Locations" stat, the aftercare stor
 - One existing issue, not changed: `/book/` has no internal links pointing to it.
 - Browser at 1440, 834 and 390 px: no console errors, no horizontal overflow, one H1 per page.
 - Existing, not changed: on inner pages at 1440 px, the centred navbar logo overlaps the "Services" link.
+
+## 7. Release-prep fixes, 2026-11-03 (local, not deployed)
+
+| Item | Result |
+|---|---|
+| Navbar logo over "Services" (desktop) | **Fixed.** The links + CTA were wider than the right half of the bar. From 1680px nothing changes. At 1360–1679px it's the same bar with tighter link spacing. Below 1360px the links move into the existing full-screen menu, with the Start Your Build button kept on desktop. Checked at 1920, 1680, 1600, 1440, 1366, 1360, 1280, 1024, 834 and 390px: no overlap, and the menu opens with all 7 links. |
+| Window Tint Laws guide | **Revised against official sources.** AED 1,500 cites the federal violations schedule, Ministerial Resolution No. 178/2017, item 68 (exceeding the permitted tint percentage, or tinting without permission). 50% side/rear is attributed to Dubai Police's 2017 announcement; the schedule itself sets no percentage. Added Dubai impoundment under Decree No. 30 of 2023, with a reported AED 10,000 release fee. **The 15 cm windscreen-strip claim is removed**: no current official guidance was found, so the windscreen is treated as off-limits. Also removed from the tint guide's legal section. |
+| `/book/` | **Reported, not changed.** The page works: the form validates and hands off to WhatsApp, because it has no email/Web3Forms delivery. Its only entry point, the homepage "Book your visit" CTA, was removed on purpose in `5be95e8` (19 Oct). It's still in the sitemap but has no internal links. Client to decide: re-add a link, or drop it from the sitemap. |
+| Model pages | All four `noindex, follow`, 0 sitemap entries, 0 pages linking (production build). |
+| Contact links | 74 `tel:+971567279727`. 13 WhatsApp links, all `wa.me/971567279727`. 113 Instagram links, all `https://www.instagram.com/wraptors.dubai/`, 0 to the brand account. |
+| Quote form | Tested in the browser with the Web3Forms request **intercepted** (nothing sent), on the Chrome Delete page and the homepage. The payload carries the service, vehicle, build detail and access key, and success shows "Request received". A failed submission falls back to WhatsApp with the enquiry prefilled. **Real delivery was not tested**: it needs `VITE_WEB3FORMS_KEY` set in Netlify's environment, which is not checked here, and one live test submission. |

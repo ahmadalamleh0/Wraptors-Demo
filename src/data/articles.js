@@ -790,7 +790,7 @@ export const ARTICLES = [
       {
         heading: 'Legal Considerations',
         body: [
-          "UAE traffic rules limit how dark the side and rear windows can be (publicly reported as up to 50% tint) and do not allow the whole windscreen to be tinted. Rules can be updated, so confirm the current limits with Dubai Police or the RTA. We only install compliant shades and can talk you through the legal options for your vehicle; our guide to window tint laws in Dubai covers the detail.",
+          "UAE traffic rules limit how dark the side and rear windows can be (announced by Dubai Police as up to 50% tint) and treat the windscreen far more strictly. Rules can be updated, so confirm the current limits with Dubai Police or the RTA. We only install compliant shades and can talk you through the legal options for your vehicle; our guide to window tint laws in Dubai covers the detail.",
         ],
       },
       {
@@ -825,16 +825,23 @@ export const ARTICLES = [
     alsoSee: [{ label: 'Window Tint Laws in Dubai', to: '/learn/window-tint-laws-dubai/' }],
   },
   {
-    // Legal figures below are as publicly reported by Dubai Police and the
-    // national press (Gulf News, 2017 onwards) at the time of writing. They
-    // are attributed and readers are told to confirm them; the client should
-    // approve this article before it is published.
+    // Sources (checked 2026-11-03):
+    // - AED 1,500 fine: federal violations schedule, Ministerial Resolution
+    //   No. 178 of 2017, item 68 (a: exceeding the permitted tint
+    //   percentage; b: tinting a vehicle without permission), as published
+    //   by Abu Dhabi Police / u.ae. No black points or impoundment listed.
+    // - 50% side/rear: Dubai Police announcement when the 2017 rules took
+    //   effect (Gulf News, 2017 and 2023). Not stated in the schedule itself.
+    // - Dubai impoundment: Decree No. 30 of 2023, AED 10,000 release fee
+    //   (Gulf News, Sept 2023).
+    // - Windscreen: no current official guidance found for a permitted
+    //   strip, so none is claimed.
     title: 'Window Tint Laws in Dubai: How Dark Can You Go?',
     slug: 'window-tint-laws-dubai',
     category: 'window-tint',
     relatedService: 'tint',
     seoTitle: 'Window Tint Laws in Dubai: Legal Tint Limits | Wraptors',
-    metaDescription: 'What UAE traffic rules allow for car window tint in Dubai: the 50% limit on side and rear windows, the windscreen, fines, and how to stay cool and legal.',
+    metaDescription: 'What UAE traffic rules allow for car window tint in Dubai: the 50% side and rear allowance, the windscreen, fines and impoundment, and staying cool legally.',
     excerpt: 'How dark your windows can legally be in Dubai, what the windscreen rule means and how to get real heat rejection without going too dark.',
     heroImageKey: 'tint1',
     publishDate: '2026-11-03',
@@ -845,8 +852,8 @@ export const ARTICLES = [
       {
         heading: 'The Short Answer',
         body: [
-          'Under the UAE traffic rules introduced in 2017, side and rear windows can be tinted up to 50%, replacing the earlier 30% limit. The front windscreen is treated differently: tinting the whole windscreen is not allowed.',
-          'These are federal rules, enforced in Dubai by Dubai Police. Rules can change, so check the current requirement with Dubai Police or the RTA before booking.',
+          'When the current federal traffic rules took effect in 2017, Dubai Police announced that side and rear windows may be tinted up to 50%, replacing the earlier 30% limit. The front windscreen is treated far more strictly than the other windows.',
+          'The rules are federal and enforced in Dubai by Dubai Police. Limits and how they are applied can change, so confirm the current requirement with Dubai Police or the RTA before booking.',
         ],
       },
       {
@@ -859,13 +866,14 @@ export const ARTICLES = [
       {
         heading: 'The Windscreen',
         body: [
-          'Full windscreen tint is not permitted. Dubai Police officials have described a narrow strip along the top of the windscreen as allowed, reported at around 15 cm. Because reports differ on the exact allowance, confirm it before fitting anything to the windscreen.',
+          'Official guidance warns drivers against tinting the windscreen. Some reports have described a narrow strip along the top as acceptable, but we have not found current official guidance confirming a specific allowance. Treat the windscreen as off-limits unless Dubai Police confirm otherwise for your car.',
         ],
       },
       {
         heading: 'Fines and Enforcement',
         body: [
-          'Tint darker than the permitted level is a traffic violation, with a fine publicly reported as AED 1,500 under the federal traffic law. In some cases the vehicle can also be impounded. Police can measure tint at the roadside, so how dark a film looks is not a reliable guide.',
+          'Under the federal violations schedule (Ministerial Resolution No. 178 of 2017), exceeding the permitted tint percentage carries a fine of AED 1,500. The same item covers tinting a vehicle without the required permission, so any exception has to come from the authorities, not from a tint installer.',
+          'Further consequences can apply. In Dubai, a 2023 decree allows vehicles to be impounded for violations including excessive tint, with a release fee reported at AED 10,000. Police can measure tint at the roadside, so how dark a film looks is not a reliable guide.',
         ],
       },
       {
@@ -878,9 +886,9 @@ export const ARTICLES = [
       },
     ],
     faqs: [
-      { q: 'Is 50% window tint legal in Dubai?', a: 'Under current UAE traffic rules, side and rear windows can be tinted up to 50%. Confirm the current limit with Dubai Police or the RTA, as rules can be updated.' },
-      { q: 'Can I tint my windscreen in Dubai?', a: 'Full windscreen tint is not allowed. A narrow strip along the top has been described as permitted, but check the exact allowance before fitting.' },
-      { q: 'What is the fine for dark tint in Dubai?', a: 'It is publicly reported as AED 1,500 under the federal traffic law, and the vehicle can be impounded in some cases.' },
+      { q: 'Is 50% window tint legal in Dubai?', a: 'Dubai Police announced a 50% allowance for side and rear windows when the current federal rules took effect. Confirm the current limit with Dubai Police or the RTA, as rules can be updated.' },
+      { q: 'Can I tint my windscreen in Dubai?', a: 'Treat it as off-limits. Official guidance warns against tinting the windscreen, and we have not found current official guidance confirming any permitted strip.' },
+      { q: 'What is the fine for dark tint in Dubai?', a: 'AED 1,500 under the federal violations schedule. In Dubai the vehicle can also be impounded, with a release fee reported at AED 10,000.' },
       { q: 'Does factory glass tint count towards the limit?', a: 'Yes. What is measured is the window as fitted, film and glass together, so the shade is chosen with the factory glass in mind.' },
       { q: 'Will Wraptors fit tint darker than the legal limit?', a: 'No. We only install shades within the current legal limits and can show you compliant options that still reject a lot of heat.' },
     ],
