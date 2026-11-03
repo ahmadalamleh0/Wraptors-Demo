@@ -1,4 +1,5 @@
 import styles from './Footer.module.css';
+import { SERVICE_LINKS } from '../data/serviceLinks';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
 import footerImg from '../../Footer.jpeg';
 
@@ -95,6 +96,18 @@ export default function Footer({ solid = false }) {
             <nav>
               {NAV_LINKS.map(l => (
                 <a key={l.label} href={l.href} className={styles.colLink}>
+                  {l.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          {/* Services */}
+          <div className={`${styles.col} ${styles.colServices}`}>
+            <h4 className={styles.colHeading}>Services</h4>
+            <nav aria-label="Services">
+              {SERVICE_LINKS.map(l => (
+                <a key={l.href} href={l.href} className={styles.colLink}>
                   {l.label}
                 </a>
               ))}

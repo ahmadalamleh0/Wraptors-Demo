@@ -29,6 +29,7 @@ export default function ServicePage({
   introDescription,
   introImage,
   benefits,
+  benefitsHeading = 'Why Ceramic Coating',
   galleryImages,
   galleryCaption,
   midSectionTitle,
@@ -151,7 +152,7 @@ export default function ServicePage({
         {/* ── Optional benefits grid — compact 2×2 grid ── */}
         {benefits && benefits.length > 0 && (
           <section className={styles.benefits}>
-            <p className={styles.benefitsHeading}>Why Ceramic Coating</p>
+            <p className={styles.benefitsHeading}>{benefitsHeading}</p>
             <div className={styles.benefitsGrid}>
               {benefits.map((b) => (
                 <div key={b.num} className={styles.benefitItem}>

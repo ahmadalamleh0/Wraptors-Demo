@@ -99,6 +99,20 @@ import bentley2         from '../Wraptors Media/Custom Builds/621830079_18385536
 import bentley3         from '../Wraptors Media/Custom Builds/621972300_18385536895146462_9042249166876917996_n.jpg';
 import bentley4         from '../Wraptors Media/Custom Builds/621825480_18385536931146462_7726450832093630152_n.jpg';
 import bentley5         from '../Wraptors Media/Custom Builds/621855805_18385536934146462_1336625565261466261_n.jpg';
+// Hero images for the additional services (existing Wraptors photos).
+import heroDetailing      from '../Detailing.jpeg';
+import heroInteriors      from '../Wraptors Media/616229612_18384175534146462_9012363648025181528_n.jpg';
+import heroStripes        from '../Wraptors Media/777023973_18418163749146462_8520045824263708492_n.jpg';
+import heroCalipers       from '../Ferrari(white_3).jpeg';
+import heroWheels         from '../Wraptors Media/561235066_18371224444146462_3625533511021440012_n.jpg';
+
+// Process for the styling services (interiors, stripes, calipers, wheels).
+const STYLE_PROCESS = [
+  { n: '01', title: 'Consultation', desc: 'We look at the car with you and agree the design, colours and scope.' },
+  { n: '02', title: 'Preparation',  desc: 'The car is cleaned and prepared, with parts removed where the job needs it.' },
+  { n: '03', title: 'The Work',     desc: 'The work is carried out in the studio with close attention to edges and finish.' },
+  { n: '04', title: 'Final Check',  desc: 'Everything is checked under the studio lighting before handover.' },
+];
 
 // Every service page follows the same hero + intro system (see
 // ServiceHero / ServiceIntroSection) — only media and wording change here.
@@ -179,6 +193,137 @@ const SERVICE_PAGES = [
       detailImages: [bentley4, bentley2, bentley5, bentley3],
     },
     learnCategory: 'custom-builds',
+  },
+  // ── Additional confirmed services (client, 2026-11-03) ──
+  // Shown in the footer Services directory, not as homepage cards. Copy is
+  // written for Dubai: no products, materials, warranties or timings that
+  // haven't been confirmed for this studio.
+  {
+    path:     '/services/detailing',
+    title:    'Auto Detailing',
+    seoTitle: 'Car Detailing Dubai | Interior & Exterior Detailing | Wraptors',
+    heroEyebrow: 'Wraptors Dubai · Auto Detailing',
+    heroHeadline: 'Showroom Clean.\nInside And Out.',
+    heroHeadlineCompact: true,
+    heroSupportingLine: 'Exterior Detailing · Interior Detailing · Preparation For Protection',
+    heroImg:  heroDetailing,
+    tagline:  'Interior and exterior car detailing at the Wraptors Dubai studio in Al Quoz: a careful hand wash, a thorough interior clean and care for Dubai dust.',
+    introKicker: 'Your Car',
+    introStatement: 'Restored.',
+    introDescription: 'Detailing at Wraptors Dubai covers the inside and the outside of the car. The exterior is washed by hand and dried without streaks, and the interior is vacuumed and cleaned across the dashboard, console, door trims, door jambs and footwells. In Dubai, where fine dust and sand settle on every surface, a proper detail is also the right starting point before PPF, ceramic coating or a wrap.',
+    benefitsHeading: 'Why Detail Regularly',
+    benefits: [
+      { num: '01', title: 'Paint That Lasts',       desc: 'Regular washing and care help keep paint from dulling under constant sun.' },
+      { num: '02', title: 'Dust And Sand Removed',  desc: 'Fine dust and sand are lifted carefully rather than dragged across the paint.' },
+      { num: '03', title: 'A Fresher Interior',     desc: 'Dust and grime are cleaned from carpets, seats and trim, keeping the cabin fresh.' },
+      { num: '04', title: 'Ready For Protection',   desc: 'A clean surface is the right base for PPF, ceramic coating or a wrap.' },
+    ],
+    processEyebrow: 'How It Works',
+    processHeading: 'Clean, Inside And Out.',
+    processSteps: [
+      { n: '01', title: 'Inspection',  desc: 'We look over the car inside and out with you and agree what it needs.' },
+      { n: '02', title: 'Exterior',    desc: 'The car is washed by hand and dried carefully, without streaks.' },
+      { n: '03', title: 'Interior',    desc: 'The cabin is vacuumed, and the dashboard, console, door trims, jambs and footwells are cleaned.' },
+      { n: '04', title: 'Final Check', desc: 'The car is checked under the studio lighting before handover.' },
+    ],
+    learnCategory: 'ceramic-coating',
+  },
+  {
+    path:     '/services/custom-interiors',
+    title:    'Custom Interiors',
+    seoTitle: 'Custom Car Interiors Dubai | Interior Colour Change | Wraptors',
+    heroEyebrow: 'Wraptors Dubai · Custom Interiors',
+    heroHeadline: 'Stock Is Boring.\nMake It Yours.',
+    heroHeadlineCompact: true,
+    heroSupportingLine: 'Custom Floor Mats · Interior Colour Change · Full Cabin Design',
+    heroImg:  heroInteriors,
+    tagline:  'Custom car interiors at the Wraptors Dubai studio in Al Quoz: custom floor mats, interior colour changes and complete cabin designs planned with you.',
+    introKicker: 'Your Interior',
+    introStatement: 'Personalised.',
+    introDescription: 'Every custom interior starts with a conversation. Layout, colours and materials are worked out together before anything is made, whether that is a set of custom floor mats, a change of interior colour or a complete cabin design planned alongside a starlight headliner.',
+    benefitsHeading: 'What We Can Do',
+    benefits: [
+      { num: '01', title: 'Custom Floor Mats',      desc: 'Floor mats designed around your car, in the colours and materials you choose.' },
+      { num: '02', title: 'Designed With You',      desc: 'Layout, artwork and materials are chosen together, not picked from a catalogue.' },
+      { num: '03', title: 'Interior Colour Change', desc: 'Change the colour of the interior to suit the car, or to contrast with it.' },
+      { num: '04', title: 'A Complete Cabin',       desc: 'Combine new mats and trim with a starlight headliner for a fully reworked interior.' },
+    ],
+    processEyebrow: 'How It Works',
+    processHeading: 'From Idea To Interior.',
+    processSteps: STYLE_PROCESS,
+  },
+  {
+    path:     '/services/stripes-decals',
+    title:    'Racing Stripes & Decals',
+    seoTitle: 'Racing Stripes & Car Decals Dubai | Wraptors',
+    heroEyebrow: 'Wraptors Dubai · Racing Stripes & Decals',
+    heroHeadline: 'Stripes & Decals.\nInstant Character.',
+    heroHeadlineCompact: true,
+    heroSupportingLine: 'Racing Stripes · Custom Decals · Accents',
+    heroImg:  heroStripes,
+    tagline:  'Racing stripes and custom car decals at the Wraptors Dubai studio in Al Quoz, designed around the car for the bonnet, roof, boot or sides.',
+    introKicker: 'Your Style',
+    introStatement: 'Signed.',
+    introDescription: 'Stripes and decals are one of the quickest ways to give a car more character without a full wrap. A stripe can run over the bonnet, roof and boot or along the sides, in a single colour or a contrasting combination, and decals can be sourced to order or designed from scratch.',
+    benefitsHeading: 'Your Options',
+    benefits: [
+      { num: '01', title: 'Ready-Made Or Bespoke',       desc: 'Choose an existing stripe design or develop a one-off design with the team.' },
+      { num: '02', title: 'Placement That Fits',         desc: 'Over the bonnet, across the boot or along the sides, placed to suit the car’s lines.' },
+      { num: '03', title: 'Colour Your Way',             desc: 'Monochrome for a subtle look, or a contrasting combination that stands out.' },
+      { num: '04', title: 'Decals, Sourced Or Designed', desc: 'We can source the decal you have in mind or design one from scratch.' },
+    ],
+    processEyebrow: 'How It Works',
+    processHeading: 'From Sketch To Street.',
+    processSteps: STYLE_PROCESS,
+    learnCategory: 'vehicle-wraps',
+  },
+  {
+    path:     '/services/caliper-painting',
+    title:    'Caliper Painting',
+    seoTitle: 'Brake Caliper Painting Dubai | Wraptors',
+    heroEyebrow: 'Wraptors Dubai · Caliper Painting',
+    heroHeadline: 'Colour Behind\nThe Spokes.',
+    heroHeadlineCompact: true,
+    heroSupportingLine: 'Colour-Matched · Contrast Finishes · Custom Designs',
+    heroImg:  heroCalipers,
+    tagline:  'Brake caliper painting at the Wraptors Dubai studio in Al Quoz: matched to your body colour or chosen as a contrast, on its own or as part of a restyle.',
+    introKicker: 'Your Calipers',
+    introStatement: 'Restyled.',
+    introDescription: 'Calipers are one of the details people notice once the wheels stop turning. We can paint yours to match the body colour, choose a contrast that shows through the spokes, or include them in a complete restyle alongside a wrap, wheel painting or chrome delete.',
+    benefitsHeading: 'Ways To Go',
+    benefits: [
+      { num: '01', title: 'Match The Body',          desc: 'Calipers painted to tie in with the car’s paint or wrap colour.' },
+      { num: '02', title: 'Make Them Stand Out',     desc: 'A contrasting colour or design that shows through the wheel spokes.' },
+      { num: '03', title: 'Planned With The Wheels', desc: 'Caliper and wheel colours chosen together so they work as a pair.' },
+      { num: '04', title: 'Part Of A Restyle',       desc: 'Planned together with a wrap or chrome delete so every detail works as one.' },
+    ],
+    processEyebrow: 'How It Works',
+    processHeading: 'Detail That Shows.',
+    processSteps: STYLE_PROCESS,
+  },
+  {
+    path:     '/services/wheel-painting',
+    title:    'Wheel Painting',
+    seoTitle: 'Wheel Painting Dubai | Rim Colour Change | Wraptors',
+    heroEyebrow: 'Wraptors Dubai · Wheel Painting',
+    heroHeadline: 'Wheels That\nFinish The Look.',
+    heroHeadlineCompact: true,
+    heroSupportingLine: 'Colour Changes · Accent Work · Calipers Together',
+    heroImg:  heroWheels,
+    tagline:  'Wheel painting at the Wraptors Dubai studio in Al Quoz: full wheel colour changes and accent work, planned around the car, the calipers and the wrap.',
+    introKicker: 'Your Wheels',
+    introStatement: 'Refinished.',
+    introDescription: 'Wheels change how the whole car reads. A full colour change can tie the wheels to a wrap or chrome delete, while accent work picks out details without changing the whole wheel. Colours are chosen with the body, the calipers and any trim work in mind, so everything is planned as one look.',
+    benefitsHeading: 'Why Wraptors',
+    benefits: [
+      { num: '01', title: 'Full Colour Or Accent', desc: 'A complete colour change or smaller accent work, whichever the build needs.' },
+      { num: '02', title: 'Planned With The Car',  desc: 'Colours chosen to match the body or wrap, or to contrast with it.' },
+      { num: '03', title: 'Calipers Together',     desc: 'Wheels and calipers planned at the same time so they work as a pair.' },
+      { num: '04', title: 'Part Of A Restyle',     desc: 'Combined with a wrap, chrome delete or stripes for a complete new look.' },
+    ],
+    processEyebrow: 'How It Works',
+    processHeading: 'From Colour To Wheel.',
+    processSteps: STYLE_PROCESS,
   },
 ];
 

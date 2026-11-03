@@ -67,6 +67,8 @@ export const FOCUS_PAGES = [
         ],
         links: [
           { label: 'Matte, Satin or Gloss in Dubai', to: '/learn/matte-satin-gloss-wrap-dubai/' },
+          { label: 'Caliper Painting', to: '/services/caliper-painting/' },
+          { label: 'Wheel Painting', to: '/services/wheel-painting/' },
         ],
       },
       {
@@ -342,6 +344,7 @@ export const SERVICE_DETAILS = {
       { heading: 'Gloss, Satin and Matte Finishes', body: 'Gloss gives depth and reflection, satin sits between the two, and matte gives a flat, modern look that needs a little more care.', links: [{ label: 'Choosing a Finish', to: '/learn/matte-satin-gloss-wrap-dubai/' }] },
       { heading: 'Chrome Delete', body: 'Window surrounds, grilles, badges and brightwork wrapped in black or a colour, on their own or as part of a full wrap.', links: [{ label: 'Chrome Delete', to: '/services/chrome-delete/' }] },
       { heading: 'Commercial and Fleet Wraps', body: 'Branded wraps for a single company vehicle or a full fleet, with design placement planned around each vehicle’s panels.' },
+      { heading: 'Stripes, Decals and Accents', body: 'Racing stripes, decals and smaller accents can be added on their own or planned with a wrap.', links: [{ label: 'Stripes & Decals', to: '/services/stripes-decals/' }] },
       { heading: 'Wrap Care Through a Dubai Summer', body: 'Bonnets, roofs and boot lids take the most sun. Hand washing and avoiding pressure washers at the edges keep a wrap looking right for longer.', links: [{ label: 'Wraps in Dubai Summer', to: '/learn/car-wrap-dubai-summer-heat/' }] },
       { heading: 'Changing Your Car’s Colour', body: 'A full colour change can affect your registration details. Check the current Dubai Police and RTA requirements before booking.', links: [{ label: 'What to Know Before You Wrap', to: '/learn/changing-car-colour-dubai/' }] },
     ],
@@ -379,6 +382,7 @@ export const SERVICE_DETAILS = {
       { heading: 'Water Spots and Dubai Water', body: 'Coated cars can still show water spots from mineral-heavy water. Most wipe off with a soft microfibre towel if they are not left to bake in the sun.', links: [{ label: 'Why Water Spots Still Appear', to: '/learn/ceramic-coating-water-spots-dubai/' }] },
       { heading: 'Coating Over PPF', body: 'Coating can go over paint protection film as well as paint, so a car with PPF on the front keeps the same gloss and easy washing across every panel.', links: [{ label: 'PPF vs Ceramic Coating', to: '/learn/ppf-vs-ceramic-coating/' }] },
       { heading: 'What a Coating Protects', body: 'Gloss, UV resistance and easier cleaning, yes. Chips, deep scratches and dents, no. Knowing the difference helps you choose the right protection.', links: [{ label: 'What Ceramic Coating Protects', to: '/learn/what-ceramic-coating-protects-dubai/' }] },
+      { heading: 'Detailing Between Coats', body: 'Regular detailing keeps a coated car at its best inside and out, and is the right preparation before any coating.', links: [{ label: 'Auto Detailing', to: '/services/detailing/' }] },
     ],
     links: [
       { label: 'Paint Protection Film', to: '/services/ppf/' },
@@ -397,7 +401,7 @@ export const SERVICE_DETAILS = {
       { heading: 'Density and Colour', body: 'Star density runs from around 500 stars for a subtle effect up to 2,500 for a fuller sky, with the colour chosen from pure white through warm and cool tones.' },
       { heading: 'Shooting Stars', body: 'An optional shooting-star effect adds occasional movement across the ceiling on top of the fixed layout.' },
       { heading: 'Planned Around the Cabin', body: 'Headliner shape, sunroofs and roof hardware all affect the layout, so we assess the cabin before confirming a design.' },
-      { heading: 'Night-Time Visibility and Comfort', body: 'Brightness and colour are chosen for the cabin at night, so the sky reads as a soft background rather than a distraction.' },
+      { heading: 'Part of a Custom Interior', body: 'A starlight headliner can be planned alongside new mats, trim colours and materials so the whole cabin works as one design.', links: [{ label: 'Custom Interiors', to: '/services/custom-interiors/' }] },
     ],
     links: [
       { label: 'Window Tint', to: '/services/tint/' },

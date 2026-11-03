@@ -25,7 +25,46 @@ export const QUOTE_SERVICES = [
 // No entry for "multiple" on purpose — that path skips straight to the
 // notes field in step 3 rather than forcing a single-service option list
 // on someone who just said they want more than one.
+// Services reached from their own pages only (not listed in step 1 on
+// the homepage form): used to label the request and offer step-3 options.
+export const QUOTE_EXTRA_SERVICES = [
+  { id: 'detailing',        label: 'Auto Detailing' },
+  { id: 'custom-interiors', label: 'Custom Interiors' },
+  { id: 'stripes-decals',   label: 'Racing Stripes & Decals' },
+  { id: 'caliper-painting', label: 'Caliper Painting' },
+  { id: 'wheel-painting',   label: 'Wheel Painting' },
+];
+
 export const QUOTE_PROJECT_OPTIONS = {
+  detailing: [
+    { id: 'full-detail',     label: 'Interior & Exterior Detail' },
+    { id: 'exterior-detail', label: 'Exterior Detail' },
+    { id: 'interior-detail', label: 'Interior Detail' },
+    { id: 'not-sure',        label: 'Not Sure Yet' },
+  ],
+  'custom-interiors': [
+    { id: 'floor-mats',    label: 'Custom Floor Mats' },
+    { id: 'colour-change', label: 'Interior Colour Change' },
+    { id: 'full-interior', label: 'Full Interior Design' },
+    { id: 'not-sure',      label: 'Not Sure Yet' },
+  ],
+  'stripes-decals': [
+    { id: 'racing-stripes', label: 'Racing Stripes' },
+    { id: 'sourced-decals', label: 'Decals — Sourced For Me' },
+    { id: 'custom-decals',  label: 'Decals — Custom Designed' },
+    { id: 'not-sure',       label: 'Not Sure Yet' },
+  ],
+  'caliper-painting': [
+    { id: 'match-body', label: 'Match My Body Colour' },
+    { id: 'contrast',   label: 'Contrast / Custom Design' },
+    { id: 'restyle',    label: 'Part Of A Bigger Restyle' },
+    { id: 'not-sure',   label: 'Not Sure Yet' },
+  ],
+  'wheel-painting': [
+    { id: 'colour-change', label: 'Full Wheel Colour Change' },
+    { id: 'detail-work',   label: 'Accent / Detail Work' },
+    { id: 'not-sure',      label: 'Not Sure Yet' },
+  ],
   wraps: [
     { id: 'full-wrap',     label: 'Full Wrap' },
     { id: 'partial-wrap',  label: 'Partial Wrap' },

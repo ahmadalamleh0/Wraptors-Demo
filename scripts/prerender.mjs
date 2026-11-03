@@ -43,6 +43,11 @@ const SERVICE_PATHS = [
   '/services/starlight',
   '/services/ppf',
   '/services/custom-builds',
+  '/services/detailing',
+  '/services/custom-interiors',
+  '/services/stripes-decals',
+  '/services/caliper-painting',
+  '/services/wheel-painting',
   // Chrome Delete + vehicle pages. Unpublished ones are still prerendered
   // (noindex) so they can be previewed; they're kept out of the sitemap.
   ...FOCUS_PAGES.map((p) => `/services/${p.slug}`),

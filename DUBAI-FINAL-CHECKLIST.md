@@ -170,3 +170,25 @@ The client-supplied photos in `singleprojects/` are confirmed as real Wraptors p
   - The Rolls-Royce model and the star count.
 
 Also on this date: Dubai's Global Locations globe and list styling now match the Hamilton and Tri-City sites, with Dubai highlighted. The YouTube reel no longer overlays titles on the video thumbnails.
+
+## 9. Footer Services directory + additional service pages, 2026-11-03 (local)
+
+- **Footer:** the same Services column as Hamilton and Tri-City.
+  - Desktop: Navigation, Services and Contact sit side by side.
+  - Mobile: Services spans the full width under the boat photo, in two columns. The drop is set to 150px because Dubai's navigation is two links shorter.
+  - 12 links, all working, with Custom Builds last.
+  - Homepage service cards are unchanged.
+- **New pages:** client-confirmed services, built on Dubai's ServicePage template, with Service and BreadcrumbList structured data, FAQs and a quote form that opens on the right service.
+  - `/services/detailing/`
+  - `/services/custom-interiors/`
+  - `/services/stripes-decals/`
+  - `/services/caliper-painting/`
+  - `/services/wheel-painting/`
+  - The copy makes no claims about products, materials, warranties, prices or timings.
+  - Hero photos are existing Wraptors images, used decoratively without project claims.
+  - Contextual links come from the Wraps, Ceramic, Chrome Delete and Starlight pages.
+  - The homepage quote form's step-1 list is unchanged.
+- **Checks:** production build 60/60; sitemap 60 URLs; the SEO scan passes except the known `/book/` orphan. Browser check: 7 pages at 1440, 834 and 390px with no errors or overflow, and 12 footer links on every page.
+- **Other changes the same day (all three sites):**
+  - Homepage order: Visit Us, Service Areas, brands banner, Global Locations, quote form.
+  - New mobile floating "Get a Quote" link. It hides over the hero, the quote form and the footer.

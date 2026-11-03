@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import {
   QUOTE_STEPS,
   QUOTE_SERVICES,
+  QUOTE_EXTRA_SERVICES,
   QUOTE_PROJECT_OPTIONS,
   QUOTE_TIMING_OPTIONS,
   QUOTE_CONTACT_METHODS,
@@ -177,7 +178,7 @@ export default function QuoteSection({
     }
 
     const labels = {
-      service: labelFor(QUOTE_SERVICES, form.service),
+      service: labelFor([...QUOTE_SERVICES, ...QUOTE_EXTRA_SERVICES], form.service),
       projectDetail: projectOptions ? labelFor(projectOptions, form.projectDetail) : '',
       timing: labelFor(QUOTE_TIMING_OPTIONS, form.timing),
       preferredContact: labelFor(QUOTE_CONTACT_METHODS, form.preferredContact),

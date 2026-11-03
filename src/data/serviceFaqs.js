@@ -102,6 +102,29 @@ export const SERVICE_FAQS = {
       a: 'Timelines vary depending on star count, headliner complexity and whether the shooting star effect is included. We can give you a clearer timeframe once we have reviewed your vehicle.',
     },
   ],
+  detailing: [
+    { q: 'Is detailing worth doing before PPF or ceramic coating?', a: 'Yes. Film and coatings go onto the surface as they find it, so the car is cleaned and prepared first. We include the preparation the job needs when we quote.' },
+    { q: 'How often should a car be detailed in Dubai?', a: 'It depends on how the car is used and where it is parked. Cars parked outdoors pick up dust and sand quickly and benefit from more frequent care. We can suggest a routine once we have seen the car.' },
+    { q: 'Can I book interior or exterior detailing on its own?', a: 'Yes. Interior and exterior detailing can be booked together or separately.' },
+  ],
+  'custom-interiors': [
+    { q: 'Can you change the colour of my interior?', a: 'Yes. We talk through colours and materials at the consultation and confirm what suits your car before any work starts.' },
+    { q: 'Can a custom interior be combined with a starlight headliner?', a: 'Yes. Many owners plan both together so the colours and materials work with the lighting.' },
+    { q: 'How long does a custom interior take?', a: 'It depends on the scope. We confirm a timeline once the design and materials are agreed.' },
+  ],
+  'stripes-decals': [
+    { q: 'Can racing stripes be removed later?', a: 'Yes. Stripes and decals are film, so they can be removed by an installer.' },
+    { q: 'Can stripes be combined with a wrap or PPF?', a: 'Yes. They are usually planned together so the layers and edges work with each other. We confirm the approach for your car at the quote.' },
+    { q: 'Do you design custom decals?', a: 'Yes. We can source the decal you have in mind or design one from scratch with you.' },
+  ],
+  'caliper-painting': [
+    { q: 'Can my calipers match my wrap colour?', a: 'Yes. Calipers can be matched to the wrap or paint, or chosen to contrast with it. We go through the options at the quote.' },
+    { q: 'Can calipers be done together with wheel painting?', a: 'Yes, and planning both together usually gives the most cohesive result.' },
+  ],
+  'wheel-painting': [
+    { q: 'Can you paint my wheels to match my wrap?', a: 'Yes. Wheel colours can be matched to a wrap or chosen to contrast with it. We go through the options at the quote.' },
+    { q: 'Can you paint the calipers at the same time?', a: 'Yes. Wheels and calipers are often planned together so they work as a pair.' },
+  ],
   'custom-builds': [
     {
       q: 'Will a body kit fit my vehicle?',
