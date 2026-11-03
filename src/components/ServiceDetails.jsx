@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ServiceDetails.module.css';
-import { SERVICE_DETAILS, publishedLinks, serviceSchema } from '../data/serviceSeo';
+import { SERVICE_DETAILS, FOCUS_PAGES, FOCUS_PAGE_PATH, publishedLinks, serviceSchema } from '../data/serviceSeo';
+import { PROJECT_GALLERIES } from '../data/projectGalleries';
 import { SITE_URL } from '../lib/siteConfig';
 import { useStructuredData } from '../lib/useStructuredData';
 
@@ -25,6 +26,10 @@ export default function ServiceDetails({ service }) {
   if (!d) return null;
 
   const links = publishedLinks(d.links);
+  // Selected Work: published project pages for this service, with a photo.
+  const projects = (d.projects || [])
+    .map((slug) => ({ page: FOCUS_PAGES.find((p) => p.slug === slug), gallery: PROJECT_GALLERIES[slug] }))
+    .filter(({ page, gallery }) => page?.published && gallery);
 
   return (
     <section className={styles.section} aria-labelledby={`${service}-details`}>
@@ -50,6 +55,31 @@ export default function ServiceDetails({ service }) {
           );
         })}
       </div>
+
+      {projects.length > 0 && (
+        <div className={styles.work}>
+          <span className={styles.workLabel}>Selected Work</span>
+          <div className={styles.workRow}>
+            {projects.map(({ page, gallery }) => (
+              <Link key={page.slug} to={FOCUS_PAGE_PATH(page.slug)} className={styles.workCard}>
+                <img
+                  src={gallery.photos[0].srcSmall}
+                  alt={gallery.photos[0].alt}
+                  loading="lazy"
+                  className={styles.workImg}
+                  style={{ objectPosition: gallery.heroPosition }}
+                />
+                <span className={styles.workShade} aria-hidden="true" />
+                <span className={styles.workText}>
+                  <span className={styles.workEyebrow}>Wraptors Project</span>
+                  <span className={styles.workTitle}>{gallery.title}</span>
+                  <span className={styles.workCta}>View Project <span aria-hidden="true">→</span></span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       {links.length > 0 && (
         <nav className={styles.related} aria-label="Related services">

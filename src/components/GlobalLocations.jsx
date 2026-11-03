@@ -237,6 +237,10 @@ const REGIONS = [
   },
 ];
 
+// This site's own studio, highlighted in the list (same treatment as the
+// Hamilton and Tri-City sites).
+const ACTIVE_CITY = 'Dubai';
+
 const instagramUrl = (handle) => `https://www.instagram.com/${handle}/`;
 
 // "Countries" is derived from the listing above. "16 Locations" is the
@@ -268,9 +272,9 @@ const GLOBE_MARKERS = [
 
 const GLOBE_MAP_STYLE = {
   oceanColor:    '#050709',
-  landFill:      '#1a1e23',
-  landStroke:    '#282e36',
-  strokeWidth:   0.4,
+  landFill:      '#21262d',
+  landStroke:    '#38414c',
+  strokeWidth:   0.5,
   hoverColor:    '#2c3540',
   disabledColor: '#0f1215',
 };
@@ -284,8 +288,8 @@ const GLOBE_TOOLTIP = {
 
 const GLOBE_GRID = {
   show:    true,
-  color:   '#252c34',
-  opacity: IS_MOBILE ? 0.15 : 0.28,
+  color:   '#2b333d',
+  opacity: IS_MOBILE ? 0.22 : 0.32,
 };
 
 const GLOBE_LAYOUT = {
@@ -415,7 +419,7 @@ export default function GlobalLocations() {
                   to whichever region grows a long list later. */}
               <div className={`${styles.locationList} ${region.locations.length > 4 ? styles.locationListGrid : ''}`}>
                 {region.locations.map(loc => (
-                  <div key={loc.name} className={`${styles.locItem} ${loc.isHQ ? styles.locHQ : ''}`}>
+                  <div key={loc.name} className={`${styles.locItem} ${loc.isHQ ? styles.locHQ : ''} ${loc.name === ACTIVE_CITY ? styles.locActive : ''}`}>
                     <span className={styles.locLeft}>
                       <span className={styles.locDot} aria-hidden="true" />
                       <span className={styles.locName}>{loc.name}</span>

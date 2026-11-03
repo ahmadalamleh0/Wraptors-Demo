@@ -5,6 +5,7 @@ import ServiceHero from './ServiceHero';
 import ServiceIntroSection from './ServiceIntroSection';
 import QuoteSection from './QuoteSection';
 import ServiceFaqSection from './ServiceFaqSection';
+import ServiceDetails from './ServiceDetails';
 import StarfieldBg from './StarfieldBg';
 import styles from './StarlightPage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
@@ -535,6 +536,8 @@ export default function StarlightPage() {
           <h2 className={styles.editorialTitle}>Crafted</h2>
         </div>
       </section>
+
+      <ServiceDetails service="starlight" />
 
       <QuoteSection
         id="cta"

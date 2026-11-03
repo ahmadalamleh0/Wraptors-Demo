@@ -9,11 +9,13 @@ import ServiceProcess from './ServiceProcess';
 import QuoteSection from './QuoteSection';
 import FaqAccordion from './FaqAccordion';
 import StarfieldBg from './StarfieldBg';
+import ProjectGallery from './ProjectGallery';
 import styles from './FocusServicePage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { useStructuredData } from '../lib/useStructuredData';
 import { SITE_URL } from '../lib/siteConfig';
-import { FOCUS_PAGE_PATH, publishedLinks, serviceSchema } from '../data/serviceSeo';
+import { FOCUS_PAGES, FOCUS_PAGE_PATH, publishedLinks, serviceSchema } from '../data/serviceSeo';
+import { PROJECT_GALLERIES } from '../data/projectGalleries';
 
 // Unpublished pages (waiting on photos or approval) stay out of the index
 // even in a production build. Restores whatever robots tag was there.
@@ -73,9 +75,26 @@ export default function FocusServicePage({ page }) {
   }, [page, url, crumbs]);
   useStructuredData(schema);
 
-  const media = page.heroMedia === 'starfield'
-    ? <StarfieldBg />
-    : <div className={styles.heroGradient} aria-hidden="true" />;
+  // Real project photo when the page has one; otherwise the starfield or
+  // the photo-free gradient backdrop.
+  const gallery = PROJECT_GALLERIES[page.slug];
+  const heroPhoto = gallery?.photos[0];
+  let media = <div className={styles.heroGradient} aria-hidden="true" />;
+  if (heroPhoto) {
+    media = (
+      <img
+        src={heroPhoto.src}
+        srcSet={`${heroPhoto.srcSmall} 720w, ${heroPhoto.src} 1440w`}
+        sizes="100vw"
+        alt=""
+        loading="eager"
+        fetchPriority="high"
+        style={{ objectPosition: gallery.heroPosition }}
+      />
+    );
+  } else if (page.heroMedia === 'starfield') {
+    media = <StarfieldBg />;
+  }
 
   return (
     <>
@@ -105,6 +124,8 @@ export default function FocusServicePage({ page }) {
           statement={page.intro.statement}
           description={page.intro.description}
         />
+
+        {gallery && <ProjectGallery gallery={gallery} />}
 
         <section className={styles.body}>
           {page.sections.map((s) => {
@@ -168,6 +189,18 @@ export default function FocusServicePage({ page }) {
             <Link to="/areas/al-quoz/" className={styles.pill}>The Al Quoz Studio</Link>
             <a href="#cta" className={`${styles.pill} ${styles.pillPrimary}`}>Request a Quote</a>
           </div>
+          {gallery && (
+            <>
+              <span className={`${styles.eyebrowSmall} ${styles.moreLabel}`}>More Wraptors Projects</span>
+              <div className={styles.onwardRow}>
+                {FOCUS_PAGES
+                  .filter((p) => p.slug !== page.slug && p.published && PROJECT_GALLERIES[p.slug])
+                  .map((p) => (
+                    <Link key={p.slug} to={FOCUS_PAGE_PATH(p.slug)} className={styles.pill}>{p.serviceName}</Link>
+                  ))}
+              </div>
+            </>
+          )}
           {page.disclaimer && <p className={styles.disclaimer}>{page.disclaimer}</p>}
         </section>
       </main>

@@ -191,6 +191,8 @@
 }
 .pillPrimary { color: #fff; border-color: rgba(212, 0, 0, 0.55); }
 
+.moreLabel { margin: 44px 0 16px; color: rgba(255, 255, 255, 0.5); }
+
 .disclaimer {
   max-width: 620px;
   margin: 40px auto 0;

@@ -147,3 +147,26 @@ Not changed, as instructed: reviews, the "16 Locations" stat, the aftercare stor
 | Model pages | All four `noindex, follow`, 0 sitemap entries, 0 pages linking (production build). |
 | Contact links | 74 `tel:+971567279727`. 13 WhatsApp links, all `wa.me/971567279727`. 113 Instagram links, all `https://www.instagram.com/wraptors.dubai/`, 0 to the brand account. |
 | Quote form | Tested in the browser with the Web3Forms request **intercepted** (nothing sent), on the Chrome Delete page and the homepage. The payload carries the service, vehicle, build detail and access key, and success shows "Request received". A failed submission falls back to WhatsApp with the enquiry prefilled. **Real delivery was not tested**: it needs `VITE_WEB3FORMS_KEY` set in Netlify's environment, which is not checked here, and one live test submission. |
+
+## 8. Project pages published, 2026-11-03 (local, not deployed)
+
+The client-supplied photos in `singleprojects/` are confirmed as real Wraptors projects for each vehicle and service.
+- Photos are matched by vehicle and converted to WebP at 1440 and 720 px: 21 photos, 16 MB down to 4.6 MB.
+- Captions say "Wraptors Project" and do not claim where the work was done. The photos appear to have been taken at a Wraptors studio outside Dubai.
+
+| Page | Photos used | Left out |
+|---|---|---|
+| `/services/porsche-ppf/` | 7, dark green 911, gold wheels | 1 grey 911: can't confirm it's the same car |
+| `/services/g-class-wrap/` | 6, black G-Class | 3 pre-made collages; 1 starlight interior that isn't confirmed for this car |
+| `/services/lamborghini-urus-ppf/` | 4, matte black Urus | 1 collage that includes a yellow Urus, which could imply an unconfirmed before/after |
+| `/services/rolls-royce-starlight-headliner/` | 4, white Rolls-Royce incl. the lit starlight cabin | none |
+
+- **Content:** each page leads with its gallery, then "What the Photos Show", then advice specific to that car. Only the vehicle and service are stated as fact. No coverage extent, film brand, finish name, star count or location is claimed.
+- **Indexing:** all four are indexable and in the sitemap. Wraps, PPF and Starlight get "Selected Work" cards. Each project page links to its service, the other projects, the studio and the quote form. The homepage Porsche 911 GTS card (same car) gets a "View Project" link.
+- **Details that would strengthen the pages:**
+  - PPF coverage extent for the Porsche and Urus.
+  - Whether either PPF changed the colour or finish. The homepage card lists the Porsche as "Gloss Midnight Green · Satin Gold Wheels · Ceramic Coating", which is not PPF, and the supplied folder also has a grey 911.
+  - What the G-Class wrap covered, and its colour.
+  - The Rolls-Royce model and the star count.
+
+Also on this date: Dubai's Global Locations globe and list styling now match the Hamilton and Tri-City sites, with Dubai highlighted. The YouTube reel no longer overlays titles on the video thumbnails.

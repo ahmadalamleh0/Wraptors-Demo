@@ -14,6 +14,10 @@
   <url><loc>https://wraptorsdubai.com/services/starlight/</loc><priority>0.8</priority></url>
   <url><loc>https://wraptorsdubai.com/services/custom-builds/</loc><priority>0.8</priority></url>
   <url><loc>https://wraptorsdubai.com/services/chrome-delete/</loc><priority>0.8</priority></url>
+  <url><loc>https://wraptorsdubai.com/services/g-class-wrap/</loc><priority>0.8</priority></url>
+  <url><loc>https://wraptorsdubai.com/services/lamborghini-urus-ppf/</loc><priority>0.8</priority></url>
+  <url><loc>https://wraptorsdubai.com/services/rolls-royce-starlight-headliner/</loc><priority>0.8</priority></url>
+  <url><loc>https://wraptorsdubai.com/services/porsche-ppf/</loc><priority>0.8</priority></url>
 
   <!-- GEO — service areas -->
   <url><loc>https://wraptorsdubai.com/areas/dubai/</loc><priority>0.8</priority></url>

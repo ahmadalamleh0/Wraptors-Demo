@@ -72,7 +72,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 64px;
+  gap: 56px;
   position: relative;
   z-index: 1;
 }
@@ -336,7 +336,7 @@
   align-items: stretch;
   max-width: 620px;
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.044);
+  border: 1px solid rgba(255,255,255,0.07);
   background: rgba(255,255,255,0.012);
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
@@ -355,7 +355,7 @@
 }
 
 .stat + .stat {
-  border-left: 1px solid rgba(255,255,255,0.044);
+  border-left: 1px solid rgba(255,255,255,0.07);
 }
 
 /* Subtle white top accent on first stat */
@@ -379,10 +379,10 @@
 
 .statLabel {
   font-family: var(--font-ui);
-  font-size: 9px;
-  letter-spacing: 0.38em;
+  font-size: 10.5px;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.26);
+  color: rgba(255,255,255,0.5);
   font-weight: 600;
 }
 
@@ -394,10 +394,10 @@
   display: flex;
   flex-direction: column;
   gap: 1px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.06);
   max-width: 1100px;
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.044);
+  border: 1px solid rgba(255,255,255,0.07);
 }
 
 .region {
@@ -406,7 +406,7 @@
   display: flex;
   flex-direction: column;
   gap: 22px;
-  border-top: 2px solid rgba(196,201,208,0.12);
+  border-top: 2px solid rgba(196,201,208,0.16);
   transition: background 0.3s;
 }
 
@@ -434,8 +434,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.038);
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 
 .regionFlag {
@@ -449,18 +449,18 @@
 
 .regionName {
   font-family: var(--font-ui);
-  font-size: 9.5px;
-  letter-spacing: 0.3em;
+  font-size: 12px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.62);
+  color: rgba(255,255,255,0.86);
   font-weight: 600;
   flex: 1;
 }
 
 .regionCount {
   font-family: var(--font-display);
-  font-size: 13px;
-  color: rgba(255,255,255,0.12);
+  font-size: 16px;
+  color: rgba(255,255,255,0.4);
   letter-spacing: 0.1em;
 }
 
@@ -511,17 +511,17 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.27);
+  background: rgba(255,255,255,0.36);
   flex-shrink: 0;
   transition: background 0.25s, box-shadow 0.25s;
 }
 
 .locName {
   font-family: var(--font-ui);
-  font-size: 10.5px;
-  letter-spacing: 0.15em;
+  font-size: 12px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.58);
+  color: rgba(255,255,255,0.72);
   font-weight: 600;
   transition: color 0.25s;
   /* Fallback only — the longest name (Mississauga) plus the HQ badge is
@@ -570,7 +570,21 @@
   box-shadow: 0 0 5px rgba(255,255,255,0.3);
 }
 
-.locHQ .locName { color: rgba(255,255,255,0.88); }
+.locHQ .locName { color: rgba(255,255,255,0.92); }
+
+/* Active location — this site's own studio. A faint white-tinted strip with
+   a white left edge; deliberately quieter than the HQ badge. */
+.locActive {
+  margin: -5px -8px;
+  padding: 5px 8px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.084), rgba(255,255,255,0.012));
+  box-shadow: inset 2px 0 0 rgba(255,255,255,0.85);
+}
+.locActive .locName { color: #fff; }
+.locActive .locDot {
+  background: #fff;
+  box-shadow: 0 0 6px rgba(255,255,255,0.36);
+}
 
 /* Hover states */
 .locItem:hover .locDot {
@@ -624,8 +638,8 @@
 
 /* ── Responsive ── */
 @media (max-width: 960px) {
-  .section  { padding: 110px 28px; }
-  .inner    { gap: 52px; }
+  .section  { padding: 88px 22px; }
+  .inner    { gap: 36px; }
   .globe,
   .globeWrap { width: clamp(280px, 72vw, 400px); height: clamp(280px, 72vw, 400px); }
   .aura1    { width: calc(clamp(280px, 72vw, 400px) + 36px); height: calc(clamp(280px, 72vw, 400px) + 36px); top: -18px; }
@@ -643,13 +657,15 @@
 
 @media (max-width: 560px) {
   .title        { font-size: clamp(40px, 9vw, 64px); }
-  .region       { padding: 24px 24px 30px; }
-  .regionCompact { padding: 16px 24px 18px; }
-  .statsRow     { max-width: 100%; }
-  .locName      { letter-spacing: 0.08em; overflow-wrap: normal; }
+  .region       { padding: 20px 18px 24px; gap: 16px; }
+  .regionCompact { padding: 16px 18px 18px; gap: 12px; }
+  .locationListGrid { column-gap: 14px; row-gap: 14px; }
+  .locName      { font-size: 11px; letter-spacing: 0.06em; overflow-wrap: normal; }
   /* A long name + HQ badge: the badge wraps beneath the name instead of
      the name breaking mid-word. */
   .locLeft      { flex-wrap: wrap; row-gap: 4px; }
+  .regionName   { font-size: 11px; letter-spacing: 0.16em; }
+  .statsRow     { max-width: 100%; }
 }
 
 /* Only truly tiny/legacy screens (well below any current phone — iPhone SE

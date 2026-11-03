@@ -32,6 +32,10 @@ export const SERVICE_CATALOG = {
   tint:      { label: 'Window Tint',           path: '/services/tint/' },
   starlight: { label: 'Starlight Headliner',   path: '/services/starlight/' },
   'chrome-delete': { label: 'Chrome Delete',     path: '/services/chrome-delete/' },
+  'rolls-royce-starlight': { label: 'Rolls-Royce Starlight Headliner', path: '/services/rolls-royce-starlight-headliner/' },
+  'porsche-ppf':   { label: 'Porsche PPF',       path: '/services/porsche-ppf/' },
+  'urus-ppf':      { label: 'Lamborghini Urus PPF', path: '/services/lamborghini-urus-ppf/' },
+  'g-class-wrap':  { label: 'G-Class Wrap',      path: '/services/g-class-wrap/' },
   commercial:{ label: 'Commercial Wrap',       path: '/services/wraps/' },
 };
 
@@ -94,22 +98,22 @@ export const COMMON_FAQS = [
 export const AREA_LINKS = {
   'dubai':              { guides: ['ppf-vs-ceramic-coating', 'window-tint-laws-dubai'], services: ['chrome-delete'] },
   'al-quoz':            { guides: ['changing-car-colour-dubai', 'ppf-vs-ceramic-coating'], services: ['chrome-delete', 'starlight'] },
-  'palm-jumeirah':      { guides: ['how-long-does-ppf-last-dubai', 'ceramic-coating-water-spots-dubai'], services: ['starlight'] },
+  'palm-jumeirah':      { guides: ['how-long-does-ppf-last-dubai', 'ceramic-coating-water-spots-dubai'], services: ['starlight', 'urus-ppf'] },
   'jumeirah':           { guides: ['window-tint-laws-dubai', 'window-tint-dubai-heat'], services: [] },
   'dubai-marina':       { guides: ['car-wrap-dubai-summer-heat', 'matte-satin-gloss-wrap-dubai'], services: ['chrome-delete'] },
   'jbr':                { guides: ['how-long-does-ppf-last-dubai', 'car-wrap-dubai-summer-heat'], services: [] },
-  'downtown-dubai':     { guides: ['changing-car-colour-dubai', 'matte-satin-gloss-wrap-dubai'], services: ['chrome-delete'] },
+  'downtown-dubai':     { guides: ['changing-car-colour-dubai', 'matte-satin-gloss-wrap-dubai'], services: ['chrome-delete', 'g-class-wrap'] },
   'business-bay':       { guides: ['is-ppf-worth-it-dubai', 'window-tint-laws-dubai'], services: [] },
   'difc':               { guides: ['clear-ppf-vs-colour-ppf', 'ceramic-tint-vs-regular-tint'], services: ['chrome-delete'] },
   'dubai-hills-estate': { guides: ['ppf-vs-ceramic-coating', 'how-long-does-window-tint-last-dubai'], services: [] },
-  'emirates-hills':     { guides: ['what-ceramic-coating-protects-dubai', 'clear-ppf-vs-colour-ppf'], services: ['chrome-delete'] },
+  'emirates-hills':     { guides: ['what-ceramic-coating-protects-dubai', 'clear-ppf-vs-colour-ppf'], services: ['chrome-delete', 'rolls-royce-starlight'] },
   'arabian-ranches':    { guides: ['how-long-does-ppf-last-dubai', 'window-tint-dubai-heat'], services: [] },
   'jlt':                { guides: ['is-ppf-worth-it-dubai', 'ceramic-tint-vs-regular-tint'], services: [] },
-  'motor-city':         { guides: ['vinyl-wrap-vs-colour-ppf', 'paint-correction-before-ceramic-coating'], services: ['chrome-delete'] },
+  'motor-city':         { guides: ['vinyl-wrap-vs-colour-ppf', 'paint-correction-before-ceramic-coating'], services: ['chrome-delete', 'porsche-ppf'] },
   'al-barsha':          { guides: ['dealer-vs-detailer-ceramic-coating-dubai', 'window-tinting-dubai-guide'], services: [] },
   'jvc':                { guides: ['is-ppf-worth-it-dubai', 'how-long-does-window-tint-last-dubai'], services: [] },
   'meydan':             { guides: ['matte-satin-gloss-wrap-dubai', 'clear-ppf-vs-colour-ppf'], services: ['chrome-delete', 'starlight'] },
-  'nad-al-sheba':       { guides: ['what-ceramic-coating-protects-dubai', 'ppf-vs-ceramic-coating'], services: ['starlight'] },
+  'nad-al-sheba':       { guides: ['what-ceramic-coating-protects-dubai', 'ppf-vs-ceramic-coating'], services: ['starlight', 'rolls-royce-starlight'] },
 };
 
 export const LOCATIONS = [

@@ -1,0 +1,144 @@
+/* Single-project gallery — same black, gapless editorial treatment as the
+   Wraps page spreads. */
+
+.section {
+  background: #000;
+  padding: 110px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.head {
+  text-align: center;
+  padding: 0 28px;
+  margin: 0 auto 48px;
+  max-width: 900px;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3.2rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.05;
+  margin: 0;
+}
+.titleSep { color: rgba(255, 255, 255, 0.35); }
+
+.img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Featured frame ── */
+.featured {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.visible .featured { opacity: 1; }
+.featured:hover .img { transform: scale(1.02); }
+
+.featuredOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.75) 100%);
+  pointer-events: none;
+}
+
+.caption {
+  position: absolute;
+  left: 56px;
+  bottom: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.captionEyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+.captionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.6vw, 3rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+}
+.captionDetail {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Grid: 3 per row on a 6-column track ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.tile {
+  grid-column: span 2;
+  aspect-ratio: 4 / 5;
+  margin: 0;
+  overflow: hidden;
+  background: #0a0a0a;
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.visible .tile { opacity: 1; transform: translateY(0); }
+.tile:hover .img { transform: scale(1.03); }
+
+.tileHalf { grid-column: span 3; aspect-ratio: 6 / 5; }
+.tileFull { grid-column: span 6; aspect-ratio: 21 / 9; }
+
+@media (max-width: 900px) {
+  .section { padding-top: 80px; }
+  .featured { aspect-ratio: 16 / 10; }
+  .caption { left: 24px; bottom: 24px; }
+}
+
+@media (max-width: 700px) {
+  .featured { aspect-ratio: 4 / 5; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tile,
+  .tileHalf,
+  .tileFull { grid-column: span 1; aspect-ratio: 4 / 5; }
+  .tileMobileFull { grid-column: span 2; aspect-ratio: 16 / 10; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured, .tile { opacity: 1; transform: none; transition: none; }
+  .img { transition: none; }
+}

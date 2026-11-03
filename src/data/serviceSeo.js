@@ -14,8 +14,10 @@
 //    URL, but carries `noindex`, is left out of sitemap.xml and is not
 //    linked from any other page. The model pages wait on real Dubai photos
 //    from the client (see DUBAI-FINAL-CHECKLIST.md). To publish one: add
-//    its photos (`gallery`), set `published: true` and add its URL to
-//    public/sitemap.xml. Links to it then appear automatically.
+//    its photos (src/data/projectGalleries.js), set `published: true` and
+//    add its URL to public/sitemap.xml. Links to it then appear
+//    automatically. All four were published on 2026-11-03 with the
+//    client's confirmed project photos.
 //
 // No prices, warranty terms, durability figures or customer projects are
 // stated anywhere below. Brand and model names are used descriptively;
@@ -103,63 +105,59 @@ export const FOCUS_PAGES = [
     ],
   },
 
+  // ── Project pages ────────────────────────────────────────────────────
+  // Each one is built around a real, client-confirmed Wraptors project
+  // (photos: src/data/projectGalleries.js). Confirmed: the vehicle and the
+  // service. Everything else described is what the photos visibly show.
+  // Not stated anywhere (not supplied): coverage extent, film or wrap
+  // brand, colour/finish names, star count, model years, where the work
+  // was done or how long it took.
   {
     slug: 'g-class-wrap',
-    published: false,
+    published: true,
     parent: { label: 'Car Wrapping', path: '/services/wraps/' },
     quoteService: 'wraps',
-    seoTitle: 'G-Class Wrap Dubai | Mercedes G-Wagon Wrapping | Wraptors',
-    metaDescription: 'G-Class wraps in Dubai at the Wraptors studio in Al Quoz: colour changes, satin and matte finishes and chrome delete, planned around the G-Wagon’s flat panels.',
+    seoTitle: 'G-Class Wrap Dubai | Mercedes G-Wagon Wrap Project | Wraptors',
+    metaDescription: 'A Wraptors Mercedes G-Class vehicle wrap project, and how we plan G-Class wraps around the flat panels, hinges and trim at our Al Quoz studio in Dubai.',
     serviceName: 'G-Class Wrap',
     eyebrow: 'Wraptors Dubai · G-Class Wrap',
-    headline: 'Square Lines. Exact Finish.',
-    supportingLine: 'Colour Change · Satin & Matte · Chrome Delete',
+    headline: 'Built Square.',
+    supportingLine: 'Mercedes G-Class · Vehicle Wrap',
     intro: {
-      kicker: 'Your G-Class',
-      statement: 'Redrawn.',
-      description: 'The Mercedes-Benz G-Class is one of the most wrapped vehicles in Dubai, and one of the least forgiving. Its large, flat panels show any stretch, ripple or uneven edge, and its exposed hardware means there is far more detail to work around than on a smooth modern SUV. At our Al Quoz studio, a G-Class wrap is planned around those details before any film is cut.',
+      kicker: 'The Project',
+      statement: 'G-Class.',
+      description: 'A black Mercedes G-Class from the Wraptors project collection, wrapped by the Wraptors team. Few cars are less forgiving to wrap. The large flat panels show any ripple or stretch mark, and the exposed hinges, trim strips and spare-wheel cover all have to be worked around cleanly.',
     },
     sections: [
       {
-        heading: 'Why the G-Class Is Different to Wrap',
+        heading: 'What the Photos Show',
         body: [
-          'Flat doors, a flat bonnet and upright sides mean light falls across each panel evenly, so a poorly laid film is easy to spot. The detail is in the hardware: the turn-signal housings on top of the front wings, the exposed door hinges, the trim strips along the doors, the wheel-arch flares and the spare-wheel cover on the tailgate.',
-          'Each of these is either removed or worked around so that the film finishes cleanly at the edge instead of stopping short or bridging gaps.',
+          'The gallery shows the finished car from the front, both sides and the rear: the flat doors and bonnet, the flared arches over the multi-spoke wheels, the spare-wheel cover on the tailgate, and the car parked outside a Wraptors studio.',
+          'Straight-on side profiles are the hardest test for a G-Class wrap, because light runs evenly across the whole flank and shows any flaw in the film.',
         ],
       },
       {
-        heading: 'Finishes That Suit the G-Class',
+        heading: 'Why the G-Class Is Different to Wrap',
         body: [
-          'Satin and matte finishes are popular on the G-Class because they emphasise its flat surfaces and hard edges. Gloss colours give a deeper, more reflective look. Many owners pair the colour change with a chrome delete on the grille, window surrounds, door strips and spare-wheel ring.',
+          'The detail is in the hardware: the turn-signal housings on top of the front wings, the exposed door hinges, the trim strips along the doors, the wheel-arch flares and the spare-wheel cover. Each is either removed or worked around so the film finishes cleanly at the edge instead of stopping short or bridging gaps.',
+        ],
+      },
+      {
+        heading: 'Planning a G-Class Wrap',
+        body: [
+          'Satin and matte finishes emphasise the G-Class’s flat surfaces and hard edges; gloss gives more depth and reflection. Many owners pair a wrap with a chrome delete on the grille, window surrounds and door strips, or with PPF on the upright front and lower doors, which take most of the stone chips and sand.',
+          'A full colour change can affect the colour recorded on the registration, so check the current Dubai Police and RTA requirements before booking.',
         ],
         links: [
           { label: 'Chrome Delete', to: '/services/chrome-delete/' },
-          { label: 'Matte, Satin or Gloss in Dubai', to: '/learn/matte-satin-gloss-wrap-dubai/' },
-        ],
-      },
-      {
-        heading: 'Protection Where a G-Class Takes Damage',
-        body: [
-          'The upright front, bonnet edge and lower doors take most of the stone chips and sand, especially on cars that see desert driving. PPF on those areas, under or instead of a wrap, protects the paint where it is most exposed.',
-        ],
-        links: [
           { label: 'Paint Protection Film', to: '/services/ppf/' },
-          { label: 'Vinyl Wrap vs Colour PPF', to: '/learn/vinyl-wrap-vs-colour-ppf/' },
-        ],
-      },
-      {
-        heading: 'Changing Colour in Dubai',
-        body: [
-          'A full colour change can affect the colour recorded on the vehicle’s registration, so check the current Dubai Police and RTA requirements before booking.',
-        ],
-        links: [
           { label: 'Changing Your Car Colour in Dubai', to: '/learn/changing-car-colour-dubai/' },
         ],
       },
     ],
     faqs: [
       { q: 'Can a G-Class be wrapped without removing the door hinges and trim?', a: 'Some pieces can be wrapped in place, but the cleanest results usually come from removing trim where practical so the film can be finished around the edges. We agree what comes off at the walkaround.' },
-      { q: 'Is satin or matte better than gloss on a G-Class?', a: 'Neither is better. It comes down to the look you want. Satin and matte emphasise the flat panels and hard edges, gloss gives more depth and reflection. We can show samples on the car before you choose.' },
+      { q: 'Is satin or matte better than gloss on a G-Class?', a: 'Neither is better; it comes down to the look you want. Satin and matte emphasise the flat panels and hard edges, gloss gives more depth and reflection. We can show samples on the car before you choose.' },
       { q: 'Can you wrap a G-Class and add PPF at the same time?', a: 'Yes. A common approach is PPF on the most exposed areas and a wrap for the colour change, planned together so the two finish cleanly.' },
     ],
     disclaimer: 'Mercedes-Benz, G-Class and G-Wagon are trademarks of Mercedes-Benz Group AG. Wraptors is an independent studio and is not affiliated with or endorsed by Mercedes-Benz.',
@@ -167,31 +165,32 @@ export const FOCUS_PAGES = [
 
   {
     slug: 'lamborghini-urus-ppf',
-    published: false,
+    published: true,
     parent: { label: 'Paint Protection Film', path: '/services/ppf/' },
     quoteService: 'ppf',
-    seoTitle: 'Lamborghini Urus PPF Dubai | Paint Protection Film | Wraptors',
-    metaDescription: 'Lamborghini Urus PPF in Dubai at the Wraptors studio in Al Quoz: front-end or full-body paint protection film planned around the Urus’s intakes, creases and arches.',
+    seoTitle: 'Lamborghini Urus PPF Dubai | Paint Protection Project | Wraptors',
+    metaDescription: 'A Wraptors Lamborghini Urus paint protection film project in matte black, and how we plan Urus PPF around its intakes, creases and arches in Dubai.',
     serviceName: 'Lamborghini Urus PPF',
     eyebrow: 'Wraptors Dubai · Lamborghini Urus PPF',
     headline: 'Protect The Edges.',
-    supportingLine: 'Front-End PPF · Full-Body PPF · Matte PPF',
+    supportingLine: 'Lamborghini Urus · Paint Protection Film',
     intro: {
-      kicker: 'Your Urus',
-      statement: 'Preserved.',
-      description: 'The Lamborghini Urus is driven like an SUV and shaped like a supercar. It covers more daily distance than most Lamborghinis, on the same motorways and desert roads as every other car in Dubai, while its low nose, deep intakes and sharp creases make it harder to protect than a typical SUV. At our Al Quoz studio, Urus PPF is planned around how the car is actually used.',
+      kicker: 'The Project',
+      statement: 'Urus.',
+      description: 'A matte black Lamborghini Urus from the Wraptors project collection, protected with paint protection film by the Wraptors team. The Urus is used like an SUV but shaped like a supercar, so the film has to follow sharp creases, deep intakes and wide arches without drawing attention to itself.',
     },
     sections: [
       {
-        heading: 'Where a Urus Takes Damage',
+        heading: 'What the Photos Show',
         body: [
-          'The front bumper, the leading edge of the long bonnet and the headlights take most of the stone chips. The wide rear arches and lower doors catch debris thrown up by the front wheels, and the lower sills pick up sand and grit.',
+          'The gallery stays close to the parts of a Urus that take the most punishment: the front three-quarter with its deep intakes, the wide rear arches over the wheels, and the lower doors and sills. These are the areas debris from the road and the car’s own front tyres reaches first.',
+          'On a matte car, protection also has to keep the surface looking matte. Film that adds shine would change the look the owner chose.',
         ],
       },
       {
-        heading: 'Front-End or Full-Body Coverage',
+        heading: 'Where a Urus Takes Damage',
         body: [
-          'Front-end coverage protects the bumper, bonnet, wings, headlights and mirrors: the areas that are hit most often. Full-body PPF covers every painted panel, so the whole car keeps its original finish. Which one makes sense depends on how often the car is driven, where it is parked and how long you plan to keep it.',
+          'The front bumper, the leading edge of the long bonnet and the headlights take most of the stone chips. The wide rear arches and lower doors catch debris thrown up by the front wheels, and the sills pick up sand and grit, especially on cars that see motorway and desert driving.',
         ],
         links: [
           { label: 'Is PPF Worth It in Dubai?', to: '/learn/is-ppf-worth-it-dubai/' },
@@ -200,13 +199,7 @@ export const FOCUS_PAGES = [
       {
         heading: 'Fitting Film Around the Urus’s Shape',
         body: [
-          'The Urus has deep intakes, sharp body creases and tight radii around the lights and vents. Film has to be stretched, relieved and finished carefully in these areas so the edges do not lift and the creases stay crisp.',
-        ],
-      },
-      {
-        heading: 'Gloss, Matte and Colour PPF',
-        body: [
-          'Gloss PPF keeps factory gloss paint looking as it left the factory. On a matte factory finish, matte PPF protects the paint without adding shine, and it can also give gloss paint a satin look. Colour PPF changes the colour while protecting the paint in a single film.',
+          'The Urus has deep intakes, sharp body creases and tight radii around the lights and vents. Film has to be stretched, relieved and finished carefully in these areas so the edges do not lift and the creases stay crisp. Coverage, from the front end to the full body, is agreed with the owner around how the car is driven and parked.',
         ],
         links: [
           { label: 'Clear PPF vs Colour PPF', to: '/learn/clear-ppf-vs-colour-ppf/' },
@@ -216,7 +209,7 @@ export const FOCUS_PAGES = [
     ],
     faqs: [
       { q: 'Should I protect a new Urus before driving it?', a: 'If you plan to fit PPF, before the car covers many kilometres is best. The paint is at its cleanest and needs the least preparation.' },
-      { q: 'Can PPF go on a matte Urus?', a: 'Yes. A matte or satin PPF protects matte factory paint without making it glossy. We confirm the film for your car at the quote stage.' },
+      { q: 'Can PPF go on a matte Urus?', a: 'Yes. A matte or satin PPF protects a matte finish without making it glossy. We confirm the right film for your car at the quote stage.' },
       { q: 'Can ceramic coating go over PPF on a Urus?', a: 'Yes. Many owners coat over the film to make washing easier. PPF handles chips and scratches; the coating handles gloss and easy cleaning.' },
     ],
     disclaimer: 'Lamborghini and Urus are trademarks of Automobili Lamborghini S.p.A. Wraptors is an independent studio and is not affiliated with or endorsed by Lamborghini.',
@@ -224,42 +217,42 @@ export const FOCUS_PAGES = [
 
   {
     slug: 'rolls-royce-starlight-headliner',
-    published: false,
+    published: true,
     parent: { label: 'Starlight Headliner', path: '/services/starlight/' },
     quoteService: 'starlight',
     heroMedia: 'starfield',
-    seoTitle: 'Rolls-Royce Starlight Headliner Dubai | Fibre-Optic Roof | Wraptors',
-    metaDescription: 'Fibre-optic starlight headliners for Rolls-Royce models in Dubai, installed at the Wraptors studio in Al Quoz, with custom star density, colour and layout.',
+    seoTitle: 'Rolls-Royce Starlight Headliner Dubai | Wraptors Project',
+    metaDescription: 'A Wraptors starlight headliner project in a white Rolls-Royce, and how we plan fibre-optic starlight roofs for Rolls-Royce cabins at our Dubai studio.',
     serviceName: 'Rolls-Royce Starlight Headliner',
     eyebrow: 'Wraptors Dubai · Rolls-Royce Starlight Headliner',
     headline: 'A Sky Of Your Own.',
-    supportingLine: 'Fibre-Optic Stars · Custom Colour · Shooting Stars',
+    supportingLine: 'Rolls-Royce · Fibre-Optic Starlight Headliner',
     intro: {
-      kicker: 'Your Cabin',
+      kicker: 'The Project',
       statement: 'After Dark.',
-      description: 'Rolls-Royce made the starlit roof famous with its factory Starlight Headliner option, but many Rolls-Royce cars were built without it. At our Al Quoz studio in Dubai, we install fibre-optic starlight headliners in Rolls-Royce cabins, with the density, colour and layout planned around the car and the owner.',
+      description: 'A white Rolls-Royce from the Wraptors project collection, fitted with a fibre-optic starlight headliner by the Wraptors team. With the lights on, the roof lining becomes a field of small points of light above the rear cabin.',
     },
     sections: [
       {
+        heading: 'What the Photos Show',
+        body: [
+          'The main photo is taken inside the cabin with the starlight lit, looking across the stars above the rear seats. The others show the car itself: the white body with its darker upper section, the Rolls-Royce badge on the bodywork and the emblem up close.',
+        ],
+      },
+      {
         heading: 'For Cars Built Without the Factory Option',
         body: [
-          'Owners usually come to us because their Rolls-Royce was ordered without a starlight roof, because they bought the car used, or because they want a layout or colour the original specification did not offer.',
+          'Rolls-Royce made the starlit roof famous with its factory Starlight Headliner option, but many Rolls-Royce cars were built without it. Owners come to us because their car was ordered without one, because they bought it used, or because they want a layout or colour the original specification did not offer.',
           'Our installation is an aftermarket fibre-optic headliner, not a Rolls-Royce factory part. If your car is still under the manufacturer’s warranty, check with your dealer how an aftermarket interior change is treated before booking.',
         ],
       },
       {
-        heading: 'Density, Colour and Shooting Stars',
+        heading: 'Planning Your Own',
         body: [
-          'Star density runs from around 500 stars for a subtle effect up to 2,500 for a fuller sky, and the colour can be set from pure white through warm and cool tones. A shooting-star effect can be added for occasional movement across the ceiling.',
+          'Star density runs from around 500 stars for a subtle effect up to 2,500 for a fuller sky, and the colour can be set from pure white through warm and cool tones, with an optional shooting-star effect. Every model has its own headliner shape and roof hardware, so we assess the cabin before confirming a layout.',
         ],
         links: [
           { label: 'Design Your Night Sky', to: '/services/starlight/' },
-        ],
-      },
-      {
-        heading: 'Planned Around the Rolls-Royce Cabin',
-        body: [
-          'Every model has its own headliner shape, lighting and roof hardware. A car with a sunroof has less headliner to work with than one without. We assess the headliner before confirming a layout, so the finished sky looks as though it belongs in the cabin rather than having been added afterwards.',
         ],
       },
     ],
@@ -273,40 +266,40 @@ export const FOCUS_PAGES = [
 
   {
     slug: 'porsche-ppf',
-    published: false,
+    published: true,
     parent: { label: 'Paint Protection Film', path: '/services/ppf/' },
     quoteService: 'ppf',
-    seoTitle: 'Porsche PPF Dubai | 911, Cayenne & Taycan Paint Protection | Wraptors',
-    metaDescription: 'Porsche PPF in Dubai at the Wraptors studio in Al Quoz: paint protection film for the 911, Cayenne, Macan and Taycan, from front-end to full-body coverage.',
+    seoTitle: 'Porsche 911 PPF Dubai | Paint Protection Film Project | Wraptors',
+    metaDescription: 'A Wraptors Porsche 911 paint protection film project in dark green with gold wheels, and how we plan 911 PPF at our studio in Al Quoz, Dubai.',
     serviceName: 'Porsche PPF',
     eyebrow: 'Wraptors Dubai · Porsche PPF',
     headline: 'Keep It Factory.',
-    supportingLine: '911 · Cayenne · Macan · Taycan',
+    supportingLine: 'Porsche 911 · Paint Protection Film',
     intro: {
-      kicker: 'Your Porsche',
-      statement: 'Protected.',
-      description: 'Porsche owners tend to drive their cars properly, and the paint shows it. Stone chips across the nose and the wide rear arches are the most common complaint, whether the car is a 911 on weekend drives or a Cayenne doing the school run. At our Al Quoz studio in Dubai, Porsche PPF is planned around the model and how it is driven.',
+      kicker: 'The Project',
+      statement: '911.',
+      description: 'A dark green Porsche 911 on gold wheels from the Wraptors project collection, protected with paint protection film by the Wraptors team. On a car like this the colour is the point, so the film has one job: keep the finish looking exactly as it does while the car is driven.',
     },
     sections: [
       {
-        heading: 'The 911’s Rear Arches',
+        heading: 'What the Photos Show',
         body: [
-          'The 911 is wide at the rear and narrow at the front, so the rear arches sit directly in the path of debris thrown up by the front tyres. Along with the front bumper, bonnet and headlights, they are one of the first places a 911 picks up chips. Covering the rear arches is a common addition to front-end protection.',
+          'The gallery covers the car from every side: the front three-quarter, the bonnet, headlights and Porsche crest, the rear arch over the gold wheel, and the rear deck with its Porsche lettering. Those are the same areas that pick up the most stone chips on a 911.',
         ],
       },
       {
-        heading: 'Cayenne, Macan and Taycan',
+        heading: 'The 911’s Rear Arches',
         body: [
-          'The SUVs and the Taycan cover far more daily distance. Front-end PPF protects the bumper, bonnet, wings and mirrors, and full-body coverage keeps the whole car in its original finish. The lower doors and sills are worth considering on cars that see sand and gravel.',
+          'The 911 is wide at the rear and narrow at the front, so the rear arches sit directly in the path of debris thrown up by the front tyres. Along with the front bumper, bonnet and headlights, they are one of the first places a 911 picks up chips, which is why the rear arches are a common addition to front-end protection.',
         ],
         links: [
           { label: 'Is PPF Worth It in Dubai?', to: '/learn/is-ppf-worth-it-dubai/' },
         ],
       },
       {
-        heading: 'Special Colours and Satin PPF',
+        heading: 'Protecting a Colour You Chose',
         body: [
-          'Special-order and Paint to Sample colours are difficult to match if a panel ever needs repainting, which makes protecting the original paint more worthwhile. Satin PPF can also give a gloss Porsche a satin look while protecting it, and the look can be reversed later.',
+          'Special-order and Paint to Sample colours are difficult to match if a panel ever needs repainting, which makes protecting the original paint more worthwhile. PPF can be finished in gloss to keep the look as it is, or in satin to change gloss paint to a satin look that can be reversed later.',
         ],
         links: [
           { label: 'Clear PPF vs Colour PPF', to: '/learn/clear-ppf-vs-colour-ppf/' },
@@ -315,11 +308,11 @@ export const FOCUS_PAGES = [
       },
     ],
     faqs: [
-      { q: 'What PPF coverage do most Porsche owners choose?', a: 'Front-end coverage is the most common starting point, with the rear arches added on a 911. Full-body PPF suits owners who want every panel protected. We recommend coverage after seeing the car and hearing how it is driven.' },
+      { q: 'What PPF coverage do most 911 owners choose?', a: 'Front-end coverage is the most common starting point, often with the rear arches added. Full-body PPF suits owners who want every panel protected. We recommend coverage after seeing the car and hearing how it is driven.' },
       { q: 'Can PPF be fitted to a GT car’s front splitter and aero parts?', a: 'Exposed aero parts can usually be covered, depending on their shape and material. We assess each part at the walkaround.' },
-      { q: 'Will PPF change the colour of my Porsche?', a: 'Clear gloss PPF keeps the original look. Satin PPF changes gloss paint to a satin finish, and colour PPF changes the colour, both while protecting the paint.' },
+      { q: 'Can ceramic coating go over PPF on a Porsche?', a: 'Yes. Coating over the film adds gloss and makes washing easier, while the PPF underneath handles chips and scratches.' },
     ],
-    disclaimer: 'Porsche, 911, Cayenne, Macan and Taycan are trademarks of Dr. Ing. h.c. F. Porsche AG. Wraptors is an independent studio and is not affiliated with or endorsed by Porsche.',
+    disclaimer: 'Porsche and 911 are trademarks of Dr. Ing. h.c. F. Porsche AG. Wraptors is an independent studio and is not affiliated with or endorsed by Porsche.',
   },
 ];
 
@@ -339,6 +332,7 @@ export function publishedLinks(links = []) {
 export const SERVICE_DETAILS = {
   wraps: {
     serviceName: 'Car Wrapping',
+    projects: ['g-class-wrap'],
     path: '/services/wraps/',
     eyebrow: 'Car Wrapping Dubai',
     heading: 'Car Wrapping in Dubai, From Our Al Quoz Studio',
@@ -352,13 +346,13 @@ export const SERVICE_DETAILS = {
       { heading: 'Changing Your Car’s Colour', body: 'A full colour change can affect your registration details. Check the current Dubai Police and RTA requirements before booking.', links: [{ label: 'What to Know Before You Wrap', to: '/learn/changing-car-colour-dubai/' }] },
     ],
     links: [
-      { label: 'G-Class Wrap', to: '/services/g-class-wrap/' },
       { label: 'Paint Protection Film', to: '/services/ppf/' },
       { label: 'Visit the Al Quoz Studio', to: '/areas/al-quoz/' },
     ],
   },
   ppf: {
     serviceName: 'Paint Protection Film',
+    projects: ['porsche-ppf', 'lamborghini-urus-ppf'],
     path: '/services/ppf/',
     eyebrow: 'PPF Dubai',
     heading: 'PPF in Dubai: Coverage, Film and Care',
@@ -370,8 +364,6 @@ export const SERVICE_DETAILS = {
       { heading: 'How Long PPF Lasts in Dubai', body: 'Lifespan depends on the film, the coverage, how the car is parked and how it is washed. Heat and sun are the main factors here.', links: [{ label: 'PPF Lifespan in Dubai', to: '/learn/how-long-does-ppf-last-dubai/' }] },
     ],
     links: [
-      { label: 'Lamborghini Urus PPF', to: '/services/lamborghini-urus-ppf/' },
-      { label: 'Porsche PPF', to: '/services/porsche-ppf/' },
       { label: 'Ceramic Coating', to: '/services/ceramic/' },
       { label: 'Visit the Al Quoz Studio', to: '/areas/al-quoz/' },
     ],
@@ -390,6 +382,24 @@ export const SERVICE_DETAILS = {
     ],
     links: [
       { label: 'Paint Protection Film', to: '/services/ppf/' },
+      { label: 'Window Tint', to: '/services/tint/' },
+      { label: 'Visit the Al Quoz Studio', to: '/areas/al-quoz/' },
+    ],
+  },
+  starlight: {
+    serviceName: 'Starlight Headliner',
+    path: '/services/starlight/',
+    projects: ['rolls-royce-starlight-headliner'],
+    eyebrow: 'Starlight Headliner Dubai',
+    heading: 'Starlight Headliners in Dubai',
+    lead: 'A fibre-optic starlight headliner turns the roof lining into a night sky. At our Al Quoz studio, star density, colour and layout are planned around the cabin before the headliner is fitted.',
+    items: [
+      { heading: 'Density and Colour', body: 'Star density runs from around 500 stars for a subtle effect up to 2,500 for a fuller sky, with the colour chosen from pure white through warm and cool tones.' },
+      { heading: 'Shooting Stars', body: 'An optional shooting-star effect adds occasional movement across the ceiling on top of the fixed layout.' },
+      { heading: 'Planned Around the Cabin', body: 'Headliner shape, sunroofs and roof hardware all affect the layout, so we assess the cabin before confirming a design.' },
+      { heading: 'Night-Time Visibility and Comfort', body: 'Brightness and colour are chosen for the cabin at night, so the sky reads as a soft background rather than a distraction.' },
+    ],
+    links: [
       { label: 'Window Tint', to: '/services/tint/' },
       { label: 'Visit the Al Quoz Studio', to: '/areas/al-quoz/' },
     ],
