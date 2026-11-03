@@ -206,7 +206,7 @@ const BUILDS = [
   // German Precision
   { brandName: "BRABUS 800 S-Class", logo: amgLogo,       mainImage: amg2,       media: [amg2, amg1, amg3, amg4, amg5, amg6],                                 serviceTags: ["RASPBERRY BLUE", "BRABUS CONVERSION", "STARLIGHT"],            category: "german-precision" },
   { brandName: "BMW G80 M3",         logo: bmwLogo,       mainImage: bmw1,       media: [bmw1, bmw2, bmw3, bmw4, bmw5, bmw6, bmw7],                           serviceTags: ["SATIN BLACK", "ORANGE CALIPERS", "WINDOW TINTS"],              category: "german-precision" },
-  { brandName: "Porsche 911 GTS",    logo: porscheLogo,   mainImage: porsch2,    media: [porsch2, porsch1, porsch3, porsch4, porsch5, porsch6],                 serviceTags: ["GLOSS MIDNIGHT GREEN", "SATIN GOLD WHEELS", "CERAMIC COATING"], category: "german-precision", projectPath: "/services/porsche-ppf/" },
+  { brandName: "Porsche 911 GTS",    logo: porscheLogo,   mainImage: porsch2,    media: [porsch2, porsch1, porsch3, porsch4, porsch5, porsch6],                 serviceTags: ["GLOSS MIDNIGHT GREEN", "SATIN GOLD WHEELS", "PPF", "CERAMIC COATING"], category: "german-precision", projectPath: "/services/porsche-ppf/" },
   { brandName: "Mercedes S580",      logo: maybachLogo,   mainImage: maybach1,   media: [maybach1, maybach2, maybach3, maybach4, maybach5, maybach6],           serviceTags: ["TWO-TONE", "SATIN WHITE ALUMINUM"],                            category: "german-precision" },
   { brandName: "Audi RS6",           logo: audiLogo,      mainImage: audi1,      media: [audi1, audi2, audi3, audi4, audi5, audi6, audi7],                     serviceTags: ["PAINT PROTECTION FILM"],                                                         category: "german-precision" },
 

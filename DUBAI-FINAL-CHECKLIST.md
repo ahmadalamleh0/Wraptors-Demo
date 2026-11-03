@@ -192,3 +192,10 @@ Also on this date: Dubai's Global Locations globe and list styling now match the
 - **Other changes the same day (all three sites):**
   - Homepage order: Visit Us, Service Areas, brands banner, Global Locations, quote form.
   - New mobile floating "Get a Quote" link. It hides over the hero, the quote form and the footer.
+
+## 10. Final consistency check, 2026-11-03 (development frozen)
+
+- **Porsche 911:** the homepage card now also lists **PPF** (confirmed), next to its existing Gloss Midnight Green, Satin Gold Wheels and Ceramic Coating tags. The project page says "dark green with gold wheels" and "protected with paint protection film". Neither says the green is colour PPF.
+- **Project titles:** these no longer read as Dubai-completed projects. "… PPF Dubai | Paint Protection Film | Wraptors" replaces "… Project". The project text says "Wraptors project collection" and makes no studio-location claim. "Dubai" refers only to the service offered at the Al Quoz studio.
+- **Verified:** 60/60 pages build. The sitemap has 60 URLs, all indexable with self-canonicals, and the built site has 0 noindex pages. Galleries: G-Class 6, Urus 4, Rolls-Royce 4, Porsche 7. Selected Work links: Wraps → G-Class; PPF → Porsche and Urus; Starlight → Rolls-Royce. All 12 footer service links resolve. Browser checks at 1440, 834 and 390px are clean.
+- **Unchanged:** reviews, hero, 16 Locations, aftercare store and pricing.
