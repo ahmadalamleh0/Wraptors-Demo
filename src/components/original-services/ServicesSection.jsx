@@ -24,17 +24,17 @@ const SERVICES = [
     size: 'wide',
   },
   {
-    name: 'Paint Protection Film',
-    to: '/services/ppf/',
-    description: 'Invisible protection from chips and road wear.',
-    image: imgPPF,
-    size: 'standard',
-  },
-  {
     name: 'Starlight Headliner',
     to: '/services/starlight/',
     description: 'A luxury interior upgrade with a custom illuminated ceiling finish.',
     image: imgStarlight,
+    size: 'standard',
+  },
+  {
+    name: 'Paint Protection Film',
+    to: '/services/ppf/',
+    description: 'Invisible protection from chips and road wear.',
+    image: imgPPF,
     size: 'standard',
   },
   {
