@@ -1,13 +1,11 @@
-/* ══ STATEMENT ══
-   Near-black (was white, client request 2026-11-04), matching Hamilton and
-   Tri-City: a touch lighter than its neighbours in the middle, easing from
-   the services section's #050505 at the top into black at the bottom. */
+/* ══ STATEMENT — editorial near-black panel between the service tiles and
+   the next section. The section itself is black (continuous with the tiles
+   above); the panel tone comes from .panel, which GSAP wipes in from the
+   top. ══ */
 .section {
   position: relative;
-  background:
-    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255, 255, 255, 0.025), transparent 70%),
-    linear-gradient(180deg, #050505 0%, #0b0b0b 30%, #0b0b0b 70%, #000 100%);
-  min-height: 100vh;
+  background: #000;
+  min-height: clamp(480px, 72vh, 760px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,26 +13,43 @@
   padding: 120px 48px;
 }
 
-/* Full-screen black plane — GSAP dissolves it on entry, restores it on exit.
-   No CSS gradients needed: the only darkness is this overlay, fully GSAP-controlled. */
-.blackOverlay {
+/* Full-bleed near-black plane. Visible by default (no JS / reduced
+   motion); GSAP clips it to nothing and wipes it open as the section
+   enters. A touch lighter than its neighbours in the middle, easing to
+   the services section's #050505 at the top and to black at the bottom so
+   both edges blend into the surrounding sections. */
+.panel {
   position: absolute;
   inset: 0;
-  background: #000;
-  z-index: 10;
-  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255, 255, 255, 0.025), transparent 70%),
+    linear-gradient(180deg, #050505 0%, #0b0b0b 30%, #0b0b0b 70%, #000 100%);
+  z-index: 0;
+  will-change: clip-path;
 }
 
-/* ── Content — sits behind the overlay until it clears ── */
 .inner {
   position: relative;
-  z-index: 5;
+  z-index: 1;
   max-width: 1300px;
   width: 100%;
   text-align: center;
 }
 
-/* ── Context line — subdued setup for the single statement below ── */
+/* Each line rises out of its own mask. A little vertical padding keeps
+   the heavy display face (and its text-stroke) from being clipped. */
+.mask {
+  display: block;
+  overflow: hidden;
+  padding: 0.06em 0;
+}
+
+.lineInner {
+  display: block;
+  will-change: transform;
+}
+
+/* ── Context line — subdued setup for the statement below ── */
 .contextLine {
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 2.6vw, 3.4rem);
@@ -51,12 +66,11 @@
   width: 52px;
   height: 1px;
   background: rgba(180, 0, 0, 0.5);
-  margin: 44px auto;
-  box-shadow: 0 0 6px rgba(180, 0, 0, 0.12);
+  margin: 40px auto;
+  transform-origin: center;
 }
 
-/* ── "YOU SET THE TONE." — now the section's one statement, so it carries
-   real weight, just not the old single-word-payoff scale. ── */
+/* ── "YOU SET THE TONE." ── */
 .mainLine {
   font-family: var(--font-display);
   font-size: clamp(3.2rem, 7.5vw, 10rem);
@@ -69,24 +83,15 @@
   margin: 0;
 }
 
-/* ── Mobile — overlay fades on scroll-in, text cascades after ── */
 @media (max-width: 768px) {
-  /* Bottom padding trimmed further, and the ruler's own margins are now
-     asymmetric (tighter above than below) rather than centered, so the
-     divider reads as closer to the first line while the whole block
-     still tightens overall. */
-  .section      { padding: 62px 36px 54px; min-height: auto; }
-  .contextLine  { font-size: clamp(1.1rem, 5.5vw, 2.4rem); letter-spacing: 0.06em; will-change: opacity, transform; }
-  .ruler        { margin: 14px auto 22px; will-change: opacity, transform; }
-  .mainLine     { font-size: clamp(2.6rem, 11vw, 6rem); will-change: opacity, transform; }
-  /* Overlay stays visible on mobile — JS fades it out when section enters view */
-
-  /* The old white panel needed black fade strips at its top and bottom
-     edges; the near-black panel blends on its own, so they were removed. */
+  .section      { min-height: 0; padding: 64px 32px 60px; }
+  .contextLine  { font-size: clamp(1.1rem, 5.5vw, 2.4rem); letter-spacing: 0.06em; }
+  .ruler        { margin: 16px auto 22px; }
+  .mainLine     { font-size: clamp(2.6rem, 11vw, 6rem); }
 }
 
 @media (max-width: 480px) {
-  .section      { padding: 48px 28px 42px; }
+  .section      { padding: 54px 26px 50px; }
   .contextLine  { font-size: 6vw; }
   .mainLine     { font-size: 12.5vw; }
 }
