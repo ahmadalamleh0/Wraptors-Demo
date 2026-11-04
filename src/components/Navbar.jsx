@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
+import { STUDIO_PHONE, STUDIO_PHONE_DISPLAY, STUDIO_EMAIL } from '../lib/studioContact';
 import uaeFlag from '../../UAE(FLAG).svg';
 import { pagePath } from '../lib/siteConfig';
 
@@ -34,6 +35,23 @@ const MOBILE_SOCIALS = [
   // generic linkedin.com homepage).
   { label: 'LinkedIn',  href: null, icon: <LinkedInGlyph /> },
 ].filter(s => s.href);
+
+function PhoneGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  );
+}
+
+function MailGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2" />
+      <path d="m3 6 9 7 9-7" />
+    </svg>
+  );
+}
 
 function InstagramGlyph() {
   return (
@@ -181,6 +199,21 @@ export default function Navbar({ alwaysVisible = false }) {
   return (
     <>
     <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''} ${!linksRevealed ? styles.navHeroMode : ''}`}>
+
+      {/* Call / Email — left side of the bar (the logo is centred and the
+          links/burger sit right). Icons only on smaller screens, icon +
+          label on wide desktop. Hidden with the rest of the nav items
+          during the homepage hero reveal. */}
+      <div className={styles.contact}>
+        <a href={`tel:${STUDIO_PHONE}`} className={styles.contactBtn} aria-label={`Call the studio: ${STUDIO_PHONE_DISPLAY}`} title={STUDIO_PHONE_DISPLAY}>
+          <PhoneGlyph />
+          <span className={styles.contactLabel}>Call</span>
+        </a>
+        <a href={`mailto:${STUDIO_EMAIL}`} className={styles.contactBtn} aria-label={`Email the studio: ${STUDIO_EMAIL}`} title={STUDIO_EMAIL}>
+          <MailGlyph />
+          <span className={styles.contactLabel}>Email</span>
+        </a>
+      </div>
 
       {/* Logo mark, with a small "Dubai Edition" label above it */}
       <a href="/" className={styles.logo} aria-label="Wraptors — back to home">

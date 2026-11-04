@@ -3,9 +3,8 @@ import { WHATSAPP_NUMBER } from '../lib/whatsappEnquiry';
 
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
-// Shared floating WhatsApp button for the main service pages (Vehicle
-// Wraps, PPF, Ceramic Coating, Window Tint). One component, one place to
-// maintain — drop <FloatingWhatsApp /> into a page to add it.
+// Site-wide floating WhatsApp button, rendered once in App.jsx after the
+// routes so it appears on every page. One component, one place to maintain.
 export default function FloatingWhatsApp() {
   return (
     <a

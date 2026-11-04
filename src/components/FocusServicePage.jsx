@@ -2,7 +2,6 @@ import { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import FloatingWhatsApp from './FloatingWhatsApp';
 import ServiceHero from './ServiceHero';
 import ServiceIntroSection from './ServiceIntroSection';
 import ServiceProcess from './ServiceProcess';
@@ -205,7 +204,6 @@ export default function FocusServicePage({ page }) {
         </section>
       </main>
       <Footer solid />
-      <FloatingWhatsApp />
     </>
   );
 }
