@@ -1,7 +1,12 @@
-/* ══ STATEMENT ══ */
+/* ══ STATEMENT ══
+   Near-black (was white, client request 2026-11-04), matching Hamilton and
+   Tri-City: a touch lighter than its neighbours in the middle, easing from
+   the services section's #050505 at the top into black at the bottom. */
 .section {
   position: relative;
-  background: #fff;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255, 255, 255, 0.025), transparent 70%),
+    linear-gradient(180deg, #050505 0%, #0b0b0b 30%, #0b0b0b 70%, #000 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -36,7 +41,7 @@
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.38);
+  color: rgba(255, 255, 255, 0.46);
   line-height: 1.25;
   margin: 0;
 }
@@ -45,9 +50,9 @@
 .ruler {
   width: 52px;
   height: 1px;
-  background: rgba(180, 0, 0, 0.65);
+  background: rgba(180, 0, 0, 0.5);
   margin: 44px auto;
-  box-shadow: 0 0 6px rgba(180, 0, 0, 0.20);
+  box-shadow: 0 0 6px rgba(180, 0, 0, 0.12);
 }
 
 /* ── "YOU SET THE TONE." — now the section's one statement, so it carries
@@ -59,7 +64,7 @@
   -webkit-text-stroke: 0.5px currentColor;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: #000;
+  color: #ecebe8;
   line-height: 0.95;
   margin: 0;
 }
@@ -70,41 +75,18 @@
      asymmetric (tighter above than below) rather than centered, so the
      divider reads as closer to the first line while the whole block
      still tightens overall. */
-  .section      { padding: 68px 36px 60px; min-height: auto; }
+  .section      { padding: 62px 36px 54px; min-height: auto; }
   .contextLine  { font-size: clamp(1.1rem, 5.5vw, 2.4rem); letter-spacing: 0.06em; will-change: opacity, transform; }
   .ruler        { margin: 14px auto 22px; will-change: opacity, transform; }
   .mainLine     { font-size: clamp(2.6rem, 11vw, 6rem); will-change: opacity, transform; }
   /* Overlay stays visible on mobile — JS fades it out when section enters view */
 
-  /* Bottom gradient — bridges into the dark Masterpieces header below.
-     Shorter still, and the darkening itself is pushed later inside that
-     shorter span (55% vs 30%), so the visible fade is really only the
-     last ~15px right at the seam — the headline above it stays on clean
-     white rather than reading as sitting inside the transition. */
-  .section::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 40px;
-    background: linear-gradient(to bottom, transparent 0%, transparent 55%, rgba(0,0,0,0.7) 80%, #000 100%);
-    z-index: 11;
-    pointer-events: none;
-  }
-
-  /* Top gradient — bridges entry from dark Services section */
-  .section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: linear-gradient(to bottom, #000 0%, transparent 100%);
-    z-index: 11;
-    pointer-events: none;
-  }
+  /* The old white panel needed black fade strips at its top and bottom
+     edges; the near-black panel blends on its own, so they were removed. */
 }
 
 @media (max-width: 480px) {
-  .section      { padding: 52px 28px 46px; }
+  .section      { padding: 48px 28px 42px; }
   .contextLine  { font-size: 6vw; }
   .mainLine     { font-size: 12.5vw; }
 }
