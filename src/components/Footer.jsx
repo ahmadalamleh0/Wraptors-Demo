@@ -2,6 +2,7 @@ import styles from './Footer.module.css';
 import { SERVICE_LINKS } from '../data/serviceLinks';
 import WraptorsMafiaLogo from './WraptorsMafiaLogo';
 import footerImg from '../../Footer.jpeg';
+import { STUDIO_PHONE, STUDIO_PHONE_DISPLAY, STUDIO_EMAIL } from '../lib/studioContact';
 
 // Footer renders on every page, so these use an absolute "/#id" path
 // (navigate home, then scroll) rather than a bare "#id" fragment, which
@@ -19,8 +20,8 @@ const CONTACT = [
     text: '32 9B St, Al Quoz Industrial Area 4, Dubai — Unit B05',
     href: 'https://www.google.com/maps/search/?api=1&query=Unit+B05%2C+32+9B+St%2C+Al+Quoz+Industrial+Area+4%2C+Dubai',
   },
-  { icon: <MailIcon />,  text: 'Wrap@wraptorsdubai.com',   href: 'mailto:Wrap@wraptorsdubai.com' },
-  { icon: <PhoneIcon />, text: '+971 56 727 9727',    href: 'tel:+971567279727'        },
+  { icon: <MailIcon />,  text: STUDIO_EMAIL,         href: `mailto:${STUDIO_EMAIL}` },
+  { icon: <PhoneIcon />, text: STUDIO_PHONE_DISPLAY, href: `tel:${STUDIO_PHONE}` },
 ];
 
 // href: null hides an icon until its real profile URL is confirmed —

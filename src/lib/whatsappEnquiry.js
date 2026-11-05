@@ -1,10 +1,11 @@
+import { STUDIO_WHATSAPP } from './studioContact.js';
 // Neither the Quote form nor the Booking form has a real backend to submit
 // to (see submitQuoteRequest.js / submitBookingRequest.js) — so instead of
 // a fake "success" screen after an async no-op, both forms hand the
 // visitor's answers off to WhatsApp as a prefilled message. This is a real,
 // verifiable action (a WhatsApp chat actually opens with the enquiry text
 // ready to send) rather than a claim we can't back up.
-export const WHATSAPP_NUMBER = '971567279727';
+export const WHATSAPP_NUMBER = STUDIO_WHATSAPP;
 
 function line(label, value) {
   return value ? `${label}: ${value}` : null;

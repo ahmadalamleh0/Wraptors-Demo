@@ -1,3 +1,4 @@
+import { STUDIO_PHONE } from '../lib/studioContact.js';
 // ══ SERVICE SEO CONTENT — core-page detail sections + focus pages ══
 //
 // Two things live here:
@@ -433,7 +434,7 @@ export const SERVICE_DETAILS = {
 export const PROVIDER = {
   '@type': 'AutomotiveBusiness',
   name: 'Wraptors Dubai',
-  telephone: '+971567279727',
+  telephone: STUDIO_PHONE,
   address: {
     '@type': 'PostalAddress',
     streetAddress: '32 9B St, Unit B05, Al Quoz Industrial Area 4',

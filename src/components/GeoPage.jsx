@@ -7,6 +7,7 @@ import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { useStructuredData } from '../lib/useStructuredData';
 import { SERVICE_CATALOG, SERVICE_CATEGORY_LABEL, TRUST_COPY, WHY_WRAPTORS_SHARED, SITE_URL, AREA_LINKS, getLocationBySlug } from '../data/geoLocations';
 import { ARTICLES } from '../data/articles';
+import { STUDIO_PHONE, STUDIO_PHONE_DISPLAY } from '../lib/studioContact';
 
 // Same address the Visit Us map uses (VisitUs.jsx).
 const STUDIO_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Unit B05, 32 9B St, Al Quoz Industrial Area 4, Dubai')}`;
@@ -24,7 +25,7 @@ export default function GeoPage({ location }) {
     provider: {
       '@type': 'AutomotiveBusiness',
       name: 'Wraptors Dubai',
-      telephone: '+971567279727',
+      telephone: STUDIO_PHONE,
       address: {
         '@type': 'PostalAddress',
         streetAddress: '32 9B St, Unit B05, Al Quoz Industrial Area 4',
@@ -184,7 +185,7 @@ export default function GeoPage({ location }) {
             <a href="/#cta" className={styles.ctaPrimary}>
               Request a Quote <span aria-hidden="true">→</span>
             </a>
-            <a href="tel:+971567279727" className={styles.ctaSecondary}>Call +971 56 727 9727</a>
+            <a href={`tel:${STUDIO_PHONE}`} className={styles.ctaSecondary}>Call {STUDIO_PHONE_DISPLAY}</a>
             {/* Every area page points to the studio: the Al Quoz page (the
                 physical studio) links to directions, the rest to it. */}
             {location.isPhysicalStudio ? (
