@@ -257,10 +257,11 @@ const MASTERPIECE_ROWS = [MASTERPIECE_ROW_1, MASTERPIECE_ROW_2].map(
 );
 
 // ── Card Component ──────────────────────────────────────────────────────────
-function BuildCard({ build }) {
+function BuildCard({ build, near }) {
   const cardRef  = useRef(null);
   const autoRef  = useRef(null);   // setInterval id
   const delayRef = useRef(null);   // setTimeout id
+  const imgEls   = useRef([]);     // rendered <img> per index
   const [imgIndex, setImgIndex] = useState(0);
   // Only the first photo is in the page until the card is actually on
   // screen; the rest are added then (2.5 s before the cycle starts). This
@@ -277,21 +278,30 @@ function BuildCard({ build }) {
     delayRef.current = null;
   }, []);
 
+  // Advance only onto a photo that has finished loading, so a slow
+  // connection never crossfades into an empty frame — it just holds the
+  // current photo until the next one is ready.
+  const advance = useCallback(() => {
+    setImgIndex(i => {
+      const next = (i + 1) % count;
+      const el = imgEls.current[next];
+      return el && el.complete && el.naturalWidth > 0 ? next : i;
+    });
+  }, [count]);
+
   const startCycle = useCallback(() => {
     clearInterval(autoRef.current);
-    autoRef.current = setInterval(() => {
-      setImgIndex(i => (i + 1) % count);
-    }, 2200);
-  }, [count]);
+    autoRef.current = setInterval(advance, 2200);
+  }, [advance]);
 
   // Tap / click: advance immediately, resume auto after 4 s pause
   const handleTap = useCallback(() => {
     if (count <= 1) return;
     stopAll();
     setPrimed(true);
-    setImgIndex(i => (i + 1) % count);
+    advance();
     delayRef.current = setTimeout(startCycle, 4000);
-  }, [count, stopAll, startCycle]);
+  }, [count, stopAll, startCycle, advance]);
 
   // IO: start auto-cycle when card enters viewport, stop when it leaves
   useEffect(() => {
@@ -325,8 +335,9 @@ function BuildCard({ build }) {
         {images.map((src, i) => (i === 0 || primed) && (
           <img
             key={src}
+            ref={el => { imgEls.current[i] = el; }}
             src={src}
-            loading="lazy"
+            loading={i === 0 && near ? 'eager' : 'lazy'}
             decoding="async"
             className={`${styles.image} ${i === imgIndex ? styles.imageActive : ''}`}
             alt={i === 0 ? `${build.brandName} Signature Build` : ''}
@@ -376,6 +387,19 @@ function BuildCard({ build }) {
 // ── Main Component ───────────────────────────────────────────────────────────
 export default function SignatureBuilds() {
   const sectionRef  = useRef(null);
+  // Once the visitor is getting close to this section, every card's first
+  // photo starts loading — including cards further along each swipe row,
+  // which lazy loading alone would leave until swiped into view.
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setNear(true); io.disconnect(); }
+    }, { rootMargin: '1000px 0px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   const headerRef   = useRef(null);
   const videoRef    = useRef(null);
 
@@ -485,7 +509,7 @@ export default function SignatureBuilds() {
         <div key={rowIndex} className={styles.categoryRow}>
           <div className={styles.cardTrack}>
             {builds.map((build, i) => (
-              <BuildCard key={`row${rowIndex}-${build.brandName}-${i}`} build={build} />
+              <BuildCard key={`row${rowIndex}-${build.brandName}-${i}`} build={build} near={near} />
             ))}
           </div>
         </div>
