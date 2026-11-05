@@ -408,7 +408,7 @@ export default function GlobalLocations() {
               style={{ transitionDelay: revealed ? `${0.48 + i * 0.13}s` : '0s' }}
             >
               <div className={styles.regionHeader}>
-                <img src={FLAG_MAP[region.code]} alt={region.name} className={styles.regionFlag} />
+                <img src={FLAG_MAP[region.code]} alt={region.name} className={styles.regionFlag} loading="lazy" decoding="async" />
                 <span className={styles.regionName}>{region.name}</span>
                 <span className={styles.regionCount}>{region.locations.length}</span>
               </div>

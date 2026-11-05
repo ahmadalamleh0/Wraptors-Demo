@@ -58,6 +58,8 @@ export default function TrustedBrands() {
               <img
                 src={brand.src}
                 alt={brand.name}
+                loading="lazy"
+                decoding="async"
                 className={styles.logo}
                 style={brand.style}
                 draggable="false"

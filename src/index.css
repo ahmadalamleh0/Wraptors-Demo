@@ -100,7 +100,8 @@
 
 @font-face {
   font-family: 'Jarvane';
-  src: url('./assets/fonts/Jarvane.ttf') format('truetype');
+  src: url('./assets/fonts/Jarvane.woff2') format('woff2'),
+       url('./assets/fonts/Jarvane.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -108,7 +109,8 @@
 
 @font-face {
   font-family: 'Ethnocentric';
-  src: url('./assets/fonts/Ethnocentric-Regular.otf') format('opentype');
+  src: url('./assets/fonts/Ethnocentric-Regular.woff2') format('woff2'),
+       url('./assets/fonts/Ethnocentric-Regular.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -116,7 +118,8 @@
 
 @font-face {
   font-family: 'BrittanySignature';
-  src: url('./assets/fonts/BrittanySignatureScript.ttf') format('truetype');
+  src: url('./assets/fonts/BrittanySignatureScript.woff2') format('woff2'),
+       url('./assets/fonts/BrittanySignatureScript.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -124,7 +127,8 @@
 
 @font-face {
   font-family: 'MonolineSignature';
-  src: url('./assets/fonts/MonolineSignature.ttf') format('truetype');
+  src: url('./assets/fonts/MonolineSignature.woff2') format('woff2'),
+       url('./assets/fonts/MonolineSignature.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;

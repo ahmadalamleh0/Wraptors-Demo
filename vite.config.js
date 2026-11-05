@@ -5,7 +5,9 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import { fileURLToPath, URL } from 'node:url'
 import { VIDEOS_CACHE_NAME } from './src/lib/pwaCacheNames.js'
 import { createReadStream, existsSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { basename, extname, resolve } from 'node:path'
+import sharp from 'sharp'
+import { createHash } from 'node:crypto'
 
 // LOCAL DEV ONLY — Neuropol X for the restored original services section
 // (components/original-services). The font is licensed under a Typodermic
@@ -111,6 +113,42 @@ const videoFetchDiagnosticsPlugin = {
 // accidentally gets indexed" (much harder to undo). This is injected into
 // the same index.html that scripts/prerender.mjs snapshots per route, so
 // it reaches every prerendered page, not just the SPA shell.
+// Responsive photos without another dependency (sharp is already used by
+// the image optimizer). `import x from './photo.jpg?srcset'` gives a srcset
+// string of WebP copies at 480/720/960/1280px plus the full width (never
+// upscaled), so each browser downloads the smallest copy that is still
+// sharp at its size and pixel density. In dev it's just the original file.
+const SRCSET_WIDTHS = [480, 720, 960, 1280]
+let isBuild = false
+const responsiveSrcset = {
+  name: 'responsive-srcset',
+  enforce: 'pre',
+  configResolved(config) {
+    isBuild = config.command === 'build'
+  },
+  async load(id) {
+    const [file, query] = id.split('?')
+    if (query !== 'srcset' || !/\.(jpe?g|png|webp)$/i.test(file)) return null
+    if (!isBuild) {
+      return `import src from ${JSON.stringify(file)}; export default src;`
+    }
+    const meta = await sharp(file).metadata()
+    const width = meta.orientation >= 5 ? meta.height : meta.width // EXIF-rotated
+    const widths = [...SRCSET_WIDTHS.filter((w) => w < width), width]
+    const stem = basename(file, extname(file))
+    const parts = await Promise.all(widths.map(async (w) => {
+      const source = await sharp(file).rotate().resize({ width: w }).webp({ quality: 80 }).toBuffer()
+      // Fixed, content-hashed name + root-relative URL: the prerender bakes
+      // these into static HTML, so they must not depend on the build host.
+      const hash = createHash('sha256').update(source).digest('hex').slice(0, 8)
+      const fileName = `assets/${stem}.srcset-${w}-${hash}.webp`
+      this.emitFile({ type: 'asset', fileName, source })
+      return `/${encodeURI(fileName)} ${w}w`
+    }))
+    return `export default ${JSON.stringify(parts.join(', '))};`
+  },
+}
+
 const IS_PRODUCTION_CONTEXT = process.env.CONTEXT === 'production'
 
 const robotsMetaPlugin = {
@@ -126,6 +164,7 @@ const robotsMetaPlugin = {
 
 export default defineConfig({
   plugins: [
+    responsiveSrcset,
     react(),
     robotsMetaPlugin,
     devOnlyNeuropolFont,
@@ -137,6 +176,8 @@ export default defineConfig({
       // logos, icons) are already small — raster photos are the real
       // payload here.
       test: /\.(jpe?g|png|webp)$/i,
+      // srcset copies are already encoded once by responsiveSrcset above.
+      exclude: /\.srcset-\d+-/,
       jpg: { quality: 78, mozjpeg: true },
       jpeg: { quality: 78, mozjpeg: true },
       png: { quality: 78 },
@@ -144,7 +185,8 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
-      injectRegister: 'auto',
+      // Deferred so registering the service worker never blocks first paint.
+      injectRegister: 'script-defer',
       includeAssets: [
         'favicon.ico',
         'favicon-32x32.png',
@@ -171,7 +213,9 @@ export default defineConfig({
         // App shell only: JS/CSS/HTML + local font files. Images are cached at
         // runtime (below) instead of precached, since the media library is
         // large and shouldn't block the initial SW install.
-        globPatterns: ['**/*.{js,css,html,ico,ttf,otf,woff,woff2}'],
+        // .ttf/.otf are only fallbacks behind the .woff2 fonts now — every
+        // browser with service-worker support uses the .woff2.
+        globPatterns: ['**/*.{js,css,html,ico,woff,woff2}'],
         navigateFallback: '/index.html',
         // Real files opened directly (sitemap.xml, robots.txt, any other
         // /name.ext) must come from the network, not the app shell —

@@ -49,6 +49,8 @@ export default function Footer({ solid = false }) {
             src={footerImg}
             alt="Wraptors race boat"
             aria-hidden="true"
+            loading="lazy"
+            decoding="async"
           />
           <div className={styles.overlay} aria-hidden="true" />
           <div className={styles.contentScrim} aria-hidden="true" />

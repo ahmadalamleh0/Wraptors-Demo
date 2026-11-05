@@ -262,6 +262,10 @@ function BuildCard({ build }) {
   const autoRef  = useRef(null);   // setInterval id
   const delayRef = useRef(null);   // setTimeout id
   const [imgIndex, setImgIndex] = useState(0);
+  // Only the first photo is in the page until the card is actually on
+  // screen; the rest are added then (2.5 s before the cycle starts). This
+  // keeps ~100 off-screen photos out of the initial page load.
+  const [primed, setPrimed] = useState(false);
 
   const images = build.media?.length ? build.media : [build.mainImage];
   const count  = images.length;
@@ -284,6 +288,7 @@ function BuildCard({ build }) {
   const handleTap = useCallback(() => {
     if (count <= 1) return;
     stopAll();
+    setPrimed(true);
     setImgIndex(i => (i + 1) % count);
     delayRef.current = setTimeout(startCycle, 4000);
   }, [count, stopAll, startCycle]);
@@ -296,6 +301,7 @@ function BuildCard({ build }) {
 
     const io = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
+        setPrimed(true);
         delayRef.current = setTimeout(startCycle, 2500);
       } else {
         stopAll();
@@ -316,10 +322,12 @@ function BuildCard({ build }) {
     >
       <div className={styles.imageContainer}>
         {/* All images stacked — opacity toggle only, no DOM mutations */}
-        {images.map((src, i) => (
+        {images.map((src, i) => (i === 0 || primed) && (
           <img
             key={src}
             src={src}
+            loading="lazy"
+            decoding="async"
             className={`${styles.image} ${i === imgIndex ? styles.imageActive : ''}`}
             alt={i === 0 ? `${build.brandName} Signature Build` : ''}
             aria-hidden={i !== imgIndex ? true : undefined}
@@ -329,7 +337,7 @@ function BuildCard({ build }) {
         <div className={styles.overlay} />
 
         <div className={styles.logoContainer}>
-          <img src={build.logo} className={styles.logo} alt="" aria-hidden="true" style={build.logoStyle} />
+          <img src={build.logo} className={styles.logo} alt="" aria-hidden="true" loading="lazy" decoding="async" style={build.logoStyle} />
         </div>
 
         {build.badge && (
