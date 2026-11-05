@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation, useNavigationType } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import './App.css';
 
 function ScrollToTop() {
@@ -55,28 +55,15 @@ import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import MobileQuoteCta from './components/MobileQuoteCta';
 
-// Service page template
-import ServicePage from './components/ServicePage';
-import StarlightPage from './components/StarlightPage';
-import PPFPage from './components/PPFPage';
-
-// GEO system — one reusable template rendered from centralized data.
-// Add/edit/remove a service area in src/data/geoLocations.js only.
-import GeoPage from './components/GeoPage';
+// Every page other than the homepage is code-split (src/routeTable.js):
+// service pages, GEO area pages (rendered from src/data/geoLocations.js),
+// the Learn hub/articles (src/data/articles.js), About/Book/Franchise, 404.
+import {
+  ServicePage, StarlightPage, PPFPage, WrapsPage, TintPage, FocusServiceRoute,
+  GeoPage, LearnHub, ArticlePage, AboutPage, BookingPage, FranchisePage,
+  NotFoundPage, setRouteList,
+} from './routeTable';
 import { LOCATIONS } from './data/geoLocations';
-
-// Learn / Insights system — one reusable hub + one reusable article
-// template, both rendered from src/data/articles.js.
-import LearnHub from './components/LearnHub';
-import ArticlePage from './components/ArticlePage';
-import NotFoundPage from './components/NotFoundPage';
-import AboutPage from './components/AboutPage';
-import BookingPage from './components/BookingPage';
-import FranchisePage from './components/FranchisePage';
-import WrapsPage from './components/WrapsPage';
-import TintPage from './components/TintPage';
-import FocusServicePage from './components/FocusServicePage';
-import { FOCUS_PAGES } from './data/serviceSeo';
 
 // Hero images for each generic service page (Vehicle Wraps, PPF and
 // Starlight have their own dedicated page components with bespoke
@@ -365,42 +352,43 @@ function HomePage() {
   );
 }
 
+// One list drives both the <Routes> below and main.jsx's preload of the
+// current page's chunk. Static /services/* paths outrank /services/:slug.
+const ROUTE_LIST = [
+  { path: '/', page: HomePage },
+  { path: '/services/wraps', page: WrapsPage },
+  { path: '/services/starlight', page: StarlightPage },
+  { path: '/services/ppf', page: PPFPage },
+  { path: '/services/tint', page: TintPage },
+  ...SERVICE_PAGES.map((svc) => ({ path: svc.path, page: ServicePage, props: svc })),
+  // Chrome Delete + vehicle pages (data in src/data/serviceSeo.js).
+  { path: '/services/:slug', page: FocusServiceRoute },
+  ...LOCATIONS.map((loc) => ({ path: `/areas/${loc.slug}`, page: GeoPage, props: { location: loc } })),
+  { path: '/learn', page: LearnHub },
+  { path: '/learn/category/:categorySlug', page: LearnHub },
+  { path: '/learn/:articleSlug', page: ArticlePage },
+  { path: '/about', page: AboutPage },
+  { path: '/book', page: BookingPage },
+  { path: '/franchise', page: FranchisePage },
+  { path: '*', page: NotFoundPage },
+];
+setRouteList(ROUTE_LIST);
+
 export default function App() {
   return (
     <>
     <ScrollToTop />
     <OfflinePresentationMode />
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/services/wraps"    element={<WrapsPage />} />
-      <Route path="/services/starlight" element={<StarlightPage />} />
-      <Route path="/services/ppf"      element={<PPFPage />} />
-      <Route path="/services/tint"     element={<TintPage />} />
-      {FOCUS_PAGES.map((page) => (
-        <Route key={page.slug} path={`/services/${page.slug}`} element={<FocusServicePage page={page} />} />
-      ))}
-      {SERVICE_PAGES.map(svc => (
-        <Route
-          key={svc.path}
-          path={svc.path}
-          element={<ServicePage {...svc} />}
-        />
-      ))}
-      {LOCATIONS.map(loc => (
-        <Route
-          key={loc.slug}
-          path={`/areas/${loc.slug}`}
-          element={<GeoPage location={loc} />}
-        />
-      ))}
-      <Route path="/learn" element={<LearnHub />} />
-      <Route path="/learn/category/:categorySlug" element={<LearnHub />} />
-      <Route path="/learn/:articleSlug" element={<ArticlePage />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/book" element={<BookingPage />} />
-      <Route path="/franchise" element={<FranchisePage />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+    {/* The opened page's chunk is preloaded before the first render
+        (main.jsx) and navigations run in a transition, so this fallback
+        never replaces a visible page. */}
+    <Suspense fallback={null}>
+      <Routes>
+        {ROUTE_LIST.map(({ path, page: Page, props }) => (
+          <Route key={path} path={path} element={<Page {...props} />} />
+        ))}
+      </Routes>
+    </Suspense>
     {/* Mobile-only floating Get a Quote link, site-wide. */}
     <MobileQuoteCta />
     {/* Site-wide floating WhatsApp button (every route), opposite the

@@ -183,6 +183,18 @@ async function main() {
     // Hero.jsx.
     await page.addInitScript(() => { window.__WRAPTORS_PRERENDER__ = true; });
 
+    // Pages are code-split: record which JS files each page loads so its
+    // static HTML can preload them in parallel with the entry script (no
+    // request waterfall on a direct visit). Cache off so every load is seen.
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send('Network.setCacheDisabled', { cacheDisabled: true });
+    const scriptsLoaded = new Set();
+    page.on('request', (req) => {
+      if (req.resourceType() !== 'script') return;
+      const url = new URL(req.url());
+      if (url.origin === BASE && url.pathname.startsWith('/assets/')) scriptsLoaded.add(url.pathname);
+    });
+
     let successCount = 0;
     const failures = [];
     const sitemapUrls = [];
@@ -190,6 +202,7 @@ async function main() {
 
     for (const route of routes) {
       try {
+        scriptsLoaded.clear();
         const response = await page.goto(`${BASE}${route}`, { waitUntil: 'networkidle', timeout: 30000 });
         if (!response || !response.ok()) {
           throw new Error(`HTTP ${response ? response.status() : 'no response'}`);
@@ -199,7 +212,12 @@ async function main() {
         // this is just a small safety margin.
         await page.waitForTimeout(150);
 
-        const html = await page.content();
+        let html = await page.content();
+        const preloads = [...scriptsLoaded]
+          .filter((path) => !html.includes(`"${path}"`))
+          .map((path) => `<link rel="modulepreload" crossorigin="" href="${path}">`)
+          .join('');
+        if (preloads) html = html.replace('</head>', `${preloads}</head>`);
         const outPath = outputPathFor(route);
         mkdirSync(dirname(outPath), { recursive: true });
         writeFileSync(outPath, html);
