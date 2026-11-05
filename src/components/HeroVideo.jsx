@@ -104,8 +104,11 @@ export default function HeroVideo() {
       entranceTl.play();
     };
     window.addEventListener('hero:exit', playEntrance, { once: true });
-    // Safety net in case 'hero:exit' never fires for some reason.
-    const entranceFallback = setTimeout(playEntrance, 6000);
+    // Safety net in case 'hero:exit' never fires for some reason. Not during
+    // the build-time prerender (scripts/prerender.mjs sets the flag): on a
+    // slow build machine it could fire before the snapshot is taken and
+    // bake the revealed headline into the static HTML. Visitors unaffected.
+    const entranceFallback = window.__WRAPTORS_PRERENDER__ ? undefined : setTimeout(playEntrance, 6000);
 
     // Fade the scroll cue out once the user actually starts scrolling; back
     // in if they return to the very top. Only engages after the entrance
