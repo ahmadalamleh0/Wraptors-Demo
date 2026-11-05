@@ -29,6 +29,7 @@ import { chromium } from 'playwright';
 import { LOCATIONS } from '../src/data/geoLocations.js';
 import { ARTICLES, CATEGORIES } from '../src/data/articles.js';
 import { FOCUS_PAGES } from '../src/data/serviceSeo.js';
+import { SITE_URL } from '../src/lib/siteConfig.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -66,6 +67,18 @@ function buildRouteList() {
 function outputPathFor(route) {
   if (route === '/') return join(DIST, 'index.html');
   return join(DIST, route.replace(/^\//, ''), 'index.html');
+}
+
+// sitemap.xml is written from what was actually rendered: every page whose
+// final robots meta isn't noindex, listed at its own canonical URL. So it
+// can never list a page that doesn't exist, an unpublished (noindex) page,
+// or a non-canonical variant — and new pages appear automatically.
+const xmlEscape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+function writeSitemap(urls) {
+  const body = urls.map((u) => `  <url><loc>${xmlEscape(u)}</loc></url>`).join('\n');
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
+  writeFileSync(join(DIST, 'sitemap.xml'), xml);
 }
 
 async function waitForServer(url, attempts = 60) {
@@ -172,6 +185,8 @@ async function main() {
 
     let successCount = 0;
     const failures = [];
+    const sitemapUrls = [];
+    const skipped = [];
 
     for (const route of routes) {
       try {
@@ -189,6 +204,18 @@ async function main() {
         mkdirSync(dirname(outPath), { recursive: true });
         writeFileSync(outPath, html);
         successCount++;
+
+        const { canonical, robots } = await page.evaluate(() => ({
+          canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href') || '',
+          robots: [...document.querySelectorAll('meta[name="robots"]')].map((m) => m.content).join(','),
+        }));
+        if (/noindex/i.test(robots)) {
+          skipped.push(`${route} (noindex)`);
+        } else if (!canonical.startsWith(`${SITE_URL}/`)) {
+          skipped.push(`${route} (canonical "${canonical}" not on ${SITE_URL})`);
+        } else if (!sitemapUrls.includes(canonical)) {
+          sitemapUrls.push(canonical);
+        }
       } catch (err) {
         failures.push({ route, error: err.message });
       }
@@ -210,6 +237,15 @@ async function main() {
     }
 
     await browser.close();
+
+    writeSitemap(sitemapUrls);
+    console.log(`[prerender] sitemap.xml: ${sitemapUrls.length} URLs (${skipped.length} left out)`);
+    skipped.forEach((s) => console.log(`  - ${s}`));
+    // A production build with no indexable pages means something upstream
+    // is wrong (e.g. the robots meta) — fail rather than publish an empty map.
+    if (process.env.CONTEXT === 'production' && sitemapUrls.length === 0) {
+      failures.push({ route: 'sitemap.xml', error: 'no indexable pages in a production build' });
+    }
 
     console.log(`\n[prerender] ${successCount}/${routes.length} routes rendered successfully.`);
     if (failures.length > 0) {

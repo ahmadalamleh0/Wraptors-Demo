@@ -14,9 +14,9 @@
 //    URL, but carries `noindex`, is left out of sitemap.xml and is not
 //    linked from any other page. The model pages wait on real Dubai photos
 //    from the client (see DUBAI-FINAL-CHECKLIST.md). To publish one: add
-//    its photos (src/data/projectGalleries.js), set `published: true` and
-//    add its URL to public/sitemap.xml. Links to it then appear
-//    automatically. All four were published on 2026-11-03 with the
+//    its photos (src/data/projectGalleries.js) and set `published: true`.
+//    Links to it and its sitemap.xml entry (written by the build, see
+//    scripts/prerender.mjs) then appear automatically. All four were published on 2026-11-03 with the
 //    client's confirmed project photos.
 //
 // No prices, warranty terms, durability figures or customer projects are

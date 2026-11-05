@@ -173,6 +173,10 @@ export default defineConfig({
         // large and shouldn't block the initial SW install.
         globPatterns: ['**/*.{js,css,html,ico,ttf,otf,woff,woff2}'],
         navigateFallback: '/index.html',
+        // Real files opened directly (sitemap.xml, robots.txt, any other
+        // /name.ext) must come from the network, not the app shell —
+        // otherwise a returning visitor sees the React 404 page for them.
+        navigateFallbackDenylist: [/\/[^/?#]+\.[a-z0-9]+$/i],
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         runtimeCaching: [
           {

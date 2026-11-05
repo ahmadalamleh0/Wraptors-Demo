@@ -122,7 +122,7 @@ Not changed, as instructed: reviews, the "16 Locations" stat, the aftercare stor
 
 | Page | What's needed |
 |---|---|
-| G-Class Wrap, Urus PPF, Rolls-Royce Starlight, Porsche PPF | Real Dubai project photos for each. To publish: add a gallery, set `published: true` in `src/data/serviceSeo.js` and add the URL to `public/sitemap.xml`. Links from the PPF and Wraps pages and the PPF guides appear automatically. Also needs the client to approve the copy and the use of the brand names. |
+| G-Class Wrap, Urus PPF, Rolls-Royce Starlight, Porsche PPF | Real Dubai project photos for each. To publish: add a gallery, set `published: true` in `src/data/serviceSeo.js` (the build adds it to `sitemap.xml`). Links from the PPF and Wraps pages and the PPF guides appear automatically. Also needs the client to approve the copy and the use of the brand names. |
 | Chrome Delete | Live without photos. Add real chrome delete photos when available. |
 | Window Tint Laws in Dubai | Legal figures (50% side and rear, windscreen strip about 15 cm, AED 1,500 fine) are as publicly reported by Dubai Police and Gulf News. Each is attributed and readers are told to confirm. The client should check and approve this guide before deploying. |
 | Prices | Still pending approved prices. |
