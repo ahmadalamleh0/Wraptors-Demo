@@ -15,6 +15,10 @@ export function buildWhatsAppUrl(text) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 }
 
+// "Start Your Project" (homepage hero + every service hero) opens a WhatsApp
+// chat with the studio straight away instead of scrolling to the quote form.
+export const START_PROJECT_WHATSAPP_URL = buildWhatsAppUrl("Hi Wraptors, I'd like to start a project.");
+
 // Quote console (5-step flow) — label lookups passed in from
 // QuoteSection.jsx so this file doesn't duplicate quoteFormData.js's option
 // lists.

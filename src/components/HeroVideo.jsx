@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import styles from './HeroVideo.module.css';
 import { getPresentationMode, MODES } from '../lib/presentationMode';
+import { START_PROJECT_WHATSAPP_URL } from '../lib/whatsappEnquiry';
 // The one fallback image, used underneath the video in Video Mode and as
 // the whole background in Safe Mode. Previously Video Mode used a separate
 // frame-matched poster (an extreme, dark close-up extracted from the video
@@ -314,7 +315,7 @@ export default function HeroVideo() {
         <p ref={subLineRef} className={styles.subLine}>
           Car&nbsp;wrapping&nbsp;&nbsp;·&nbsp;&nbsp;PPF<span className={styles.subLineSep}>&nbsp;&nbsp;·&nbsp;&nbsp;</span><br className={styles.subLineBreak} />Ceramic&nbsp;coating&nbsp;&nbsp;·&nbsp;&nbsp;Window&nbsp;tint
         </p>
-        <a ref={ctaRef} href="/#cta" className={styles.heroCta}>
+        <a ref={ctaRef} href={START_PROJECT_WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.heroCta}>
           <span className={styles.heroCtaLabel}>
             Start Your Project
             {/* Real SVG, not a Unicode arrow glyph — the latter renders as a
