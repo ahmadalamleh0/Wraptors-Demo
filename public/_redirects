@@ -1,3 +1,22 @@
+# Old URLs from a previous site on this domain (Search Console 404 export, Nov 2026).
+# Each points at the current page for the same service or topic; Netlify matches
+# with and without the trailing slash. Paths with no equivalent are left to 404.
+/services/paint-protection/                              /services/ppf/                           301
+/services/racing-stripes/                                /services/stripes-decals/                301
+/services/decals/                                        /services/stripes-decals/                301
+/services/vehicle-wrapping/                              /services/wraps/                         301
+/services/auto-detailing/                                /services/detailing/                     301
+/services/starlight-headliner/                           /services/starlight/                     301
+/services/galaxy-ceilings/                               /services/starlight/                     301
+/services/window-tinting/                                /services/tint/                          301
+/franchises/                                             /franchise/                              301
+/category/paint-protection-film/                         /learn/category/paint-protection-film/   301
+/blog/                                                   /learn/                                  301
+/articles/                                               /learn/                                  301
+/5-things-you-might-not-know-about-vehicle-wraps/        /learn/category/vehicle-wraps/           301
+/what-you-need-to-know-before-designing-a-vehicle-wrap/  /learn/category/vehicle-wraps/           301
+/contact-wraptors/                                       /book/                                   301
+
 # Every real route the app defines (home, services, GEO areas, Learn hub/
 # categories/articles) is prerendered to a real static file by
 # scripts/prerender.mjs, and static files always take priority over this
