@@ -4,7 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import { fileURLToPath, URL } from 'node:url'
 import { VIDEOS_CACHE_NAME } from './src/lib/pwaCacheNames.js'
-import { STUDIO_PHONE } from './src/lib/studioContact.js'
+import { STUDIO_EMAIL, STUDIO_PHONE } from './src/lib/studioContact.js'
 import { createReadStream, existsSync } from 'node:fs'
 import { basename, extname, resolve } from 'node:path'
 import sharp from 'sharp'
@@ -150,11 +150,11 @@ const responsiveSrcset = {
   },
 }
 
-// index.html's static structured data takes the phone number from the same
-// shared file as the rest of the site (src/lib/studioContact.js).
+// index.html's static structured data takes the phone number and email from
+// the same shared file as the rest of the site (src/lib/studioContact.js).
 const studioContactHtml = {
   name: 'studio-contact-html',
-  transformIndexHtml: (html) => html.replaceAll('%STUDIO_PHONE%', STUDIO_PHONE),
+  transformIndexHtml: (html) => html.replaceAll('%STUDIO_PHONE%', STUDIO_PHONE).replaceAll('%STUDIO_EMAIL%', STUDIO_EMAIL),
 }
 
 const IS_PRODUCTION_CONTEXT = process.env.CONTEXT === 'production'

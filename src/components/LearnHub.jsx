@@ -44,7 +44,7 @@ export default function LearnHub() {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
       { '@type': 'ListItem', position: 2, name: 'Learn', item: `${SITE_URL}/learn/` },
       ...(activeCategory
         ? [{ '@type': 'ListItem', position: 3, name: activeCategory.label, item: canonicalUrl }]

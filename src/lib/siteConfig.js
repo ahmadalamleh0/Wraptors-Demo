@@ -2,6 +2,11 @@
 // URL and the sitemap always agree — never hardcode this string elsewhere.
 export const SITE_URL = 'https://wraptorsdubai.com';
 
+// Permanent @id of the Wraptors Dubai AutomotiveBusiness entity, defined once
+// in index.html's JSON-LD. Page-level schema (Service providers etc.) refers
+// to it by this id instead of repeating the business details. Never change it.
+export const BUSINESS_ID = `${SITE_URL}/#business`;
+
 // Every page is published at a trailing-slash URL: the prerender writes
 // <route>/index.html, which Netlify serves at /<route>/ and 301-redirects
 // /<route> to. Internal links use this form so none of them hit a redirect.

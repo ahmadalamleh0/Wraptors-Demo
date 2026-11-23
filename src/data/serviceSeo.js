@@ -1,4 +1,4 @@
-import { STUDIO_PHONE } from '../lib/studioContact.js';
+import { BUSINESS_ID } from '../lib/siteConfig.js';
 // ══ SERVICE SEO CONTENT — core-page detail sections + focus pages ══
 //
 // Two things live here:
@@ -429,19 +429,10 @@ export const SERVICE_DETAILS = {
   },
 };
 
-// Shared business entity for page-level Service schema (matches the
-// site-wide AutomotiveBusiness JSON-LD in index.html).
-export const PROVIDER = {
-  '@type': 'AutomotiveBusiness',
-  name: 'Wraptors Dubai',
-  telephone: STUDIO_PHONE,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '32 9B St, Unit B05, Al Quoz Industrial Area 4',
-    addressLocality: 'Dubai',
-    addressCountry: 'AE',
-  },
-};
+// Page-level Service schema points at the one Wraptors Dubai business entity
+// (index.html's AutomotiveBusiness JSON-LD) by its @id, rather than repeating
+// the business details on every page.
+export const PROVIDER = { '@id': BUSINESS_ID };
 
 export function serviceSchema({ name, description, url, siteUrl, crumbs }) {
   return {

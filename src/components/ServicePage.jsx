@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ServiceHero from './ServiceHero';
@@ -11,6 +11,8 @@ import ServiceFaqSection from './ServiceFaqSection';
 import ServiceDetails from './ServiceDetails';
 import QuoteSection from './QuoteSection';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
+import { useStructuredData } from '../lib/useStructuredData';
+import { SERVICE_DETAILS, serviceSchema } from '../data/serviceSeo';
 import { SITE_URL } from '../lib/siteConfig';
 import styles from './ServicePage.module.css';
 
@@ -107,11 +109,32 @@ export default function ServicePage({
     return () => io.disconnect();
   }, []);
 
+  const metaDescription = tagline || `${title} from Wraptors Dubai — premium automotive customization at our Al Quoz studio.`;
   useDocumentMeta(
     seoTitle || `${title} in Dubai | Wraptors`,
-    tagline || `${title} from Wraptors Dubai — premium automotive customization at our Al Quoz studio.`,
+    metaDescription,
     path ? `${SITE_URL}${path}` : undefined
   );
+
+  // Service + BreadcrumbList for services without a SERVICE_DETAILS entry
+  // (custom builds, detailing, interiors, stripes, calipers, wheels). The
+  // five core services get theirs from <ServiceDetails> below, so this stays
+  // null for them — never two Service entities on one page.
+  const fallbackSchema = useMemo(() => {
+    if (!path || SERVICE_DETAILS[serviceId]) return null;
+    const pagePathWithSlash = path.endsWith('/') ? path : `${path}/`;
+    return serviceSchema({
+      name: title,
+      description: metaDescription,
+      url: `${SITE_URL}${pagePathWithSlash}`,
+      siteUrl: SITE_URL,
+      crumbs: [
+        { label: 'Home', path: '/' },
+        { label: title, path: pagePathWithSlash },
+      ],
+    });
+  }, [path, serviceId, title, metaDescription]);
+  useStructuredData(fallbackSchema);
 
   return (
     <>
