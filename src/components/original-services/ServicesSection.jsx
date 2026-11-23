@@ -22,11 +22,14 @@ import imgTint from '../../../tint.jpeg';
 import imgTintSet from '../../../tint.jpeg?srcset';
 
 // How wide each card size renders, so the browser can pick the right srcset
-// copy: one column up to 768px, else a 4-column grid (rounded up slightly).
+// copy. Matches ServicesSection.module.css: the grid sits inside 20px side
+// padding and stops growing at max-width 1280px (a 1320px viewport); one
+// column up to 768px, else 4 columns (standard 1, wide 2, featured 4).
+// Rounded up slightly (gaps ignored) so a copy is never too small.
 const SIZES = {
-  standard: '(max-width: 768px) 100vw, 23vw',
-  wide: '(max-width: 768px) 100vw, 46vw',
-  featured: '(max-width: 768px) 100vw, 90vw',
+  standard: '(max-width: 768px) calc(100vw - 40px), (max-width: 1320px) calc((100vw - 40px) / 4), 300px',
+  wide: '(max-width: 768px) calc(100vw - 40px), (max-width: 1320px) calc((100vw - 40px) / 2), 626px',
+  featured: '(max-width: 768px) calc(100vw - 40px), (max-width: 1320px) calc(100vw - 40px), 1280px',
 };
 
 const SERVICES = [
