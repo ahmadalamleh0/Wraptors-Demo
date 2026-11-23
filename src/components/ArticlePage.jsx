@@ -5,6 +5,7 @@ import FaqAccordion from './FaqAccordion';
 import styles from './ArticlePage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { useStructuredData } from '../lib/useStructuredData';
+import { BUSINESS_ID } from '../lib/siteConfig';
 import { publishedLinks } from '../data/serviceSeo';
 import { SITE_URL, getArticleBySlug, getCategoryBySlug, getRelatedArticleObjects } from '../data/articles';
 import { ARTICLE_IMAGES } from '../data/articleImages';
@@ -48,8 +49,9 @@ export default function ArticlePage() {
       image: article.heroImageKey ? `${SITE_URL}${ARTICLE_IMAGES[article.heroImageKey]}` : undefined,
       datePublished: article.publishDate,
       dateModified: article.updatedDate || article.publishDate,
-      author: { '@type': 'Organization', name: 'Wraptors Dubai' },
-      publisher: { '@type': 'Organization', name: 'Wraptors Dubai' },
+      // Both are the one Wraptors Dubai business entity (index.html JSON-LD).
+      author: { '@id': BUSINESS_ID },
+      publisher: { '@id': BUSINESS_ID },
       mainEntityOfPage: canonicalUrl,
     }
   );
