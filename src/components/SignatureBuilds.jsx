@@ -25,178 +25,178 @@ import maybachLogo from '../../maybach-svgrepo-com.svg';
 import ferrariGesLogo from '../../ferrari-svgrepo-com.svg';
 
 // BMW
-import bmw1 from '../../Signture Section/BMW(1).jpeg';
-import bmw2 from '../../Signture Section/BMW(2).jpeg';
-import bmw3 from '../../Signture Section/BMW(3).jpeg';
-import bmw4 from '../../Signture Section/BMW(4).jpeg';
-import bmw5 from '../../Signture Section/BMW(5).jpeg';
-import bmw6 from '../../Signture Section/BMW(6).jpeg';
-import bmw7 from '../../Signture Section/BMW(7).jpeg';
+import bmw1 from '../../Signture Section/BMW(1).jpeg?responsive';
+import bmw2 from '../../Signture Section/BMW(2).jpeg?responsive';
+import bmw3 from '../../Signture Section/BMW(3).jpeg?responsive';
+import bmw4 from '../../Signture Section/BMW(4).jpeg?responsive';
+import bmw5 from '../../Signture Section/BMW(5).jpeg?responsive';
+import bmw6 from '../../Signture Section/BMW(6).jpeg?responsive';
+import bmw7 from '../../Signture Section/BMW(7).jpeg?responsive';
 
 // Maybach
-import maybach1 from '../../Signture Section/Maybach(1).jpeg';
-import maybach2 from '../../Signture Section/Maybach(2).jpeg';
-import maybach3 from '../../Signture Section/Maybach(3).jpeg';
-import maybach4 from '../../Signture Section/Maybach(4).jpeg';
-import maybach5 from '../../Signture Section/Maybach(5).jpeg';
-import maybach6 from '../../Signture Section/Maybach(6).jpeg';
+import maybach1 from '../../Signture Section/Maybach(1).jpeg?responsive';
+import maybach2 from '../../Signture Section/Maybach(2).jpeg?responsive';
+import maybach3 from '../../Signture Section/Maybach(3).jpeg?responsive';
+import maybach4 from '../../Signture Section/Maybach(4).jpeg?responsive';
+import maybach5 from '../../Signture Section/Maybach(5).jpeg?responsive';
+import maybach6 from '../../Signture Section/Maybach(6).jpeg?responsive';
 
 // McLaren
-import mclaren1 from '../../Signture Section/Mclaren(1).jpeg';
-import mclaren2 from '../../Signture Section/Mclaren(2).jpeg';
-import mclaren3 from '../../Signture Section/Mclaren(3).jpeg';
-import mclaren4 from '../../Signture Section/Mclaren(4).jpeg';
-import mclaren5 from '../../Signture Section/Mclaren(5).jpeg';
-import mclaren6 from '../../Signture Section/Mclaren(6).jpeg';
-import mclaren7 from '../../Signture Section/Mclaren(7).jpeg';
-import mclaren8 from '../../Signture Section/Mclaren(8).jpeg';
-import mclaren9 from '../../Signture Section/Mclaren(9).jpeg';
+import mclaren1 from '../../Signture Section/Mclaren(1).jpeg?responsive';
+import mclaren2 from '../../Signture Section/Mclaren(2).jpeg?responsive';
+import mclaren3 from '../../Signture Section/Mclaren(3).jpeg?responsive';
+import mclaren4 from '../../Signture Section/Mclaren(4).jpeg?responsive';
+import mclaren5 from '../../Signture Section/Mclaren(5).jpeg?responsive';
+import mclaren6 from '../../Signture Section/Mclaren(6).jpeg?responsive';
+import mclaren7 from '../../Signture Section/Mclaren(7).jpeg?responsive';
+import mclaren8 from '../../Signture Section/Mclaren(8).jpeg?responsive';
+import mclaren9 from '../../Signture Section/Mclaren(9).jpeg?responsive';
 
 // Mustang
-import mustang3 from '../../Signture Section/Mustang(3).jpeg';
-import mustang4 from '../../Signture Section/Mustang(4).jpeg';
-import mustang5 from '../../Signture Section/Mustang(5).jpeg';
-import mustang6 from '../../Signture Section/Mustang(6).jpeg';
-import mustang7 from '../../Signture Section/Mustang(7).jpeg';
+import mustang3 from '../../Signture Section/Mustang(3).jpeg?responsive';
+import mustang4 from '../../Signture Section/Mustang(4).jpeg?responsive';
+import mustang5 from '../../Signture Section/Mustang(5).jpeg?responsive';
+import mustang6 from '../../Signture Section/Mustang(6).jpeg?responsive';
+import mustang7 from '../../Signture Section/Mustang(7).jpeg?responsive';
 
 // Porsche
-import porsch1 from '../../Signture Section/Porsch(1).jpeg';
-import porsch2 from '../../Signture Section/Porsch(2).jpeg';
-import porsch3 from '../../Signture Section/Porsch(3).jpeg';
-import porsch4 from '../../Signture Section/Porsch(4).jpeg';
-import porsch5 from '../../Signture Section/Porsch(5).jpeg';
-import porsch6 from '../../Signture Section/Porsch(6).jpeg';
+import porsch1 from '../../Signture Section/Porsch(1).jpeg?responsive';
+import porsch2 from '../../Signture Section/Porsch(2).jpeg?responsive';
+import porsch3 from '../../Signture Section/Porsch(3).jpeg?responsive';
+import porsch4 from '../../Signture Section/Porsch(4).jpeg?responsive';
+import porsch5 from '../../Signture Section/Porsch(5).jpeg?responsive';
+import porsch6 from '../../Signture Section/Porsch(6).jpeg?responsive';
 
 // Audi
-import audi1 from '../../Signture Section/Audi(1).jpeg';
-import audi2 from '../../Signture Section/Audi(2).jpeg';
-import audi3 from '../../Signture Section/Audi(3).jpeg';
-import audi4 from '../../Signture Section/Audi(4).jpeg';
-import audi5 from '../../Signture Section/Audi(5).jpeg';
-import audi6 from '../../Signture Section/Audi(6).jpeg';
-import audi7 from '../../Signture Section/Audi(7).jpeg';
+import audi1 from '../../Signture Section/Audi(1).jpeg?responsive';
+import audi2 from '../../Signture Section/Audi(2).jpeg?responsive';
+import audi3 from '../../Signture Section/Audi(3).jpeg?responsive';
+import audi4 from '../../Signture Section/Audi(4).jpeg?responsive';
+import audi5 from '../../Signture Section/Audi(5).jpeg?responsive';
+import audi6 from '../../Signture Section/Audi(6).jpeg?responsive';
+import audi7 from '../../Signture Section/Audi(7).jpeg?responsive';
 
 // AMG
-import amg1 from '../../Signture Section/AMG(1).jpeg';
-import amg2 from '../../Signture Section/AMG(2).jpeg';
-import amg3 from '../../Signture Section/AMG(3).jpeg';
-import amg4 from '../../Signture Section/AMG(4).jpeg';
-import amg5 from '../../Signture Section/AMG(5).jpeg';
-import amg6 from '../../Signture Section/AMG(6).jpeg';
+import amg1 from '../../Signture Section/AMG(1).jpeg?responsive';
+import amg2 from '../../Signture Section/AMG(2).jpeg?responsive';
+import amg3 from '../../Signture Section/AMG(3).jpeg?responsive';
+import amg4 from '../../Signture Section/AMG(4).jpeg?responsive';
+import amg5 from '../../Signture Section/AMG(5).jpeg?responsive';
+import amg6 from '../../Signture Section/AMG(6).jpeg?responsive';
 
 // Ferrari
-import ferrari1 from '../../Signture Section/Ferrari(1).jpeg';
-import ferrari2 from '../../Signture Section/Ferrari(2).jpeg';
-import ferrari3 from '../../Signture Section/Ferrari(3).jpeg';
-import ferrari4 from '../../Signture Section/Ferrari(4).jpeg';
-import ferrari5 from '../../Signture Section/Ferrari(5).jpeg';
-import ferrari6 from '../../Signture Section/Ferrari(6).jpeg';
+import ferrari1 from '../../Signture Section/Ferrari(1).jpeg?responsive';
+import ferrari2 from '../../Signture Section/Ferrari(2).jpeg?responsive';
+import ferrari3 from '../../Signture Section/Ferrari(3).jpeg?responsive';
+import ferrari4 from '../../Signture Section/Ferrari(4).jpeg?responsive';
+import ferrari5 from '../../Signture Section/Ferrari(5).jpeg?responsive';
+import ferrari6 from '../../Signture Section/Ferrari(6).jpeg?responsive';
 
 // Lexus
-import lexus1 from '../../Signture Section/Lexaus_N(1).jpeg';
-import lexus2 from '../../Signture Section/Lexaus_N(2).jpeg';
-import lexus3 from '../../Signture Section/Lexaus_N(3).jpeg';
-import lexus4 from '../../Signture Section/Lexaus_N(4).jpeg';
-import lexus5 from '../../Signture Section/Lexaus_N(5).jpeg';
+import lexus1 from '../../Signture Section/Lexaus_N(1).jpeg?responsive';
+import lexus2 from '../../Signture Section/Lexaus_N(2).jpeg?responsive';
+import lexus3 from '../../Signture Section/Lexaus_N(3).jpeg?responsive';
+import lexus4 from '../../Signture Section/Lexaus_N(4).jpeg?responsive';
+import lexus5 from '../../Signture Section/Lexaus_N(5).jpeg?responsive';
 
 // Bentley
-import bentley1 from '../../Signture Section/Bentley_N(1).jpeg';
-import bentley2 from '../../Signture Section/Bentley_N(2).jpeg';
-import bentley3 from '../../Signture Section/Bentley_N(3).jpeg';
-import bentley4 from '../../Signture Section/Bentley_N(4).jpeg';
-import bentley5 from '../../Signture Section/Bentley_N(5).jpeg';
+import bentley1 from '../../Signture Section/Bentley_N(1).jpeg?responsive';
+import bentley2 from '../../Signture Section/Bentley_N(2).jpeg?responsive';
+import bentley3 from '../../Signture Section/Bentley_N(3).jpeg?responsive';
+import bentley4 from '../../Signture Section/Bentley_N(4).jpeg?responsive';
+import bentley5 from '../../Signture Section/Bentley_N(5).jpeg?responsive';
 
 // Rolls-Royce (no (5).jpeg — file does not exist)
-import rolls1 from '../../Signture Section/Rolls-Royce(1).jpeg';
-import rolls2 from '../../Signture Section/Rolls-Royce(2).jpeg';
-import rolls3 from '../../Signture Section/Rolls-Royce(3).jpeg';
-import rolls4 from '../../Signture Section/Rolls-Royce(4).jpeg';
-import rolls6 from '../../Signture Section/Rolls-Royce(6).jpeg';
-import rolls7 from '../../Signture Section/Rolls-Royce(7).jpeg';
+import rolls1 from '../../Signture Section/Rolls-Royce(1).jpeg?responsive';
+import rolls2 from '../../Signture Section/Rolls-Royce(2).jpeg?responsive';
+import rolls3 from '../../Signture Section/Rolls-Royce(3).jpeg?responsive';
+import rolls4 from '../../Signture Section/Rolls-Royce(4).jpeg?responsive';
+import rolls6 from '../../Signture Section/Rolls-Royce(6).jpeg?responsive';
+import rolls7 from '../../Signture Section/Rolls-Royce(7).jpeg?responsive';
 
 // Range Rover (no (4).jpeg — file does not exist)
-import range1 from '../../Signture Section/Range_rover(1).jpeg';
-import range2 from '../../Signture Section/Range_rover(2).jpeg';
-import range3 from '../../Signture Section/Range_rover(3).jpeg';
-import range5 from '../../Signture Section/Range_rover(5).jpeg';
+import range1 from '../../Signture Section/Range_rover(1).jpeg?responsive';
+import range2 from '../../Signture Section/Range_rover(2).jpeg?responsive';
+import range3 from '../../Signture Section/Range_rover(3).jpeg?responsive';
+import range5 from '../../Signture Section/Range_rover(5).jpeg?responsive';
 
 // GTR
-import gtr1 from '../../Signture Section/GTR(1).jpeg';
-import gtr2 from '../../Signture Section/GTR(2).jpeg';
-import gtr3 from '../../Signture Section/GTR(3).jpeg';
-import gtr4 from '../../Signture Section/GTR(4).jpeg';
-import gtr5 from '../../Signture Section/GTR(5).jpeg';
+import gtr1 from '../../Signture Section/GTR(1).jpeg?responsive';
+import gtr2 from '../../Signture Section/GTR(2).jpeg?responsive';
+import gtr3 from '../../Signture Section/GTR(3).jpeg?responsive';
+import gtr4 from '../../Signture Section/GTR(4).jpeg?responsive';
+import gtr5 from '../../Signture Section/GTR(5).jpeg?responsive';
 
 // Subaru
-import subaru1 from '../../Signture Section/Subaru(1).jpeg';
-import subaru2 from '../../Signture Section/Subaru(2).jpeg';
-import subaru3 from '../../Signture Section/Subaru(3).jpeg';
-import subaru4 from '../../Signture Section/Subaru(4).jpeg';
-import subaru5 from '../../Signture Section/Subaru(5).jpeg';
+import subaru1 from '../../Signture Section/Subaru(1).jpeg?responsive';
+import subaru2 from '../../Signture Section/Subaru(2).jpeg?responsive';
+import subaru3 from '../../Signture Section/Subaru(3).jpeg?responsive';
+import subaru4 from '../../Signture Section/Subaru(4).jpeg?responsive';
+import subaru5 from '../../Signture Section/Subaru(5).jpeg?responsive';
 
 // Lambo Purple
-import lamboPurple1 from '../../Signture Section/Lambo(purble_1).jpeg';
-import lamboPurple2 from '../../Signture Section/Lambo(purble_2).jpeg';
-import lamboPurple3 from '../../Signture Section/Lambo(purble_3).jpeg';
-import lamboPurple4 from '../../Signture Section/Lambo(purble_4).jpeg';
-import lamboPurple5 from '../../Signture Section/Lambo(purble_5).jpeg';
+import lamboPurple1 from '../../Signture Section/Lambo(purble_1).jpeg?responsive';
+import lamboPurple2 from '../../Signture Section/Lambo(purble_2).jpeg?responsive';
+import lamboPurple3 from '../../Signture Section/Lambo(purble_3).jpeg?responsive';
+import lamboPurple4 from '../../Signture Section/Lambo(purble_4).jpeg?responsive';
+import lamboPurple5 from '../../Signture Section/Lambo(purble_5).jpeg?responsive';
 
 // Lambo LBWK
-import lamboLBWK1 from '../../Signture Section/Lambo(LBWK_1).jpeg';
-import lamboLBWK2 from '../../Signture Section/Lambo(LBWK_2).jpeg';
-import lamboLBWK3 from '../../Signture Section/Lambo(LBWK_3).jpeg';
-import lamboLBWK4 from '../../Signture Section/Lambo(LBWK_4).jpeg';
-import lamboLBWK5 from '../../Signture Section/Lambo(LBWK_5).jpeg';
+import lamboLBWK1 from '../../Signture Section/Lambo(LBWK_1).jpeg?responsive';
+import lamboLBWK2 from '../../Signture Section/Lambo(LBWK_2).jpeg?responsive';
+import lamboLBWK3 from '../../Signture Section/Lambo(LBWK_3).jpeg?responsive';
+import lamboLBWK4 from '../../Signture Section/Lambo(LBWK_4).jpeg?responsive';
+import lamboLBWK5 from '../../Signture Section/Lambo(LBWK_5).jpeg?responsive';
 
 // Ferrari Red (project root)
-import ferrariRed1 from '../../Ferrari(red_1).jpeg';
-import ferrariRed2 from '../../Ferrari(red_2).jpeg';
-import ferrariRed3 from '../../Ferrari(red_3).jpeg';
-import ferrariRed4 from '../../Ferrari(red_4).jpeg';
-import ferrariRed5 from '../../Ferrari(red_5).jpeg';
+import ferrariRed1 from '../../Ferrari(red_1).jpeg?responsive';
+import ferrariRed2 from '../../Ferrari(red_2).jpeg?responsive';
+import ferrariRed3 from '../../Ferrari(red_3).jpeg?responsive';
+import ferrariRed4 from '../../Ferrari(red_4).jpeg?responsive';
+import ferrariRed5 from '../../Ferrari(red_5).jpeg?responsive';
 
 // Ferrari White (project root)
-import ferrariWhite1 from '../../Ferrari(white_1).jpeg';
-import ferrariWhite2 from '../../Ferrari(white_2).jpeg';
-import ferrariWhite3 from '../../Ferrari(white_3).jpeg';
-import ferrariWhite4 from '../../Ferrari(white_4).jpeg';
-import ferrariWhite5 from '../../Ferrari(white_5).jpeg';
-import ferrariWhite6 from '../../Ferrari(white_6).jpeg';
-import ferrariWhite7 from '../../Ferrari(white_7).jpeg';
+import ferrariWhite1 from '../../Ferrari(white_1).jpeg?responsive';
+import ferrariWhite2 from '../../Ferrari(white_2).jpeg?responsive';
+import ferrariWhite3 from '../../Ferrari(white_3).jpeg?responsive';
+import ferrariWhite4 from '../../Ferrari(white_4).jpeg?responsive';
+import ferrariWhite5 from '../../Ferrari(white_5).jpeg?responsive';
+import ferrariWhite6 from '../../Ferrari(white_6).jpeg?responsive';
+import ferrariWhite7 from '../../Ferrari(white_7).jpeg?responsive';
 
 // Urus (project root — note double dots in filenames)
-import urus2 from '../../Urus_2..jpeg';
-import urus4 from '../../Urus_4..jpeg';
+import urus2 from '../../Urus_2..jpeg?responsive';
+import urus4 from '../../Urus_4..jpeg?responsive';
 
 // Aston Martin
-import aston1 from '../../Signture Section/Aston_Martin(1).jpeg';
-import aston2 from '../../Signture Section/Aston_Martin(2).jpeg';
-import aston3 from '../../Signture Section/Aston_Martin(3).jpeg';
-import aston4 from '../../Signture Section/Aston_Martin(4).jpeg';
-import aston5 from '../../Signture Section/Aston_Martin(5).jpeg';
-import aston6 from '../../Signture Section/Aston_Martin(6).jpeg';
+import aston1 from '../../Signture Section/Aston_Martin(1).jpeg?responsive';
+import aston2 from '../../Signture Section/Aston_Martin(2).jpeg?responsive';
+import aston3 from '../../Signture Section/Aston_Martin(3).jpeg?responsive';
+import aston4 from '../../Signture Section/Aston_Martin(4).jpeg?responsive';
+import aston5 from '../../Signture Section/Aston_Martin(5).jpeg?responsive';
+import aston6 from '../../Signture Section/Aston_Martin(6).jpeg?responsive';
 
 // Corvette
-import corvette1 from '../../Signture Section/corvette(1).jpeg';
-import corvette2 from '../../Signture Section/corvette(2).jpeg';
-import corvette3 from '../../Signture Section/corvette(3).jpeg';
-import corvette4 from '../../Signture Section/corvette(4).jpeg';
-import corvette5 from '../../Signture Section/corvette(5).jpeg';
+import corvette1 from '../../Signture Section/corvette(1).jpeg?responsive';
+import corvette2 from '../../Signture Section/corvette(2).jpeg?responsive';
+import corvette3 from '../../Signture Section/corvette(3).jpeg?responsive';
+import corvette4 from '../../Signture Section/corvette(4).jpeg?responsive';
+import corvette5 from '../../Signture Section/corvette(5).jpeg?responsive';
 
 // Cadillac
-import cadillac1 from '../../Signture Section/Cadillac(1).jpeg';
-import cadillac2 from '../../Signture Section/Cadillac(2).jpeg';
-import cadillac3 from '../../Signture Section/Cadillac(3).jpeg';
-import cadillac4 from '../../Signture Section/Cadillac(4).jpeg';
-import cadillac5 from '../../Signture Section/Cadillac(5).jpeg';
-import cadillac6 from '../../Signture Section/Cadillac(6).jpeg';
+import cadillac1 from '../../Signture Section/Cadillac(1).jpeg?responsive';
+import cadillac2 from '../../Signture Section/Cadillac(2).jpeg?responsive';
+import cadillac3 from '../../Signture Section/Cadillac(3).jpeg?responsive';
+import cadillac4 from '../../Signture Section/Cadillac(4).jpeg?responsive';
+import cadillac5 from '../../Signture Section/Cadillac(5).jpeg?responsive';
+import cadillac6 from '../../Signture Section/Cadillac(6).jpeg?responsive';
 
 // SRT
-import srt1 from '../../Signture Section/SRT(1).jpeg';
-import srt2 from '../../Signture Section/SRT(2).jpeg';
-import srt3 from '../../Signture Section/SRT(3).jpeg';
-import srt4 from '../../Signture Section/SRT(4).jpeg';
-import srt5 from '../../Signture Section/SRT(5).jpeg';
+import srt1 from '../../Signture Section/SRT(1).jpeg?responsive';
+import srt2 from '../../Signture Section/SRT(2).jpeg?responsive';
+import srt3 from '../../Signture Section/SRT(3).jpeg?responsive';
+import srt4 from '../../Signture Section/SRT(4).jpeg?responsive';
+import srt5 from '../../Signture Section/SRT(5).jpeg?responsive';
 
 // Japanese Icons is intentionally not rendered — homepage is curated down
 // to Italian/German/British/American for now. Its BUILDS entries below
@@ -257,6 +257,17 @@ const MASTERPIECE_ROWS = [MASTERPIECE_ROW_1, MASTERPIECE_ROW_2].map(
 );
 
 // ── Card Component ──────────────────────────────────────────────────────────
+// Intrinsic width of each brand logo at its 58px CSS height (from the SVG
+// viewBox), so the <img> reserves the right shape before it loads. Logos not
+// listed are square.
+const LOGO_WIDTHS = new Map([[srtLogo, 78], [corvetteLogo, 68], [gtrLogo, 62], [bentleyLogo, 116], [astonLogo, 256], [rangeLogo, 214]]);
+
+// Card photos are imported with `?responsive` (vite.config.js): { src, srcset }.
+// Matches the card widths in SignatureBuilds.module.css (82vw ≤480px, 72vw
+// ≤960px, then clamp(260px, 31vw, 410px)), so phones get a ~480–720px copy
+// instead of the full 1080px photo.
+const CARD_IMAGE_SIZES = '(max-width: 480px) 82vw, (max-width: 960px) 72vw, (max-width: 1322px) 31vw, 410px';
+
 function BuildCard({ build, near }) {
   const cardRef  = useRef(null);
   const autoRef  = useRef(null);   // setInterval id
@@ -332,11 +343,13 @@ function BuildCard({ build, near }) {
     >
       <div className={styles.imageContainer}>
         {/* All images stacked — opacity toggle only, no DOM mutations */}
-        {images.map((src, i) => (i === 0 || primed) && (
+        {images.map((photo, i) => (i === 0 || primed) && (
           <img
-            key={src}
+            key={photo.src}
             ref={el => { imgEls.current[i] = el; }}
-            src={src}
+            src={photo.src}
+            srcSet={photo.srcset}
+            sizes={CARD_IMAGE_SIZES}
             loading={i === 0 && near ? 'eager' : 'lazy'}
             decoding="async"
             className={`${styles.image} ${i === imgIndex ? styles.imageActive : ''}`}
@@ -348,7 +361,7 @@ function BuildCard({ build, near }) {
         <div className={styles.overlay} />
 
         <div className={styles.logoContainer}>
-          <img src={build.logo} className={styles.logo} alt="" aria-hidden="true" loading="lazy" decoding="async" style={build.logoStyle} />
+          <img src={build.logo} width={LOGO_WIDTHS.get(build.logo) ?? 58} height={58} className={styles.logo} alt="" aria-hidden="true" loading="lazy" decoding="async" style={build.logoStyle} />
         </div>
 
         {build.badge && (

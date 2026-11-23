@@ -10,7 +10,12 @@ import { START_PROJECT_WHATSAPP_URL } from '../lib/whatsappEnquiry';
 // length of time — this Lamborghini shot is what should show instead,
 // instantly on mount, for as long as the video hasn't started playing (or
 // forever, if it never does).
-import heroFallbackImage from '../assets/hero-safe-mode.jpg';
+import heroFallbackImage from '../assets/hero-safe-mode.jpg?responsive';
+// The photo is 3:4 portrait shown with object-fit: cover, so it renders at
+// the larger of the viewport width and 75% of its height (a tall phone shows
+// it wider than the screen). Phones get a ~1280px WebP instead of the
+// 1440px JPEG; desktops still get the full-size copy.
+const HERO_IMAGE_SIZES = 'max(100vw, 75vh)';
 // Mobile: natively portrait footage. Desktop: separate, natively landscape
 // footage. Neither is stored pre-rotated, so both use the same plain
 // full-bleed cover CSS treatment (see .video in HeroVideo.module.css) —
@@ -23,11 +28,6 @@ import heroVideoDesktopSrc from '../../hero-video-desktop.mp4';
 const HERO = {
   label: 'Dubai Studio · Al Quoz, UAE',
 };
-
-// TEMPORARY DEBUG — remove once the Safe Mode black-flash fix is confirmed
-// on real devices. Logs image-readiness at the exact moment the intro
-// clears, which is the only thing that actually proves there's no gap.
-const DEBUG_HERO = true;
 
 export default function HeroVideo() {
   // Read once per mount, synchronously, before first paint — the admin
@@ -50,16 +50,6 @@ export default function HeroVideo() {
   const subLineRef     = useRef(null);
   const ctaRef         = useRef(null);
   const scrollCueRef   = useRef(null);
-
-  useEffect(() => {
-    if (!DEBUG_HERO) return;
-    const img = imageRef.current;
-    console.log('[HeroDebug] permanent image mounted at', performance.now().toFixed(1), {
-      mode,
-      complete: img?.complete,
-      naturalWidth: img?.naturalWidth,
-    });
-  }, [mode]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -92,16 +82,6 @@ export default function HeroVideo() {
     const playEntrance = () => {
       if (entrancePlayed) return;
       entrancePlayed = true;
-      if (DEBUG_HERO) {
-        const img = imageRef.current;
-        const computed = img ? getComputedStyle(img).opacity : null;
-        console.log('[HeroDebug] intro clears (HeroVideo side) at', performance.now().toFixed(1), {
-          mode,
-          complete: img?.complete,
-          naturalWidth: img?.naturalWidth,
-          computedOpacity: computed,
-        });
-      }
       entranceTl.play();
     };
     window.addEventListener('hero:exit', playEntrance, { once: true });
@@ -262,7 +242,9 @@ export default function HeroVideo() {
           whole background. */}
       <img
         ref={imageRef}
-        src={heroFallbackImage}
+        src={heroFallbackImage.src}
+        srcSet={heroFallbackImage.srcset}
+        sizes={HERO_IMAGE_SIZES}
         alt=""
         className={`${styles.heroImage} ${!isVideoMode ? styles.heroImageSafe : ''}`}
         loading="eager"
