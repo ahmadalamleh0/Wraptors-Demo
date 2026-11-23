@@ -7,11 +7,9 @@ import masterVideoSrc from '../../MasterPieces(new).mp4';
 import bmwLogo from '../../Brands/bmw.svg';
 import amgLogo from '../../Brands/amg.svg';
 import porscheLogo from '../../Brands/porsche.svg';
-import audiLogo from '../../Brands/audi.svg';
 import lamborghiniLogo from '../../Brands/lamborghini.svg';
 import srtLogo from '../../SRT_NEW.svg';
 import corvetteLogo from '../../COrvette_N.svg';
-import mustangLogo from '../../FORD_N.svg';
 import cadillacLogo from '../../cadillac-svgrepo-com.svg';
 import lexusLogo from '../../lexus-svgrepo-com.svg';
 import subaruLogo from '../../subaru-svgrepo-com.svg';
@@ -29,90 +27,54 @@ import bmw1 from '../../Signture Section/BMW(1).jpeg?responsive';
 import bmw2 from '../../Signture Section/BMW(2).jpeg?responsive';
 import bmw3 from '../../Signture Section/BMW(3).jpeg?responsive';
 import bmw4 from '../../Signture Section/BMW(4).jpeg?responsive';
-import bmw5 from '../../Signture Section/BMW(5).jpeg?responsive';
-import bmw6 from '../../Signture Section/BMW(6).jpeg?responsive';
-import bmw7 from '../../Signture Section/BMW(7).jpeg?responsive';
 
 // Maybach
 import maybach1 from '../../Signture Section/Maybach(1).jpeg?responsive';
 import maybach2 from '../../Signture Section/Maybach(2).jpeg?responsive';
 import maybach3 from '../../Signture Section/Maybach(3).jpeg?responsive';
 import maybach4 from '../../Signture Section/Maybach(4).jpeg?responsive';
-import maybach5 from '../../Signture Section/Maybach(5).jpeg?responsive';
-import maybach6 from '../../Signture Section/Maybach(6).jpeg?responsive';
 
 // McLaren
 import mclaren1 from '../../Signture Section/Mclaren(1).jpeg?responsive';
 import mclaren2 from '../../Signture Section/Mclaren(2).jpeg?responsive';
 import mclaren3 from '../../Signture Section/Mclaren(3).jpeg?responsive';
 import mclaren4 from '../../Signture Section/Mclaren(4).jpeg?responsive';
-import mclaren5 from '../../Signture Section/Mclaren(5).jpeg?responsive';
-import mclaren6 from '../../Signture Section/Mclaren(6).jpeg?responsive';
-import mclaren7 from '../../Signture Section/Mclaren(7).jpeg?responsive';
-import mclaren8 from '../../Signture Section/Mclaren(8).jpeg?responsive';
-import mclaren9 from '../../Signture Section/Mclaren(9).jpeg?responsive';
-
-// Mustang
-import mustang3 from '../../Signture Section/Mustang(3).jpeg?responsive';
-import mustang4 from '../../Signture Section/Mustang(4).jpeg?responsive';
-import mustang5 from '../../Signture Section/Mustang(5).jpeg?responsive';
-import mustang6 from '../../Signture Section/Mustang(6).jpeg?responsive';
-import mustang7 from '../../Signture Section/Mustang(7).jpeg?responsive';
 
 // Porsche
 import porsch1 from '../../Signture Section/Porsch(1).jpeg?responsive';
 import porsch2 from '../../Signture Section/Porsch(2).jpeg?responsive';
 import porsch3 from '../../Signture Section/Porsch(3).jpeg?responsive';
 import porsch4 from '../../Signture Section/Porsch(4).jpeg?responsive';
-import porsch5 from '../../Signture Section/Porsch(5).jpeg?responsive';
-import porsch6 from '../../Signture Section/Porsch(6).jpeg?responsive';
-
-// Audi
-import audi1 from '../../Signture Section/Audi(1).jpeg?responsive';
-import audi2 from '../../Signture Section/Audi(2).jpeg?responsive';
-import audi3 from '../../Signture Section/Audi(3).jpeg?responsive';
-import audi4 from '../../Signture Section/Audi(4).jpeg?responsive';
-import audi5 from '../../Signture Section/Audi(5).jpeg?responsive';
-import audi6 from '../../Signture Section/Audi(6).jpeg?responsive';
-import audi7 from '../../Signture Section/Audi(7).jpeg?responsive';
 
 // AMG
 import amg1 from '../../Signture Section/AMG(1).jpeg?responsive';
 import amg2 from '../../Signture Section/AMG(2).jpeg?responsive';
 import amg3 from '../../Signture Section/AMG(3).jpeg?responsive';
 import amg4 from '../../Signture Section/AMG(4).jpeg?responsive';
-import amg5 from '../../Signture Section/AMG(5).jpeg?responsive';
-import amg6 from '../../Signture Section/AMG(6).jpeg?responsive';
 
 // Ferrari
 import ferrari1 from '../../Signture Section/Ferrari(1).jpeg?responsive';
 import ferrari2 from '../../Signture Section/Ferrari(2).jpeg?responsive';
 import ferrari3 from '../../Signture Section/Ferrari(3).jpeg?responsive';
 import ferrari4 from '../../Signture Section/Ferrari(4).jpeg?responsive';
-import ferrari5 from '../../Signture Section/Ferrari(5).jpeg?responsive';
-import ferrari6 from '../../Signture Section/Ferrari(6).jpeg?responsive';
 
 // Lexus
 import lexus1 from '../../Signture Section/Lexaus_N(1).jpeg?responsive';
 import lexus2 from '../../Signture Section/Lexaus_N(2).jpeg?responsive';
 import lexus3 from '../../Signture Section/Lexaus_N(3).jpeg?responsive';
 import lexus4 from '../../Signture Section/Lexaus_N(4).jpeg?responsive';
-import lexus5 from '../../Signture Section/Lexaus_N(5).jpeg?responsive';
 
 // Bentley
 import bentley1 from '../../Signture Section/Bentley_N(1).jpeg?responsive';
 import bentley2 from '../../Signture Section/Bentley_N(2).jpeg?responsive';
 import bentley3 from '../../Signture Section/Bentley_N(3).jpeg?responsive';
 import bentley4 from '../../Signture Section/Bentley_N(4).jpeg?responsive';
-import bentley5 from '../../Signture Section/Bentley_N(5).jpeg?responsive';
 
 // Rolls-Royce (no (5).jpeg — file does not exist)
 import rolls1 from '../../Signture Section/Rolls-Royce(1).jpeg?responsive';
 import rolls2 from '../../Signture Section/Rolls-Royce(2).jpeg?responsive';
 import rolls3 from '../../Signture Section/Rolls-Royce(3).jpeg?responsive';
 import rolls4 from '../../Signture Section/Rolls-Royce(4).jpeg?responsive';
-import rolls6 from '../../Signture Section/Rolls-Royce(6).jpeg?responsive';
-import rolls7 from '../../Signture Section/Rolls-Royce(7).jpeg?responsive';
 
 // Range Rover (no (4).jpeg — file does not exist)
 import range1 from '../../Signture Section/Range_rover(1).jpeg?responsive';
@@ -125,44 +87,36 @@ import gtr1 from '../../Signture Section/GTR(1).jpeg?responsive';
 import gtr2 from '../../Signture Section/GTR(2).jpeg?responsive';
 import gtr3 from '../../Signture Section/GTR(3).jpeg?responsive';
 import gtr4 from '../../Signture Section/GTR(4).jpeg?responsive';
-import gtr5 from '../../Signture Section/GTR(5).jpeg?responsive';
 
 // Subaru
 import subaru1 from '../../Signture Section/Subaru(1).jpeg?responsive';
 import subaru2 from '../../Signture Section/Subaru(2).jpeg?responsive';
 import subaru3 from '../../Signture Section/Subaru(3).jpeg?responsive';
 import subaru4 from '../../Signture Section/Subaru(4).jpeg?responsive';
-import subaru5 from '../../Signture Section/Subaru(5).jpeg?responsive';
 
 // Lambo Purple
 import lamboPurple1 from '../../Signture Section/Lambo(purble_1).jpeg?responsive';
 import lamboPurple2 from '../../Signture Section/Lambo(purble_2).jpeg?responsive';
 import lamboPurple3 from '../../Signture Section/Lambo(purble_3).jpeg?responsive';
 import lamboPurple4 from '../../Signture Section/Lambo(purble_4).jpeg?responsive';
-import lamboPurple5 from '../../Signture Section/Lambo(purble_5).jpeg?responsive';
 
 // Lambo LBWK
 import lamboLBWK1 from '../../Signture Section/Lambo(LBWK_1).jpeg?responsive';
 import lamboLBWK2 from '../../Signture Section/Lambo(LBWK_2).jpeg?responsive';
 import lamboLBWK3 from '../../Signture Section/Lambo(LBWK_3).jpeg?responsive';
 import lamboLBWK4 from '../../Signture Section/Lambo(LBWK_4).jpeg?responsive';
-import lamboLBWK5 from '../../Signture Section/Lambo(LBWK_5).jpeg?responsive';
 
 // Ferrari Red (project root)
 import ferrariRed1 from '../../Ferrari(red_1).jpeg?responsive';
 import ferrariRed2 from '../../Ferrari(red_2).jpeg?responsive';
 import ferrariRed3 from '../../Ferrari(red_3).jpeg?responsive';
 import ferrariRed4 from '../../Ferrari(red_4).jpeg?responsive';
-import ferrariRed5 from '../../Ferrari(red_5).jpeg?responsive';
 
 // Ferrari White (project root)
 import ferrariWhite1 from '../../Ferrari(white_1).jpeg?responsive';
 import ferrariWhite2 from '../../Ferrari(white_2).jpeg?responsive';
 import ferrariWhite3 from '../../Ferrari(white_3).jpeg?responsive';
 import ferrariWhite4 from '../../Ferrari(white_4).jpeg?responsive';
-import ferrariWhite5 from '../../Ferrari(white_5).jpeg?responsive';
-import ferrariWhite6 from '../../Ferrari(white_6).jpeg?responsive';
-import ferrariWhite7 from '../../Ferrari(white_7).jpeg?responsive';
 
 // Urus (project root — note double dots in filenames)
 import urus2 from '../../Urus_2..jpeg?responsive';
@@ -172,31 +126,25 @@ import urus4 from '../../Urus_4..jpeg?responsive';
 import aston1 from '../../Signture Section/Aston_Martin(1).jpeg?responsive';
 import aston2 from '../../Signture Section/Aston_Martin(2).jpeg?responsive';
 import aston3 from '../../Signture Section/Aston_Martin(3).jpeg?responsive';
-import aston4 from '../../Signture Section/Aston_Martin(4).jpeg?responsive';
 import aston5 from '../../Signture Section/Aston_Martin(5).jpeg?responsive';
-import aston6 from '../../Signture Section/Aston_Martin(6).jpeg?responsive';
 
 // Corvette
 import corvette1 from '../../Signture Section/corvette(1).jpeg?responsive';
 import corvette2 from '../../Signture Section/corvette(2).jpeg?responsive';
 import corvette3 from '../../Signture Section/corvette(3).jpeg?responsive';
 import corvette4 from '../../Signture Section/corvette(4).jpeg?responsive';
-import corvette5 from '../../Signture Section/corvette(5).jpeg?responsive';
 
 // Cadillac
 import cadillac1 from '../../Signture Section/Cadillac(1).jpeg?responsive';
 import cadillac2 from '../../Signture Section/Cadillac(2).jpeg?responsive';
 import cadillac3 from '../../Signture Section/Cadillac(3).jpeg?responsive';
 import cadillac4 from '../../Signture Section/Cadillac(4).jpeg?responsive';
-import cadillac5 from '../../Signture Section/Cadillac(5).jpeg?responsive';
-import cadillac6 from '../../Signture Section/Cadillac(6).jpeg?responsive';
 
 // SRT
 import srt1 from '../../Signture Section/SRT(1).jpeg?responsive';
 import srt2 from '../../Signture Section/SRT(2).jpeg?responsive';
 import srt3 from '../../Signture Section/SRT(3).jpeg?responsive';
 import srt4 from '../../Signture Section/SRT(4).jpeg?responsive';
-import srt5 from '../../Signture Section/SRT(5).jpeg?responsive';
 
 // Japanese Icons is intentionally not rendered — homepage is curated down
 // to Italian/German/British/American for now. Its BUILDS entries below
@@ -204,37 +152,35 @@ import srt5 from '../../Signture Section/SRT(5).jpeg?responsive';
 // later just by re-adding it here; nothing else needs to change.
 const BUILDS = [
   // German Precision
-  { brandName: "BRABUS 800 S-Class", logo: amgLogo,       mainImage: amg2,       media: [amg2, amg1, amg3, amg4, amg5, amg6],                                 serviceTags: ["RASPBERRY BLUE", "BRABUS CONVERSION", "STARLIGHT"],            category: "german-precision" },
-  { brandName: "BMW G80 M3",         logo: bmwLogo,       mainImage: bmw1,       media: [bmw1, bmw2, bmw3, bmw4, bmw5, bmw6, bmw7],                           serviceTags: ["SATIN BLACK", "ORANGE CALIPERS", "WINDOW TINTS"],              category: "german-precision" },
-  { brandName: "Porsche 911 GTS",    logo: porscheLogo,   mainImage: porsch2,    media: [porsch2, porsch1, porsch3, porsch4, porsch5, porsch6],                 serviceTags: ["GLOSS MIDNIGHT GREEN", "SATIN GOLD WHEELS", "PPF", "CERAMIC COATING"], category: "german-precision", projectPath: "/services/porsche-ppf/" },
-  { brandName: "Mercedes S580",      logo: maybachLogo,   mainImage: maybach1,   media: [maybach1, maybach2, maybach3, maybach4, maybach5, maybach6],           serviceTags: ["TWO-TONE", "SATIN WHITE ALUMINUM"],                            category: "german-precision" },
-  { brandName: "Audi RS6",           logo: audiLogo,      mainImage: audi1,      media: [audi1, audi2, audi3, audi4, audi5, audi6, audi7],                     serviceTags: ["PAINT PROTECTION FILM"],                                                         category: "german-precision" },
+  { brandName: "BRABUS 800 S-Class", logo: amgLogo,       mainImage: amg2,       media: [amg2, amg1, amg3, amg4],                                 serviceTags: ["RASPBERRY BLUE", "BRABUS CONVERSION", "STARLIGHT"],            category: "german-precision" },
+  { brandName: "BMW G80 M3",         logo: bmwLogo,       mainImage: bmw1,       media: [bmw1, bmw2, bmw3, bmw4],                           serviceTags: ["SATIN BLACK", "ORANGE CALIPERS", "WINDOW TINTS"],              category: "german-precision" },
+  { brandName: "Porsche 911 GTS",    logo: porscheLogo,   mainImage: porsch2,    media: [porsch2, porsch1, porsch3, porsch4],                 serviceTags: ["GLOSS MIDNIGHT GREEN", "SATIN GOLD WHEELS", "PPF", "CERAMIC COATING"], category: "german-precision", projectPath: "/services/porsche-ppf/" },
+  { brandName: "Mercedes S580",      logo: maybachLogo,   mainImage: maybach1,   media: [maybach1, maybach2, maybach3, maybach4],           serviceTags: ["TWO-TONE", "SATIN WHITE ALUMINUM"],                            category: "german-precision" },
 
   // Italian Exotics — LBWK first, then Lamborghini / Ferrari alternating
-  { brandName: "Lamborghini LBWK",  logo: lamborghiniLogo, mainImage: lamboLBWK1,    media: [lamboLBWK1, lamboLBWK2, lamboLBWK3, lamboLBWK4, lamboLBWK5],                                                              badge: "1 OF 1", serviceTags: ["CELESTIAL UNICORN FINISH"],                                                   category: "italian-exotics" },
-  { brandName: "Ferrari F8",         logo: ferrariGesLogo,  mainImage: ferrari1,      media: [ferrari1, ferrari2, ferrari3, ferrari4, ferrari5, ferrari6],                                                                serviceTags: ["FULL-BODY PAINT PROTECTION FILM", "DEEP BLUE INTERIOR ACCENTS"],                                              category: "italian-exotics" },
-  { brandName: "Lamborghini",        logo: lamborghiniLogo, mainImage: lamboPurple1,  media: [lamboPurple1, lamboPurple2, lamboPurple3, lamboPurple4, lamboPurple5],                                                     serviceTags: ["TWO-TONE FINISH", "SATIN BLACK UPPER", "MATTE ICED TITANIUM PINK LOWER"],                                     category: "italian-exotics" },
-  { brandName: "Ferrari 488 Spider", logo: ferrariGesLogo,  mainImage: ferrariRed1,   media: [ferrariRed1, ferrariRed2, ferrariRed3, ferrariRed4, ferrariRed5],                                                          serviceTags: ["GLOSS CARMEN RED", "DOOR TRIMS", "GLOSS BLACK ACCENTS"],                                                      category: "italian-exotics" },
+  { brandName: "Lamborghini LBWK",  logo: lamborghiniLogo, mainImage: lamboLBWK1,    media: [lamboLBWK1, lamboLBWK2, lamboLBWK3, lamboLBWK4],                                                              badge: "1 OF 1", serviceTags: ["CELESTIAL UNICORN FINISH"],                                                   category: "italian-exotics" },
+  { brandName: "Ferrari F8",         logo: ferrariGesLogo,  mainImage: ferrari1,      media: [ferrari1, ferrari2, ferrari3, ferrari4],                                                                serviceTags: ["FULL-BODY PAINT PROTECTION FILM", "DEEP BLUE INTERIOR ACCENTS"],                                              category: "italian-exotics" },
+  { brandName: "Lamborghini",        logo: lamborghiniLogo, mainImage: lamboPurple1,  media: [lamboPurple1, lamboPurple2, lamboPurple3, lamboPurple4],                                                     serviceTags: ["TWO-TONE FINISH", "SATIN BLACK UPPER", "MATTE ICED TITANIUM PINK LOWER"],                                     category: "italian-exotics" },
+  { brandName: "Ferrari 488 Spider", logo: ferrariGesLogo,  mainImage: ferrariRed1,   media: [ferrariRed1, ferrariRed2, ferrariRed3, ferrariRed4],                                                          serviceTags: ["GLOSS CARMEN RED", "DOOR TRIMS", "GLOSS BLACK ACCENTS"],                                                      category: "italian-exotics" },
   { brandName: "Lamborghini Urus",   logo: lamborghiniLogo, mainImage: urus2,         media: [urus2, urus4],                                                                                                              serviceTags: ["BLOSSOM COLOR WRAP"],                                                                                         category: "italian-exotics" },
-  { brandName: "Ferrari",            logo: ferrariGesLogo,  mainImage: ferrariWhite1, media: [ferrariWhite1, ferrariWhite2, ferrariWhite3, ferrariWhite4, ferrariWhite5, ferrariWhite6, ferrariWhite7],                  serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],                                                                   category: "italian-exotics" },
+  { brandName: "Ferrari",            logo: ferrariGesLogo,  mainImage: ferrariWhite1, media: [ferrariWhite1, ferrariWhite2, ferrariWhite3, ferrariWhite4],                  serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],                                                                   category: "italian-exotics" },
 
   // American Muscle
-  { brandName: "Dodge",     logo: srtLogo,      mainImage: srt4,      media: [srt4, srt1, srt2, srt3, srt5],                                         serviceTags: ["SATIN CHROME RED WRAP", "CERAMIC COATING"],                                          category: "american-muscle" },
-  { brandName: "Corvette",  logo: corvetteLogo, mainImage: corvette1, media: [corvette1, corvette2, corvette3, corvette4, corvette5],                  serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],                                                  category: "american-muscle" },
-  { brandName: "Cadillac",  logo: cadillacLogo, mainImage: cadillac1, media: [cadillac1, cadillac2, cadillac3, cadillac4, cadillac5, cadillac6],       serviceTags: ["SATIN ALUMINUM WHITE FINISH", "GLOSS BLACK ROOF", "COLOR-MATCHED ACCENTS"],           category: "american-muscle" },
-  { brandName: "Mustang",   logo: mustangLogo,  mainImage: mustang3,  media: [mustang3, mustang4, mustang5, mustang6, mustang7],                       serviceTags: ["SATIN BLACK WRAP", "GLOSS BLACK RACING STRIPES"],                                     category: "american-muscle" },
+  { brandName: "Dodge",     logo: srtLogo,      mainImage: srt4,      media: [srt4, srt1, srt2, srt3],                                         serviceTags: ["SATIN CHROME RED WRAP", "CERAMIC COATING"],                                          category: "american-muscle" },
+  { brandName: "Corvette",  logo: corvetteLogo, mainImage: corvette1, media: [corvette1, corvette2, corvette3, corvette4],                  serviceTags: ["FULL CLEAR PPF", "CERAMIC COATING"],                                                  category: "american-muscle" },
+  { brandName: "Cadillac",  logo: cadillacLogo, mainImage: cadillac1, media: [cadillac1, cadillac2, cadillac3, cadillac4],       serviceTags: ["SATIN ALUMINUM WHITE FINISH", "GLOSS BLACK ROOF", "COLOR-MATCHED ACCENTS"],           category: "american-muscle" },
 
   // Japanese Icons
-  { brandName: "Lexus",     logo: lexusLogo,   mainImage: lexus1,   media: [lexus1, lexus2, lexus3, lexus4, lexus5],     serviceTags: ["CHROME RED INTERIOR", "AMBIENT LIGHTING", "CERAMIC COATING"], category: "japanese-icons" },
-  { brandName: "Subaru",    logo: subaruLogo,  mainImage: subaru1,  media: [subaru1, subaru2, subaru3, subaru4, subaru5], serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],               category: "japanese-icons" },
-  { brandName: "Nissan GTR",logo: gtrLogo,     mainImage: gtr1,     media: [gtr1, gtr2, gtr3, gtr4, gtr5],               serviceTags: ["MATTE GUNMETAL METALLIC FINISH"],                          category: "japanese-icons" },
+  { brandName: "Lexus",     logo: lexusLogo,   mainImage: lexus1,   media: [lexus1, lexus2, lexus3, lexus4],     serviceTags: ["CHROME RED INTERIOR", "AMBIENT LIGHTING", "CERAMIC COATING"], category: "japanese-icons" },
+  { brandName: "Subaru",    logo: subaruLogo,  mainImage: subaru1,  media: [subaru1, subaru2, subaru3, subaru4], serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],               category: "japanese-icons" },
+  { brandName: "Nissan GTR",logo: gtrLogo,     mainImage: gtr1,     media: [gtr1, gtr2, gtr3, gtr4],               serviceTags: ["MATTE GUNMETAL METALLIC FINISH"],                          category: "japanese-icons" },
 
   // British Luxury
-  { brandName: "Rolls-Royce", logo: rollsLogo,   mainImage: rolls1,   media: [rolls1, rolls2, rolls3, rolls4, rolls6, rolls7],                             serviceTags: ["SATIN BLACK FINISH", "BLACKED-OUT TRIM"],                                         category: "british-luxury" },
-  { brandName: "Bentley",     logo: bentleyLogo, mainImage: bentley1, media: [bentley1, bentley2, bentley3, bentley4, bentley5],                           serviceTags: ["WIDEBODY CONVERSION", "FULL NARDO GRAY WRAP"],                                    category: "british-luxury" },
-  { brandName: "Aston Martin",logo: astonLogo,   mainImage: aston5,   media: [aston5, aston1, aston2, aston3, aston4, aston6],                             serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],                                       category: "british-luxury" },
+  { brandName: "Rolls-Royce", logo: rollsLogo,   mainImage: rolls1,   media: [rolls1, rolls2, rolls3, rolls4],                             serviceTags: ["SATIN BLACK FINISH", "BLACKED-OUT TRIM"],                                         category: "british-luxury" },
+  { brandName: "Bentley",     logo: bentleyLogo, mainImage: bentley1, media: [bentley1, bentley2, bentley3, bentley4],                           serviceTags: ["WIDEBODY CONVERSION", "FULL NARDO GRAY WRAP"],                                    category: "british-luxury" },
+  { brandName: "Aston Martin",logo: astonLogo,   mainImage: aston5,   media: [aston5, aston1, aston2, aston3],                             serviceTags: ["PAINT PROTECTION FILM", "CERAMIC COATING"],                                       category: "british-luxury" },
   { brandName: "Range Rover", logo: rangeLogo,   mainImage: range1,   media: [range1, range2, range3, range5],                                              serviceTags: ["MATTE DEAD BLACK", "GLOSS BLACK RIMS", "FRONT WINDOW TINT", "CERAMIC COATING"],  category: "british-luxury" },
-  { brandName: "McLaren",     logo: mclarenLogo, mainImage: mclaren1, media: [mclaren1, mclaren2, mclaren3, mclaren4, mclaren5, mclaren6, mclaren7, mclaren8, mclaren9], serviceTags: ["FULL SATIN BLACK WRAP", "CARBON FIBER ACCENTS"], category: "british-luxury" },
+  { brandName: "McLaren",     logo: mclarenLogo, mainImage: mclaren1, media: [mclaren1, mclaren2, mclaren3, mclaren4], serviceTags: ["FULL SATIN BLACK WRAP", "CARBON FIBER ACCENTS"], category: "british-luxury" },
 ];
 
 // Combined collection — the four German/Italian/British/American rows above
@@ -246,11 +192,11 @@ const BUILDS = [
 // renders in, by brandName lookup against BUILDS above.
 const MASTERPIECE_ROW_1 = [
   'Lamborghini LBWK', 'Bentley', 'Ferrari F8', 'BMW G80 M3', 'Corvette',
-  'Aston Martin', 'Lamborghini', 'Porsche 911 GTS', 'Mustang', 'Ferrari',
+  'Aston Martin', 'Lamborghini', 'Porsche 911 GTS', 'Ferrari',
 ];
 const MASTERPIECE_ROW_2 = [
   'Rolls-Royce', 'BRABUS 800 S-Class', 'Ferrari 488 Spider', 'Range Rover',
-  'Dodge', 'Audi RS6', 'Lamborghini Urus', 'Cadillac', 'McLaren', 'Mercedes S580',
+  'Dodge', 'Lamborghini Urus', 'Cadillac', 'McLaren', 'Mercedes S580',
 ];
 const MASTERPIECE_ROWS = [MASTERPIECE_ROW_1, MASTERPIECE_ROW_2].map(
   (names) => names.map((name) => BUILDS.find((b) => b.brandName === name))
@@ -497,7 +443,7 @@ export default function SignatureBuilds() {
           playsInline
           loop
           preload="none"
-          poster={rolls1}
+          poster={rolls1.src}
         />
 
         {/* Dark overlay for text readability */}
