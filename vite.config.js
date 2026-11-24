@@ -168,6 +168,33 @@ const studioContactHtml = {
 
 const IS_PRODUCTION_CONTEXT = process.env.CONTEXT === 'production'
 
+// Google Analytics 4 — the official Google tag (gtag.js), added to the shared
+// template so every prerendered page has it exactly once. Production builds
+// only (deploy previews and local builds never get it), and it only reports on
+// wraptorsdubai.com itself, so drafts or local copies of a production build
+// never send data. Page views on in-app navigation come from GA4's enhanced
+// measurement ("page changes based on browser history events", on by default
+// for the web stream), so no manual page_view is sent here — that would
+// count each page twice. The build-time prerender blocks Google's requests
+// (scripts/prerender.mjs), so building the site never records visits.
+const GA_MEASUREMENT_ID = 'G-D4KZJ0KB59'
+const googleAnalyticsPlugin = {
+  name: 'google-analytics',
+  transformIndexHtml(html) {
+    if (!IS_PRODUCTION_CONTEXT) return html
+    const tag = `
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      if (/(^|\\.)wraptorsdubai\\.com$/.test(location.hostname)) gtag('config', '${GA_MEASUREMENT_ID}');
+    </script>`
+    return html.replace('<head>', `<head>${tag}`)
+  },
+}
+
 const robotsMetaPlugin = {
   name: 'inject-preview-robots-meta',
   transformIndexHtml(html) {
@@ -185,6 +212,7 @@ export default defineConfig({
     studioContactHtml,
     react(),
     robotsMetaPlugin,
+    googleAnalyticsPlugin,
     devOnlyNeuropolFont,
     // Build-time only — re-encodes every bundled raster asset at a lossy-
     // but-visually-transparent quality instead of the ~100% source photos

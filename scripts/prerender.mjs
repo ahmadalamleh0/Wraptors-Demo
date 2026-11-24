@@ -231,6 +231,11 @@ async function main() {
     // Hero.jsx.
     await page.addInitScript(() => { window.__WRAPTORS_PRERENDER__ = true; });
 
+    // Never let the build record analytics: Google's tag and collection
+    // requests are blocked for every snapshot (the page HTML is unaffected —
+    // the tag snippet itself is static in index.html).
+    await page.route(/^https:\/\/([a-z0-9-]+\.)*(googletagmanager|google-analytics|analytics\.google)\.com\//, (route) => route.abort());
+
     // Pages are code-split: record which JS files each page loads so its
     // static HTML can preload them in parallel with the entry script (no
     // request waterfall on a direct visit). Cache off so every load is seen.
