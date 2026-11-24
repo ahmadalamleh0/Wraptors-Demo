@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -8,6 +9,7 @@ import { useStructuredData } from '../lib/useStructuredData';
 import { SERVICE_CATALOG, SERVICE_CATEGORY_LABEL, TRUST_COPY, WHY_WRAPTORS_SHARED, SITE_URL, AREA_LINKS, getLocationBySlug } from '../data/geoLocations';
 import { ARTICLES } from '../data/articles';
 import { STUDIO_PHONE, STUDIO_PHONE_DISPLAY } from '../lib/studioContact';
+import { PROVIDER } from '../data/serviceSeo';
 
 // Same address the Visit Us map uses (VisitUs.jsx).
 const STUDIO_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Unit B05, 32 9B St, Al Quoz Industrial Area 4, Dubai')}`;
@@ -18,27 +20,32 @@ const STUDIO_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destinatio
 export default function GeoPage({ location }) {
   const canonicalUrl = `${SITE_URL}/areas/${location.slug}/`;
   useDocumentMeta(location.seoTitle, location.metaDescription, canonicalUrl);
-  useStructuredData({
+  // Service (named exactly as the visible H1) + Home > Area breadcrumb, built
+  // once per location so the hook gets a stable object.
+  const schema = useMemo(() => ({
     '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: `${location.primaryKeyword} — Wraptors Dubai`,
-    provider: {
-      '@type': 'AutomotiveBusiness',
-      name: 'Wraptors Dubai',
-      telephone: STUDIO_PHONE,
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: '32 9B St, Unit B05, Al Quoz Industrial Area 4',
-        addressLocality: 'Dubai',
-        addressCountry: 'AE',
+    '@graph': [
+      {
+        '@type': 'Service',
+        name: location.h1,
+        url: canonicalUrl,
+        provider: PROVIDER,
+        areaServed: {
+          '@type': 'Place',
+          name: location.locationName,
+        },
+        description: location.metaDescription,
       },
-    },
-    areaServed: {
-      '@type': 'Place',
-      name: location.locationName,
-    },
-    description: location.metaDescription,
-  });
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: location.locationName, item: canonicalUrl },
+        ],
+      },
+    ],
+  }), [location, canonicalUrl]);
+  useStructuredData(schema);
 
   const whyWraptors = [...WHY_WRAPTORS_SHARED, location.whyWraptorsLocal];
   const areaLinks = AREA_LINKS[location.slug] || { guides: [], services: [] };

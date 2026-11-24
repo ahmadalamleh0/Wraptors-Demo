@@ -5,6 +5,7 @@ import FaqAccordion from './FaqAccordion';
 import styles from './ArticlePage.module.css';
 import { useDocumentMeta } from '../lib/useDocumentMeta';
 import { useStructuredData } from '../lib/useStructuredData';
+import { BUSINESS_ID } from '../lib/siteConfig';
 import { publishedLinks } from '../data/serviceSeo';
 import { SITE_URL, getArticleBySlug, getCategoryBySlug, getRelatedArticleObjects } from '../data/articles';
 import { ARTICLE_IMAGES } from '../data/articleImages';
@@ -48,8 +49,9 @@ export default function ArticlePage() {
       image: article.heroImageKey ? `${SITE_URL}${ARTICLE_IMAGES[article.heroImageKey]}` : undefined,
       datePublished: article.publishDate,
       dateModified: article.updatedDate || article.publishDate,
-      author: { '@type': 'Organization', name: 'Wraptors Dubai' },
-      publisher: { '@type': 'Organization', name: 'Wraptors Dubai' },
+      // Both are the one Wraptors Dubai business entity (index.html JSON-LD).
+      author: { '@id': BUSINESS_ID },
+      publisher: { '@id': BUSINESS_ID },
       mainEntityOfPage: canonicalUrl,
     }
   );
@@ -59,7 +61,7 @@ export default function ArticlePage() {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
         { '@type': 'ListItem', position: 2, name: 'Learn', item: `${SITE_URL}/learn/` },
         { '@type': 'ListItem', position: 3, name: category?.label, item: `${SITE_URL}/learn/category/${article.category}/` },
         { '@type': 'ListItem', position: 4, name: article.title, item: canonicalUrl },
