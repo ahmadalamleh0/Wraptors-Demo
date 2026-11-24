@@ -21,7 +21,7 @@
 // working client render avoids touching any component at all.
 
 import { execFileSync, spawn } from 'node:child_process';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
@@ -81,6 +81,52 @@ function writeSitemap(urls) {
   writeFileSync(join(DIST, 'sitemap.xml'), xml);
 }
 
+// Two head tweaks applied to every snapshot (pages and 404.html):
+//
+// 1. The entry stylesheet is inlined as <style> instead of a render-blocking
+//    <link>, so the first paint doesn't wait for a second request. Only the
+//    stylesheet(s) the built index.html links are inlined; per-page CSS chunks
+//    stay as links. All url()s in it are root-relative (/assets/...), so it
+//    works at any depth. No JS chunk references this file, so it is never
+//    re-requested at runtime.
+// 2. index.html preloads the hero photo for phones. Only the homepage shows
+//    it, so the preload is turned into a responsive one matching the hero
+//    <img>'s srcset/sizes there (no JPEG + WebP double download) and removed
+//    from every other page (no 200 KB unused download).
+function readEntryStyles() {
+  const template = readFileSync(join(DIST, 'index.html'), 'utf8');
+  return [...template.matchAll(/<link rel="stylesheet"[^>]*href="(\/assets\/[^"]+\.css)"[^>]*>/g)].map(([, href]) => {
+    const css = readFileSync(join(DIST, href), 'utf8');
+    if (/<\/style/i.test(css)) throw new Error(`${href} contains </style; can't inline it`);
+    return { href, css };
+  });
+}
+
+const attr = (tag, name) => (tag.match(new RegExp(`\\s${name}="([^"]*)"`)) || [])[1];
+
+// Pages after the homepage are rendered from the homepage snapshot (the
+// preview server falls back to the already-written dist/index.html), so a
+// page may arrive with the CSS already inlined and the preload already
+// rewritten. Both steps are therefore idempotent, and each check below
+// guarantees exactly one copy of the CSS and at most one hero preload.
+function finalizeHead(html, entryStyles) {
+  for (const { href, css } of entryStyles) {
+    const link = new RegExp(`<link rel="stylesheet"[^>]*href="${href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>`, 'g');
+    const links = (html.match(link) || []).length;
+    const inlined = html.split(`<style>${css}</style>`).length - 1;
+    if (links + inlined !== 1) throw new Error(`expected 1 copy of ${href}, found ${links} link(s) + ${inlined} inline`);
+    html = html.replace(link, () => `<style>${css}</style>`);
+  }
+  const preload = /<link rel="preload"[^>]*(?:href="\/assets\/hero-safe-mode-|imagesrcset="[^"]*hero-safe-mode)[^>]*>/;
+  const heroImg = html.match(/<img[^>]*class="[^"]*heroImage[^"]*"[^>]*>/);
+  const srcset = heroImg && attr(heroImg[0], 'srcset');
+  const sizes = heroImg && attr(heroImg[0], 'sizes');
+  html = html.replace(preload, () => (srcset && sizes
+    ? `<link rel="preload" as="image" imagesrcset="${srcset}" imagesizes="${sizes}" fetchpriority="high" media="(max-width: 768px)">`
+    : ''));
+  return html;
+}
+
 async function waitForServer(url, attempts = 60) {
   for (let i = 0; i < attempts; i++) {
     try {
@@ -97,6 +143,8 @@ async function waitForServer(url, attempts = 60) {
 async function main() {
   const routes = buildRouteList();
   console.log(`[prerender] ${routes.length} routes to render\n`);
+  // Read before any snapshot overwrites dist/index.html.
+  const entryStyles = readEntryStyles();
 
   // Invoke the local vite binary directly with Node — no shell wrapper
   // (no npx, no `shell: true`). A shell in between means kill() only ever
@@ -218,6 +266,7 @@ async function main() {
           .map((path) => `<link rel="modulepreload" crossorigin="" href="${path}">`)
           .join('');
         if (preloads) html = html.replace('</head>', `${preloads}</head>`);
+        html = finalizeHead(html, entryStyles);
         const outPath = outputPathFor(route);
         mkdirSync(dirname(outPath), { recursive: true });
         writeFileSync(outPath, html);
@@ -246,7 +295,7 @@ async function main() {
     try {
       await page.goto(`${BASE}/__prerender-404-sentinel__`, { waitUntil: 'networkidle', timeout: 30000 });
       await page.waitForTimeout(150);
-      const html404 = await page.content();
+      const html404 = finalizeHead(await page.content(), entryStyles);
       writeFileSync(join(DIST, '404.html'), html404);
       console.log('[prerender] generated 404.html');
     } catch (err) {

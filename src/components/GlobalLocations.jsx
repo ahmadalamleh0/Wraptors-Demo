@@ -1,6 +1,8 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import styles from './GlobalLocations.module.css';
-import MilitaryMap from '../../components/TacticalGlobe';
+// The globe (its own code, ~500 SVG nodes and the world-map data it fetches)
+// is only loaded once the section is close to the screen — see DeferredGlobe.
+const MilitaryMap = lazy(() => import('../../components/TacticalGlobe'));
 import flagAE from '../../UAE(FLAG).svg';
 import flagCA from '../../CANADA(FLAG).svg';
 import flagUS from '../../USA(FLAG).svg';
@@ -324,6 +326,48 @@ function InstagramIcon() {
 }
 
 /* ── Component ───────────────────────────────────────────── */
+// Mounts the globe when its section is within ~1200px of the viewport, so
+// none of its work competes with the homepage intro. The wrapper keeps its
+// fixed size the whole time (no layout shift), and the section's own fade-in
+// (`revealed`, below) only starts once it is actually on screen — by then the
+// globe has long been mounted. The build-time prerender mounts it straight
+// away so the static HTML is unchanged.
+function DeferredGlobe() {
+  const wrapRef = useRef(null);
+  const [mounted, setMounted] = useState(() => typeof window !== 'undefined' && Boolean(window.__WRAPTORS_PRERENDER__));
+
+  useEffect(() => {
+    if (mounted) return undefined;
+    const el = wrapRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') { setMounted(true); return undefined; }
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setMounted(true); io.disconnect(); } },
+      { rootMargin: '1200px 0px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [mounted]);
+
+  return (
+    <div ref={wrapRef} className={styles.globeWrap}>
+      {mounted && (
+        <Suspense fallback={null}>
+          <MilitaryMap
+            markers={GLOBE_MARKERS}
+            countries={[]}
+            mapStyle={GLOBE_MAP_STYLE}
+            tooltip={GLOBE_TOOLTIP}
+            grid={GLOBE_GRID}
+            layout={GLOBE_LAYOUT}
+            interaction={GLOBE_INTERACTION}
+          />
+          <GlobeLines markers={GLOBE_MARKERS} interaction={GLOBE_INTERACTION} />
+        </Suspense>
+      )}
+    </div>
+  );
+}
+
 export default function GlobalLocations() {
   const sectionRef = useRef(null);
   const [revealed, setRevealed] = useState(false);
@@ -370,18 +414,7 @@ export default function GlobalLocations() {
           {!IS_MOBILE && <div className={styles.aura3}    aria-hidden="true" />}
           {!IS_MOBILE && <div className={styles.auraScan} aria-hidden="true" />}
 
-          <div className={styles.globeWrap}>
-            <MilitaryMap
-              markers={GLOBE_MARKERS}
-              countries={[]}
-              mapStyle={GLOBE_MAP_STYLE}
-              tooltip={GLOBE_TOOLTIP}
-              grid={GLOBE_GRID}
-              layout={GLOBE_LAYOUT}
-              interaction={GLOBE_INTERACTION}
-            />
-            <GlobeLines markers={GLOBE_MARKERS} interaction={GLOBE_INTERACTION} />
-          </div>
+          <DeferredGlobe />
         </div>
 
         {/* ── Stats ── */}

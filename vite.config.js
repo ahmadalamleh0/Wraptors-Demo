@@ -129,7 +129,16 @@ const responsiveSrcset = {
   },
   async load(id) {
     const [file, query] = id.split('?')
-    if (query !== 'srcset' || !/\.(jpe?g|png|webp)$/i.test(file)) return null
+    if (!/\.(jpe?g|png|webp)$/i.test(file)) return null
+    // `?responsive` gives { src, srcset }: the original file (bundled and
+    // optimised as before) as the fallback src, plus the same WebP srcset.
+    if (query === 'responsive') {
+      const srcsetExpr = isBuild ? `srcset from ${JSON.stringify(`${file}?srcset`)}` : null
+      return isBuild
+        ? `import src from ${JSON.stringify(file)}; import ${srcsetExpr}; export default { src, srcset };`
+        : `import src from ${JSON.stringify(file)}; export default { src, srcset: undefined };`
+    }
+    if (query !== 'srcset') return null
     if (!isBuild) {
       return `import src from ${JSON.stringify(file)}; export default src;`
     }
